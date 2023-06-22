@@ -1,0 +1,13 @@
+.form-group {
+    text-align: center;
+  }
+
+  .form-group label {
+    display: block;
+    text-align: center;
+  }
+
+  .form-group input.form-control , textarea.form-control{
+    width: 60%;
+    margin: 0 auto;
+  }

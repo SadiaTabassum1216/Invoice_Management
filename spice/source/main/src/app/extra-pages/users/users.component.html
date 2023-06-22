@@ -1,0 +1,115 @@
+<h2>Users</h2>
+<br /><br />
+
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <button class="btn btn-primary add-button" (click)="addUserFormVisible = true">
+        <i class="fas fa-plus"></i> Add User
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<br><br>
+
+<table class="table user-list-table">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Full Name</th>
+      <th>Username</th>
+      <th>User Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userList; let i in index">
+      <td>{{ user.userID }}</td>
+      <td>{{ user.fullName }}</td>
+      <td>{{ user.username }}</td>
+      <td [ngClass]="{'text-success': user.userStatus, 'text-danger': !user.userStatus}">
+        {{ user.userStatus ? 'Active' : 'Inactive' }}
+      </td>
+      <td>
+        <button class="btn btn-primary edit-button" (click)="editUser(i) ">
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <button class="btn btn-danger delete-button" (click)="deleteUser(user.userID)">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- edit div -->
+<br><br>
+<div *ngIf="onEdit" class="edit-user-container">
+  <h4>Edit User</h4>
+  <br><br>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="userID">User ID</label>
+      <input type="text" class="form-control" id="userID" [(ngModel)]="selectedUser.userID" disabled>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="fullName">Full Name</label>
+      <input type="text" class="form-control" id="fullName" [(ngModel)]="selectedUser.fullName">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="selectedUser.username">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="status">Status</label>
+      <select class="form-control" id="status" [(ngModel)]="selectedUser.userStatus">
+        <option [ngValue]="true">Active</option>
+        <option [ngValue]="false">Inactive</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <button class="btn btn-primary edit-button" (click)="updateUser()">
+    <i class="fas fa-pencil-alt"></i> Update
+  </button>
+</div>
+
+<!-- ADD USER DIV -->
+<br><br>
+<div *ngIf="addUserFormVisible" class="add-user-container">
+  <h4>Add User</h4>
+  <br><br>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="newUserID">User ID</label>
+      <input type="text" class="form-control" id="newUserID" [(ngModel)]="newUser.userID">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="newFullName">Full Name</label>
+      <input type="text" class="form-control" id="newFullName" [(ngModel)]="newUser.fullName">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="newUsername">Username</label>
+      <input type="text" class="form-control" id="newUsername" [(ngModel)]="newUser.username">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="newStatus">Status</label>
+      <select class="form-control" id="newStatus" [(ngModel)]="newUser.userStatus">
+        <option [ngValue]="true">Active</option>
+        <option [ngValue]="false">Inactive</option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <button class="btn btn-primary add-button" (click)="addUser()">
+    <i class="fas fa-user-plus"></i> Add
+  </button>
+</div>
