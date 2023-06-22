@@ -12,20 +12,20 @@
 
     <div class="form-group">
       <label for="billFrom">BILL FROM</label>
-      <input type="text" class="form-control"  name="billFrom1" [(ngModel)]="invoice.billFrom1" placeholder="Company name">
-      <input type="text" class="form-control"  name="billFrom2" [(ngModel)]="invoice.billFrom2" placeholder="Address">
-      <input type="text" class="form-control"  name="billFrom3" [(ngModel)]="invoice.billFrom3" placeholder="City, State Zip">
-      <input type="text" class="form-control" name="billFrom4" [(ngModel)]="invoice.billFrom4" placeholder="Country">
+      <input type="text" class="form-control"  name="billFrom1" [(ngModel)]="invaddress.billFrom1" placeholder="Company name">
+      <input type="text" class="form-control"  name="billFrom2" [(ngModel)]="invaddress.billFrom2" placeholder="Address">
+      <input type="text" class="form-control"  name="billFrom3" [(ngModel)]="invaddress.billFrom3" placeholder="City, State Zip">
+      <input type="text" class="form-control" name="billFrom4" [(ngModel)]="invaddress.billFrom4" placeholder="Country">
     </div>
 
   
     <div class="form-group">
       <label for="billToAddress">Bill To</label>
-      <input type="text" class="form-control"  name="billTo1" [(ngModel)]="invoice.billTo1" placeholder="Client name">
-      <input type="text" class="form-control"  name="billTo2" [(ngModel)]="invoice.billTo2"  placeholder="Company name">
-      <input type="text" class="form-control"  name="billTo3" [(ngModel)]="invoice.billTo3"  placeholder="Address">
-      <input type="text" class="form-control"  name="billTo4" [(ngModel)]="invoice.billTo4"  placeholder="City, State Zip">
-      <input type="text" class="form-control"  name="billTo5" [(ngModel)]="invoice.billTo5"  placeholder="Country">
+      <input type="text" class="form-control"  name="billTo1" [(ngModel)]="invaddress.billTo1" placeholder="Client name">
+      <input type="text" class="form-control"  name="billTo2" [(ngModel)]="invaddress.billTo2"  placeholder="Company name">
+      <input type="text" class="form-control"  name="billTo3" [(ngModel)]="invaddress.billTo3"  placeholder="Address">
+      <input type="text" class="form-control"  name="billTo4" [(ngModel)]="invaddress.billTo4"  placeholder="City, State Zip">
+      <input type="text" class="form-control"  name="billTo5" [(ngModel)]="invaddress.billTo5"  placeholder="Country">
     </div>
 
     <div style="width: 70%; margin: 0 auto;">
@@ -68,16 +68,21 @@
     <div class="form-group">
       <label for="invoiceDate">Invoice Estimate Date</label>
       <input type="date" class="form-control" id="EstimateDate" name="EstimateDate"
-        [(ngModel)]="invoice.invoiceEstimateDate">
+        [(ngModel)]="invoice.estimateDate">
     </div>
 
 
     <div class="form-group">
       <label for="invoiceDate">Invoice Closing Date</label>
       <input type="date" class="form-control" id="closingDate" name="closingDate"
-        [(ngModel)]="invoice.invoiceClosingDate">
+        [(ngModel)]="invoice.closingDate">
     </div>
 
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input type="text" class="form-control" id="status" name="status"
+        [(ngModel)]="invoice.status">
+    </div>
 
 
 
@@ -112,27 +117,27 @@
                       <div class="float-start">
                         <address>
                           <p class="font-bold">BILL FROM :</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billFrom1 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billFrom2 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billFrom3 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billFrom4 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom1 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom2 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom3 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom4 }}</p>
                         </address>
                       </div>
                       <div class="float-end text-end">
                         <address>
                           <p class="addr-font-h3 font-bold">BILL TO :</p>
-                          <p class="font-bold addr-font-h4">{{invoice.billTo1}}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billTo2 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billTo3 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billTo4 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billTo5 }}</p>
+                          <p class="font-bold addr-font-h4">{{invaddress.billTo1}}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo2 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo3 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo4 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo5 }}</p>
                           <p class="m-t-30">
                             <b>Invoice Date :</b>
                             <i class="fa fa-calendar"></i>{{ invoice.invoiceDate | date: "dd-MM-yyyy"}}
                           </p>
                           <p>
                             <b>Status :</b>
-                            <span class="label label-success">Success</span>
+                            <span class="label label-success">{{invoice.status}}</span>
                           </p>
                         </address>
                       </div>
@@ -172,22 +177,22 @@
 
                     <div class="col-md-12">
                       <div class="float-end m-t-30 text-end">
-                        <p>Sub - Total amount: ${{subtotal  | number:'1.2-2'}}</p>
-                        <p>Discount : ${{discount  | number:'1.2-2'}} </p>
-                        <p>Tax (10%) : ${{tax  | number:'1.2-2'}} </p>
+                        <p>Sub - Total amount: ${{invoice.subtotal  | number:'1.2-2'}}</p>
+                        <p>Discount : ${{invoice.discount  | number:'1.2-2'}} </p>
+                        <p>Tax (10%) : ${{invoice.tax  | number:'1.2-2'}} </p>
                         <hr>
                         <h3>
-                          <b>Total :</b> ${{total  | number:'1.2-2'}}
+                          <b>Total :</b> ${{invoice.totalCost  | number:'1.2-2'}}
                         </h3>
                       </div>
                       <div class="clearfix"></div>
                       <hr>
                       <div class="text-end">
-                        <!-- <a href="Downloads/invoice.pdf" download="invoice.pdf"> -->
+                        <a href="C:\Users\User\Downloads\spice\spice\source\main\README" download>
                         <button mat-raised-button color="primary">
                           <i class="fas fa-print msr-2"></i> Print
                         </button>
-                        <!-- </a> -->
+                        </a>
                       </div>
 
                     </div>
