@@ -1,14 +1,15 @@
 export class User {
-    userID: number;
-    fullName: string;
+    id: number;
+    name: string;
     username: string;
-    userStatus: boolean;
+    status: string;
+    password:string='';
   
-    constructor(userID: number, fullName: string, username: string, userStatus: boolean) {
-      this.userID = userID;
-      this.fullName = fullName;
+    constructor(userID: number, fullName: string, username: string, userStatus: string) {
+      this.id = userID;
+      this.name = fullName;
       this.username = username;
-      this.userStatus = userStatus;
+      this.status = userStatus;
     }
   }
   

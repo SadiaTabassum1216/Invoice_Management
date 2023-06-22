@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 
@@ -6,63 +7,71 @@ import { User } from 'src/app/models/user.model';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent  implements OnInit{
-  userList: User[] = [];
-  onEdit: boolean=false;
-  addUserFormVisible: boolean=false;
-  selectedUser: User = new User(0,'','',false);
-  newUser: User = new User(0,'','',false);
-  //  constructor(private modalService: NgbModal) { }
-  ngOnInit(): void {
-   this.getList();
-  }
+export class UsersComponent implements OnInit {
+  userList: any;
+  onEdit: boolean = false;
+  addUserFormVisible: boolean = false;
+  selectedUser: User = new User(0, '', '', '');
+  newUser: User = new User(0, '', '', '');
 
+
+  constructor(private http: HttpClient) { }
   
+  ngOnInit(): void {
+    this.getList();
+  }
 
   getList() {
-    //use url to fetch the userlist from database
-    this.userList = [
-      new User(1, 'abc', 'johndoe', true),
-      new User(2, 'cde', 'janesmith', false),
-      new User(3, 'asd', 'bobjohnson', true),     
-    ];
-  
+    this.http.get<any[]>('http://localhost:8000/api/users').subscribe(data => {
+
+      this.userList = data;
+      console.log(this.userList);
+    });
+
   }
-  
-  open(content: any) {   
-    this.onEdit=true;
-    // this.modalService.open(content);
-   
-  }
+
 
   // Function to edit a user
   editUser(user: User) {
-   this.selectedUser=user;
-   this.onEdit=true;
-   console.log(this.selectedUser);
+    this.selectedUser = user;
+    this.onEdit = true;
+    console.log(this.selectedUser);
   }
 
-  updateUser(){
+  updateUser() {
     //send the data to backend
-    this.onEdit=false;
-   
+    this.http.put<any>('http://localhost:8000/api/user/${selectedUser.id}', this.selectedUser).subscribe(data => {
+      console.log(this.selectedUser)
+    });
+    this.onEdit = false;
+
   }
 
- addUser(){
-  //send the data to backend
-  this.userList.push(this.newUser);
-  this.addUserFormVisible=false;
- }
+  addUser() {
+    //send the data to backend
+    this.http.post<any>('http://localhost:8000/api/user', this.selectedUser).subscribe(data => {
+      console.log(this.newUser)
+    });
+    this.userList.push(this.newUser);
+    this.addUserFormVisible = false;
+  }
 
-
-  deleteUser(userID: number) {  
-    const userIndex = this.userList.findIndex(user => user.userID === userID);
-
+  deleteUser(userID: number) {
+    const userIndex = this.userList.data.findIndex((user: { userID: number; }) => user.userID === userID);
     if (userIndex !== -1) {
-      this.userList.splice(userIndex, 1);
+      this.userList.data.splice(userIndex, 1);
     }
-
-    //send the updates to database
+  
+    this.http.delete<any>(`http://localhost:8000/api/users/${userID}`).subscribe(
+      data => {
+        console.log("User deleted successfully");
+        window.location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
+  
 }
 

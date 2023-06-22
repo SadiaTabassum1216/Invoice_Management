@@ -1,25 +1,80 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Invoice } from 'src/app/models/invoice.model';
+import { Item } from 'src/app/models/item.model';
+
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss'],
 })
-export class InvoiceComponent {
-  items: any[];
-  invoices: any[];
-  invoice:any; 
-  isFormSubmitted = false; 
+export class InvoiceComponent  implements OnInit{
+
+  items: any[]=[];
+  itemsWithQuantity: Item[] = [];
+  invoice: Invoice = new Invoice;
+  invaddress:any;
+  isFormSubmitted = false;
+ 
+  discountPercentage = 0.05; 
+  taxPercentage = 0.1;
 
 
-  submit(){
-    //send the data to backend
-    console.log(this.invoice);
+  
+  constructor(private http: HttpClient) {
+    
   }
 
-  submitInvoiceForm() {
+  ngOnInit(): void {
+  //  this.getItemList();
+
+   this.items= [
+    new Item(1, 'Item 1', 'Description of Item 1', 'Source of Item 1', 'Active', 0, 12),
+    new Item(2, 'Item 2', 'Description of Item 2', 'Source of Item 2', 'Inactive', 0, 45),
+    new Item(3, 'Item 3', 'Description of Item 3', 'Source of Item 3', 'Active', 0, 34)
+  ];
+  }
+
+
+  getItemList() {
+    this.http.get<any[]>('http://localhost:8000/api/items').subscribe(data => {
+       this.items = data;
+      console.log(this.items);
+    });
+
    
-    this.isFormSubmitted = true;
+
   }
+
+  submit() {
+    //send the data to backend
+
+    this.isFormSubmitted = true;
+    this.itemsWithQuantity = this.items.filter(item => item.quantity > 0);
+    // this.subtotal = 0;
+    this.invoice.subtotal=0;
+    for (const item of this.itemsWithQuantity) {
+      console.log(item.totalPrice)
+      this.invoice.subtotal += item.totalPrice;
+    }
+  
+    this.invoice.discount = this.invoice.subtotal * this.discountPercentage;
+    this.invoice.tax = this.invoice.subtotal * this.taxPercentage;
+    this.invoice.totalCost = this.invoice.subtotal - this.invoice.discount + this.invoice.tax;
+
+    this.http.post<any>('http://localhost:8000/api/user', this.invoice).subscribe(data => {
+      console.log(this.invoice)
+    });
+
+  }
+
+
+
+  increaseQuantity(item: any) {
+    item.quantity++;
+    item.totalPrice = item.quantity * item.unitPrice;
+  }
+
 
   breadscrums = [
     {
@@ -28,80 +83,6 @@ export class InvoiceComponent {
       active: 'Invoice',
     },
   ];
-  constructor() {
-    this.invoice= {
-      invoiceID: 'INV001',
-      invoiceDate: new Date(),
-      billFrom:'',
-      billToName:'',
-      billToAddress:'',
-      invoiceTime: '10:00 AM',
-      invoiceEstimateDate: '2023-06-25',
-      closingDate: '2023-06-30',
-      totalCost: 500,
-      totalSubtotal: 450,
-      grandTotal: 550,
-      additional: 'Additional information goes here',
-      status: 'Pending',
-      offering: 'Special Discount',
-      done: false
-    };
-    
+  
 
-    this.items = [
-      {
-        itemId: 1,
-        itemName: 'Item 1',
-        itemDesc: 'Description of Item 1',
-        itemSource: 'Source of Item 1',
-        itemStatus: 'Active'
-      },
-      {
-        itemId: 2,
-        itemName: 'Item 2',
-        itemDesc: 'Description of Item 2',
-        itemSource: 'Source of Item 2',
-        itemStatus: 'Inactive'
-      },
-      {
-        itemId: 3,
-        itemName: 'Item 3',
-        itemDesc: 'Description of Item 3',
-        itemSource: 'Source of Item 3',
-        itemStatus: 'Active'
-      }
-    ];
-
-    this.invoices = [
-      {
-        invoiceID: 'INV001',
-        invoiceDate: '2023-06-01',
-        invoiceTime: '10:00 AM',
-        invoiceEstimateDate: '2023-06-05',
-        closingDate: '2023-06-10',
-        totalCost: 5000,
-        totalSubtotal: 4500,
-        grandTotal: 5500,
-        additional: 'Additional info',
-        status: 'Pending',
-        offering: 'Product A',
-        done: true
-      },
-      {
-        invoiceID: 'INV002',
-        invoiceDate: '2023-06-02',
-        invoiceTime: '11:30 AM',
-        invoiceEstimateDate: '2023-06-07',
-        closingDate: '2023-06-12',
-        totalCost: 8000,
-        totalSubtotal: 7500,
-        grandTotal: 8500,
-        additional: 'Additional notes',
-        status: 'Paid',
-        offering: 'Product B',
-        done: false
-      },
-      // Add more invoices as needed
-    ];
-  }
 }
