@@ -3,6 +3,7 @@ export class User {
     fullName: string;
     username: string;
     userStatus: boolean;
+    password:string='';
   
     constructor(userID: number, fullName: string, username: string, userStatus: boolean) {
       this.userID = userID;

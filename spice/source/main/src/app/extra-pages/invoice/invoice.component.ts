@@ -1,25 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Item } from 'src/app/models/item.model';
+
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss'],
 })
-export class InvoiceComponent {
-  items: any[];
+export class InvoiceComponent implements OnInit {
+  items: Item[];
+  itemsWithQuantity: Item[] = [];
   invoices: any[];
-  invoice:any; 
-  isFormSubmitted = false; 
+  invoice: any;
+  isFormSubmitted = false;
+  subtotal: number = 0;
+  discountPercentage = 0.05;
+  discount: number = 0;
+  total: number = 0;
+  taxPercentage = 0.1;
+  tax: number = 0;
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+    this.getItemList();
+  }
 
 
-  submit(){
+  getItemList() {
+    //get list here
+  }
+
+
+  submit() {
     //send the data to backend
-    console.log(this.invoice);
+
+    this.isFormSubmitted = true;
+    this.itemsWithQuantity = this.items.filter(item => item.quantity > 0);
+
+    this.subtotal = 0;
+    for (const item of this.itemsWithQuantity) {
+      console.log(item.totalPrice)
+      this.subtotal += item.totalPrice;
+    }
+    console.log(this.subtotal);
+
+
+    this.discount = this.subtotal * this.discountPercentage;
+
+    this.tax = this.subtotal * this.taxPercentage;
+
+    this.total = this.subtotal - this.discount + this.tax;
+
   }
 
-  submitInvoiceForm() {
-   
-    this.isFormSubmitted = true;
+
+
+  increaseQuantity(item: any) {
+    item.quantity++;
+    item.totalPrice = item.quantity * item.unitPrice;
   }
+
 
   breadscrums = [
     {
@@ -29,48 +68,28 @@ export class InvoiceComponent {
     },
   ];
   constructor() {
-    this.invoice= {
+    this.invoice = {
       invoiceID: 'INV001',
       invoiceDate: new Date(),
-      billFrom:'',
-      billToName:'',
-      billToAddress:'',
-      invoiceTime: '10:00 AM',
-      invoiceEstimateDate: '2023-06-25',
+      billFrom: '',
+      billToName: '',
+      billToAddress: '',
       closingDate: '2023-06-30',
-      totalCost: 500,
-      totalSubtotal: 450,
-      grandTotal: 550,
+
       additional: 'Additional information goes here',
       status: 'Pending',
       offering: 'Special Discount',
       done: false
     };
-    
 
-    this.items = [
-      {
-        itemId: 1,
-        itemName: 'Item 1',
-        itemDesc: 'Description of Item 1',
-        itemSource: 'Source of Item 1',
-        itemStatus: 'Active'
-      },
-      {
-        itemId: 2,
-        itemName: 'Item 2',
-        itemDesc: 'Description of Item 2',
-        itemSource: 'Source of Item 2',
-        itemStatus: 'Inactive'
-      },
-      {
-        itemId: 3,
-        itemName: 'Item 3',
-        itemDesc: 'Description of Item 3',
-        itemSource: 'Source of Item 3',
-        itemStatus: 'Active'
-      }
+
+    this.items= [
+      new Item(1, 'Item 1', 'Description of Item 1', 'Source of Item 1', 'Active', 0,12),
+      new Item(2, 'Item 2', 'Description of Item 2', 'Source of Item 2', 'Inactive', 0,45),
+      new Item(3, 'Item 3', 'Description of Item 3', 'Source of Item 3', 'Active', 0,34)
     ];
+
+
 
     this.invoices = [
       {
@@ -101,7 +120,8 @@ export class InvoiceComponent {
         offering: 'Product B',
         done: false
       },
-      // Add more invoices as needed
+
     ];
   }
+
 }

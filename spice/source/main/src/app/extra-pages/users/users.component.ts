@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 
@@ -12,29 +13,26 @@ export class UsersComponent  implements OnInit{
   addUserFormVisible: boolean=false;
   selectedUser: User = new User(0,'','',false);
   newUser: User = new User(0,'','',false);
-  //  constructor(private modalService: NgbModal) { }
+ constructor(private http:HttpClient) { }
   ngOnInit(): void {
    this.getList();
   }
 
-  
-
   getList() {
-    //use url to fetch the userlist from database
+    this.http.get<any[]>('http://localhost:8000/getUser').subscribe(data => {
+      // this.userList = data;
+      
+    });
+
     this.userList = [
       new User(1, 'abc', 'johndoe', true),
       new User(2, 'cde', 'janesmith', false),
       new User(3, 'asd', 'bobjohnson', true),     
     ];
-  
-  }
-  
-  open(content: any) {   
-    this.onEdit=true;
-    // this.modalService.open(content);
-   
+      
   }
 
+  
   // Function to edit a user
   editUser(user: User) {
    this.selectedUser=user;
@@ -44,24 +42,31 @@ export class UsersComponent  implements OnInit{
 
   updateUser(){
     //send the data to backend
+    this.http.post<any>('http://localhost:8000/user', this.selectedUser).subscribe(data => {
+    console.log(this.selectedUser)  
+    });
     this.onEdit=false;
    
   }
 
  addUser(){
   //send the data to backend
+  this.http.post<any>('http://localhost:8000/newuser', this.selectedUser).subscribe(data => {
+    console.log(this.newUser)  
+    });
   this.userList.push(this.newUser);
   this.addUserFormVisible=false;
  }
 
 
-  deleteUser(userID: number) {  
-    const userIndex = this.userList.findIndex(user => user.userID === userID);
-
+  deleteUser(deleteduser: User) {  
+    const userIndex = this.userList.findIndex(user => user.userID === deleteduser.userID);
     if (userIndex !== -1) {
       this.userList.splice(userIndex, 1);
     }
-
+    this.http.post<any>('http://localhost:8000/deleteduser', deleteduser).subscribe(data => {
+      console.log(deleteduser)  
+      });
     //send the updates to database
   }
 }

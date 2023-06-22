@@ -1,47 +1,92 @@
-<form (ngSubmit)="submitInvoiceForm()">
-  <br><br><br><br>
+<div *ngIf="!isFormSubmitted">
+  <form>
+    <br><br><br><br>
 
-  <h3 class="text-center">Invoice Table</h3>
-  <br><br>
+    <h3 class="text-center">Invoice Table</h3>
+    <br><br>
 
-  <div class="form-group">
-    <label for="invoiceID">Invoice ID</label>
-    <input type="text" class="form-control" id="invoiceID" name="invoiceID" [(ngModel)]="invoice.invoiceID">
-  </div>
+    <div class="form-group">
+      <label for="invoiceID">Invoice ID</label>
+      <input type="text" class="form-control" id="invoiceID" name="invoiceID" [(ngModel)]="invoice.invoiceID">
+    </div>
 
-  <div class="form-group">
-    <label for="billFrom">BILL FROM</label>
-    <input type="text" class="form-control" id="billFrom" name="billFrom" [(ngModel)]="invoice.billFrom">
-  </div>
+    <div class="form-group">
+      <label for="billFrom">BILL FROM</label>
+      <input type="text" class="form-control"  name="billFrom1" [(ngModel)]="invoice.billFrom1" placeholder="Company name">
+      <input type="text" class="form-control"  name="billFrom2" [(ngModel)]="invoice.billFrom2" placeholder="Address">
+      <input type="text" class="form-control"  name="billFrom3" [(ngModel)]="invoice.billFrom3" placeholder="City, State Zip">
+      <input type="text" class="form-control" name="billFrom4" [(ngModel)]="invoice.billFrom4" placeholder="Country">
+    </div>
 
-  <h4 class="text-center">Bill To</h4>
+  
+    <div class="form-group">
+      <label for="billToAddress">Bill To</label>
+      <input type="text" class="form-control"  name="billTo1" [(ngModel)]="invoice.billTo1" placeholder="Client name">
+      <input type="text" class="form-control"  name="billTo2" [(ngModel)]="invoice.billTo2"  placeholder="Company name">
+      <input type="text" class="form-control"  name="billTo3" [(ngModel)]="invoice.billTo3"  placeholder="Address">
+      <input type="text" class="form-control"  name="billTo4" [(ngModel)]="invoice.billTo4"  placeholder="City, State Zip">
+      <input type="text" class="form-control"  name="billTo5" [(ngModel)]="invoice.billTo5"  placeholder="Country">
+    </div>
 
-      <div class="form-group">
-        <label for="billToName">Name</label>
-        <input type="text" class="form-control" id="billToName" name="billToName" [(ngModel)]="invoice.billToName">
-      </div>
+    <div style="width: 70%; margin: 0 auto;">
+      <h3 class="text-center">Item Table</h3>
 
- 
-      <div class="form-group">
-        <label for="billToAddress">Address</label>
-        <input type="text" class="form-control" id="billToAddress" name="billToAddress"  [(ngModel)]="invoice.billToAddress">
-      </div>
- 
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">Item ID</th>
+            <th class="text-center">Item Name</th>
+            <th class="text-center">Item Description</th>
+            <th class="text-center">Item Source</th>
+            <th class="text-center">Item Status</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Unit Price</th>
+            <th class="text-center">Total Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td class="text-center">{{ item.itemId }}</td>
+            <td class="text-center">{{ item.itemName }}</td>
+            <td class="text-center">{{ item.itemDesc }}</td>
+            <td class="text-center">{{ item.itemSource }}</td>
+            <td class="text-center">{{ item.itemStatus }}</td>
+            <td class="text-center">{{ item.quantity }}</td>
+            <td class="text-center">{{ item.unitPrice }}</td>
+            <td class="text-center">{{ item.quantity * item.unitPrice }}</td>
+            <td class="text-center">
+              <button class="btn btn-primary" (click)="increaseQuantity(item)">Add</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <div class="form-group">
-    <label for="invoiceDate">Invoice Estimate Date</label>
-    <input type="date" class="form-control" id="invoiceDate" name="invoiceDate"
-      [(ngModel)]="invoice.invoiceEstimateDate">
-  </div>
+
+
+    <div class="form-group">
+      <label for="invoiceDate">Invoice Estimate Date</label>
+      <input type="date" class="form-control" id="EstimateDate" name="EstimateDate"
+        [(ngModel)]="invoice.invoiceEstimateDate">
+    </div>
+
+
+    <div class="form-group">
+      <label for="invoiceDate">Invoice Closing Date</label>
+      <input type="date" class="form-control" id="closingDate" name="closingDate"
+        [(ngModel)]="invoice.invoiceClosingDate">
+    </div>
 
 
 
 
-  <div class="text-center">
-    <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
-  </div>
-</form>
-
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+    <br><br><br>
+  </form>
+</div>
 
 <section class="content" *ngIf="isFormSubmitted">
   <div class="content-block">
@@ -67,18 +112,20 @@
                       <div class="float-start">
                         <address>
                           <p class="font-bold">BILL FROM :</p>
-                          <p class="text-muted" style="white-space: pre-line;">
-                            {{ invoice.billFrom }}
-                          </p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billFrom1 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billFrom2 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billFrom3 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billFrom4 }}</p>
                         </address>
                       </div>
                       <div class="float-end text-end">
                         <address>
                           <p class="addr-font-h3 font-bold">BILL TO :</p>
-                          <p class="font-bold addr-font-h4">{{invoice.billToName}}</p>
-                          <p class="text-muted" style="white-space: pre-line;">
-                            {{ invoice.billToAddress }}
-                          </p>
+                          <p class="font-bold addr-font-h4">{{invoice.billTo1}}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billTo2 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billTo3 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billTo4 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invoice.billTo5 }}</p>
                           <p class="m-t-30">
                             <b>Invoice Date :</b>
                             <i class="fa fa-calendar"></i>{{ invoice.invoiceDate | date: "dd-MM-yyyy"}}
@@ -90,155 +137,59 @@
                         </address>
                       </div>
                     </div>
-                    <div class="col-md-12">
-                      <div class="table-responsive m-t-40">
-                        <table class="table table-hover">
-                          <thead>
-                            <tr>
-                              <th class="text-center">#</th>
-                              <th class="text-center">image</th>
-                              <th class="text-center">Description</th>
-                              <th class="text-center">Quantity</th>
-                              <th class="text-center">Unit Cost</th>
-                              <th class="text-end">Total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td class="text-center">1</td>
-                              <td class="table-img text-center">
-                                <img src="assets/images/products/p-13.jpg" alt="">
-                              </td>
-                              <td class="text-center">Lorem ipsum dolor sit amet</td>
-                              <td class="text-center">1</td>
-                              <td class="text-center">$100</td>
-                              <td class="text-end">$100</td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">2</td>
-                              <td class="table-img text-center">
-                                <img src="assets/images/products/p-14.jpg" alt="">
-                              </td>
-                              <td class="text-center">Consectetur adipisicing elit</td>
-                              <td class="text-center">3</td>
-                              <td class="text-center">$50</td>
-                              <td class="text-end">$150</td>
-                            </tr>
-                            <tr>
-                              <td class="text-center">3</td>
-                              <td class="table-img text-center">
-                                <img src="assets/images/products/p-15.jpg" alt="">
-                              </td>
-                              <td class="text-center">Dolorum provident rerum </td>
-                              <td class="text-center">2</td>
-                              <td class="text-center">$25</td>
-                              <td class="text-end">$50</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+
+                    <div style="width: 70%; margin: 0 auto;">
+                      <h3 class="text-center">Selected Items</h3>
+
+                      <table class="table" style="width: 100%;">
+                        <thead>
+                          <tr>
+                            <th class="text-center">Item ID</th>
+                            <th class="text-center">Item Name</th>
+                            <th class="text-center">Item Description</th>
+                            <th class="text-center">Item Source</th>
+                            <th class="text-center">Item Status</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Unit Price</th>
+                            <th class="text-center">Total Price</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of itemsWithQuantity">
+                            <td class="text-center">{{ item.itemId }}</td>
+                            <td class="text-center">{{ item.itemName }}</td>
+                            <td class="text-center">{{ item.itemDesc }}</td>
+                            <td class="text-center">{{ item.itemSource }}</td>
+                            <td class="text-center">{{ item.itemStatus }}</td>
+                            <td class="text-center">{{ item.quantity }}</td>
+                            <td class="text-center">{{ item.unitPrice }}</td>
+                            <td class="text-center">{{ item.quantity * item.unitPrice }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
-
-
-                    <!-- new table -->
-                    <h3 class="text-center">Item Table</h3>
-
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th class="text-center">Item ID</th>
-                          <th class="text-center">Item Name</th>
-                          <th class="text-center">Item Description</th>
-                          <th class="text-center">Item Source</th>
-                          <th class="text-center">Item Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of items">
-                          <td class="text-center">{{ item.itemId }}</td>
-                          <td class="text-center">{{ item.itemName }}</td>
-                          <td class="text-center">{{ item.itemDesc }}</td>
-                          <td class="text-center">{{ item.itemSource }}</td>
-                          <td class="text-center">{{ item.itemStatus }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-
-                    <!-- invoice table -->
-                    <h3 class="text-center">Invoice Table</h3>
-                    <table class="table">
-                      <tbody>
-                        <tr>
-                          <th class="text-center">Invoice ID</th>
-                          <td class="text-center">{{ invoice.invoiceID }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Invoice Date</th>
-                          <td class="text-center">{{ invoice.invoiceDate }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Invoice Time</th>
-                          <td class="text-center">{{ invoice.invoiceTime }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Invoice Estimate Date</th>
-                          <td class="text-center">{{ invoice.invoiceestimateDate }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Closing Date</th>
-                          <td class="text-center">{{ invoice.closingDate }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Total Cost</th>
-                          <td class="text-center">{{ invoice.totalCost }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Total Subtotal</th>
-                          <td class="text-center">{{ invoice.totalSubtotal }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Grand Total</th>
-                          <td class="text-center">{{ invoice.grandTotal }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Additional</th>
-                          <td class="text-center">{{ invoice.additional }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Status</th>
-                          <td class="text-center">{{ invoice.status }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Offering</th>
-                          <td class="text-center">{{ invoice.offering }}</td>
-                        </tr>
-                        <tr>
-                          <th class="text-center">Done</th>
-                          <td class="text-center">{{ invoice.done }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-
-
 
 
                     <div class="col-md-12">
                       <div class="float-end m-t-30 text-end">
-                        <p>Sub - Total amount: $300</p>
-                        <p>Discount : $10 </p>
-                        <p>Tax (10%) : $14 </p>
+                        <p>Sub - Total amount: ${{subtotal  | number:'1.2-2'}}</p>
+                        <p>Discount : ${{discount  | number:'1.2-2'}} </p>
+                        <p>Tax (10%) : ${{tax  | number:'1.2-2'}} </p>
                         <hr>
                         <h3>
-                          <b>Total :</b> $304
+                          <b>Total :</b> ${{total  | number:'1.2-2'}}
                         </h3>
                       </div>
                       <div class="clearfix"></div>
                       <hr>
                       <div class="text-end">
-                        <button mat-raised-button color="primary"><i class="fas fa-print msr-2"></i>Print</button>
+                        <!-- <a href="Downloads/invoice.pdf" download="invoice.pdf"> -->
+                        <button mat-raised-button color="primary">
+                          <i class="fas fa-print msr-2"></i> Print
+                        </button>
+                        <!-- </a> -->
                       </div>
+
                     </div>
                   </div>
                 </div>
