@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 
@@ -8,81 +8,94 @@ import { Item } from 'src/app/models/item.model';
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss'],
 })
-export class InvoiceComponent  implements OnInit{
-
-  items: any[]=[];
-  itemsWithQuantity: Item[] = [];
-  invoice: Invoice = new Invoice;
-  invaddress:any;
-  isFormSubmitted = false;
+export class InvoiceComponent {
  
-  discountPercentage = 0.05; 
+  items: Item[] = [];
+  invoice: Invoice = new Invoice;
+  invaddress: any;
+  isFormSubmitted = false;
+
+  discountPercentage = 0.05;
   taxPercentage = 0.1;
 
 
-  
+
   constructor(private http: HttpClient) {
-    
-  }
-
-  ngOnInit(): void {
-  //  this.getItemList();
-
-   this.items= [
-    new Item(1, 'Item 1', 'Description of Item 1', 'Source of Item 1', 'Active', 0, 12),
-    new Item(2, 'Item 2', 'Description of Item 2', 'Source of Item 2', 'Inactive', 0, 45),
-    new Item(3, 'Item 3', 'Description of Item 3', 'Source of Item 3', 'Active', 0, 34)
-  ];
-  }
-
-
-  getItemList() {
-    this.http.get<any[]>('http://localhost:8000/api/items').subscribe(data => {
-       this.items = data;
-      console.log(this.items);
-    });
-
+    this.invaddress = {};
    
-
   }
 
-  submit() {
-    //send the data to backend
+  // getItemList() {
+  //   this.http.get<any[]>('http://localhost:8000/api/items').subscribe(data => {
+  //     this.items = data;
+  //     console.log(this.items);
+  //   });
+  // }
 
-    this.isFormSubmitted = true;
-    this.itemsWithQuantity = this.items.filter(item => item.quantity > 0);
-    // this.subtotal = 0;
-    this.invoice.subtotal=0;
-    for (const item of this.itemsWithQuantity) {
-      console.log(item.totalPrice)
-      this.invoice.subtotal += item.totalPrice;
+
+  addRow() {
+    let newItem: Item = {
+      itemId: '',
+      firstPrice: 0,
+      lastPrice: 0,
+      quantity:0,
+      VAT: 0,
+      unitPrice: 0,
+      additionalCost: 0,
+      purchaseAdditionalCost: 0,
+      deliveryAdditionalCost: 0,
+      totalPrice: 0,
+      POD: '',
+      closingDate:new Date(),
+      purchasePrice: 0,
+      isFirstPaymentDone: false,
+      firstPaymentDate:new Date(),
+      isLastPaymentDone: false,
+      logisticCompany: '',
+      logisticLocation: '',
+      logisticEstimatedDate: new Date(),
+      shippingStatus: '',
+      isDeliveredToIraq: false,
+      isDeliveredByLogistic: false,
+      isDeliverToClient: false,
+      logisticCost: 0,
+      isFullyPaid: false,
+      isSubmitted: false,
+      status: ''
+    };
+  
+    this.items.push(newItem);
+  }
+  
+
+    submit() {
+      this.isFormSubmitted = true;
+       console.log(this.items);
+
+      this.invoice.totalCost = 0;
+      for (const item of this.items) {
+        item.totalPrice = item.unitPrice* item.quantity +item.lastPrice + item.additionalCost + item.deliveryAdditionalCost;
+        console.log(item.totalPrice);
+        this.invoice.totalCost += item.totalPrice;
+      }
+
+      // this.invoice.discount = this.invoice.subtotal * this.discountPercentage;
+      // this.invoice.tax = this.invoice.subtotal * this.taxPercentage;
+      // this.invoice.totalCost = this.invoice.subtotal - this.invoice.discount + this.invoice.tax;
+
+      this.http.post<any>('http://localhost:8000/api/user', this.invoice).subscribe(data => {
+        console.log(this.invoice);
+      });
     }
-  
-    this.invoice.discount = this.invoice.subtotal * this.discountPercentage;
-    this.invoice.tax = this.invoice.subtotal * this.taxPercentage;
-    this.invoice.totalCost = this.invoice.subtotal - this.invoice.discount + this.invoice.tax;
 
-    this.http.post<any>('http://localhost:8000/api/user', this.invoice).subscribe(data => {
-      console.log(this.invoice)
-    });
+
+    breadscrums = [
+      {
+        title: 'Invoice',
+        items: ['Extra'],
+        active: 'Invoice',
+      },
+    ];
+
 
   }
-
-
-
-  increaseQuantity(item: any) {
-    item.quantity++;
-    item.totalPrice = item.quantity * item.unitPrice;
-  }
-
-
-  breadscrums = [
-    {
-      title: 'Invoice',
-      items: ['Extra'],
-      active: 'Invoice',
-    },
-  ];
-  
-
-}

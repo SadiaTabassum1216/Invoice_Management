@@ -16,6 +16,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ComponentsModule } from '../shared/components/components.module';
 import { UsersComponent } from './users/users.component';
+import { EditModalComponent } from './users/edit-modal/edit-modal.component';
+import { AddModalComponent } from './users/add-modal/add-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -24,6 +27,8 @@ import { UsersComponent } from './users/users.component';
     FaqsComponent,
     BlankComponent,
     UsersComponent,
+    EditModalComponent,
+    AddModalComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +43,7 @@ import { UsersComponent } from './users/users.component';
     MatCheckboxModule,
     MatTabsModule,
     ComponentsModule,
+    MatDialogModule
   ],
 })
 export class ExtraPagesModule {}

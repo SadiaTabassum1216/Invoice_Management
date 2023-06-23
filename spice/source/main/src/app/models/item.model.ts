@@ -1,29 +1,29 @@
 export class Item {
-  itemId: number;
-  itemName: string;
-  itemDesc: string;
-  itemSource: string;
-  itemStatus: string;
-  quantity: number;
-  unitPrice: number;
-  totalPrice: number=0;
-
-  constructor(
-    itemId: number,
-    itemName: string,
-    itemDesc: string,
-    itemSource: string,
-    itemStatus: string,
-    quantity: number,
-    unitPrice: number
-  ) {
-    this.itemId = itemId;
-    this.itemName = itemName;
-    this.itemDesc = itemDesc;
-    this.itemSource = itemSource;
-    this.itemStatus = itemStatus;
-    this.quantity = quantity;
-    this.unitPrice = unitPrice; 
-   
-  }
+  itemId: string='';
+  firstPrice: number=0;
+  lastPrice: number=0;
+  quantity: number=0;
+  VAT: number=0;
+  unitPrice: number=0;
+  additionalCost: number=0;
+  purchaseAdditionalCost: number=0;
+  deliveryAdditionalCost: number=0;
+  totalPrice: number = 0;
+  POD: string='';
+  closingDate: Date=new Date();
+  purchasePrice: number=0;
+  isFirstPaymentDone: boolean=false;
+  firstPaymentDate: Date=new Date();
+  isLastPaymentDone: boolean=false;
+  logisticCompany: string='';
+  logisticLocation: string='';
+  logisticEstimatedDate: Date=new Date();
+  shippingStatus: string=''; 
+  isDeliveredToIraq: boolean = false; // Set to false by default
+  isDeliveredByLogistic: boolean = false; // Set to false by default
+  isDeliverToClient: boolean = false; // Set to false by default
+  logisticCost: number=0;
+  isFullyPaid: boolean = false;
+  isSubmitted: boolean = false;
+  status: string='';
 }
