@@ -28,55 +28,133 @@
       <input type="text" class="form-control"  name="billTo5" [(ngModel)]="invaddress.billTo5"  placeholder="Country">
     </div>
 
-    <div style="width: 70%; margin: 0 auto;">
+    <div style="width: 70%; margin: 0 auto; ; overflow-x: auto;">
       <h3 class="text-center">Item Table</h3>
-
+    
       <table class="table">
         <thead>
           <tr>
             <th class="text-center">Item ID</th>
-            <th class="text-center">Item Name</th>
-            <th class="text-center">Item Description</th>
-            <th class="text-center">Item Source</th>
-            <th class="text-center">Item Status</th>
-            <th class="text-center">Quantity</th>
+            <th class="text-center">First Price</th>
+            <th class="text-center">Last Price</th>    
+            <th class="text-center">Quantity</th>        
+            <th class="text-center">VAT</th>
             <th class="text-center">Unit Price</th>
-            <th class="text-center">Total Price</th>
-            <th></th>
+            <th class="text-center">Additional Cost</th>
+            <th class="text-center">Purchase Additional Cost</th>
+            <th class="text-center">Delivery Additional Cost</th>
+            <th class="text-center">POD</th>
+            <th class="text-center">Closing Date</th>
+            <th class="text-center">Purchase Price</th>
+            <th class="text-center">Is First Payment Done</th>
+            <th class="text-center">First Payment Date</th>
+            <th class="text-center">Is Last Payment Done</th>
+            <th class="text-center">Logistic Company</th>
+            <th class="text-center">Logistic Location</th>
+            <th class="text-center">Logistic Estimated Date</th>
+            <th class="text-center">Shipping Status</th>
+            <th class="text-center">Is Delivered to Iraq</th>
+            <th class="text-center">Is Delivered by Logistic</th>
+            <th class="text-center">Is Deliver to Client</th>
+            <th class="text-center">Logistic Cost</th>
+            <th class="text-center">Is Fully Paid</th>
+            <th class="text-center">Is Submitted</th>
+            <th class="text-center">Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of items">
-            <td class="text-center">{{ item.itemId }}</td>
-            <td class="text-center">{{ item.itemName }}</td>
-            <td class="text-center">{{ item.itemDesc }}</td>
-            <td class="text-center">{{ item.itemSource }}</td>
-            <td class="text-center">{{ item.itemStatus }}</td>
-            <td class="text-center">{{ item.quantity }}</td>
-            <td class="text-center">{{ item.unitPrice }}</td>
-            <td class="text-center">{{ item.quantity * item.unitPrice }}</td>
+          <tr *ngFor="let item of items; let i = index">
             <td class="text-center">
-              <button class="btn btn-primary" (click)="increaseQuantity(item)">Add</button>
+              <input type="text" name="{{item.itemId}}" [(ngModel)]="item.itemId">
+            </td>
+         
+            <td class="text-center">
+              <input type="number" name="{{item.firstPrice}}" [(ngModel)]="item.firstPrice">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.lastPrice}}" [(ngModel)]="item.lastPrice">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.quantity}}" [(ngModel)]="item.quantity">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.VAT}}" [(ngModel)]="item.VAT">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.unitPrice}}" [(ngModel)]="item.unitPrice">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.additionalCost}}" [(ngModel)]="item.additionalCost" >
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.purchaseAdditionalCost}}" [(ngModel)]="item.purchaseAdditionalCost">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.deliveryAdditionalCost}}" [(ngModel)]="item.deliveryAdditionalCost" >
+            </td>
+           
+            <td class="text-center">
+              <input type="text" name="{{item.POD}}" [(ngModel)]="item.POD">
+            </td>
+            <td class="text-center">
+              <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.purchasePrice}}" [(ngModel)]="item.purchasePrice">
+            </td>
+            <td class="text-center">
+              <input type="checkbox" name="{{item.isFirstPaymentDone}}" [(ngModel)]="item.isFirstPaymentDone">
+            </td>
+            <td class="text-center">
+              <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate">
+            </td>
+            <td class="text-center">
+              <input type="checkbox" name="{{item.isLastPaymentDone}}" [(ngModel)]="item.isLastPaymentDone">
+            </td>
+            <td class="text-center">
+              <input type="text" name="{{item.logisticCompany}}" [(ngModel)]="item.logisticCompany">
+            </td>
+            <td class="text-center">
+              <input type="text" name="{{item.logisticLocation}}" [(ngModel)]="item.logisticLocation">
+            </td>
+            <td class="text-center">
+              <input type="date"  name="{{item.logisticEstimatedDate}}" [(ngModel)]="item.logisticEstimatedDate">
+            </td>
+            <td class="text-center">
+              <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">
+            </td>
+            <td class="text-center">
+              <input type="checkbox" name="{{item.isDeliveredToIraq}}" [(ngModel)]="item.isDeliveredToIraq">
+            </td>
+            <td class="text-center">
+              <input type="checkbox" name="{{item.isDeliveredByLogistic}}" [(ngModel)]="item.isDeliveredByLogistic">
+            </td>
+            <td class="text-center">
+              <input type="checkbox" name="{{item.isDeliverToClient}}" [(ngModel)]="item.isDeliverToClient">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.logisticCost}}" [(ngModel)]="item.logisticCost">
+            </td>
+            <td class="text-center">
+              <input type="checkbox" name="{{item.isFullyPaid}}" [(ngModel)]="item.isFullyPaid">
+            </td>
+            <td class="text-center">
+              <input type="checkbox" name="{{item.isSubmitted}}" [(ngModel)]="item.isSubmitted">
+            </td>
+            <td class="text-center">
+              <input type="text" name="{{item.status}}" [(ngModel)]="item.status">
+            </td>
+          </tr>
+          <tr>
+            <td colspan="29" class="text-center">
+              <button class="fa fa-plus " (click)="addRow()">Add Row</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-
-
-
-    <div class="form-group">
-      <label for="invoiceDate">Invoice Estimate Date</label>
-      <input type="date" class="form-control" id="EstimateDate" name="EstimateDate"
-        [(ngModel)]="invoice.estimateDate">
-    </div>
-
-
-    <div class="form-group">
-      <label for="invoiceDate">Invoice Closing Date</label>
-      <input type="date" class="form-control" id="closingDate" name="closingDate"
-        [(ngModel)]="invoice.closingDate">
-    </div>
+    
+  
 
     <div class="form-group">
       <label for="status">Status</label>
@@ -143,32 +221,71 @@
                       </div>
                     </div>
 
-                    <div style="width: 70%; margin: 0 auto;">
+                    <div class="table-container" style="width: 70%; margin: 0 auto; overflow-x: auto;">
                       <h3 class="text-center">Selected Items</h3>
 
                       <table class="table" style="width: 100%;">
                         <thead>
                           <tr>
                             <th class="text-center">Item ID</th>
-                            <th class="text-center">Item Name</th>
-                            <th class="text-center">Item Description</th>
-                            <th class="text-center">Item Source</th>
-                            <th class="text-center">Item Status</th>
-                            <th class="text-center">Quantity</th>
+                            <th class="text-center">First Price</th>
+                            <th class="text-center">Last Price</th>    
+                            <th class="text-center">Quantity</th>        
+                            <th class="text-center">VAT</th>
                             <th class="text-center">Unit Price</th>
+                            <th class="text-center">Additional Cost</th>
+                            <th class="text-center">Purchase Additional Cost</th>
+                            <th class="text-center">Delivery Additional Cost</th>
                             <th class="text-center">Total Price</th>
+                            <th class="text-center">POD</th>
+                            <th class="text-center">Closing Date</th>
+                            <th class="text-center">Purchase Price</th>
+                            <th class="text-center">Is First Payment Done</th>
+                            <th class="text-center">First Payment Date</th>
+                            <th class="text-center">Is Last Payment Done</th>
+                            <th class="text-center">Logistic Company</th>
+                            <th class="text-center">Logistic Location</th>
+                            <th class="text-center">Logistic Estimated Date</th>
+                            <th class="text-center">Shipping Status</th>
+                            <th class="text-center">Is Delivered to Iraq</th>
+                            <th class="text-center">Is Delivered by Logistic</th>
+                            <th class="text-center">Is Deliver to Client</th>
+                            <th class="text-center">Logistic Cost</th>
+                            <th class="text-center">Is Fully Paid</th>
+                            <th class="text-center">Is Submitted</th>
+                            <th class="text-center">Status</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let item of itemsWithQuantity">
+                          
+                          <tr *ngFor="let item of items">
                             <td class="text-center">{{ item.itemId }}</td>
-                            <td class="text-center">{{ item.itemName }}</td>
-                            <td class="text-center">{{ item.itemDesc }}</td>
-                            <td class="text-center">{{ item.itemSource }}</td>
-                            <td class="text-center">{{ item.itemStatus }}</td>
+                            <td class="text-center">{{ item.firstPrice }}</td>
+                            <td class="text-center">{{ item.lastPrice }}</td>
                             <td class="text-center">{{ item.quantity }}</td>
+                            <td class="text-center">{{ item.VAT }}</td>
                             <td class="text-center">{{ item.unitPrice }}</td>
-                            <td class="text-center">{{ item.quantity * item.unitPrice }}</td>
+                            <td class="text-center">{{ item.additionalCost }}</td>
+                            <td class="text-center">{{ item.purchaseAdditionalCost }}</td>
+                            <td class="text-center">{{ item.deliveryAdditionalCost }}</td>
+                            <td class="text-center">{{ item.totalPrice }}</td>
+                            <td class="text-center">{{ item.POD }}</td>
+                            <td class="text-center">{{ item.closingDate | date: 'dd/MM/yyyy'}}</td>
+                            <td class="text-center">{{ item.purchasePrice }}</td>
+                            <td class="text-center">{{ item.isFirstPaymentDone }}</td>
+                            <td class="text-center">{{ item.firstPaymentDate | date: 'dd/MM/yyyy'}}</td>
+                            <td class="text-center">{{ item.isLastPaymentDone }}</td>
+                            <td class="text-center">{{ item.logisticCompany }}</td>
+                            <td class="text-center">{{ item.logisticLocation }}</td>
+                            <td class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
+                            <td class="text-center">{{ item.shippingStatus }}</td>
+                            <td class="text-center">{{ item.isDeliveredToIraq }}</td>
+                            <td class="text-center">{{ item.isDeliveredByLogistic }}</td>
+                            <td class="text-center">{{ item.isDeliverToClient }}</td>
+                            <td class="text-center">{{ item.logisticCost }}</td>
+                            <td class="text-center">{{ item.isFullyPaid }}</td>
+                            <td class="text-center">{{ item.isSubmitted }}</td>
+                            <td class="text-center">{{ item.status }}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -177,9 +294,9 @@
 
                     <div class="col-md-12">
                       <div class="float-end m-t-30 text-end">
-                        <p>Sub - Total amount: ${{invoice.subtotal  | number:'1.2-2'}}</p>
+                        <!-- <p>Sub - Total amount: ${{invoice.subtotal  | number:'1.2-2'}}</p>
                         <p>Discount : ${{invoice.discount  | number:'1.2-2'}} </p>
-                        <p>Tax (10%) : ${{invoice.tax  | number:'1.2-2'}} </p>
+                        <p>Tax (10%) : ${{invoice.tax  | number:'1.2-2'}} </p> -->
                         <hr>
                         <h3>
                           <b>Total :</b> ${{invoice.totalCost  | number:'1.2-2'}}
