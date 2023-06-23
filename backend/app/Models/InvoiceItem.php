@@ -43,12 +43,13 @@ class InvoiceItem extends Model
         'invoiceItemStatus',
     ];
     protected $casts = [
-        'invoiceItemShippingStatus' => 'boolean',
         'invoiceItemDeliveredToIraq' => 'boolean',
         'invoiceItemDeliverByLogisic' => 'boolean',
         'invoiceItemDeliverToClient' => 'boolean',
         'invoiceItemFullPaid' => 'boolean',
         'invoiceItemSubmitted' => 'boolean',
+        'invoiceItemIsFirstPaymentDone' => 'boolean',
+        'invoiceItemIsLastPaymentDone' => 'boolean',
     ];
 
     public function item()
