@@ -13,14 +13,15 @@ return new class extends Migration {
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->id('invoiceItemID');
             $table->unsignedBigInteger('itemID');
-            $table->unsignedBigInteger('userID');
+            $table->unsignedBigInteger('invoiceID');
+            $table->unsignedBigInteger('userID')->nullable();
             $table->integer('invoiceItemQTY');
-            $table->unsignedBigInteger('uomID');
+            $table->unsignedBigInteger('uomID')->nullable();
             $table->double('invoiceItemFirstprice', 8, 2);
             $table->double('invoiceItemLastprice', 8, 2);
             $table->double('invoiceItemVAT', 8, 2);
             $table->double('invoiceItemUnitprice', 8, 2);
-            $table->double('invoiceItemQoutAdditioncost', 8, 2);
+            $table->double('invoiceItemQouteAdditioncost', 8, 2);
             $table->double('invoiceitemPurchaseAdditioncost', 8, 2);
             $table->double('invoiceItemDeliveryAdditioncost', 8, 2);
             $table->double('invoiceItemTotalprice', 8, 2);
@@ -35,9 +36,9 @@ return new class extends Migration {
             $table->string('invoiceItemLogisticLocation')->nullable();
             $table->date('invoiceItemLogisitEstimatedDate')->nullable();
             $table->boolean('invoiceItemShippingStatus')->nullable();
-            $table->boolean('invoiceItemDeliveredtoIraqi')->nullable();
-            $table->boolean('invoiceItemDeliverByLogisic')->nullable();
-            $table->boolean('invoiceItemDeliverToClient')->nullable();
+            $table->boolean('invoiceItemDeliveredToIraq')->default(false)->nullable();
+            $table->boolean('invoiceItemDeliverByLogisic')->default(false)->nullable();
+            $table->boolean('invoiceItemDeliverToClient')->default(false)->nullable();
             $table->double('invoiceItemLogisticCost', 8, 2)->nullable();
             $table->boolean('invoiceItemFullPaid')->nullable();
             $table->boolean('invoiceItemSubmitted')->nullable();
@@ -46,6 +47,7 @@ return new class extends Migration {
 
             
             $table->foreign('itemID')->references('itemID')->on('items');
+            $table->foreign('invoiceID')->references('invoiceID')->on('invoices');
             $table->foreign('userID')->references('id')->on('users');
             $table->foreign('uomID')->references('uomID')->on('uom_ids');
         });

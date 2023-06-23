@@ -12,17 +12,17 @@ return new class extends Migration {
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id('invoiceID');
-            $table->date('invoiceDate');
-            $table->time('invoiceTime');
-            $table->date('invoiceEstimateDate');
-            $table->date('invoiceClosingDate');
-            $table->double('invoiceTotalCost', 8, 2);
-            $table->double('invoiceTotalsubtotal', 8, 2);
-            $table->double('invoiceGrandtotal', 8, 2);
+            $table->date('invoiceDate')->nullable();
+            $table->time('invoiceTime')->nullable();
+            $table->date('invoiceEstimateDate')->nullable();
+            $table->date('invoiceClosingDate')->nullable();
+            $table->double('invoiceTotalCost', 8, 2)->nullable();
+            $table->double('invoiceTotalsubtotal', 8, 2)->nullable();
+            $table->double('invoiceGrandtotal', 8, 2)->nullable();
             $table->text('invoiceAdditional')->nullable();
-            $table->boolean('invoiceStatus');
-            $table->boolean('invoiceIsOffering');
-            $table->boolean('invoiceDone');
+            $table->boolean('invoiceStatus')->nullable();
+            $table->boolean('invoiceIsOffering')->nullable();
+            $table->boolean('invoiceDone')->nullable();
             $table->timestamps();
         });
     }
