@@ -30,6 +30,6 @@ class Invoice extends Model
 
     public function invoiceItems()
     {
-        $this->hasMany(InvoiceItem::class, 'invoiceItemID');
+        return $this->hasMany(InvoiceItem::class, 'invoiceItemID');
     }
 }
