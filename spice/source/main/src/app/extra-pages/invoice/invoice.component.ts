@@ -46,7 +46,7 @@ export class InvoiceComponent {
       deliveryAdditionalCost: 0,
       totalPrice: 0,
       POD: '',
-      closingDate:new Date(),
+      closingDate:new Date() ,
       purchasePrice: 0,
       isFirstPaymentDone: false,
       firstPaymentDate:new Date(),
@@ -71,6 +71,7 @@ export class InvoiceComponent {
     submit() {
       this.isFormSubmitted = true;
        console.log(this.items);
+       this.invoice.invoiceDate= new Date();
 
       this.invoice.totalCost = 0;
       for (const item of this.items) {
