@@ -35,7 +35,7 @@ export class InvoiceComponent {
 
   addRow() {
     let newItem: Item = {
-      itemId: '',
+      itemId: 0,
       firstPrice: 0,
       lastPrice: 0,
       quantity:0,
@@ -46,14 +46,14 @@ export class InvoiceComponent {
       deliveryAdditionalCost: 0,
       totalPrice: 0,
       POD: '',
-      closingDate:new Date() ,
+      closingDate:new Date('Invalid Date') ,
       purchasePrice: 0,
       isFirstPaymentDone: false,
-      firstPaymentDate:new Date(),
+      firstPaymentDate:new Date('Invalid Date'),
       isLastPaymentDone: false,
       logisticCompany: '',
       logisticLocation: '',
-      logisticEstimatedDate: new Date(),
+      logisticEstimatedDate:new Date('Invalid Date'),
       shippingStatus: '',
       isDeliveredToIraq: false,
       isDeliveredByLogistic: false,
@@ -79,13 +79,15 @@ export class InvoiceComponent {
         console.log(item.totalPrice);
         this.invoice.totalCost += item.totalPrice;
       }
-
+      this.invoice.itemList=this.items;
+      console.log(this.invoice);
       // this.invoice.discount = this.invoice.subtotal * this.discountPercentage;
       // this.invoice.tax = this.invoice.subtotal * this.taxPercentage;
       // this.invoice.totalCost = this.invoice.subtotal - this.invoice.discount + this.invoice.tax;
 
-      this.http.post<any>('http://localhost:8000/api/user', this.invoice).subscribe(data => {
+      this.http.post<any>('http://localhost:8000/api/invoice', this.invoice).subscribe(data => {
         console.log(this.invoice);
+        this.invoice.invoiceID=data.id;
       });
     }
 

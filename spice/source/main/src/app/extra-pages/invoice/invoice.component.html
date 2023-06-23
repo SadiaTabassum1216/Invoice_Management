@@ -5,10 +5,10 @@
     <h3 class="text-center">Invoice Table</h3>
     <br><br>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="invoiceID">Invoice ID</label>
       <input type="text" class="form-control" id="invoiceID" name="invoiceID" [(ngModel)]="invoice.invoiceID">
-    </div>
+    </div> -->
 
     <div class="form-group">
       <label for="billFrom">BILL FROM</label>
@@ -65,7 +65,7 @@
         <tbody>
           <tr *ngFor="let item of items; let i = index">
             <td class="text-center">
-              <input type="text" name="{{item.itemId}}" [(ngModel)]="item.itemId">
+              <input type="number" name="{{item.itemId}}" [(ngModel)]="item.itemId">
             </td>
          
             <td class="text-center">
