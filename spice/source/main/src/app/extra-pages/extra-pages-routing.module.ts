@@ -33,6 +33,11 @@ const routes: Routes = [
     path: 'user',
     component: UsersComponent
   },
+
+  // {
+  //   path: 'table',
+  //   component: ItemformComponent
+  // },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

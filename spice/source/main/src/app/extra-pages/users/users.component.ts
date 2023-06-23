@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
+import { AddModalComponent } from './add-modal/add-modal.component';
+
 
 @Component({
   selector: 'app-users',
@@ -14,12 +19,20 @@ export class UsersComponent implements OnInit {
   selectedUser: User = new User(0, '', '', '');
   newUser: User = new User(0, '', '', '');
 
-
-  constructor(private http: HttpClient) { }
+  dialogConfig?: MatDialogConfig;
+  constructor(private http: HttpClient,  private dialogModel: MatDialog) { }
   
   ngOnInit(): void {
     this.getList();
   }
+
+  openDialog2(): void {
+    this.dialogModel.open(AddModalComponent, {
+      width: '640px',
+      disableClose: true,
+    });
+  }
+
 
   getList() {
     this.http.get<any[]>('http://localhost:8000/api/users').subscribe(data => {
@@ -30,31 +43,21 @@ export class UsersComponent implements OnInit {
 
   }
 
-
-  // Function to edit a user
   editUser(user: User) {
     this.selectedUser = user;
     this.onEdit = true;
     console.log(this.selectedUser);
-  }
-
-  updateUser() {
-    //send the data to backend
-    this.http.put<any>('http://localhost:8000/api/user/${selectedUser.id}', this.selectedUser).subscribe(data => {
-      console.log(this.selectedUser)
+  
+    // Pass the selected user as data to the EditModalComponent
+    this.dialogModel.open(EditModalComponent, {
+      width: '640px',
+      disableClose: true,
+      data: {
+        user: this.selectedUser
+      }
     });
-    this.onEdit = false;
-
   }
-
-  addUser() {
-    //send the data to backend
-    this.http.post<any>('http://localhost:8000/api/user', this.selectedUser).subscribe(data => {
-      console.log(this.newUser)
-    });
-    this.userList.push(this.newUser);
-    this.addUserFormVisible = false;
-  }
+  
 
   deleteUser(userID: number) {
     const userIndex = this.userList.data.findIndex((user: { userID: number; }) => user.userID === userID);
