@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('invoiceItemID');
             $table->timestamps();
 
-            // Foreign key relationships
             $table->foreign('userID')->references('id')->on('users');
             $table->foreign('invoiceItemID')->references('invoiceItemID')->on('invoice_items');
         });
