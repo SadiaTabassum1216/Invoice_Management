@@ -1,5 +1,7 @@
 export class Item {
-  itemId: number=0;
+  itemId: string='';
+  userId: string='';
+  UOMId: string='';
   firstPrice: number=0;
   lastPrice: number=0;
   quantity: number=0;
@@ -11,19 +13,25 @@ export class Item {
   totalPrice: number = 0;
   POD: string='';
   closingDate: Date=new Date('Invalid Date');
+
   purchasePrice: number=0;
   isFirstPaymentDone: boolean=false;
+  firstPaymentPrice: number=0;
   firstPaymentDate: Date=new Date('Invalid Date');
   isLastPaymentDone: boolean=false;
+  lastPaymentPrice: number=0;
+  lastPaymentDate: Date=new Date('Invalid Date');
   logisticCompany: string='';
   logisticLocation: string='';
   logisticEstimatedDate: Date=new Date('Invalid Date');
-  shippingStatus: string=''; 
+  shippingStatus: string='';
+  
   isDeliveredToIraq: boolean = false; // Set to false by default
   isDeliveredByLogistic: boolean = false; // Set to false by default
   isDeliverToClient: boolean = false; // Set to false by default
   logisticCost: number=0;
   isFullyPaid: boolean = false;
   isSubmitted: boolean = false;
+
   status: string='';
 }
