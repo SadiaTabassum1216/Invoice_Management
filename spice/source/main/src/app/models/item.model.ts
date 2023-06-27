@@ -26,4 +26,9 @@ export class Item {
   isFullyPaid: boolean = false;
   isSubmitted: boolean = false;
   status: string='';
+  static itemId: any;
+
+  uploadedFiles1: File[] = [];
+  uploadedFiles2: File[] = [];
+  uploadedFiles3: File[] = [];
 }

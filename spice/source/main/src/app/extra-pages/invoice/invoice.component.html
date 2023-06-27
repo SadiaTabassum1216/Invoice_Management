@@ -53,12 +53,24 @@
             <th class="text-center">Logistic Location</th>
             <th class="text-center">Logistic Estimated Date</th>
             <th class="text-center">Shipping Status</th>
+<<<<<<< Updated upstream
+=======
+            <th class="text-center">Files</th>
+
+
+>>>>>>> Stashed changes
             <th class="text-center">Is Delivered to Iraq</th>
             <th class="text-center">Is Delivered by Logistic</th>
             <th class="text-center">Is Deliver to Client</th>
             <th class="text-center">Logistic Cost</th>
             <th class="text-center">Is Fully Paid</th>
             <th class="text-center">Is Submitted</th>
+<<<<<<< Updated upstream
+=======
+            <th class="text-center">Files</th>
+
+
+>>>>>>> Stashed changes
             <th class="text-center">Status</th>
           </tr>
         </thead>
@@ -99,6 +111,19 @@
             <td class="text-center">
               <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate">
             </td>
+<<<<<<< Updated upstream
+=======
+
+            <!-- file buttons -->
+            <td class="text-center">
+              <p><input type="file" multiple (change)="onFileSelect($event)"></p>
+              <button class="upload-button" (click)="uploadFiles(item.uploadedFiles1)">Upload Files</button>
+              <span class="button-gap"></span>
+              <button class="view-button" (click)="openModal(item.uploadedFiles1)">View</button>
+            </td>
+           
+            <!-- level 2 -->
+>>>>>>> Stashed changes
             <td class="text-center">
               <input type="number" name="{{item.purchasePrice}}" [(ngModel)]="item.purchasePrice">
             </td>
@@ -123,6 +148,20 @@
             <td class="text-center">
               <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">
             </td>
+<<<<<<< Updated upstream
+=======
+
+             <!-- file buttons -->
+             <td class="text-center">
+              <p><input type="file" multiple (change)="onFileSelect($event)"></p>
+              <button class="upload-button" (click)="uploadFiles(item.uploadedFiles2)">Upload Files</button>
+              <span class="button-gap"></span>
+              <button class="view-button" (click)="openModal(item.uploadedFiles2)">View</button>
+            </td>
+
+
+            <!-- level 3 -->
+>>>>>>> Stashed changes
             <td class="text-center">
               <input type="checkbox" name="{{item.isDeliveredToIraq}}" [(ngModel)]="item.isDeliveredToIraq">
             </td>
@@ -141,14 +180,30 @@
             <td class="text-center">
               <input type="checkbox" name="{{item.isSubmitted}}" [(ngModel)]="item.isSubmitted">
             </td>
+<<<<<<< Updated upstream
+=======
+
+             <!-- file buttons -->
+            <td class="text-center">
+              <p><input type="file" multiple (change)="onFileSelect($event)"></p>
+              <button class="upload-button" (click)="uploadFiles(item.uploadedFiles3)">Upload Files</button>
+              <span class="button-gap"></span>
+              <button class="view-button" (click)="openModal(item.uploadedFiles3)">View</button>
+            </td>
+
+            <!-- level 4 -->
+>>>>>>> Stashed changes
             <td class="text-center">
               <input type="text" name="{{item.status}}" [(ngModel)]="item.status">
             </td>
           </tr>
           <tr>
             <td colspan="29" class="text-center">
-              <button class="fa fa-plus " (click)="addRow()">Add Row</button>
+              <button class="add-row-button" (click)="addRow()">
+                <i class="fa fa-plus"></i> Add Row
+              </button>
             </td>
+            
           </tr>
         </tbody>
       </table>
@@ -158,8 +213,16 @@
 
     <div class="form-group">
       <label for="status">Status</label>
+<<<<<<< Updated upstream
       <input type="text" class="form-control" id="status" name="status"
         [(ngModel)]="invoice.status">
+=======
+      <input type="text" class="form-control" id="status" name="status" [(ngModel)]="invoice.status">
+    </div>
+
+    <div class="form-group">
+      Is done <input type="checkbox" name="isDone" [(ngModel)]="invoice.isDone">
+>>>>>>> Stashed changes
     </div>
 
 
@@ -227,6 +290,7 @@
                       <table class="table" style="width: 100%;">
                         <thead>
                           <tr>
+<<<<<<< Updated upstream
                             <th class="text-center">Item ID</th>
                             <th class="text-center">First Price</th>
                             <th class="text-center">Last Price</th>    
@@ -254,6 +318,52 @@
                             <th class="text-center">Is Fully Paid</th>
                             <th class="text-center">Is Submitted</th>
                             <th class="text-center">Status</th>
+=======
+                            <!-- level 1 -->
+                            <th class="text-center level1">Item Name</th>
+                            <th class="text-center level1">User ID</th>
+                            <th class="text-center level1">UOM ID</th>
+                            <th class="text-center level1">First Price</th>
+                            <th class="text-center level1">Last Price</th>
+                            <th class="text-center level1">Quantity</th>
+                            <th class="text-center level1">VAT</th>
+                            <th class="text-center level1">Unit Price</th>
+                            <th class="text-center level1">Additional Cost</th>
+                            <th class="text-center level1">Purchase Additional Cost</th>
+                            <th class="text-center level1">Delivery Additional Cost</th>
+                            <th class="text-center level1">POD</th>
+                            <th class="text-center level1">Closing Date</th>
+
+                           
+
+                            <!-- level 2 -->
+                            <th class="text-center level2">Purchase Price</th>
+
+                            <th class="text-center level2">Is First Payment Done</th>
+                            <th class="text-center level2">First Payment Price</th>
+                            <th class="text-center level2">First Payment Date</th>
+
+                            <th class="text-center level2">Is Last Payment Done</th>
+                            <th class="text-center level2">Last Payment Price</th>
+                            <th class="text-center level2">Last Payment Date</th>
+
+                            <th class="text-center level2">Logistic Company</th>
+                            <th class="text-center level2">Logistic Location</th>
+                            <th class="text-center level2">Logistic Estimated Date</th>
+                            <th class="text-center level2">Shipping Status</th>
+
+                            <!-- level 3 -->
+                            <th class="text-center level3">Is Delivered to Iraq</th>
+                            <th class="text-center level3">Is Delivered by Logistic</th>
+                            <th class="text-center level3">Is Deliver to Client</th>
+                            <th class="text-center level3">Logistic Cost</th>
+                            <th class="text-center level3">Is Fully Paid</th>
+                            <th class="text-center level3">Is Submitted</th>
+
+                            <!-- level 4 -->
+                            <th class="text-center level3">Total Cost</th>
+                            <th class="text-center level4">Status</th>
+>>>>>>> Stashed changes
                           </tr>
                         </thead>
                         <tbody>
@@ -271,6 +381,11 @@
                             <td class="text-center">{{ item.totalPrice }}</td>
                             <td class="text-center">{{ item.POD }}</td>
                             <td class="text-center">{{ item.closingDate | date: 'dd/MM/yyyy'}}</td>
+<<<<<<< Updated upstream
+=======
+
+                      
+>>>>>>> Stashed changes
                             <td class="text-center">{{ item.purchasePrice }}</td>
                             <td class="text-center">{{ item.isFirstPaymentDone }}</td>
                             <td class="text-center">{{ item.firstPaymentDate | date: 'dd/MM/yyyy'}}</td>
@@ -285,6 +400,11 @@
                             <td class="text-center">{{ item.logisticCost }}</td>
                             <td class="text-center">{{ item.isFullyPaid }}</td>
                             <td class="text-center">{{ item.isSubmitted }}</td>
+<<<<<<< Updated upstream
+=======
+
+                            <td class="text-center">{{ item.totalPrice }}</td>
+>>>>>>> Stashed changes
                             <td class="text-center">{{ item.status }}</td>
                           </tr>
                         </tbody>

@@ -19,6 +19,7 @@ import { UsersComponent } from './users/users.component';
 import { EditModalComponent } from './users/edit-modal/edit-modal.component';
 import { AddModalComponent } from './users/add-modal/add-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ModalComponent } from './invoice/modal/modal.component';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -29,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     UsersComponent,
     EditModalComponent,
     AddModalComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,

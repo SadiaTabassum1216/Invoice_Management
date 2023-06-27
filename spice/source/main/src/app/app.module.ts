@@ -20,6 +20,8 @@ import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { UsertaskComponent } from './usertask/usertask.component';
+import { EditItemModalComponent } from './usertask/edit-item-modal/edit-item-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     PageLoaderComponent,
     SidebarComponent,
     RightSidebarComponent,
+    UsertaskComponent,
+    EditItemModalComponent,
    
   ],
   imports: [
