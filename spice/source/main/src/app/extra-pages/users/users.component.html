@@ -24,10 +24,8 @@
       <td>{{ user.id }}</td>
       <td>{{ user.name }}</td>
       <td>{{ user.username }}</td>
-      <td>{{user.status}}</td>
-      <!-- <td [ngClass]="{'text-success': user.userStatus, 'text-danger': !user.status}">
-        {{ user.userStatus ? 'Active' : 'Inactive' }}
-      </td> -->
+      <td>{{ user.status}}</td>
+     
       <td>
         <button mat-raised-button class="btn btn-primary edit-button" (click)="editUser(i) ">
           <i class="fas fa-edit"></i> Edit

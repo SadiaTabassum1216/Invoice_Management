@@ -12,22 +12,10 @@ import { ModalComponent } from './modal/modal.component';
 })
 export class InvoiceComponent {
  
-  items: Item[] = [];
+  itemList: Item[] = [];
   invoice: Invoice = new Invoice;
-  invaddress: any;
+ 
   isFormSubmitted = false;
-<<<<<<< Updated upstream
-
-  discountPercentage = 0.05;
-  taxPercentage = 0.1;
-
-
-
-  constructor(private http: HttpClient) {
-    this.invaddress = {};
-   
-  }
-=======
   isModalOpen: boolean = false;
   uploadedFilePaths1: string[] = [];
   uploadedFilePaths2: string[] = [];
@@ -40,68 +28,54 @@ export class InvoiceComponent {
 
 
   constructor(private http: HttpClient,  private dialogModel: MatDialog) {}
->>>>>>> Stashed changes
 
-  // getItemList() {
-  //   this.http.get<any[]>('http://localhost:8000/api/items').subscribe(data => {
-  //     this.items = data;
-  //     console.log(this.items);
-  //   });
-  // }
 
 
   addRow() {
     let newItem: Item = {
-      itemId: '',
+      itemId: ' ',
+      userId: ' ',
+      UOMId: ' ',
       firstPrice: 0,
       lastPrice: 0,
-      quantity:0,
+      quantity: 0,
       VAT: 0,
       unitPrice: 0,
       additionalCost: 0,
       purchaseAdditionalCost: 0,
       deliveryAdditionalCost: 0,
       totalPrice: 0,
-      POD: '',
-      closingDate:new Date() ,
+      POD: ' ',
+      closingDate: new Date('Invalid Date'),
       purchasePrice: 0,
       isFirstPaymentDone: false,
-<<<<<<< Updated upstream
-      firstPaymentDate:new Date(),
-      isLastPaymentDone: false,
-=======
       firstPaymentPrice: 0,
-      firstPaymentDate: new Date(),
+      firstPaymentDate: new Date('Invalid Date'),
       isLastPaymentDone: false,
       lastPaymentPrice: 0,
-      lastPaymentDate: new Date(),
->>>>>>> Stashed changes
-      logisticCompany: '',
-      logisticLocation: '',
-      logisticEstimatedDate: new Date(),
-      shippingStatus: '',
+      lastPaymentDate:  new Date('Invalid Date'),
+      logisticCompany: ' ',
+      logisticLocation: ' ',
+      logisticEstimatedDate: new Date('Invalid Date'),
+      shippingStatus: ' ',
       isDeliveredToIraq: false,
       isDeliveredByLogistic: false,
       isDeliverToClient: false,
       logisticCost: 0,
       isFullyPaid: false,
       isSubmitted: false,
-<<<<<<< Updated upstream
-      status: ''
-=======
-      status: '',
+      status: ' ',
+      
       uploadedFiles1: [],
       uploadedFiles2: [],
       uploadedFiles3: []
->>>>>>> Stashed changes
+
     };
   
-    this.items.push(newItem);
+    this.itemList.push(newItem);
   }
   
 
-<<<<<<< Updated upstream
-=======
   onFileSelect(event: any): void {
     this.selectedFiles = event.target.files;
   }
@@ -139,27 +113,30 @@ export class InvoiceComponent {
   }
 
 
->>>>>>> Stashed changes
-    submit() {
-      this.isFormSubmitted = true;
-       console.log(this.items);
-       this.invoice.invoiceDate= new Date();
+  submit() {
+    this.isFormSubmitted = true;
 
-      this.invoice.totalCost = 0;
-      for (const item of this.items) {
-        item.totalPrice = item.unitPrice* item.quantity +item.lastPrice + item.additionalCost + item.deliveryAdditionalCost;
-        console.log(item.totalPrice);
-        this.invoice.totalCost += item.totalPrice;
-      }
+    this.invoice.invoiceDate= new Date();
 
-      // this.invoice.discount = this.invoice.subtotal * this.discountPercentage;
-      // this.invoice.tax = this.invoice.subtotal * this.taxPercentage;
-      // this.invoice.totalCost = this.invoice.subtotal - this.invoice.discount + this.invoice.tax;
+    this.invoice.totalCost = 0;
+    this.invoice.subtotal = 0;     
 
-      this.http.post<any>('http://localhost:8000/api/user', this.invoice).subscribe(data => {
-        console.log(this.invoice);
-      });
+    for (const item of this.itemList) {
+      item.totalPrice = item.unitPrice*item.quantity + item.VAT + item.additionalCost + item.deliveryAdditionalCost + item.logisticCost;
+      
+      this.invoice.subtotal += item.firstPrice;
+      this.invoice.totalCost += item.totalPrice;
     }
+
+    this.invoice.itemList=this.itemList;
+    console.log(this.invoice);
+
+
+    this.http.post<any>('http://localhost:8000/api/invoice', this.invoice).subscribe(data => {
+      console.log(this.invoice);
+      this.invoice.invoiceID=data.id;
+    });
+  }
 
 
     breadscrums = [

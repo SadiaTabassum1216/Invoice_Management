@@ -6,11 +6,18 @@
     <br><br>
 
     <div class="form-group">
-      <label for="invoiceID">Invoice ID</label>
-      <input type="text" class="form-control" id="invoiceID" name="invoiceID" [(ngModel)]="invoice.invoiceID">
+      <label for="estimatedDate">Estimated Date</label>
+      <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
+        [(ngModel)]="invoice.invoiceEstimatedDate">
     </div>
 
     <div class="form-group">
+      <label for="closingDate">Closing Date</label>
+      <input type="date" class="form-control" id="closingDate" name="closingDate"
+        [(ngModel)]="invoice.invoiceClosingDate">
+    </div>
+
+    <!-- <div class="form-group">
       <label for="billFrom">BILL FROM</label>
       <input type="text" class="form-control"  name="billFrom1" [(ngModel)]="invaddress.billFrom1" placeholder="Company name">
       <input type="text" class="form-control"  name="billFrom2" [(ngModel)]="invaddress.billFrom2" placeholder="Address">
@@ -26,7 +33,7 @@
       <input type="text" class="form-control"  name="billTo3" [(ngModel)]="invaddress.billTo3"  placeholder="Address">
       <input type="text" class="form-control"  name="billTo4" [(ngModel)]="invaddress.billTo4"  placeholder="City, State Zip">
       <input type="text" class="form-control"  name="billTo5" [(ngModel)]="invaddress.billTo5"  placeholder="Country">
-    </div>
+    </div> -->
 
     <div style="width: 70%; margin: 0 auto; ; overflow-x: auto;">
       <h3 class="text-center">Item Table</h3>
@@ -34,10 +41,12 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="text-center">Item ID</th>
+            <th class="text-center">Item Name</th>
+            <th class="text-center">User ID</th>
+            <th class="text-center">UOM ID</th>
             <th class="text-center">First Price</th>
-            <th class="text-center">Last Price</th>    
-            <th class="text-center">Quantity</th>        
+            <th class="text-center">Last Price</th>
+            <th class="text-center">Quantity</th>
             <th class="text-center">VAT</th>
             <th class="text-center">Unit Price</th>
             <th class="text-center">Additional Cost</th>
@@ -45,39 +54,48 @@
             <th class="text-center">Delivery Additional Cost</th>
             <th class="text-center">POD</th>
             <th class="text-center">Closing Date</th>
+            <th class="text-center">Files</th>
+
+
             <th class="text-center">Purchase Price</th>
+
             <th class="text-center">Is First Payment Done</th>
+            <th class="text-center">First Payment Price</th>
             <th class="text-center">First Payment Date</th>
+
             <th class="text-center">Is Last Payment Done</th>
+            <th class="text-center">Last Payment Price</th>
+            <th class="text-center">Last Payment Date</th>
+
             <th class="text-center">Logistic Company</th>
             <th class="text-center">Logistic Location</th>
             <th class="text-center">Logistic Estimated Date</th>
             <th class="text-center">Shipping Status</th>
-<<<<<<< Updated upstream
-=======
             <th class="text-center">Files</th>
 
 
->>>>>>> Stashed changes
             <th class="text-center">Is Delivered to Iraq</th>
             <th class="text-center">Is Delivered by Logistic</th>
             <th class="text-center">Is Deliver to Client</th>
             <th class="text-center">Logistic Cost</th>
             <th class="text-center">Is Fully Paid</th>
             <th class="text-center">Is Submitted</th>
-<<<<<<< Updated upstream
-=======
             <th class="text-center">Files</th>
 
 
->>>>>>> Stashed changes
             <th class="text-center">Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of items; let i = index">
+          <tr *ngFor="let item of itemList; let i = index">
             <td class="text-center">
               <input type="text" name="{{item.itemId}}" [(ngModel)]="item.itemId">
+            </td>
+            <td class="text-center">
+              <input type="text" name="{{item.userId}}" [(ngModel)]="item.userId">
+            </td>
+            <td class="text-center">
+              <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId">
             </td>
          
             <td class="text-center">
@@ -111,8 +129,6 @@
             <td class="text-center">
               <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate">
             </td>
-<<<<<<< Updated upstream
-=======
 
             <!-- file buttons -->
             <td class="text-center">
@@ -123,7 +139,6 @@
             </td>
            
             <!-- level 2 -->
->>>>>>> Stashed changes
             <td class="text-center">
               <input type="number" name="{{item.purchasePrice}}" [(ngModel)]="item.purchasePrice">
             </td>
@@ -131,10 +146,20 @@
               <input type="checkbox" name="{{item.isFirstPaymentDone}}" [(ngModel)]="item.isFirstPaymentDone">
             </td>
             <td class="text-center">
-              <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate">
+              <input type="number" name="{{item.firstPaymentPrice}}" [(ngModel)]="item.firstPaymentPrice">
             </td>
             <td class="text-center">
+              <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate">
+            </td>
+
+            <td class="text-center">
               <input type="checkbox" name="{{item.isLastPaymentDone}}" [(ngModel)]="item.isLastPaymentDone">
+            </td>
+            <td class="text-center">
+              <input type="number" name="{{item.lastPaymentPrice}}" [(ngModel)]="item.lastPaymentPrice">
+            </td>
+            <td class="text-center">
+              <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate">
             </td>
             <td class="text-center">
               <input type="text" name="{{item.logisticCompany}}" [(ngModel)]="item.logisticCompany">
@@ -148,8 +173,6 @@
             <td class="text-center">
               <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">
             </td>
-<<<<<<< Updated upstream
-=======
 
              <!-- file buttons -->
              <td class="text-center">
@@ -161,7 +184,6 @@
 
 
             <!-- level 3 -->
->>>>>>> Stashed changes
             <td class="text-center">
               <input type="checkbox" name="{{item.isDeliveredToIraq}}" [(ngModel)]="item.isDeliveredToIraq">
             </td>
@@ -180,8 +202,6 @@
             <td class="text-center">
               <input type="checkbox" name="{{item.isSubmitted}}" [(ngModel)]="item.isSubmitted">
             </td>
-<<<<<<< Updated upstream
-=======
 
              <!-- file buttons -->
             <td class="text-center">
@@ -192,7 +212,6 @@
             </td>
 
             <!-- level 4 -->
->>>>>>> Stashed changes
             <td class="text-center">
               <input type="text" name="{{item.status}}" [(ngModel)]="item.status">
             </td>
@@ -212,17 +231,23 @@
   
 
     <div class="form-group">
+      <label for="offering">Offering</label>
+      <input type="text" class="form-control" id="offering" name="offering" [(ngModel)]="invoice.offering">
+    </div>
+
+    <div class="form-group">
+      <label for="additionalCost">Additional Cost</label>
+      <input type="number" class="form-control" id="additionalCost" name="additionalCost"
+        [(ngModel)]="invoice.additionalCost">
+    </div>
+
+    <div class="form-group">
       <label for="status">Status</label>
-<<<<<<< Updated upstream
-      <input type="text" class="form-control" id="status" name="status"
-        [(ngModel)]="invoice.status">
-=======
       <input type="text" class="form-control" id="status" name="status" [(ngModel)]="invoice.status">
     </div>
 
     <div class="form-group">
-      Is done <input type="checkbox" name="isDone" [(ngModel)]="invoice.isDone">
->>>>>>> Stashed changes
+      Is done <input type="checkbox" name="{{invoice.isDone}}" [(ngModel)]="invoice.isDone">
     </div>
 
 
@@ -234,6 +259,7 @@
   </form>
 </div>
 
+<!-- Output -->
 <section class="content" *ngIf="isFormSubmitted">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
@@ -257,29 +283,45 @@
                     <div class="col-md-12">
                       <div class="float-start">
                         <address>
-                          <p class="font-bold">BILL FROM :</p>
+                          <!-- <p class="font-bold">BILL FROM :</p>
                           <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom1 }}</p>
                           <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom2 }}</p>
                           <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom3 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom4 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom4 }}</p> -->
                         </address>
                       </div>
                       <div class="float-end text-end">
                         <address>
-                          <p class="addr-font-h3 font-bold">BILL TO :</p>
+                          <!-- <p class="addr-font-h3 font-bold">BILL TO :</p>
                           <p class="font-bold addr-font-h4">{{invaddress.billTo1}}</p>
                           <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo2 }}</p>
                           <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo3 }}</p>
                           <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo4 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo5 }}</p>
+                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo5 }}</p> -->
                           <p class="m-t-30">
                             <b>Invoice Date :</b>
                             <i class="fa fa-calendar"></i>{{ invoice.invoiceDate | date: "dd-MM-yyyy"}}
+                          </p>
+                          <p class="m-t-30">
+                            <b>Estimated Date :</b>
+                            <i class="fa fa-calendar"></i>{{ invoice.invoiceEstimatedDate | date: "dd-MM-yyyy"}}
+                          </p>
+                          <p class="m-t-30">
+                            <b>Closing Date :</b>
+                            <i class="fa fa-calendar"></i>{{ invoice.invoiceClosingDate | date: "dd-MM-yyyy"}}
                           </p>
                           <p>
                             <b>Status :</b>
                             <span class="label label-success">{{invoice.status}}</span>
                           </p>
+
+                          <p>
+                            <b>Done </b>
+                            <i class="fas"
+                              [ngClass]="{'fa-check-circle': invoice.isDone, 'fa-times-circle': !invoice.isDone}"
+                              [ngStyle]="{'color': invoice.isDone ? 'green' : 'red'}"></i>
+                          </p>
+
                         </address>
                       </div>
                     </div>
@@ -290,35 +332,6 @@
                       <table class="table" style="width: 100%;">
                         <thead>
                           <tr>
-<<<<<<< Updated upstream
-                            <th class="text-center">Item ID</th>
-                            <th class="text-center">First Price</th>
-                            <th class="text-center">Last Price</th>    
-                            <th class="text-center">Quantity</th>        
-                            <th class="text-center">VAT</th>
-                            <th class="text-center">Unit Price</th>
-                            <th class="text-center">Additional Cost</th>
-                            <th class="text-center">Purchase Additional Cost</th>
-                            <th class="text-center">Delivery Additional Cost</th>
-                            <th class="text-center">Total Price</th>
-                            <th class="text-center">POD</th>
-                            <th class="text-center">Closing Date</th>
-                            <th class="text-center">Purchase Price</th>
-                            <th class="text-center">Is First Payment Done</th>
-                            <th class="text-center">First Payment Date</th>
-                            <th class="text-center">Is Last Payment Done</th>
-                            <th class="text-center">Logistic Company</th>
-                            <th class="text-center">Logistic Location</th>
-                            <th class="text-center">Logistic Estimated Date</th>
-                            <th class="text-center">Shipping Status</th>
-                            <th class="text-center">Is Delivered to Iraq</th>
-                            <th class="text-center">Is Delivered by Logistic</th>
-                            <th class="text-center">Is Deliver to Client</th>
-                            <th class="text-center">Logistic Cost</th>
-                            <th class="text-center">Is Fully Paid</th>
-                            <th class="text-center">Is Submitted</th>
-                            <th class="text-center">Status</th>
-=======
                             <!-- level 1 -->
                             <th class="text-center level1">Item Name</th>
                             <th class="text-center level1">User ID</th>
@@ -334,7 +347,6 @@
                             <th class="text-center level1">POD</th>
                             <th class="text-center level1">Closing Date</th>
 
-                           
 
                             <!-- level 2 -->
                             <th class="text-center level2">Purchase Price</th>
@@ -361,15 +373,17 @@
                             <th class="text-center level3">Is Submitted</th>
 
                             <!-- level 4 -->
-                            <th class="text-center level3">Total Cost</th>
+                            <th class="text-center level4">total Cost</th>
                             <th class="text-center level4">Status</th>
->>>>>>> Stashed changes
                           </tr>
+
                         </thead>
                         <tbody>
-                          
-                          <tr *ngFor="let item of items">
+
+                          <tr *ngFor="let item of itemList">
                             <td class="text-center">{{ item.itemId }}</td>
+                            <td class="text-center">{{ item.userId }}</td>
+                            <td class="text-center">{{ item.UOMId }}</td>
                             <td class="text-center">{{ item.firstPrice }}</td>
                             <td class="text-center">{{ item.lastPrice }}</td>
                             <td class="text-center">{{ item.quantity }}</td>
@@ -378,33 +392,30 @@
                             <td class="text-center">{{ item.additionalCost }}</td>
                             <td class="text-center">{{ item.purchaseAdditionalCost }}</td>
                             <td class="text-center">{{ item.deliveryAdditionalCost }}</td>
-                            <td class="text-center">{{ item.totalPrice }}</td>
                             <td class="text-center">{{ item.POD }}</td>
                             <td class="text-center">{{ item.closingDate | date: 'dd/MM/yyyy'}}</td>
-<<<<<<< Updated upstream
-=======
 
-                      
->>>>>>> Stashed changes
                             <td class="text-center">{{ item.purchasePrice }}</td>
                             <td class="text-center">{{ item.isFirstPaymentDone }}</td>
+                            <td class="text-center">{{ item.firstPaymentPrice }}</td>
                             <td class="text-center">{{ item.firstPaymentDate | date: 'dd/MM/yyyy'}}</td>
                             <td class="text-center">{{ item.isLastPaymentDone }}</td>
+                            <td class="text-center">{{ item.lastPaymentPrice }}</td>
+                            <td class="text-center">{{ item.lastPaymentDate | date: 'dd/MM/yyyy'}}</td>
+
                             <td class="text-center">{{ item.logisticCompany }}</td>
                             <td class="text-center">{{ item.logisticLocation }}</td>
                             <td class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
                             <td class="text-center">{{ item.shippingStatus }}</td>
+
                             <td class="text-center">{{ item.isDeliveredToIraq }}</td>
                             <td class="text-center">{{ item.isDeliveredByLogistic }}</td>
                             <td class="text-center">{{ item.isDeliverToClient }}</td>
                             <td class="text-center">{{ item.logisticCost }}</td>
                             <td class="text-center">{{ item.isFullyPaid }}</td>
                             <td class="text-center">{{ item.isSubmitted }}</td>
-<<<<<<< Updated upstream
-=======
 
                             <td class="text-center">{{ item.totalPrice }}</td>
->>>>>>> Stashed changes
                             <td class="text-center">{{ item.status }}</td>
                           </tr>
                         </tbody>
@@ -414,24 +425,24 @@
 
                     <div class="col-md-12">
                       <div class="float-end m-t-30 text-end">
-                        <!-- <p>Sub - Total amount: ${{invoice.subtotal  | number:'1.2-2'}}</p>
-                        <p>Discount : ${{invoice.discount  | number:'1.2-2'}} </p>
-                        <p>Tax (10%) : ${{invoice.tax  | number:'1.2-2'}} </p> -->
+                        <p>Offering : {{invoice.offering }} </p>
+                        <p>Sub-Total amount: ${{invoice.subtotal | number:'1.2-2'}}</p>
+                        <p>Grand Total : ${{invoice.grandTotal | number:'1.2-2'}} </p>
+                        <p>Additional Cost : ${{invoice.additionalCost | number:'1.2-2'}} </p>
                         <hr>
                         <h3>
-                          <b>Total :</b> ${{invoice.totalCost  | number:'1.2-2'}}
+                          <b>Total :</b> ${{invoice.totalCost | number:'1.2-2'}}
                         </h3>
                       </div>
                       <div class="clearfix"></div>
                       <hr>
                       <div class="text-end">
-                        <a href="C:\Users\User\Downloads\spice\spice\source\main\README" download>
-                        <button mat-raised-button color="primary">
-                          <i class="fas fa-print msr-2"></i> Print
-                        </button>
+                        <a href="C:\Users\User\Downloads\" download>
+                          <button mat-raised-button color="primary">
+                            <i class="fas fa-print msr-2"></i> Print
+                          </button>
                         </a>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -443,3 +454,4 @@
     </div>
   </div>
 </section>
+
