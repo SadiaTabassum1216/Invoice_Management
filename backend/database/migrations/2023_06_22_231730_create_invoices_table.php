@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->double('invoiceTotalCost', 8, 2)->nullable();
             $table->double('invoiceTotalsubtotal', 8, 2)->nullable();
             $table->double('invoiceGrandtotal', 8, 2)->nullable();
-            $table->text('invoiceAdditional')->nullable();
+            $table->text('invoiceAdditional')->nullable(); //cost
             $table->string('invoiceStatus')->nullable();
             $table->boolean('invoiceIsOffering')->nullable();
             $table->boolean('invoiceDone')->nullable();

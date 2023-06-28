@@ -30,8 +30,13 @@ return new class extends Migration {
             $table->double('invoiceItemPurchaseprice', 8, 2)->nullable();
             $table->double('invoiceItemFirstPayment', 8, 2)->nullable();
             $table->date('invoiceItemFirstPaymentDate')->nullable();
+            //first payment price, 
+            //second payment price these already exist
+
             $table->double('invoiceItemLastPayment', 8, 2)->nullable();
             $table->date('invoiceItemLastPaymentDate')->nullable();
+
+
             $table->string('invoiceItemLogisticCompany')->nullable();
             $table->string('invoiceItemLogisticLocation')->nullable();
             $table->date('invoiceItemLogisitEstimatedDate')->nullable();
