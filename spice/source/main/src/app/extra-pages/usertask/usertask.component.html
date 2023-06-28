@@ -1,0 +1,110 @@
+<br><br><br><br>
+
+<div class="table-container" style="width: 70%; margin: 0 auto; overflow-x: auto;">
+    <h2 class="text-center">Selected Items</h2>
+    <br>
+
+    <table class="table" style="width: 100%;">
+      <thead>
+        <tr>
+          <!-- level 1 -->
+          <th class="text-center level1">Item Name</th>
+         
+          <th class="text-center level1">UOM ID</th>
+          <th class="text-center level1">First Price</th>
+          <th class="text-center level1">Last Price</th>
+          <th class="text-center level1">Quantity</th>
+          <th class="text-center level1">VAT</th>
+          <th class="text-center level1">Unit Price</th>
+          <th class="text-center level1">Additional Cost</th>
+          <th class="text-center level1">Purchase Additional Cost</th>
+          <th class="text-center level1">Delivery Additional Cost</th>
+          <th class="text-center level1">POD</th>
+          <th class="text-center level1">Closing Date</th>
+
+         
+
+          <!-- level 2 -->
+          <th class="text-center level2">Purchase Price</th>
+          <th class="text-center level2">Is First Payment Done</th>
+          <th class="text-center level2">First Payment Price</th>
+          <th class="text-center level2">First Payment Date</th>
+
+          <th class="text-center level2">Is Last Payment Done</th>
+          <th class="text-center level2">Last Payment Price</th>
+          <th class="text-center level2">Last Payment Date</th>
+
+          <th class="text-center level2">Logistic Company</th>
+          <th class="text-center level2">Logistic Location</th>
+          <th class="text-center level2">Logistic Estimated Date</th>
+          <th class="text-center level2">Shipping Status</th>
+
+          <!-- level 3 -->
+          <th class="text-center level3">Is Delivered to Iraq</th>
+          <th class="text-center level3">Is Delivered by Logistic</th>
+          <th class="text-center level3">Is Deliver to Client</th>
+          <th class="text-center level3">Logistic Cost</th>
+          <th class="text-center level3">Is Fully Paid</th>
+          <th class="text-center level3">Is Submitted</th>
+
+          <!-- level 4 -->
+          <th class="text-center level4">Total Cost</th>
+          <th class="text-center level4">Status</th>
+          <th class="text-center level4">Actions</th>
+        </tr>
+
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of items; let i in index">
+          <td class="text-center">{{ item.itemId }}</td>
+          <td class="text-center">{{ item.UOMId }}</td>
+          <td class="text-center">{{ item.firstPrice }}</td>
+          <td class="text-center">{{ item.lastPrice }}</td>
+          <td class="text-center">{{ item.quantity }}</td>
+          <td class="text-center">{{ item.VAT }}</td>
+          <td class="text-center">{{ item.unitPrice }}</td>
+          <td class="text-center">{{ item.additionalCost }}</td>
+          <td class="text-center">{{ item.purchaseAdditionalCost }}</td>
+          <td class="text-center">{{ item.deliveryAdditionalCost }}</td>
+          <td class="text-center">{{ item.POD }}</td>
+          <td class="text-center">{{ item.closingDate | date: 'dd/MM/yyyy'}}</td>
+
+    
+          <td class="text-center">{{ item.purchasePrice }}</td>
+          <td class="text-center">{{ item.isFirstPaymentDone }}</td>
+          <td class="text-center">{{ item.firstPaymentPrice }}</td>
+          <td class="text-center">{{ item.firstPaymentDate | date: 'dd/MM/yyyy'}}</td>
+          <td class="text-center">{{ item.isLastPaymentDone }}</td>
+          <td class="text-center">{{ item.lastPaymentPrice }}</td>
+          <td class="text-center">{{ item.lastPaymentDate | date: 'dd/MM/yyyy'}}</td>
+
+          <td class="text-center">{{ item.logisticCompany }}</td>
+          <td class="text-center">{{ item.logisticLocation }}</td>
+          <td class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
+          <td class="text-center">{{ item.shippingStatus }}</td>
+
+          <td class="text-center">{{ item.isDeliveredToIraq }}</td>
+          <td class="text-center">{{ item.isDeliveredByLogistic }}</td>
+          <td class="text-center">{{ item.isDeliverToClient }}</td>
+          <td class="text-center">{{ item.logisticCost }}</td>
+          <td class="text-center">{{ item.isFullyPaid }}</td>
+          <td class="text-center">{{ item.isSubmitted }}</td>
+
+          <td class="text-center">{{ item.totalPrice }}</td>
+          <td class="text-center">{{ item.status }}</td>
+          <td>
+            <button mat-raised-button class="btn btn-primary edit-button" (click)="edit(i) ">
+              <i class="fas fa-edit"></i> Edit
+            </button>
+            <span class="button-gap"></span> 
+            <button class="btn btn-danger delete-button" (click)="delete(i)">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+

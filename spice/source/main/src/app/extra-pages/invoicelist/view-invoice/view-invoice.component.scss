@@ -1,0 +1,61 @@
+
+.edit-user-container {
+    // margin: 0 auto;
+    // margin-bottom: 20px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 800px;
+    overflow-y: auto;
+  }
+
+
+  .edit-user-container label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  .edit-user-container input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .button-gap {
+    margin-right: 10px; 
+  }
+
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+
+  .level1 {
+    background-color: rgb(245, 245, 146);
+  }
+  
+  .level2 {
+    background-color: rgb(145, 247, 145);
+  }
+  
+  .level3 {
+    background-color: rgb(167, 167, 235);
+  }
+  
+  .level4 {
+    background-color: rgb(209, 196, 196);
+  }

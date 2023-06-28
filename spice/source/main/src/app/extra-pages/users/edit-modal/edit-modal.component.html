@@ -1,0 +1,37 @@
+<!-- edit div -->
+<br><br>
+<div class="edit-user-container">
+  <h4>Edit User</h4>
+  <br><br>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="fullName">Full Name</label>
+      <input type="text" class="form-control" id="fullName" [(ngModel)]="selectedUser.name">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="selectedUser.username">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="status">Status</label>
+      <select class="form-control" id="status" [(ngModel)]="selectedUser.status">
+        <option [ngValue]="'online'">Active</option>
+        <option [ngValue]="'offline'">Inactive</option>
+      </select>
+    </div>
+  </div>
+  
+  <br>
+  <button class="btn btn-primary edit-button" (click)="updateUser()">
+    <i class="fas fa-pencil-alt"></i> Update
+  </button>
+
+  <span class="button-gap"></span>
+  <button mat-raised-button class="btn btn-primary" (click)="close()">Close</button>
+</div>

@@ -1,0 +1,41 @@
+.invoice-list {
+    margin: 20px;
+    margin: 0 auto;
+    width: 70%;
+  }
+
+
+  
+  table {
+    width: 100%;
+
+  }
+  
+  thead th {
+    background-color: #d3d1d1;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  tbody td {
+    padding: 10px;
+    
+  }
+
+  table{
+    border: 1px solid black;
+  }
+  
+  button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    // background-color: #4CAF50;
+    // color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
