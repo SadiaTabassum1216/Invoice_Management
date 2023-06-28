@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
+
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+const htmlToPdfmake = require("html-to-pdfmake");
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-invoicelist',
@@ -14,6 +19,8 @@ import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
 export class InvoicelistComponent {
   invoices: Invoice[] = [];
   selectedInvoice: Invoice=new Invoice();
+  @ViewChild('toPrint')
+  toPrint!: ElementRef;
 
   constructor(private http: HttpClient, private dialogModel: MatDialog) {
     // Initialize the invoices array with sample data
@@ -178,9 +185,13 @@ deleteInvoice(invoice: Invoice) {
   );
 }
 
-printInvoice(invoice: Invoice){
-
+printInvoice(invoice: Invoice) {
+    const toPrintContent = this.toPrint.nativeElement.innerHTML;
+    const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
+    const documentDefinition = { content: pdfContent };
+    pdfMake.vfs = pdfFonts.pdfMake.vfs; // Set the virtual file system
+    pdfMake.createPdf(documentDefinition).download('invoice.pdf');
+  }
+  
 }
 
-
-}

@@ -1,6 +1,6 @@
 <br><br>
 
-<div class="modal-body" style="max-height: 300px; overflow-y: auto;">
+<div class="modal-body" style="max-height: 800px; overflow-y: auto;">
 
     <div class="edit-user-container">
         <h4>Edit Item</h4>
@@ -14,147 +14,261 @@
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="UOMId">UOM</label>
-                <input type="text" class="form-control" id="UOMId" name="selectedItem.UOMId" [(ngModel)]="selectedItem.UOMId">
+                <label for="userId">userId</label>
+                <input type="text" class="form-control" id="userId" name="userId" [(ngModel)]="selectedItem.userId"
+                    disabled>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="UOMId">UOM ID</label>
+                <input type="text" class="form-control" id="UOMId" name="selectedItem.UOMId"
+                    [(ngModel)]="selectedItem.UOMId">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="firstPrice">First Price</label>
-                <input type="number" class="form-control" id="firstPrice" name="firstPrice"  [(ngModel)]="selectedItem.firstPrice">
+                <input type="number" class="form-control" id="firstPrice" name="firstPrice"
+                    [(ngModel)]="selectedItem.firstPrice">
             </div>
         </div>
 
-        <!-- <td class="text-center">
-            <input type="text" name="{{item.itemId}}" [(ngModel)]="item.itemId">
-          </td>
-          <td class="text-center">
-            <input type="text" name="{{item.userId}}" [(ngModel)]="item.userId">
-          </td>
-          <td class="text-center">
-            <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId">
-          </td>
-       
-          <td class="text-center">
-            <input type="number" name="{{item.firstPrice}}" [(ngModel)]="item.firstPrice">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.lastPrice}}" [(ngModel)]="item.lastPrice">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.quantity}}" [(ngModel)]="item.quantity">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.VAT}}" [(ngModel)]="item.VAT">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.unitPrice}}" [(ngModel)]="item.unitPrice">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.additionalCost}}" [(ngModel)]="item.additionalCost" >
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.purchaseAdditionalCost}}" [(ngModel)]="item.purchaseAdditionalCost">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.deliveryAdditionalCost}}" [(ngModel)]="item.deliveryAdditionalCost" >
-          </td>
-         
-          <td class="text-center">
-            <input type="text" name="{{item.POD}}" [(ngModel)]="item.POD">
-          </td>
-          <td class="text-center">
-            <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate">
-          </td> -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="lastPrice">Last Price</label>
+                <input type="number" class="form-control" id="lastPrice" name="lastPrice"
+                    [(ngModel)]="selectedItem.lastPrice">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="quantity">Quantity</label>
+                <input type="number" class="form-control" id="quantity" name="quantity"
+                    [(ngModel)]="selectedItem.quantity">
+            </div>
+        </div>
 
-          <!-- file buttons -->
-          <!-- <td class="text-center">
-            <p><input type="file" multiple (change)="onFileSelect($event)"></p>
-            <button class="upload-button" (click)="uploadFiles(item.uploadedFiles1)">Upload Files</button>
-            <span class="button-gap"></span>
-            <button class="view-button" (click)="openModal(item.uploadedFiles1)">View</button>
-          </td> -->
-         
-          <!-- level 2 -->
-          <!-- <td class="text-center">
-            <input type="number" name="{{item.purchasePrice}}" [(ngModel)]="item.purchasePrice">
-          </td>
-          <td class="text-center">
-            <input type="checkbox" name="{{item.isFirstPaymentDone}}" [(ngModel)]="item.isFirstPaymentDone">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.firstPaymentPrice}}" [(ngModel)]="item.firstPaymentPrice">
-          </td>
-          <td class="text-center">
-            <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate">
-          </td>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="VAT">VAT</label>
+                <input type="number" class="form-control" id="VAT" name="VAT" [(ngModel)]="selectedItem.VAT">
+            </div>
+        </div>
 
-          <td class="text-center">
-            <input type="checkbox" name="{{item.isLastPaymentDone}}" [(ngModel)]="item.isLastPaymentDone">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.lastPaymentPrice}}" [(ngModel)]="item.lastPaymentPrice">
-          </td>
-          <td class="text-center">
-            <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate">
-          </td>
-          <td class="text-center">
-            <input type="text" name="{{item.logisticCompany}}" [(ngModel)]="item.logisticCompany">
-          </td>
-          <td class="text-center">
-            <input type="text" name="{{item.logisticLocation}}" [(ngModel)]="item.logisticLocation">
-          </td>
-          <td class="text-center">
-            <input type="date"  name="{{item.logisticEstimatedDate}}" [(ngModel)]="item.logisticEstimatedDate">
-          </td>
-          <td class="text-center">
-            <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">
-          </td> -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="unitPrice">Unit Price</label>
+                <input type="number" class="form-control" id="unitPrice" name="unitPrice"
+                    [(ngModel)]="selectedItem.unitPrice">
+            </div>
+        </div>
 
-           <!-- file buttons -->
-           <!-- <td class="text-center">
-            <p><input type="file" multiple (change)="onFileSelect($event)"></p>
-            <button class="upload-button" (click)="uploadFiles(item.uploadedFiles2)">Upload Files</button>
-            <span class="button-gap"></span>
-            <button class="view-button" (click)="openModal(item.uploadedFiles2)">View</button>
-          </td> -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="additionalCost">Additional Cost</label>
+                <input type="number" class="form-control" id="additionalCost" name="additionalCost"
+                    [(ngModel)]="selectedItem.additionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="purchaseAdditionalCost">Purchase Additional Cost</label>
+                <input type="number" class="form-control" id="purchaseAdditionalCost" name="purchaseAdditionalCost"
+                    [(ngModel)]="selectedItem.purchaseAdditionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="deliveryAdditionalCost">Delivery Additional Cost</label>
+                <input type="number" class="form-control" id="deliveryAdditionalCost" name="deliveryAdditionalCost"
+                    [(ngModel)]="selectedItem.deliveryAdditionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="totalPrice">Total Price</label>
+                <input type="number" class="form-control" id="totalPrice" name="totalPrice"
+                    [(ngModel)]="selectedItem.totalPrice" disabled>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="POD">POD</label>
+                <input type="text" class="form-control" id="POD" name="POD" [(ngModel)]="selectedItem.POD">
+            </div>
+        </div>
 
 
-          <!-- level 3 -->
-          <!-- <td class="text-center">
-            <input type="checkbox" name="{{item.isDeliveredToIraq}}" [(ngModel)]="item.isDeliveredToIraq">
-          </td>
-          <td class="text-center">
-            <input type="checkbox" name="{{item.isDeliveredByLogistic}}" [(ngModel)]="item.isDeliveredByLogistic">
-          </td>
-          <td class="text-center">
-            <input type="checkbox" name="{{item.isDeliverToClient}}" [(ngModel)]="item.isDeliverToClient">
-          </td>
-          <td class="text-center">
-            <input type="number" name="{{item.logisticCost}}" [(ngModel)]="item.logisticCost">
-          </td>
-          <td class="text-center">
-            <input type="checkbox" name="{{item.isFullyPaid}}" [(ngModel)]="item.isFullyPaid">
-          </td>
-          <td class="text-center">
-            <input type="checkbox" name="{{item.isSubmitted}}" [(ngModel)]="item.isSubmitted">
-          </td> -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="closingDate">Closing Date</label>
+                <input type="date" class="form-control" id="closingDate" name="closingDate"
+                    [(ngModel)]="selectedItem.closingDate">
+            </div>
+        </div>
 
-           <!-- file buttons
-          <td class="text-center">
-            <p><input type="file" multiple (change)="onFileSelect($event)"></p>
-            <button class="upload-button" (click)="uploadFiles(item.uploadedFiles3)">Upload Files</button>
-            <span class="button-gap"></span>
-            <button class="view-button" (click)="openModal(item.uploadedFiles3)">View</button>
-          </td> -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="purchasePrice">Purchase Price</label>
+                <input type="number" class="form-control" id="purchasePrice" name="purchasePrice"
+                    [(ngModel)]="selectedItem.purchasePrice">
+            </div>
+        </div>
 
-          <!-- level 4 -->
-          <!-- <td class="text-center">
-            <input type="text" name="{{item.status}}" [(ngModel)]="item.status">
-          </td>
-        </tr>
- -->
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is First Payment Done
+                <input type="checkbox" name="isFirstPaymentDone" [(ngModel)]="selectedItem.isFirstPaymentDone">
+              
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstPaymentPrice">First Payment Price</label>
+                <input type="number" class="form-control" id="firstPaymentPrice" name="firstPaymentPrice"
+                    [(ngModel)]="selectedItem.firstPaymentPrice">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstPaymentDate">First Payment Date</label>
+                <input type="date" class="form-control" id="firstPaymentDate" name="firstPaymentDate"
+                    [(ngModel)]="selectedItem.firstPaymentDate">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Last Payment done
+                <input type="checkbox" name="isLastPaymentDone"
+                    [(ngModel)]="selectedItem.isLastPaymentDone">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="lastPaymentPrice">Last Payment Price</label>
+                <input type="number" class="form-control" id="lastPaymentPrice" name="lastPaymentPrice"
+                    [(ngModel)]="selectedItem.lastPaymentPrice">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="lastPaymentDate">Last Payment Date</label>
+                <input type="date" class="form-control" id="lastPaymentDate" name="lastPaymentDate"
+                    [(ngModel)]="selectedItem.lastPaymentDate">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="logisticCompany">Logistic Company</label>
+                <input type="text" class="form-control" id="logisticCompany" name="logisticCompany"
+                    [(ngModel)]="selectedItem.logisticCompany">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="logisticLocation">Logistic Location</label>
+                <input type="text" class="form-control" id="logisticLocation" name="logisticLocation"
+                    [(ngModel)]="selectedItem.logisticLocation">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="logisticEstimatedDate">Logistic Estimated Date</label>
+                <input type="date" class="form-control" id="logisticEstimatedDate" name="logisticEstimatedDate"
+                    [(ngModel)]="selectedItem.logisticEstimatedDate">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="shippingStatus">Shipping Status</label>
+                <input type="text" class="form-control" id="shippingStatus" name="shippingStatus"
+                    [(ngModel)]="selectedItem.shippingStatus">
+            </div>
+        </div>
+
+        <!-- Repeat the pattern for other attributes -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              Is Delivered to Iraq
+                <input type="checkbox"  name="isDeliveredToIraq"
+                    [(ngModel)]="selectedItem.isDeliveredToIraq">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              Is Delivered by Logistic
+                <input type="checkbox"  name="isDeliveredByLogistic"
+                    [(ngModel)]="selectedItem.isDeliveredByLogistic">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Deliver to Client
+                <input type="checkbox"  name="isDeliverToClient"
+                    [(ngModel)]="selectedItem.isDeliverToClient">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="logisticCost">Logistic Cost</label>
+                <input type="number" class="form-control" id="logisticCost" name="logisticCost"
+                    [(ngModel)]="selectedItem.logisticCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Fully Paid
+                <input type="checkbox" name="isFullyPaid"
+                    [(ngModel)]="selectedItem.isFullyPaid">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Submitted<input type="checkbox"  name="isSubmitted"
+                    [(ngModel)]="selectedItem.isSubmitted">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" name="status" [(ngModel)]="selectedItem.status">
+            </div>
+        </div>
+
+        <!-- <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="uploadedFiles1">Uploaded Files 1</label>
+      <input type="file" class="form-control" id="uploadedFiles1" name="uploadedFiles1" (change)="onFileChange($event, 'uploadedFiles1')">
+    </div>
+  </div> -->
+
 
         <br>
         <button class="btn btn-primary edit-button" (click)="update()">
