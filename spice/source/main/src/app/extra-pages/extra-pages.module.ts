@@ -22,6 +22,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './invoice/modal/modal.component';
 import { UsertaskComponent } from './usertask/usertask.component';
 import { InvoicelistComponent } from './invoicelist/invoicelist.component';
+import { ViewInvoiceComponent } from './invoicelist/view-invoice/view-invoice.component';
+import { EditInvoiceComponent } from './invoicelist/edit-invoice/edit-invoice.component';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -35,6 +37,8 @@ import { InvoicelistComponent } from './invoicelist/invoicelist.component';
     ModalComponent,
     UsertaskComponent,
     InvoicelistComponent,
+    ViewInvoiceComponent,
+    EditInvoiceComponent,
   ],
   imports: [
     CommonModule,

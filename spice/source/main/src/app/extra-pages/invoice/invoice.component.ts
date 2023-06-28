@@ -1,9 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, VERSION } from '@angular/core';
+import { Component,ViewChild, ElementRef } from '@angular/core';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
+// import {html2pdf} from '/html2pdf.js';
+
+declare var require: any;
+
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+const htmlToPdfmake = require("html-to-pdfmake");
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-invoice',
@@ -11,6 +20,8 @@ import { ModalComponent } from './modal/modal.component';
   styleUrls: ['./invoice.component.scss'],
 })
 export class InvoiceComponent {
+  @ViewChild('toPrint')
+  toPrint!: ElementRef;
  
   itemList: Item[] = [];
   invoice: Invoice = new Invoice;
@@ -112,6 +123,20 @@ export class InvoiceComponent {
     });
   }
 
+  // export(){
+  //   const toPrint = this.toPrint.nativeElement;
+  //   var html = htmlToPdfmake(toPrint.innerHTML);
+  //   const documentDefinition = { content: html };
+  //   pdfMake.createPdf(documentDefinition).download()
+  // }
+
+  export(): void {
+    const toPrintContent = this.toPrint.nativeElement.innerHTML;
+    const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
+    const documentDefinition = { content: pdfContent };
+    pdfMake.createPdf(documentDefinition).download('example.pdf');
+  }
+
 
   submit() {
     this.isFormSubmitted = true;
@@ -120,12 +145,14 @@ export class InvoiceComponent {
 
     this.invoice.totalCost = 0;
     this.invoice.subtotal = 0;     
+    this.invoice.grandTotal = 0;  
 
     for (const item of this.itemList) {
-      item.totalPrice = item.unitPrice*item.quantity + item.VAT + item.additionalCost + item.deliveryAdditionalCost + item.logisticCost;
+      item.totalPrice = item.unitPrice*item.quantity + item.VAT + item.additionalCost + item.deliveryAdditionalCost ;
       
       this.invoice.subtotal += item.firstPrice;
       this.invoice.totalCost += item.totalPrice;
+      this.invoice.grandTotal+=this.invoice.totalCost+item.logisticCost;
     }
 
     this.invoice.itemList=this.itemList;
