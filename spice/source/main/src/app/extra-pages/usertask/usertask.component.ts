@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Item } from 'src/app/models/item.model';
+import { EditItemsComponent } from './edit-items/edit-items.component';
 
 @Component({
   selector: 'app-usertask',
@@ -18,7 +19,7 @@ export class UsertaskComponent implements OnInit{
 
   items: Item[] = [];
   selectedItem: Item= new Item();
-  dialog?: MatDialogRef<EditItemModalComponent>;
+  dialog?: MatDialogRef<EditItemsComponent>;
 
    getItemList() {
     // this.http.get<any[]>('http://localhost:8000/api/items').subscribe(data => {
@@ -111,7 +112,7 @@ edit(item: Item): void {
   this.selectedItem = item;
     //  console.log(this.selectedItem);
   
-    this.dialogModel.open(EditItemModalComponent, {
+    this.dialogModel.open(EditItemsComponent, {
       width: '640px',
       disableClose: true,
       data: {
