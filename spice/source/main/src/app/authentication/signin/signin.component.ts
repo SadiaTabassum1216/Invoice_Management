@@ -24,7 +24,14 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private tokenService: TokenService
-  ) {}
+  ) {
+    const info = JSON.parse(JSON.stringify(this.authService.currentUserValue));
+    console.log(info);
+    if (info.user)
+    {
+      this.router.navigate(['dashboard/main']);
+    } 
+  }
   ngOnInit() {
     this.authForm = this.formBuilder.group({
       username: ['admin', Validators.required],
