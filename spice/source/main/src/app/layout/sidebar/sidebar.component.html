@@ -5,33 +5,7 @@
     <div class="menu">
       <ng-scrollbar [style.height]="listMaxHeight + 'px'" visibility="hover">
         <ul class="list">
-          <li class="sidebar-user-panel">
-            <div class="user-panel">
-              <div class=" image">
-                <img src="assets/images/usrbig.jpg" class="img-circle user-img-circle" alt="User Image" />
-              </div>
-            </div>
-            <div class="profile-usertitle">
-              <div class="sidebar-userpic-name">Emily Smith </div>
-              <div class="profile-usertitle-job ">Manager </div>
-            </div>
-            <div class="sidebar-userpic-btn">
-              <a mat-icon-button disabled routerLink="extra-pages/profile" matTooltip="Profile"
-                [matTooltipPosition]="'above'">
-                <i class="material-icons-two-tone">account_circle</i>
-              </a>
-              <a mat-icon-button disabled routerLink="email/inbox" matTooltip="Email" [matTooltipPosition]="'above'">
-                <i class="material-icons-two-tone">mark_email_unread</i>
-              </a>
-              <a mat-icon-button disabled routerLink="calendar" matTooltip="Calendar" [matTooltipPosition]="'above'">
-                <i class="material-icons-two-tone">event</i>
-              </a>
-              <a mat-icon-button disabled routerLink="authentication/locked" matTooltip="Lock"
-                [matTooltipPosition]="'above'">
-                <i class="material-icons-two-tone">lock</i>
-              </a>
-            </div>
-          </li>
+      
           <!-- Top Most level menu -->
           <li *ngFor="let sidebarItem of sidebarItems"
             [routerLinkActive]="sidebarItem.submenu.length !== 0 ? 'active' : 'active-top'">

@@ -189,7 +189,7 @@ printInvoice(invoice: Invoice) {
     const toPrintContent = this.toPrint.nativeElement.innerHTML;
     const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
     const documentDefinition = { content: pdfContent };
-    pdfMake.vfs = pdfFonts.pdfMake.vfs; // Set the virtual file system
+    // pdfMake.vfs = pdfFonts.pdfMake.vfs; // Set the virtual file system
     pdfMake.createPdf(documentDefinition).download('invoice.pdf');
   }
   
