@@ -4,7 +4,9 @@ import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout
 import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
+
 const routes: Routes = [
+  
   {
     path: '',
     component: MainLayoutComponent,

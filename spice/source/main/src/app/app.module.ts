@@ -30,7 +30,6 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     PageLoaderComponent,
     SidebarComponent,
     RightSidebarComponent,
-   
   ],
   imports: [
     BrowserModule,

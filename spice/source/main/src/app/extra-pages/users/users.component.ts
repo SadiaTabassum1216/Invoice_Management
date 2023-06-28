@@ -14,8 +14,8 @@ import { AddModalComponent } from './add-modal/add-modal.component';
 })
 export class UsersComponent implements OnInit {
   userList: any;
-  onEdit: boolean = false;
-  addUserFormVisible: boolean = false;
+ 
+  
   selectedUser: User = new User(0, '', '', '');
   newUser: User = new User(0, '', '', '');
 
@@ -45,10 +45,8 @@ export class UsersComponent implements OnInit {
 
   editUser(user: User) {
     this.selectedUser = user;
-    this.onEdit = true;
     console.log(this.selectedUser);
   
-    // Pass the selected user as data to the EditModalComponent
     this.dialogModel.open(EditModalComponent, {
       width: '640px',
       disableClose: true,
