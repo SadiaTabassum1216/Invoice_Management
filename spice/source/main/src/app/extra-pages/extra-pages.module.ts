@@ -20,10 +20,12 @@ import { EditModalComponent } from './users/edit-modal/edit-modal.component';
 import { AddModalComponent } from './users/add-modal/add-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './invoice/modal/modal.component';
-import { UsertaskComponent } from './usertask/usertask.component';
+// import { UsertaskComponent } from './usertask/usertask.component';
 import { InvoicelistComponent } from './invoicelist/invoicelist.component';
 import { ViewInvoiceComponent } from './invoicelist/view-invoice/view-invoice.component';
 import { EditInvoiceComponent } from './invoicelist/edit-invoice/edit-invoice.component';
+import { UsertaskComponent } from './usertask/usertask.component';
+import { EditItemsComponent } from './usertask/edit-items/edit-items.component';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -39,6 +41,7 @@ import { EditInvoiceComponent } from './invoicelist/edit-invoice/edit-invoice.co
     InvoicelistComponent,
     ViewInvoiceComponent,
     EditInvoiceComponent,
+    EditItemsComponent,
   ],
   imports: [
     CommonModule,

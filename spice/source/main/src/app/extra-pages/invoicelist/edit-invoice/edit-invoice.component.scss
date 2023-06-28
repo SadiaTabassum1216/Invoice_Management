@@ -1,0 +1,94 @@
+
+.edit-user-container {
+    width: 90%;
+    // padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 800px;
+    overflow-y: auto;
+  }
+
+  
+  .edit-user-container label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  .edit-user-container input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+ 
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    text-align: center;
+  }
+
+    
+  .form-group label {
+    display: block;
+    text-align: center;
+  }
+
+  .form-group input.form-control , textarea.form-control{
+    width: 60%;
+    margin: 0 auto;
+  }
+
+
+  
+  // .upload-button {
+  //   background-color: #4CAF50;
+  //   color: white;
+  //   border: none;
+  //   padding: 8px 16px;
+  //   text-align: center;
+  //   text-decoration: none;
+  //   display: inline-block;
+  //   font-size: 14px;
+  //   cursor: pointer;
+  // }
+  
+  // .view-button {
+  //   background-color: #2196F3;
+  //   color: white;
+  //   border: none;
+  //   padding: 8px 16px;
+  //   text-align: center;
+  //   text-decoration: none;
+  //   display: inline-block;
+  //   font-size: 14px;
+  //   cursor: pointer;
+  // }
+  
+  .button-gap {
+    margin-right: 5px; 
+  }
+  
+  .add-row-button {
+    background-color: #0f0735;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .add-row-button i {
+    margin-right: 5px;
+  }
+  

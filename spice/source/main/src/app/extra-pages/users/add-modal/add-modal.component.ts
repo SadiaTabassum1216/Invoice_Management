@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user.model';
 export class AddModalComponent {
   newUser: User = new User(0, '', '', '');
   constructor(private http: HttpClient,  public dialog: MatDialog) { }
-  
+
 
   addUser() {
     this.http.post<any>('http://localhost:8000/api/users', this.newUser).subscribe(data => {
