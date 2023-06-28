@@ -38,3 +38,47 @@
     background-color: rgb(209, 196, 196);
   }
   
+  .upload-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .view-button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .button-gap {
+    margin-right: 5px; 
+  }
+  
+  .add-row-button {
+    background-color: #0f0735;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .add-row-button i {
+    margin-right: 5px;
+  }
+  

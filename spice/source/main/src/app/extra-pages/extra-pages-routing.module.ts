@@ -6,6 +6,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { BlankComponent } from './blank/blank.component';
 import { UsersComponent } from './users/users.component';
+import { UsertaskComponent } from './usertask/usertask.component';
+import { InvoicelistComponent } from './invoicelist/invoicelist.component';
 
 const routes: Routes = [
   {
@@ -33,11 +35,14 @@ const routes: Routes = [
     path: 'user',
     component: UsersComponent
   },
-
-  // {
-  //   path: 'table',
-  //   component: ItemformComponent
-  // },
+  {
+    path: 'userprofile',
+    component: UsertaskComponent
+  },
+  {
+    path: 'invoicelist',
+    component: InvoicelistComponent
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

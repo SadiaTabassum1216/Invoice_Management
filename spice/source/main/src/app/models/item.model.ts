@@ -34,4 +34,8 @@ export class Item {
   isSubmitted: boolean = false;
 
   status: string='';
+
+  uploadedFiles1: File[] = [];
+  uploadedFiles2: File[] = [];
+  uploadedFiles3: File[] = [];
 }

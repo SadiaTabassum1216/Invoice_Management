@@ -1,4 +1,3 @@
-<!-- Input -->
 <div *ngIf="!isFormSubmitted">
   <form>
     <br><br><br><br>
@@ -42,7 +41,6 @@
       <table class="table">
         <thead>
           <tr>
-
             <th class="text-center">Item Name</th>
             <th class="text-center">User ID</th>
             <th class="text-center">UOM ID</th>
@@ -73,6 +71,7 @@
             <th class="text-center">Logistic Location</th>
             <th class="text-center">Logistic Estimated Date</th>
             <th class="text-center">Shipping Status</th>
+            <th class="text-center">Files</th>
 
 
             <th class="text-center">Is Delivered to Iraq</th>
@@ -81,14 +80,14 @@
             <th class="text-center">Logistic Cost</th>
             <th class="text-center">Is Fully Paid</th>
             <th class="text-center">Is Submitted</th>
+            <th class="text-center">Files</th>
 
 
             <th class="text-center">Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of items; let i = index">
-            <!-- level 1 -->
+          <tr *ngFor="let item of itemList; let i = index">
             <td class="text-center">
               <input type="text" name="{{item.itemId}}" [(ngModel)]="item.itemId">
             </td>
@@ -131,31 +130,13 @@
               <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate">
             </td>
 
-            <td>
-              <!-- Upload Files button -->
-              <p><input type="file" (change)="onFileSelect($event)"></p>
-              <!-- <input type="file" multiple (change)="onFileSelect($event)">-->
-              <button (click)="uploadFiles()">Upload Files</button> 
-
-              <!-- View button -->
-              <button (click)="openModal()">View</button>
+            <!-- file buttons -->
+            <td class="text-center">
+              <p><input type="file" multiple (change)="onFileSelect($event)"></p>
+              <button class="upload-button" (click)="uploadFiles(item.uploadedFiles1)">Upload Files</button>
+              <span class="button-gap"></span>
+              <button class="view-button" (click)="openModal(item.uploadedFiles1)">View</button>
             </td>
-            
-            <!-- Modal -->
-<div class="modal" [ngClass]="{'active': isModalOpen}">
-  <div class="modal-content">
-    <h2>Uploaded Files</h2>
-    <ul>
-      <li *ngFor="let filePath of uploadedFilePaths">
-        <a [href]="filePath" target="_blank">{{ filePath }}</a>
-        <button (click)="deleteFile(filePath)">Delete</button>
-        <button (click)="redirectToPath(filePath)">Redirect</button>
-      </li>
-    </ul>
-    <button (click)="closeModal()">Close</button>
-  </div>
-</div>
-              
 
             <!-- level 2 -->
             <td class="text-center">
@@ -180,7 +161,6 @@
             <td class="text-center">
               <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate">
             </td>
-
             <td class="text-center">
               <input type="text" name="{{item.logisticCompany}}" [(ngModel)]="item.logisticCompany">
             </td>
@@ -192,6 +172,14 @@
             </td>
             <td class="text-center">
               <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">
+            </td>
+
+            <!-- file buttons -->
+            <td class="text-center">
+              <p><input type="file" multiple (change)="onFileSelect($event)"></p>
+              <button class="upload-button" (click)="uploadFiles(item.uploadedFiles2)">Upload Files</button>
+              <span class="button-gap"></span>
+              <button class="view-button" (click)="openModal(item.uploadedFiles2)">View</button>
             </td>
 
 
@@ -215,6 +203,14 @@
               <input type="checkbox" name="{{item.isSubmitted}}" [(ngModel)]="item.isSubmitted">
             </td>
 
+            <!-- file buttons -->
+            <td class="text-center">
+              <p><input type="file" multiple (change)="onFileSelect($event)"></p>
+              <button class="upload-button" (click)="uploadFiles(item.uploadedFiles3)">Upload Files</button>
+              <span class="button-gap"></span>
+              <button class="view-button" (click)="openModal(item.uploadedFiles3)">View</button>
+            </td>
+
             <!-- level 4 -->
             <td class="text-center">
               <input type="text" name="{{item.status}}" [(ngModel)]="item.status">
@@ -222,12 +218,17 @@
           </tr>
           <tr>
             <td colspan="29" class="text-center">
-              <button class="fa fa-plus " (click)="addRow()">Add Row</button>
+              <button class="add-row-button" (click)="addRow()">
+                <i class="fa fa-plus"></i> Add Row
+              </button>
             </td>
+
           </tr>
         </tbody>
       </table>
     </div>
+
+
 
     <div class="form-group">
       <label for="offering">Offering</label>
@@ -258,213 +259,178 @@
   </form>
 </div>
 
-
 <!-- Output -->
-<section class="content" *ngIf="isFormSubmitted">
-  <div class="content-block">
-    <div class="block-header" *ngFor="let breadscrum of breadscrums">
-      <!-- breadcrumb -->
-      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
-      </app-breadcrumb>
-    </div>
-    <div class="row clearfix">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="white-box">
-                  <h3>
-                    <b>INVOICE</b>
-                    <span class="float-end">{{invoice.invoiceID}}</span>
-                  </h3>
-                  <hr>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="float-start">
-                        <address>
-                          <!-- <p class="font-bold">BILL FROM :</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom1 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom2 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom3 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billFrom4 }}</p> -->
-                        </address>
+<div id="toPrint" #toPrint>
+  <section class="content" *ngIf="isFormSubmitted">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="white-box">
+                    <h3>
+                      <b>INVOICE</b>
+                      <span class="float-end">{{invoice.invoiceID}}</span>
+                    </h3>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-12">
+
+                        <div class="float-end text-end">
+                          <address>
+                            <p class="m-t-30">
+                              <b>Invoice Date :</b>
+                              <i class="fa fa-calendar"></i>{{ invoice.invoiceDate | date: "dd-MM-yyyy"}}
+                            </p>
+                            <p class="m-t-30">
+                              <b>Estimated Date :</b>
+                              <i class="fa fa-calendar"></i>{{ invoice.invoiceEstimatedDate | date: "dd-MM-yyyy"}}
+                            </p>
+                            <p class="m-t-30">
+                              <b>Closing Date :</b>
+                              <i class="fa fa-calendar"></i>{{ invoice.invoiceClosingDate | date: "dd-MM-yyyy"}}
+                            </p>
+                            <p>
+                              <b>Status :</b>
+                              <span class="label label-success">{{invoice.status}}</span>
+                            </p>
+
+                            <p>
+                              <b>Done </b>
+                              <i class="fas"
+                                [ngClass]="{'fa-check-circle': invoice.isDone, 'fa-times-circle': !invoice.isDone}"
+                                [ngStyle]="{'color': invoice.isDone ? 'green' : 'red'}"></i>
+                            </p>
+
+                          </address>
+                        </div>
                       </div>
-                      <div class="float-end text-end">
-                        <address>
-                          <!-- <p class="addr-font-h3 font-bold">BILL TO :</p>
-                          <p class="font-bold addr-font-h4">{{invaddress.billTo1}}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo2 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo3 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo4 }}</p>
-                          <p class="text-muted" style="white-space: pre-line;">{{ invaddress.billTo5 }}</p> -->
-                          <p class="m-t-30">
-                            <b>Invoice Date :</b>
-                            <i class="fa fa-calendar"></i>{{ invoice.invoiceDate | date: "dd-MM-yyyy"}}
-                          </p>
-                          <p class="m-t-30">
-                            <b>Estimated Date :</b>
-                            <i class="fa fa-calendar"></i>{{ invoice.invoiceEstimatedDate | date: "dd-MM-yyyy"}}
-                          </p>
-                          <p class="m-t-30">
-                            <b>Closing Date :</b>
-                            <i class="fa fa-calendar"></i>{{ invoice.invoiceClosingDate | date: "dd-MM-yyyy"}}
-                          </p>
-                          <p>
-                            <b>Status :</b>
-                            <span class="label label-success">{{invoice.status}}</span>
-                          </p>
 
-                          <p>
-                            <b>Done </b>
-                            <i class="fas"
-                              [ngClass]="{'fa-check-circle': invoice.isDone, 'fa-times-circle': !invoice.isDone}"
-                              [ngStyle]="{'color': invoice.isDone ? 'green' : 'red'}"></i>
-                          </p>
+                      <div class="table-container" style="width: 70%; margin: 0 auto; overflow-x: auto;">
+                        <h3 class="text-center">Selected Items</h3>
 
-                        </address>
+                        <table class="table" style="width: 100%;">
+                          <thead>
+                            <tr>
+                              <!-- level 1 -->
+                              <th class="text-center level1">Item Name</th>
+                              <th class="text-center level1">User ID</th>
+                              <th class="text-center level1">UOM ID</th>
+                              <th class="text-center level1">First Price</th>
+                              <th class="text-center level1">Last Price</th>
+                              <th class="text-center level1">Quantity</th>
+                              <th class="text-center level1">VAT</th>
+                              <th class="text-center level1">Unit Price</th>
+                              <th class="text-center level1">Additional Cost</th>
+                              <th class="text-center level1">Purchase Additional Cost</th>
+                              <th class="text-center level1">Delivery Additional Cost</th>
+                              <th class="text-center level1">POD</th>
+                              <th class="text-center level1">Closing Date</th>
+
+
+                              <!-- level 2 -->
+                              <th class="text-center level2">Purchase Price</th>
+
+                              <th class="text-center level2">Is First Payment Done</th>
+                              <th class="text-center level2">First Payment Price</th>
+                              <th class="text-center level2">First Payment Date</th>
+
+                              <th class="text-center level2">Is Last Payment Done</th>
+                              <th class="text-center level2">Last Payment Price</th>
+                              <th class="text-center level2">Last Payment Date</th>
+
+                              <th class="text-center level2">Logistic Company</th>
+                              <th class="text-center level2">Logistic Location</th>
+                              <th class="text-center level2">Logistic Estimated Date</th>
+                              <th class="text-center level2">Shipping Status</th>
+
+                              <!-- level 3 -->
+                              <th class="text-center level3">Is Delivered to Iraq</th>
+                              <th class="text-center level3">Is Delivered by Logistic</th>
+                              <th class="text-center level3">Is Deliver to Client</th>
+                              <th class="text-center level3">Logistic Cost</th>
+                              <th class="text-center level3">Is Fully Paid</th>
+                              <th class="text-center level3">Is Submitted</th>
+
+                              <!-- level 4 -->
+                              <th class="text-center level4">total Cost</th>
+                              <th class="text-center level4">Status</th>
+                            </tr>
+
+                          </thead>
+                          <tbody>
+
+                            <tr *ngFor="let item of itemList">
+                              <td class="text-center">{{ item.itemId }}</td>
+                              <td class="text-center">{{ item.userId }}</td>
+                              <td class="text-center">{{ item.UOMId }}</td>
+                              <td class="text-center">{{ item.firstPrice }}</td>
+                              <td class="text-center">{{ item.lastPrice }}</td>
+                              <td class="text-center">{{ item.quantity }}</td>
+                              <td class="text-center">{{ item.VAT }}</td>
+                              <td class="text-center">{{ item.unitPrice }}</td>
+                              <td class="text-center">{{ item.additionalCost }}</td>
+                              <td class="text-center">{{ item.purchaseAdditionalCost }}</td>
+                              <td class="text-center">{{ item.deliveryAdditionalCost }}</td>
+                              <td class="text-center">{{ item.POD }}</td>
+                              <td class="text-center">{{ item.closingDate | date: 'dd/MM/yyyy'}}</td>
+
+                              <td class="text-center">{{ item.purchasePrice }}</td>
+                              <td class="text-center">{{ item.isFirstPaymentDone }}</td>
+                              <td class="text-center">{{ item.firstPaymentPrice }}</td>
+                              <td class="text-center">{{ item.firstPaymentDate | date: 'dd/MM/yyyy'}}</td>
+                              <td class="text-center">{{ item.isLastPaymentDone }}</td>
+                              <td class="text-center">{{ item.lastPaymentPrice }}</td>
+                              <td class="text-center">{{ item.lastPaymentDate | date: 'dd/MM/yyyy'}}</td>
+
+                              <td class="text-center">{{ item.logisticCompany }}</td>
+                              <td class="text-center">{{ item.logisticLocation }}</td>
+                              <td class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
+                              <td class="text-center">{{ item.shippingStatus }}</td>
+
+                              <td class="text-center">{{ item.isDeliveredToIraq }}</td>
+                              <td class="text-center">{{ item.isDeliveredByLogistic }}</td>
+                              <td class="text-center">{{ item.isDeliverToClient }}</td>
+                              <td class="text-center">{{ item.logisticCost }}</td>
+                              <td class="text-center">{{ item.isFullyPaid }}</td>
+                              <td class="text-center">{{ item.isSubmitted }}</td>
+
+                              <td class="text-center">{{ item.totalPrice }}</td>
+                              <td class="text-center">{{ item.status }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
-                    </div>
-
-                    <div class="table-container" style="width: 70%; margin: 0 auto; overflow-x: auto;">
-                      <h3 class="text-center">Selected Items</h3>
-
-                      <table class="table" style="width: 100%;">
-                        <thead>
-                          <tr>
-                            <!-- level 1 -->
-                            <th class="text-center level1">Item Name</th>
-                            <th class="text-center level1">User ID</th>
-                            <th class="text-center level1">UOM ID</th>
-                            <th class="text-center level1">First Price</th>
-                            <th class="text-center level1">Last Price</th>
-                            <th class="text-center level1">Quantity</th>
-                            <th class="text-center level1">VAT</th>
-                            <th class="text-center level1">Unit Price</th>
-                            <th class="text-center level1">Additional Cost</th>
-                            <th class="text-center level1">Purchase Additional Cost</th>
-                            <th class="text-center level1">Delivery Additional Cost</th>
-                            <th class="text-center level1">POD</th>
-                            <th class="text-center level1">Closing Date</th>
-
-                           
-
-                            <!-- level 2 -->
-                            <th class="text-center level2">Purchase Price</th>
-
-                            <th class="text-center level2">Is First Payment Done</th>
-                            <th class="text-center level2">First Payment Price</th>
-                            <th class="text-center level2">First Payment Date</th>
-
-                            <th class="text-center level2">Is Last Payment Done</th>
-                            <th class="text-center level2">Last Payment Price</th>
-                            <th class="text-center level2">Last Payment Date</th>
-
-                            <th class="text-center level2">Logistic Company</th>
-                            <th class="text-center level2">Logistic Location</th>
-                            <th class="text-center level2">Logistic Estimated Date</th>
-                            <th class="text-center level2">Shipping Status</th>
-
-                            <!-- level 3 -->
-                            <th class="text-center level3">Is Delivered to Iraq</th>
-                            <th class="text-center level3">Is Delivered by Logistic</th>
-                            <th class="text-center level3">Is Deliver to Client</th>
-                            <th class="text-center level3">Logistic Cost</th>
-                            <th class="text-center level3">Is Fully Paid</th>
-                            <th class="text-center level3">Is Submitted</th>
-
-                            <!-- level 4 -->
-                            <th class="text-center level4">Status</th>
-                          </tr>
-
-                        </thead>
-                        <tbody>
-
-                          <tr *ngFor="let item of items">
-                            <td class="text-center">{{ item.itemId }}</td>
-                            <td class="text-center">{{ item.userId }}</td>
-                            <td class="text-center">{{ item.UOMId }}</td>
-                            <td class="text-center">{{ item.firstPrice }}</td>
-                            <td class="text-center">{{ item.lastPrice }}</td>
-                            <td class="text-center">{{ item.quantity }}</td>
-                            <td class="text-center">{{ item.VAT }}</td>
-                            <td class="text-center">{{ item.unitPrice }}</td>
-                            <td class="text-center">{{ item.additionalCost }}</td>
-                            <td class="text-center">{{ item.purchaseAdditionalCost }}</td>
-                            <td class="text-center">{{ item.deliveryAdditionalCost }}</td>
-                            <td class="text-center">{{ item.totalPrice }}</td>
-                            <td class="text-center">{{ item.POD }}</td>
-                            <td class="text-center">{{ item.closingDate | date: 'dd/MM/yyyy'}}</td>
-
-                             <!-- Upload Files button -->
-                              <input type="file" multiple (change)="onFileSelect($event)">
-                              <button (click)="uploadFiles()">Upload Files</button>
-
-                              <!-- View button -->
-                              <button (click)="openModal()">View</button>
-
-                              <!-- Modal -->
-                              <div class="modal" [ngClass]="{'active': isModalOpen}">
-                                <div class="modal-content">
-                                  <h2>Uploaded Files</h2>
-                                  <ul>
-                                    <li *ngFor="let filePath of uploadedFilePaths">
-                                      <a [href]="filePath" target="_blank">{{ filePath }}</a>
-                                      <button (click)="deleteFile(filePath)">Delete</button>
-                                      <button (click)="redirectToPath(filePath)">Redirect</button>
-                                    </li>
-                                  </ul>
-                                  <button (click)="closeModal()">Close</button>
-                                </div>
-                              </div>
 
 
-                            <td class="text-center">{{ item.purchasePrice }}</td>
-                            <td class="text-center">{{ item.isFirstPaymentDone }}</td>
-                            <td class="text-center">{{ item.firstPaymentPrice }}</td>
-                            <td class="text-center">{{ item.firstPaymentDate | date: 'dd/MM/yyyy'}}</td>
-                            <td class="text-center">{{ item.isLastPaymentDone }}</td>
-                            <td class="text-center">{{ item.lastPaymentPrice }}</td>
-                            <td class="text-center">{{ item.lastPaymentDate | date: 'dd/MM/yyyy'}}</td>
+                      <div class="col-md-12">
+                        <div class="float-end m-t-30 text-end">
+                          <p>Offering : {{invoice.offering }} </p>
+                          <p>Sub-Total amount: ${{invoice.subtotal | number:'1.2-2'}}</p>
+                          <p>Additional Cost : ${{invoice.additionalCost | number:'1.2-2'}} </p>
+                          <hr>
+                          <h4>
+                            <p>Total : ${{invoice.totalCost | number:'1.2-2'}}</p>
+                            <p><b>Grand Total : ${{invoice.grandTotal | number:'1.2-2'}} </b></p>
+                          </h4>
+                        </div>
+                        <div class="clearfix"></div>
 
-                            <td class="text-center">{{ item.logisticCompany }}</td>
-                            <td class="text-center">{{ item.logisticLocation }}</td>
-                            <td class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
-                            <td class="text-center">{{ item.shippingStatus }}</td>
-
-                            <td class="text-center">{{ item.isDeliveredToIraq }}</td>
-                            <td class="text-center">{{ item.isDeliveredByLogistic }}</td>
-                            <td class="text-center">{{ item.isDeliverToClient }}</td>
-                            <td class="text-center">{{ item.logisticCost }}</td>
-                            <td class="text-center">{{ item.isFullyPaid }}</td>
-                            <td class="text-center">{{ item.isSubmitted }}</td>
-
-                            <td class="text-center">{{ item.status }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-
-                    <div class="col-md-12">
-                      <div class="float-end m-t-30 text-end">
-                        <p>Offering : ${{invoice.offering }} </p>
-                        <p>Sub-Total amount: ${{invoice.subtotal | number:'1.2-2'}}</p>
-                        <p>Grand Total : ${{invoice.grandTotal | number:'1.2-2'}} </p>
-                        <p>Additional Cost : ${{invoice.additionalCost | number:'1.2-2'}} </p>
                         <hr>
-                        <h3>
-                          <b>Total :</b> ${{invoice.totalCost | number:'1.2-2'}}
-                        </h3>
-                      </div>
-                      <div class="clearfix"></div>
-                      <hr>
-                      <div class="text-end">
-                        <a href="C:\Users\User\Downloads\spice\spice\source\main\README" download>
-                          <button mat-raised-button color="primary">
+                        <div class="text-end">
+                          <!-- <a href="C:\Users\User\Downloads\" download> -->
+                          <button mat-raised-button color="primary" (click)="export()">
                             <i class="fas fa-print msr-2"></i> Print
                           </button>
-                        </a>
+                          <!-- </a> -->
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -475,9 +441,5 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-
-
+  </section>
+</div>
