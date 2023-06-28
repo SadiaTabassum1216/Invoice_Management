@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\InvoiceItemController;
+use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +29,10 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
+Route::get('/items', [ItemController::class, 'index']);
+Route::post('/items', [ItemController::class, 'store']);
+Route::get('/items/{id}', [ItemController::class, 'show']);
+Route::put('/items/{id}', [ItemController::class, 'update']);
+Route::delete('/items/{id}', [ItemController::class, 'destroy']);
+
+Route::post('/invoice', [InvoiceItemController::class, 'store']);

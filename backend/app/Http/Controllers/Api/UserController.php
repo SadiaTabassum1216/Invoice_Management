@@ -29,11 +29,11 @@ class UserController extends Controller
      */
 
 
-    public function store(Request $request)
+    public function store(Request $request) 
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users',
+            // 'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             'username' => 'required|unique:users',
             'status' => 'nullable|string'
@@ -47,7 +47,7 @@ class UserController extends Controller
 
         $user = User::create([
             'name' => $request->input('name'),
-            'email' => $request->input('email'),
+            // 'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'username' => $request->input('username'),
             'status' => $request->input('status'),
@@ -88,7 +88,7 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $id,
+            // 'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'required|min:8',
             'username' => 'required|unique:users,username,' . $id,
             'status' => 'nullable|string'
@@ -110,7 +110,7 @@ class UserController extends Controller
 
         $user->update([
             'name' => $request->input('name'),
-            'email' => $request->input('email'),
+            // 'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'username' => $request->input('username'),
             'status' => $request->input('status'),
