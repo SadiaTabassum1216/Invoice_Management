@@ -1,41 +1,44 @@
 <br><br><br><br>
-
-<div class="invoice-list">
-    <h2 class="text-center">Invoice List</h2>
-    <br><br>
-    <div class="container">
-        <div class="row justify-content-center">
+<section class="content">
+  <div class="card">
+    <div class="card-body">
+      <div class="invoice-list">
+        <h2 class="text-center">Invoice List</h2>
+        <br><br>
+        <div class="container">
+          <div class="row justify-content-center">
             <div class="col-md-12">
-                <table>
-                    <thead>
-                        <tr>
-                            <th  scope="col" col="50%" class="text-center">Invoice ID</th>
-                            <th  scope="col" col="50%" class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let invoice of invoices">
-                            <td class="text-center">{{ invoice.invoiceID }}</td>
-                            <td class="text-center">
-                                <button class="btn btn-primary" (click)="viewInvoice(invoice)">
-                                  <i class="fas fa-eye"></i> View
-                                </button>
-                                <button class="btn btn-success" (click)="editInvoice(invoice)">
-                                  <i class="fas fa-edit"></i> Edit
-                                </button>
-                                <button class="btn btn-danger" (click)="deleteInvoice(invoice)">
-                                  <i class="fas fa-trash"></i> Delete
-                                </button>
-                                <button class="btn btn-secondary" (click)="printInvoice(invoice)">
-                                  <i class="fas fa-print"></i> Print
-                                </button>
-                              </td>
-                              
-                              
-                        </tr>
-                    </tbody>
-                </table>
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col" col="50%" class="text-center">Invoice ID</th>
+                    <th scope="col" col="50%" class="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let invoice of invoices">
+                    <td class="text-center">{{ invoice.invoiceID }}</td>
+                    <td class="text-center">
+                      <button class="btn btn-primary" (click)="viewInvoice(invoice)">
+                        <i class="fas fa-eye"></i> View
+                      </button>
+                      <button class="btn btn-success" (click)="editInvoice(invoice)">
+                        <i class="fas fa-edit"></i> Edit
+                      </button>
+                      <button class="btn btn-danger" (click)="deleteInvoice(invoice)">
+                        <i class="fas fa-trash"></i> Delete
+                      </button>
+                      <button class="btn btn-secondary" (click)="printInvoice(invoice)">
+                        <i class="fas fa-print"></i> Print
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>

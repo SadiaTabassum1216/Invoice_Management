@@ -1,40 +1,43 @@
-<h2>Users</h2>
-<br /><br />
+<section class="content">
+  <h2>Users</h2>
+  <br /><br />
 
 
-<div class="container">     
-      <button mat-raised-button class="btn btn-primary" (click)="openDialog2()"> <i class="fas fa-plus"></i> Add User</button> 
-</div>
+  <div class="container">
+    <button mat-raised-button class="btn btn-primary" (click)="openDialog2()"> <i class="fas fa-plus"></i> Add
+      User</button>
+  </div>
 
 
-<br><br>
+  <br><br>
 
-<table class="table user-list-table">
-  <thead>
-    <tr>
-      <th>User ID</th>
-      <th>Full Name</th>
-      <th>Username</th>
-      <th>User Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of userList.data; let i in index">
-      <td>{{ user.id }}</td>
-      <td>{{ user.name }}</td>
-      <td>{{ user.username }}</td>
-      <td>{{ user.status}}</td>
-     
-      <td>
-        <button mat-raised-button class="btn btn-primary edit-button" (click)="editUser(i) ">
-          <i class="fas fa-edit"></i> Edit
-        </button>
-        <span class="button-gap"></span> 
-        <button class="btn btn-danger delete-button" (click)="deleteUser(user.id)">
-          <i class="fas fa-trash"></i> Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table class="table user-list-table">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Full Name</th>
+        <th>Username</th>
+        <th>User Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userList.data; let i in index">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.status}}</td>
+
+        <td>
+          <button mat-raised-button class="btn btn-primary edit-button" (click)="editUser(i) ">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+          <span class="button-gap"></span>
+          <button class="btn btn-danger delete-button" (click)="deleteUser(user.id)">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

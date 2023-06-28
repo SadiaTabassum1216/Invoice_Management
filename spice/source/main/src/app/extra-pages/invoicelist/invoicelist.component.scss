@@ -1,4 +1,4 @@
-.invoice-list {
+.card {
     margin: 20px;
     margin: 0 auto;
     width: 70%;
@@ -12,7 +12,7 @@
   }
   
   thead th {
-    background-color: #d3d1d1;
+    background-color: #e0dddd;
     padding: 10px;
     text-align: left;
   }
@@ -22,9 +22,9 @@
     
   }
 
-  table{
-    border: 1px solid black;
-  }
+  // table{
+  //   border: 1px solid black;
+  // }
   
   button {
     padding: 8px 12px;
