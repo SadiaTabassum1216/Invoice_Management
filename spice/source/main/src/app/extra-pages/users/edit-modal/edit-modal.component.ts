@@ -21,8 +21,6 @@ export class EditModalComponent {
     this.http.put<any>(`http://localhost:8000/api/users/${this.selectedUser.id}`, this.selectedUser).subscribe(data => {
   console.log(this.selectedUser);
 });
-
-   
     this.dialog.closeAll();
   }
 
