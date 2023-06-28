@@ -13,3 +13,9 @@
   .level4 {
     background-color: rgb(209, 196, 196);
   }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // height: 100vh; /* Adjust as needed */
+  }

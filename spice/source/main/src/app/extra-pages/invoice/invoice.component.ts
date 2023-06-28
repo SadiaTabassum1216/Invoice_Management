@@ -134,7 +134,7 @@ export class InvoiceComponent {
     const toPrintContent = this.toPrint.nativeElement.innerHTML;
     const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
     const documentDefinition = { content: pdfContent };
-    pdfMake.createPdf(documentDefinition).download('example.pdf');
+    pdfMake.createPdf(documentDefinition).download('invoice.pdf');
   }
 
 

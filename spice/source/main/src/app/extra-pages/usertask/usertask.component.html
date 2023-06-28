@@ -1,10 +1,10 @@
 <br><br><br><br>
-
+  
 <div class="table-container" style="width: 70%; margin: 0 auto; overflow-x: auto;">
     <h2 class="text-center">Selected Items</h2>
     <br>
 
-    <table class="table" style="width: 100%;">
+    <table class="table" style="width: 100%;" id="excel">
       <thead>
         <tr>
           <!-- level 1 -->
@@ -105,6 +105,11 @@
         </tr>
       </tbody>
     </table>
+    <br>
   </div>
-
-
+ 
+  <div class="container">
+    <br><br>
+    <button mat-raised-button class="btn btn-primary" (click)="exportList()">Export</button>
+  </div>
+  
