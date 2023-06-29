@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { TokenService } from 'src/app/core/service/token.service';
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -25,12 +26,10 @@ export class SigninComponent implements OnInit {
     private authService: AuthService,
     private tokenService: TokenService
   ) {
-    const info = JSON.parse(JSON.stringify(this.authService.currentUserValue));
-    console.log(info);
-    if (info.user)
-    {
+    const token = localStorage.getItem('token');
+    if (token) {
       this.router.navigate(['dashboard/main']);
-    } 
+    }
   }
   ngOnInit() {
     this.authForm = this.formBuilder.group({
@@ -54,10 +53,11 @@ export class SigninComponent implements OnInit {
           next: (res) => {
             if (res) {
               if (res) {
-                
-                const info = JSON.parse(JSON.stringify(this.authService.currentUserValue));
+                const info = JSON.parse(
+                  JSON.stringify(this.authService.currentUserValue)
+                );
                 const token = info.access_token;
-                
+
                 if (token) {
                   this.router.navigate(['/dashboard/main']);
                 }
