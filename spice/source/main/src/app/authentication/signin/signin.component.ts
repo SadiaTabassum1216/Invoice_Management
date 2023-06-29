@@ -25,12 +25,7 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private tokenService: TokenService
-  ) {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.router.navigate(['dashboard/main']);
-    }
-  }
+  ) {}
   ngOnInit() {
     this.authForm = this.formBuilder.group({
       username: ['admin', Validators.required],

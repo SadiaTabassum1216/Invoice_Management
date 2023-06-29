@@ -12,6 +12,7 @@ import { TokenService } from './token.service';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
+  // private loggedIn: BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient, private tokenService: TokenService) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -47,11 +48,16 @@ export class AuthService {
       );
   }
 
-  logout() {
+  public logout() {
     // remove user from local storage to log user out
     this.tokenService.remove();
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(this.currentUserValue);
     return of({ success: false });
+  }
+
+  public isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+    return this.tokenService.isValid(token);
   }
 }
