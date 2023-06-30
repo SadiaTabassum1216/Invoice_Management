@@ -24,7 +24,7 @@ export class EditItemsComponent {
 
 
   update() {
-    this.http.put<any>(`http://localhost:8000/api/users/${this.selectedItem.itemId}`, this.selectedItem).subscribe(data => {
+    this.http.put<any>(`http://localhost:8000/api/items/${this.selectedItem.itemId}`, this.selectedItem).subscribe(data => {
       console.log(this.selectedItem);
     },
       error => {      

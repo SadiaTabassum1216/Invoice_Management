@@ -43,6 +43,7 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
 Route::get('/items', [ItemController::class, 'index']);
+Route::get('/searchItem', [ItemController::class, 'searchItems']);
 Route::post('/items', [ItemController::class, 'store']);
 Route::get('/items/{id}', [ItemController::class, 'show']);
 Route::put('/items/{id}', [ItemController::class, 'update']);

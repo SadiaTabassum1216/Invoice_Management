@@ -5,6 +5,7 @@ import { Item } from 'src/app/models/item.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
 import { AuthService } from 'src/app/core/service/auth.service';
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 
 
 declare var require: any;
@@ -45,6 +46,7 @@ export class InvoiceComponent implements OnInit{
   public currentUser: Observable<User> | undefined;
   name: string='';
   id: number=0;
+  items: Item[] = [];
 
   constructor(private http: HttpClient,  private dialogModel: MatDialog, private authService: AuthService) {}
   
@@ -55,9 +57,19 @@ export class InvoiceComponent implements OnInit{
       this.id=info['user']['id'];
       // console.log("Current user id ",  this.id);
     });
+    this.getItemList();
+   
+
   }
 
-
+  getItemList() {
+    this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/items`).subscribe(data => {
+      this.items = data;
+      console.log(this.items);
+      // this.itemName = this.items.map(item => item.itemId);
+      console.log("items: ",this.itemName)
+    });
+  }
 
   addRow() {
     let newItem: Item = {
