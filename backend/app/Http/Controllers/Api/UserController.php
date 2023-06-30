@@ -18,11 +18,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $onlineUserIds = Cache::get('user-online-*')->pluck('user_id')->toArray();
+        $userIds = User::pluck('id')->toArray();
 
-        // User::whereNotIn('id', $onlineUserIds)->update(['status' => 'Offline']);
-        // User::whereIn('id', $onlineUserIds)->update(['status' => 'Online']);
-
+        if ($userIds)
+        {
+            foreach($userIds as $userId)
+            {
+                if (Cache::get('user-online-'.$userId)){
+                    User::where('id', $userId)->update(['status' => 'Online']);
+                }
+                else {
+                    User::where('id', $userId)->update(['status' => 'Offline']);
+                }
+            }
+        }
         $users = User::all();
         return UserResource::collection($users);
     }

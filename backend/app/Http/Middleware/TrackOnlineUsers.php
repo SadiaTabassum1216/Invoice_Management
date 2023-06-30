@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +18,14 @@ class TrackOnlineUsers
      */
     public function handle(Request $request, Closure $next): Response
     {
-        Log::info("Tracking Middleware"." ".$request->user());
-        if ($request->user()) {
-            $expiresAt = now()->addMinutes(5); 
+        if (Auth::guard()->check()) {
+            $userId = Auth::guard()->user()->id;
+            Log::info("User ID: $userId");
 
-            Cache::put('user-online-' . $request->user()->id, true, $expiresAt);
+            $expiresAt = now()->addMinutes(5);
+            Cache::put('user-online-' . $userId, true, $expiresAt);
+        } else {
+            Log::info("Unauthorized user");
         }
 
         return $next($request);
