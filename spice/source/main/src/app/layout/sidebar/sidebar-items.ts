@@ -56,6 +56,21 @@ export const ROUTES: RouteInfo[] = [
       },
     ],
   },
+  // ...(id === 1
+  //   ? [
+  //       {
+  //         path: '/extra-pages/specific',
+  //         title: 'Specific Page',
+  //         iconType: 'material-icons-two-tone',
+  //         icon: 'specific_icon',
+  //         class: 'ml-menu',
+  //         groupTitle: false,
+  //         badge: '',
+  //         badgeClass: '',
+  //         submenu: [],
+  //       },
+  //     ]
+  //   : []),
  
 ];
 // export const ROUTES: RouteInfo[] = [

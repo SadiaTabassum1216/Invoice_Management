@@ -9,21 +9,32 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-   
+    public function searchItems(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        if (strlen($searchTerm) >= 3) {
+            $items = Item::where('itemName', 'like', "%$searchTerm%")
+                ->get();
+
+            return ItemResource::collection($items);
+        }
+    }
+
     public function index()
     {
         $items = Item::all();
         return ItemResource::collection($items);
     }
 
-   
+
     public function store(Request $request)
     {
         $item = Item::create($request->all());
         return new ItemResource($item);
     }
 
-   
+
     public function show($id)
     {
         $item = Item::find($id);
@@ -48,7 +59,7 @@ class ItemController extends Controller
         return new ItemResource($item);
     }
 
-   
+
     public function destroy($id)
     {
         $item = Item::find($id);
@@ -59,5 +70,5 @@ class ItemController extends Controller
 
         $item->delete();
         return response()->json(null, 204);
-    } 
+    }
 }

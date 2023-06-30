@@ -12,6 +12,8 @@ import {
 import { ROUTES } from './sidebar-items';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { RouteInfo } from './sidebar.metadata';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/core/models/user';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -66,10 +68,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     }
   }
+  public currentUser: Observable<User> | undefined;
+  id:number=0;
   ngOnInit() {
     if (this.authService.currentUserValue) {
       this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
+      console.log("user: ",this.authService.currentUserValue);
+      this.currentUser=this.authService.currentUser;
+    this.currentUser.subscribe(info => {
+      this.id=info['user']['id'];
+      // console.log("Current user id ",  this.id);
+    });
     }
+    
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
   }
