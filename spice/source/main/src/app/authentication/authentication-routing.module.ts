@@ -20,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'signup',
-    component: SignupComponent
+    component: SignupComponent,
+    canActivate: [GuestService]
   },
   {
     path: 'forgot-password',

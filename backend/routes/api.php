@@ -31,7 +31,7 @@ Route::prefix('auth')->middleware('api')->namespace('App\Http\Controllers\Api')-
     Route::post('signup', [AuthController::class, 'register']);
 });
 
-Route::get('/users', [UserController::class, 'index']);
+Route::get('/users', [UserController::class, 'index'])->middleware('jwt.auth');
 Route::post('/users', [UserController::class, 'store']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 Route::put('/users/{id}', [UserController::class, 'update']);
