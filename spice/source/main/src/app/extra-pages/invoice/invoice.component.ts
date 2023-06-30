@@ -1,15 +1,18 @@
 import { HttpClient } from '@angular/common/http';
-import { Component,ViewChild, ElementRef } from '@angular/core';
+import { Component,ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 
 declare var require: any;
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import { Observable } from 'rxjs';
+import { User } from 'src/app/core/models/user';
 const htmlToPdfmake = require("html-to-pdfmake");
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -19,7 +22,7 @@ const htmlToPdfmake = require("html-to-pdfmake");
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.scss'],
 })
-export class InvoiceComponent {
+export class InvoiceComponent implements OnInit{
   @ViewChild('toPrint')
   toPrint!: ElementRef;
  
@@ -39,8 +42,20 @@ export class InvoiceComponent {
   selectedFiles2: FileList | null | undefined;
   selectedFiles: FileList | null | undefined;
 
+  public currentUser: Observable<User> | undefined;
+  name: string='';
+  id: number=0;
 
-  constructor(private http: HttpClient,  private dialogModel: MatDialog) {}
+  constructor(private http: HttpClient,  private dialogModel: MatDialog, private authService: AuthService) {}
+  
+  ngOnInit(): void {
+    this.currentUser=this.authService.currentUser;
+    this.currentUser.subscribe(info => {
+      this.name=info['user']['name'];
+      this.id=info['user']['id'];
+      // console.log("Current user id ",  this.id);
+    });
+  }
 
 
 
