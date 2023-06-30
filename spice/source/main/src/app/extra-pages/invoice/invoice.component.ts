@@ -4,7 +4,7 @@ import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
-// import {html2pdf} from '/html2pdf.js';
+
 
 declare var require: any;
 
@@ -25,6 +25,8 @@ export class InvoiceComponent {
  
   itemList: Item[] = [];
   invoice: Invoice = new Invoice;
+  itemName: string[] = ['apple', 'banana', 'grape'];
+
  
   isFormSubmitted = false;
   isModalOpen: boolean = false;
@@ -123,18 +125,12 @@ export class InvoiceComponent {
     });
   }
 
-  // export(){
-  //   const toPrint = this.toPrint.nativeElement;
-  //   var html = htmlToPdfmake(toPrint.innerHTML);
-  //   const documentDefinition = { content: html };
-  //   pdfMake.createPdf(documentDefinition).download()
-  // }
 
   export(): void {
     const toPrintContent = this.toPrint.nativeElement.innerHTML;
     const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
     const documentDefinition = { content: pdfContent };
-    pdfMake.createPdf(documentDefinition).download('invoice.pdf');
+    pdfMake.createPdf(documentDefinition).download('newinvoice.pdf');
   }
 
 

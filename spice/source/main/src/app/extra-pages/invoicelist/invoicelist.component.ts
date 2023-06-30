@@ -6,10 +6,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
 
-import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
-const htmlToPdfmake = require("html-to-pdfmake");
-(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-invoicelist',
@@ -19,12 +15,29 @@ const htmlToPdfmake = require("html-to-pdfmake");
 export class InvoicelistComponent {
   invoices: Invoice[] = [];
   selectedInvoice: Invoice=new Invoice();
-  @ViewChild('toPrint')
-  toPrint!: ElementRef;
+
+  totalInvoice: number=20;
+  totalGrandTotal: number=900;
+  totalCost: number=1000;
+  totalDone: number=50;
 
   constructor(private http: HttpClient, private dialogModel: MatDialog) {
-    // Initialize the invoices array with sample data
+    
     this.getInvoices();
+    this.getStat();
+  }
+  getStat() {
+    this.http.get<any>('http://localhost:8000/api/data').subscribe(data => {
+    this.totalInvoice = data.totalInvoice;
+    this.totalGrandTotal = data.totalGrandTotal;
+    this.totalCost = data.totalCost;
+    this.totalDone = data.totalDone;
+
+    console.log('Total Invoice:', this.totalInvoice);
+    console.log('Total Grand Total:', this.totalGrandTotal);
+    console.log('Total Cost:', this.totalCost);
+    console.log('Total Done:', this.totalDone);
+  }); 
   }
   getInvoices() {
     const item1: Item = {
@@ -132,14 +145,16 @@ export class InvoicelistComponent {
       status: 'Completed',
       isDone: true
     };
-
-    // Add the invoices to the invoices array
     this.invoices.push(invoice1, invoice2);
+
+    this.http.get<any[]>('http://localhost:8000/api/invoice').subscribe(data => {
+    this.invoices = data;
+    console.log(this.invoices);
+  });
   }
 
 
 viewInvoice(invoice: Invoice) {
-  // Handle view invoice action
   console.log('View Invoice:', invoice.invoiceID);
 
   this.selectedInvoice = invoice;
@@ -156,13 +171,16 @@ viewInvoice(invoice: Invoice) {
 editInvoice(invoice: Invoice) {
   console.log('Edit Invoice:', invoice.invoiceID);
   this.selectedInvoice = invoice;
-  // console.log(this.selectedInvoice);
 
   this.dialogModel.open(EditInvoiceComponent, {
     disableClose: true,
     data: {
       invoice: this.selectedInvoice
     }
+  });
+
+  this.http.put<any>(`http://localhost:8000/api/invoice/${invoice.invoiceID}`, invoice).subscribe(data => {
+    console.log(invoice);
   });
 }
 
@@ -171,7 +189,6 @@ deleteInvoice(invoice: Invoice) {
   if (index !== -1) {
     this.invoices.splice(index, 1);
   }
-
 
 
   this.http.delete<any>(`http://localhost:8000/api/invoice/${invoice.invoiceID}`).subscribe(
@@ -185,13 +202,67 @@ deleteInvoice(invoice: Invoice) {
   );
 }
 
-printInvoice(invoice: Invoice) {
-    const toPrintContent = this.toPrint.nativeElement.innerHTML;
-    const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
-    const documentDefinition = { content: pdfContent };
-    // pdfMake.vfs = pdfFonts.pdfMake.vfs; // Set the virtual file system
-    pdfMake.createPdf(documentDefinition).download('invoice.pdf');
-  }
-  
+
+
+filterOptions: string[] = ['Date Range', 'Status', 'Is Done'];
+selectedFilters: string[] = [];
+
+// Input variables
+startDate: Date = new Date();
+endDate: Date = new Date();
+status: string = '';
+isDone: string = '';
+
+
+// Filter visibility
+filterOptionsVisible: boolean = false;
+toggleFilterOptionsVisibility() {
+  this.filterOptionsVisible = !this.filterOptionsVisible;
 }
 
+
+// Filtered data
+filteredInvoices: Invoice[] =this.invoices;
+applyFilters() {
+  let filteredInvoices = this.invoices;
+
+  if (this.selectedFilters.includes('Date Range')) {
+    filteredInvoices = filteredInvoices.filter((invoice) => {
+      const invoiceDate = new Date(invoice.invoiceDate);
+      return invoiceDate >= this.startDate && invoiceDate <= this.endDate;
+    });
+  }
+
+  if (this.selectedFilters.includes('Status')) {
+    if (this.status !== null) {
+      filteredInvoices = filteredInvoices.filter((invoice) => invoice.status === this.status);
+    }
+  }
+  
+  if (this.selectedFilters.includes('Is Done')) {
+    filteredInvoices = filteredInvoices.filter((invoice) => {
+      if (this.isDone === 'Yes') {
+        return invoice.isDone === true;
+      } else if (this.isDone === 'No') {
+        return invoice.isDone === false;
+      } else {
+        return true;
+      }
+    });
+  }
+  
+  this.filteredInvoices = filteredInvoices;
+}
+
+
+removeFilter(filter: string) {
+  const index = this.selectedFilters.indexOf(filter);
+  if (index !== -1) {
+    this.selectedFilters.splice(index, 1);
+  }
+  this.filteredInvoices=this.invoices;
+  this.applyFilters();
+}
+
+  
+}
