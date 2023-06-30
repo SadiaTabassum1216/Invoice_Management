@@ -47,7 +47,16 @@ export class AuthService {
         })
       );
   }
-
+  signup(username: string, password: string, email: string) {
+    return this.http.post(
+      `${backendEnvironment.apiUrl}/api/auth/signup`,
+      {
+        username, password, email
+      }
+    ).subscribe(
+      // data => console.log(data)
+    );
+  }
   public logout() {
     // remove user from local storage to log user out
     this.tokenService.remove();

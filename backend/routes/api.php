@@ -23,6 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::get('/ping', function (Request $request) {
+    return response()->json(['message' => 'Pong']);
+})->middleware('jwt.auth');
+
+
 Route::prefix('auth')->middleware('api')->namespace('App\Http\Controllers\Api')->group(function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
