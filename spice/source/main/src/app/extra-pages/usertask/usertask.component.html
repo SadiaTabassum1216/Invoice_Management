@@ -1,15 +1,16 @@
-<br><br><br><br>
+<section class="content">
+  <br><br><br><br>
 
-<div class="table-container" style="width: 70%; margin: 0 auto; overflow-x: auto;">
+  <div class="table-container" style="width: 70%; margin: 0 auto; overflow-x: auto;">
     <h2 class="text-center">Selected Items</h2>
     <br>
 
-    <table class="table" style="width: 100%;">
+    <table class="table" style="width: 100%;" id="excel">
       <thead>
         <tr>
           <!-- level 1 -->
           <th class="text-center level1">Item Name</th>
-         
+
           <th class="text-center level1">UOM ID</th>
           <th class="text-center level1">First Price</th>
           <th class="text-center level1">Last Price</th>
@@ -22,7 +23,7 @@
           <th class="text-center level1">POD</th>
           <th class="text-center level1">Closing Date</th>
 
-         
+
 
           <!-- level 2 -->
           <th class="text-center level2">Purchase Price</th>
@@ -70,7 +71,7 @@
           <td class="text-center">{{ item.POD }}</td>
           <td class="text-center">{{ item.closingDate | date: 'dd/MM/yyyy'}}</td>
 
-    
+
           <td class="text-center">{{ item.purchasePrice }}</td>
           <td class="text-center">{{ item.isFirstPaymentDone }}</td>
           <td class="text-center">{{ item.firstPaymentPrice }}</td>
@@ -97,7 +98,7 @@
             <button mat-raised-button class="btn btn-primary edit-button" (click)="edit(i) ">
               <i class="fas fa-edit"></i> Edit
             </button>
-            <span class="button-gap"></span> 
+            <span class="button-gap"></span>
             <button class="btn btn-danger delete-button" (click)="delete(i)">
               <i class="fas fa-trash"></i> Delete
             </button>
@@ -105,6 +106,12 @@
         </tr>
       </tbody>
     </table>
+    <br>
   </div>
 
+  <div class="container">
+    <br><br>
+    <button mat-raised-button class="btn btn-primary" (click)="exportList()">Export</button>
+  </div>
 
+</section>

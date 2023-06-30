@@ -1,5 +1,63 @@
 import { RouteInfo } from './sidebar.metadata';
-export const ROUTES: RouteInfo[] = [];
+export const ROUTES: RouteInfo[] = [
+  {
+    path: '',
+    title: 'All Pages',
+    iconType: 'material-icons-two-tone',
+    icon: 'description',
+    class: 'menu-toggle',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [
+      {
+        path: '/extra-pages/invoice',
+        title: 'Invoice',
+        iconType: 'material-icons-two-tone',
+        icon: 'receipt',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      },
+      {
+        path: '/extra-pages/user',
+        title: 'User List',
+        iconType: 'material-icons-two-tone',
+        icon: 'people_alt',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      },
+      {
+        path: '/extra-pages/userprofile',
+        title: 'User Profile',
+        iconType: 'material-icons-two-tone',
+        icon: 'person',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      },
+      {
+        path: '/extra-pages/invoicelist',
+        title: 'Invoice List',
+        iconType: 'material-icons-two-tone',
+        icon: 'list_alt',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+      },
+    ],
+  },
+ 
+];
 // export const ROUTES: RouteInfo[] = [
 //   {
 //     path: '',

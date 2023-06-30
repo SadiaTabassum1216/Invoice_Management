@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EditItemModalComponent } from './edit-item-modal/edit-item-modal.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Item } from 'src/app/models/item.model';
 import { EditItemsComponent } from './edit-items/edit-items.component';
+import * as XLSX from "xlsx";
 
 @Component({
   selector: 'app-usertask',
@@ -20,6 +20,7 @@ export class UsertaskComponent implements OnInit{
   items: Item[] = [];
   selectedItem: Item= new Item();
   dialog?: MatDialogRef<EditItemsComponent>;
+  filename='items.xlsx';
 
    getItemList() {
     // this.http.get<any[]>('http://localhost:8000/api/items').subscribe(data => {
@@ -139,6 +140,16 @@ delete(item: Item): void {
       console.log(error);
     }
   );
+
+}
+
+exportList(){
+  let element = document.getElementById('excel')
+
+  const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element)
+  const wb: XLSX.WorkBook = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wb,ws,'Sheet1')
+  XLSX.writeFile(wb,this.filename)
 
 }
 
