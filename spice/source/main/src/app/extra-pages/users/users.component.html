@@ -27,17 +27,17 @@
         <td>{{ user.name }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.status}}</td>
-
         <td>
-          <button mat-raised-button class="btn btn-primary edit-button" (click)="editUser(i) ">
+          <button mat-raised-button class="btn btn-primary edit-button" (click)="editUser(i)" *ngIf="user.id !== 1">
             <i class="fas fa-edit"></i> Edit
           </button>
           <span class="button-gap"></span>
-          <button class="btn btn-danger delete-button" (click)="deleteUser(user.id)">
+          <button class="btn btn-danger delete-button" (click)="deleteUser(user.id)" *ngIf="user.id !== 1">
             <i class="fas fa-trash"></i> Delete
           </button>
         </td>
       </tr>
     </tbody>
+    
   </table>
 </section>

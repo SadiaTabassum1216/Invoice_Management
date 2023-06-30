@@ -8,8 +8,10 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ConfigService } from 'src/app/config/config.service';
 import { InConfiguration } from 'src/app/core/models/config.interface';
+import { User } from 'src/app/core/models/user';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
 
@@ -41,59 +43,18 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private rightSidebarService: RightSidebarService,
     private configService: ConfigService
   ) {}
-  notifications: Notifications[] = [
-    {
-      message: 'Please check your mail',
-      time: '14 mins ago',
-      icon: 'mail',
-      color: 'nfc-green',
-      status: 'msg-unread',
-    },
-    {
-      message: 'New Patient Added..',
-      time: '22 mins ago',
-      icon: 'person_add',
-      color: 'nfc-blue',
-      status: 'msg-read',
-    },
-    {
-      message: 'Your leave is approved!! ',
-      time: '3 hours ago',
-      icon: 'event_available',
-      color: 'nfc-orange',
-      status: 'msg-read',
-    },
-    {
-      message: 'Lets break for lunch...',
-      time: '5 hours ago',
-      icon: 'lunch_dining',
-      color: 'nfc-blue',
-      status: 'msg-read',
-    },
-    {
-      message: 'Patient report generated',
-      time: '14 mins ago',
-      icon: 'description',
-      color: 'nfc-green',
-      status: 'msg-read',
-    },
-    {
-      message: 'Please check your mail',
-      time: '22 mins ago',
-      icon: 'mail',
-      color: 'nfc-red',
-      status: 'msg-read',
-    },
-    {
-      message: 'Salary credited...',
-      time: '3 hours ago',
-      icon: 'paid',
-      color: 'nfc-purple',
-      status: 'msg-read',
-    },
-  ];
+  
+
+  public currentUser: Observable<User> | undefined;
+  name: string='';
+ 
   ngOnInit() {
     this.config = this.configService.configData;
+    this.currentUser=this.authService.currentUser;
+    this.currentUser.subscribe(info => {
+      this.name=info['user']['name'];
+      console.log("Current user is ", this.name);
+    });
   }
   ngAfterViewInit() {
     // set theme on startup
