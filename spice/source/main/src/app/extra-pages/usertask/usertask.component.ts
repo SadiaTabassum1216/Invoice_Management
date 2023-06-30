@@ -4,6 +4,10 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Item } from 'src/app/models/item.model';
 import { EditItemsComponent } from './edit-items/edit-items.component';
 import * as XLSX from "xlsx";
+import { AuthService } from 'src/app/core/service/auth.service';
+import { Observable } from 'rxjs';
+// import { User } from 'src/app/models/user.model';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-usertask',
@@ -11,19 +15,32 @@ import * as XLSX from "xlsx";
   styleUrls: ['./usertask.component.scss']
 })
 export class UsertaskComponent implements OnInit{
+  public currentUser: Observable<User> | undefined;
+  name: string='';
+  id: number=0;
+
   ngOnInit(): void {
     this.getItemList();
+    this.currentUser=this.authService.currentUser;
+    this.currentUser.subscribe(info => {
+      this.name=info['user']['name'];
+      this.id=info['user']['id'];
+      // console.log("Current user id ",  this.id);
+    });
   }
 
-  constructor(private http: HttpClient,  private dialogModel: MatDialog) {}
+  constructor(private http: HttpClient,  private dialogModel: MatDialog, private authService: AuthService) {}
 
   items: Item[] = [];
   selectedItem: Item= new Item();
   dialog?: MatDialogRef<EditItemsComponent>;
+
+ 
+  
   filename='items.xlsx';
 
    getItemList() {
-    // this.http.get<any[]>('http://localhost:8000/api/items').subscribe(data => {
+    // this.http.get<any[]>('http://localhost:8000/api/items/id').subscribe(data => {
     //   this.items = data;
     //   console.log(this.items);
     // });

@@ -3,20 +3,21 @@
     <form>
       <br><br><br><br>
 
-      <h3 class="text-center">Invoice Table</h3>
+      <h2 class="text-center">Invoice Form</h2>
       <br><br>
 
-      <div class="form-group">
-        <label for="estimatedDate">Estimated Date</label>
+      <div class="form-group  row">
+        <label for="estimatedDate" class="col-sm-6 col-form-label">Estimated Date</label>
         <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
           [(ngModel)]="invoice.invoiceEstimatedDate">
-      </div>
+      </div><br>
+      
 
-      <div class="form-group">
-        <label for="closingDate">Closing Date</label>
+      <div class="form-group   row">
+        <label for="closingDate" class="col-sm-6 col-form-label">Closing Date</label>
         <input type="date" class="form-control" id="closingDate" name="closingDate"
           [(ngModel)]="invoice.invoiceClosingDate">
-      </div>
+      </div><br>
 
       <!-- <div class="form-group">
       <label for="billFrom">BILL FROM</label>
@@ -90,7 +91,9 @@
           <tbody>
             <tr *ngFor="let item of itemList; let i = index">
               <td class="text-center">
-                <input type="text" name="{{item.itemId}}" [(ngModel)]="item.itemId">
+                <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
+                  <option *ngFor="let option of itemName" [value]="option">{{option}}</option>
+                </select>
               </td>
               <td class="text-center">
                 <input type="text" name="{{item.userId}}" [(ngModel)]="item.userId">
@@ -217,40 +220,46 @@
                 <input type="text" name="{{item.status}}" [(ngModel)]="item.status">
               </td>
             </tr>
-            <tr>
-              <td colspan="29" class="text-center">
-                <button class="add-row-button" (click)="addRow()">
-                  <i class="fa fa-plus"></i> Add Row
-                </button>
-              </td>
-
-            </tr>
           </tbody>
         </table>
+        
       </div>
+      <br>
+      <div colspan="29" class="text-center">
+        <button class="add-row-button" (click)="addRow()">
+          <i class="fa fa-plus"></i> Add Row
+        </button>
+      </div>
+      <br>
 
 
-
-      <div class="form-group">
-        <label for="offering">Offering</label>
+      <div class="form-group   row">
+        <label for="offering" class="col-sm-6 col-form-label">Offering</label>
         <input type="text" class="form-control" id="offering" name="offering" [(ngModel)]="invoice.offering">
       </div>
+      <br>
 
-      <div class="form-group">
-        <label for="additionalCost">Additional Cost</label>
+      <div class="form-group   row">
+        <label for="additionalCost" class="col-sm-6 col-form-label">Additional Cost</label>
         <input type="number" class="form-control" id="additionalCost" name="additionalCost"
           [(ngModel)]="invoice.additionalCost">
       </div>
+      <br>
 
-      <div class="form-group">
-        <label for="status">Status</label>
+      <div class="form-group   row">
+        <label for="status" class="col-sm-6 col-form-label">Status</label>
         <input type="text" class="form-control" id="status" name="status" [(ngModel)]="invoice.status">
       </div>
+      <br>
 
-      <div class="form-group">
-        Is done <input type="checkbox" name="{{invoice.isDone}}" [(ngModel)]="invoice.isDone">
+      <div class="form-group row">
+        <label for="isDone" class="col-sm-6 col-form-label text-right">Is done</label>
+        <div class="col-sm-6  d-flex align-items-left">
+        
+          <input type="checkbox" class="form-check-input"  id="isDone" name="{{invoice.isDone}}" [(ngModel)]="invoice.isDone">
+          </div>     
       </div>
-
+      <br>
 
 
       <div class="text-center">
