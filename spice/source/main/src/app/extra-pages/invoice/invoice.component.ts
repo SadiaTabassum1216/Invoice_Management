@@ -25,6 +25,8 @@ export class InvoiceComponent {
  
   itemList: Item[] = [];
   invoice: Invoice = new Invoice;
+  itemName: string[] = ['apple', 'banana', 'grape'];
+
  
   isFormSubmitted = false;
   isModalOpen: boolean = false;

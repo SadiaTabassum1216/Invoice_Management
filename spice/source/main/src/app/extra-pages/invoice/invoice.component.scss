@@ -1,24 +1,16 @@
 .form-group {
     text-align: center;
+    width: 70%;
   }
 
 
-  .table-container {
-    overflow-x: auto;
-    width: 60%;
-    margin: 0 auto;
-  }
-  
-
-
-  
   .form-group label {
     display: block;
-    text-align: center;
+    text-align: right;
   }
 
   .form-group input.form-control , textarea.form-control{
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
   }
 

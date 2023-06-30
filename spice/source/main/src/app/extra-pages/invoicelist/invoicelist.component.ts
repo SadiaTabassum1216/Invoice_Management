@@ -21,6 +21,10 @@ export class InvoicelistComponent {
   selectedInvoice: Invoice=new Invoice();
   @ViewChild('toPrint')
   toPrint!: ElementRef;
+  totalInvoice: number=20;
+  totalGrandTotal: number=900;
+  totalCost: number=1000;
+  totalDone: number=50;
 
   constructor(private http: HttpClient, private dialogModel: MatDialog) {
     // Initialize the invoices array with sample data
@@ -192,6 +196,70 @@ printInvoice(invoice: Invoice) {
     // pdfMake.vfs = pdfFonts.pdfMake.vfs; // Set the virtual file system
     pdfMake.createPdf(documentDefinition).download('invoice.pdf');
   }
-  
+
+
+filterOptions: string[] = ['Date Range', 'Status', 'Is Done'];
+selectedFilters: string[] = [];
+
+// Input variables
+startDate: Date = new Date();
+endDate: Date = new Date();
+status: string = '';
+isDone: string = '';
+
+
+// Filter visibility
+filterOptionsVisible: boolean = false;
+toggleFilterOptionsVisibility() {
+  this.filterOptionsVisible = !this.filterOptionsVisible;
 }
 
+
+// Filtered data
+filteredInvoices: Invoice[] =this.invoices;
+applyFilters() {
+  // Apply the selected filters
+  let filteredInvoices = this.invoices;
+
+  if (this.selectedFilters.includes('Date Range')) {
+    // Filter by date range
+    filteredInvoices = filteredInvoices.filter((invoice) => {
+      const invoiceDate = new Date(invoice.invoiceDate);
+      return invoiceDate >= this.startDate && invoiceDate <= this.endDate;
+    });
+  }
+
+  if (this.selectedFilters.includes('Status')) {
+    if (this.status !== null) {
+      filteredInvoices = filteredInvoices.filter((invoice) => invoice.status === this.status);
+    }
+  }
+  
+  if (this.selectedFilters.includes('Is Done')) {
+    // Filter by is done
+    filteredInvoices = filteredInvoices.filter((invoice) => {
+      if (this.isDone === 'Yes') {
+        return invoice.isDone === true;
+      } else if (this.isDone === 'No') {
+        return invoice.isDone === false;
+      } else {
+        return true;
+      }
+    });
+  }
+  
+
+  // Update the invoices list with the filtered invoices
+  this.filteredInvoices = filteredInvoices;
+}
+
+
+removeFilter(filter: string) {
+  const index = this.selectedFilters.indexOf(filter);
+  if (index !== -1) {
+    this.selectedFilters.splice(index, 1);
+  }
+}
+
+  
+}
