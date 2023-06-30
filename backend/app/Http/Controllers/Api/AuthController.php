@@ -38,9 +38,8 @@ class AuthController extends Controller
         return response()->json(['error' => 'Invalid User Name Or Password'], 401);
     }
 
-    public function register (Request $request)
+    public function register(Request $request)
     {
-        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -48,8 +47,9 @@ class AuthController extends Controller
             'username' => $request->username,
         ]);
 
-        return response()->json(['success' => 'User created successfully'],200);
+        
 
+        return $this->login($request);
     }
     /**
      * Get the authenticated User

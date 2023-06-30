@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -17,6 +18,20 @@ class UserController extends Controller
      */
     public function index()
     {
+        $userIds = User::pluck('id')->toArray();
+
+        if ($userIds)
+        {
+            foreach($userIds as $userId)
+            {
+                if (Cache::get('user-online-'.$userId)){
+                    User::where('id', $userId)->update(['status' => 'Online']);
+                }
+                else {
+                    User::where('id', $userId)->update(['status' => 'Offline']);
+                }
+            }
+        }
         $users = User::all();
         return UserResource::collection($users);
     }
@@ -29,7 +44,7 @@ class UserController extends Controller
      */
 
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',

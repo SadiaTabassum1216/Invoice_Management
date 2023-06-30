@@ -1,4 +1,5 @@
 import { DOCUMENT } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   Component,
   Inject,
@@ -14,7 +15,7 @@ import { InConfiguration } from 'src/app/core/models/config.interface';
 import { User } from 'src/app/core/models/user';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
-
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 interface Notifications {
   message: string;
   time: string;
@@ -41,7 +42,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private router: Router,
     private rightSidebarService: RightSidebarService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private http: HttpClient
   ) {}
   
 
@@ -52,9 +54,17 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.config = this.configService.configData;
     this.currentUser=this.authService.currentUser;
     this.currentUser.subscribe(info => {
-      this.name=info['user']['name'];
+      this.name=info['user']['username'];
       console.log("Current user is ", this.name);
     });
+    this.sendPing();
+  }
+
+  sendPing(){
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    this.http.get(`${backendEnvironment.apiUrl}/api/ping`, {headers}).subscribe(
+      // data => console.log(data)
+    );
   }
   ngAfterViewInit() {
     // set theme on startup

@@ -5,6 +5,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { AuthService } from 'src/app/core/service/auth.service';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -18,7 +19,8 @@ export class SignupComponent implements OnInit {
   chide = true;
   constructor(
     private formBuilder: UntypedFormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
   ngOnInit() {
     this.authForm = this.formBuilder.group({
@@ -40,7 +42,25 @@ export class SignupComponent implements OnInit {
     if (this.authForm.invalid) {
       return;
     } else {
-      this.router.navigate(['/dashboard/main']);
+      this.authService.signup(this.f['username'].value, this.f['password'].value, this.f['email'].value);
+      this.authService
+        .login(this.f['username'].value, this.f['password'].value)
+        .subscribe({
+          next: (res) => {
+            if (res) {
+              if (res) {
+                const info = JSON.parse(
+                  JSON.stringify(this.authService.currentUserValue)
+                );
+                const token = info.access_token;
+
+                if (token) {
+                  this.router.navigate(['/dashboard/main']);
+                }
+              }
+            }
+          },
+        });
     }
   }
 }
