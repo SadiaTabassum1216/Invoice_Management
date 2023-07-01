@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { Observable } from 'rxjs';
  import { AuthUser } from 'src/app/core/models/user';
 import { Router } from '@angular/router';
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 
 
 @Component({
@@ -55,7 +56,7 @@ export class UsersComponent implements OnInit {
 
 
   getList() {
-    this.http.get<any[]>('http://localhost:8000/api/users').subscribe(data => {
+    this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/users`).subscribe(data => {
 
       this.userList = data;
       console.log(this.userList);
@@ -75,6 +76,12 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
+  confirmDelete(userID: number): void {
+    const confirmation = window.confirm('Are you sure you want to delete?');
+    if (confirmation) 
+      this.deleteUser(userID);
+    }
   
 
   deleteUser(userID: number) {
@@ -83,7 +90,7 @@ export class UsersComponent implements OnInit {
       this.userList.data.splice(userIndex, 1);
     }
   
-    this.http.delete<any>(`http://localhost:8000/api/users/${userID}`).subscribe(
+    this.http.delete<any>(`${backendEnvironment.apiUrl}/api/users/${userID}`).subscribe(
       data => {
         console.log("User deleted successfully");
         window.location.reload();

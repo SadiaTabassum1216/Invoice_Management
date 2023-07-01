@@ -1,4 +1,4 @@
-<section class="content"  *ngIf="id === 1">
+<section class="content" *ngIf="id === 1">
   <h2>Users</h2>
   <br /><br />
 
@@ -32,12 +32,12 @@
             <i class="fas fa-edit"></i> Edit
           </button>
           <span class="button-gap"></span>
-          <button class="btn btn-danger delete-button" (click)="deleteUser(user.id)"  *ngIf="user.id !== 1">
+          <button class="btn btn-danger delete-button" (click)="confirmDelete(user.id)" *ngIf="user.id !== 1">
             <i class="fas fa-trash"></i> Delete
           </button>
         </td>
       </tr>
     </tbody>
-    
+
   </table>
 </section>

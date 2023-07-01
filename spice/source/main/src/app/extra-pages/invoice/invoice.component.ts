@@ -6,9 +6,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalComponent } from './modal/modal.component';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
-import { AutoCompleteComponent } from '@syncfusion/ej2-angular-dropdowns';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { startWith, map } from 'rxjs';
 
@@ -254,7 +252,7 @@ export class InvoiceComponent implements OnInit {
     console.log(this.invoice);
 
 
-    this.http.post<any>('http://localhost:8000/api/invoice', this.invoice).subscribe(data => {
+    this.http.post<any>(`${backendEnvironment.apiUrl}/api/invoice`, this.invoice).subscribe(data => {
       console.log(this.invoice);
       this.invoice.invoiceID = data.id;
     });

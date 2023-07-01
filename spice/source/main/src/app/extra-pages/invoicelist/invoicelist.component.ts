@@ -5,6 +5,7 @@ import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 
 
 @Component({
@@ -147,7 +148,7 @@ export class InvoicelistComponent {
     };
     this.invoices.push(invoice1, invoice2);
 
-    this.http.get<any[]>('http://localhost:8000/api/invoice').subscribe(data => {
+    this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoice`).subscribe(data => {
     this.invoices = data;
     console.log(this.invoices);
   });
@@ -179,10 +180,17 @@ editInvoice(invoice: Invoice) {
     }
   });
 
-  this.http.put<any>(`http://localhost:8000/api/invoice/${invoice.invoiceID}`, invoice).subscribe(data => {
+  this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice/${invoice.invoiceID}`, invoice).subscribe(data => {
     console.log(invoice);
   });
 }
+
+confirmDelete(invoice: Invoice): void {
+  const confirmation = window.confirm('Are you sure you want to delete?');
+  if (confirmation) 
+    this.deleteInvoice(invoice);
+  }
+
 
 deleteInvoice(invoice: Invoice) {
   const index = this.invoices.indexOf(invoice);
@@ -191,7 +199,7 @@ deleteInvoice(invoice: Invoice) {
   }
 
 
-  this.http.delete<any>(`http://localhost:8000/api/invoice/${invoice.invoiceID}`).subscribe(
+  this.http.delete<any>(`${backendEnvironment.apiUrl}/api/invoice/${invoice.invoiceID}`).subscribe(
     data => {
       console.log("Item deleted successfully");
       window.location.reload();
