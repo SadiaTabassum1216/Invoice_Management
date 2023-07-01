@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 
 @Component({
   selector: 'app-edit-invoice',
@@ -65,7 +66,7 @@ export class EditInvoiceComponent {
   }
   
   update() {
-    this.http.put<any>(`http://localhost:8000/api/invoice/${this.invoice.invoiceID}`, this.invoice).subscribe(data => {
+    this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice/${this.invoice.invoiceID}`, this.invoice).subscribe(data => {
   console.log(this.invoice);
 });
     this.dialog.closeAll();

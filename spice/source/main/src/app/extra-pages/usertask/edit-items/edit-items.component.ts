@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/d
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 import { FormsModule } from '@angular/forms';
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class EditItemsComponent {
 
 
   update() {
-    this.http.put<any>(`http://localhost:8000/api/items/${this.selectedItem.itemId}`, this.selectedItem).subscribe(data => {
+    this.http.put<any>(`${backendEnvironment.apiUrl}/api/items/${this.selectedItem.itemId}`, this.selectedItem).subscribe(data => {
       console.log(this.selectedItem);
     },
       error => {      

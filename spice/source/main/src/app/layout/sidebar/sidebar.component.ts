@@ -13,7 +13,7 @@ import { ROUTES } from './sidebar-items';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { RouteInfo } from './sidebar.metadata';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/core/models/user';
+import { AuthUser } from 'src/app/core/models/user';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -68,7 +68,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     }
   }
-  public currentUser: Observable<User> | undefined;
+  public currentUser: Observable<AuthUser> | undefined;
   id:number=0;
   ngOnInit() {
     if (this.authService.currentUserValue) {
