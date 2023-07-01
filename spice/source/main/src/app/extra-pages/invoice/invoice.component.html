@@ -11,7 +11,7 @@
         <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
           [(ngModel)]="invoice.invoiceEstimatedDate">
       </div><br>
-      
+
 
       <div class="form-group   row">
         <label for="closingDate" class="col-sm-6 col-form-label">Closing Date</label>
@@ -43,7 +43,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="text-center">Item Name</th>
+              <th class="text-center">Item ID</th>
               <th class="text-center">User ID</th>
               <th class="text-center">UOM ID</th>
               <th class="text-center">First Price</th>
@@ -91,13 +91,33 @@
           <tbody>
             <tr *ngFor="let item of itemList; let i = index">
               <td class="text-center">
-                <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
+                <!-- <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
                   <option *ngFor="let option of itemName" [value]="option">{{option}}</option>
-                </select>
+                </select> -->
+
+                <mat-form-field>
+                  <input matInput type="text" [matAutocomplete]="auto" [(ngModel)]="item.itemId" [formControl]="myControlitem">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let item of filteredOptionsItem | async" [value]="item.id">
+                      {{ item.name }} (ID: {{ item.id }})
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
               </td>
+
+
               <td class="text-center">
-                <input type="text" name="{{item.userId}}" [(ngModel)]="item.userId">
+
+                <mat-form-field>
+                  <input matInput type="text" [matAutocomplete]="autouser" [(ngModel)]="item.userId" [formControl]="myControluser">
+                  <mat-autocomplete #autouser="matAutocomplete">
+                    <mat-option *ngFor="let user of filteredOptionsUser | async" [value]="user.id">
+                      {{ user.name }} (ID: {{ user.id }})
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
               </td>
+
               <td class="text-center">
                 <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId">
               </td>
@@ -222,7 +242,7 @@
             </tr>
           </tbody>
         </table>
-        
+
       </div>
       <br>
       <div colspan="29" class="text-center">
@@ -255,9 +275,10 @@
       <div class="form-group row">
         <label for="isDone" class="col-sm-6 col-form-label text-right">Is done</label>
         <div class="col-sm-6  d-flex align-items-left">
-        
-          <input type="checkbox" class="form-check-input"  id="isDone" name="{{invoice.isDone}}" [(ngModel)]="invoice.isDone">
-          </div>     
+
+          <input type="checkbox" class="form-check-input" id="isDone" name="{{invoice.isDone}}"
+            [(ngModel)]="invoice.isDone">
+        </div>
       </div>
       <br>
 

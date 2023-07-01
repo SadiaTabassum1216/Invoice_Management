@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
   constructor(private http: HttpClient,  private dialogModel: MatDialog, private authService: AuthService) { }
   
   ngOnInit(): void {
-    this.getList();
+    // this.getList();
     // this.currentUser=this.authService.currentUser;
     // this.currentUser.subscribe(info => {
      
