@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfigService } from 'src/app/config/config.service';
 import { InConfiguration } from 'src/app/core/models/config.interface';
-import { User } from 'src/app/core/models/user';
+import { AuthUser } from 'src/app/core/models/user';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ) {}
   
 
-  public currentUser: Observable<User> | undefined;
+  public currentUser: Observable<AuthUser> | undefined;
   name: string='';
  
   ngOnInit() {

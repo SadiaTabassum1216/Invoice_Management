@@ -17,8 +17,9 @@ declare var require: any;
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
 import { Observable } from 'rxjs';
-import { User } from 'src/app/core/models/user';
+import { AuthUser } from 'src/app/core/models/user';
 import { Product } from 'src/app/models/product.model';
+import { Router } from '@angular/router';
 const htmlToPdfmake = require("html-to-pdfmake");
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -48,7 +49,7 @@ export class InvoiceComponent implements OnInit {
   selectedFiles2: FileList | null | undefined;
   selectedFiles: FileList | null | undefined;
 
-  public currentUser: Observable<User> | undefined;
+  public currentUser: Observable<AuthUser> | undefined;
   name: string = '';
   id: number = 0;
   // items: Item[] = [];
@@ -59,19 +60,18 @@ export class InvoiceComponent implements OnInit {
   userList: any;
   userName: string[] = [];
 
-  
 
-
-  // formGroup : FormGroup | undefined;
-
-  
   filteredOptionsItem: Observable<any[]> | undefined;
   filteredOptionsUser: Observable<any[]> | undefined;
 
   myControlitem= new FormControl();
   myControluser= new FormControl();
 
-  constructor(private http: HttpClient, private dialogModel: MatDialog, private authService: AuthService) { }
+  constructor(private http: HttpClient, 
+    private dialogModel: MatDialog,
+    private router: Router, 
+    private authService: AuthService,
+    ) { }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
@@ -79,6 +79,11 @@ export class InvoiceComponent implements OnInit {
       this.name = info['user']['name'];
       this.id = info['user']['id'];
     });
+
+    if (this.id !== 1) {
+      this.router.navigate(['/**']);
+    }
+
     this.getProductList();
     this.getUserList();
 

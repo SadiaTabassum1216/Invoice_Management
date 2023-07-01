@@ -7,7 +7,8 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
 import { AddModalComponent } from './add-modal/add-modal.component';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Observable } from 'rxjs';
-// import { User } from 'src/app/core/models/user';
+ import { AuthUser } from 'src/app/core/models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { Observable } from 'rxjs';
 export class UsersComponent implements OnInit {
   userList: any;
  
-  public currentUser: Observable<User> | undefined;
+  public currentUser: Observable<AuthUser> | undefined;
   id: number=0;
 
   
@@ -26,16 +27,23 @@ export class UsersComponent implements OnInit {
   newUser: User = new User(0, '', '', '');
 
   dialogConfig?: MatDialogConfig;
-  constructor(private http: HttpClient,  private dialogModel: MatDialog, private authService: AuthService) { }
+  constructor(private http: HttpClient,  
+    private dialogModel: MatDialog, 
+    private authService: AuthService,
+    private router: Router) { }
   
   ngOnInit(): void {
-    // this.getList();
-    // this.currentUser=this.authService.currentUser;
-    // this.currentUser.subscribe(info => {
+     this.getList();
+    this.currentUser=this.authService.currentUser;
+    this.currentUser.subscribe(info => {
      
-    //   this.id=info['user']['id'];
-    //   // console.log("Current user id ",  this.id);
-    // });
+      this.id=info['user']['id'];
+      // console.log("Current user id ",  this.id);
+    });
+
+    if (this.id !== 1) {
+      this.router.navigate(['/**']);
+    }
   }
 
   openDialog2(): void {

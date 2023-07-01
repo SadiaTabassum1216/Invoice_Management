@@ -7,7 +7,7 @@ import * as XLSX from "xlsx";
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Observable } from 'rxjs';
 // import { User } from 'src/app/models/user.model';
-import { User } from 'src/app/core/models/user';
+import { AuthUser } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-usertask',
@@ -15,7 +15,7 @@ import { User } from 'src/app/core/models/user';
   styleUrls: ['./usertask.component.scss']
 })
 export class UsertaskComponent implements OnInit{
-  public currentUser: Observable<User> | undefined;
+  public currentUser: Observable<AuthUser> | undefined;
   name: string='';
   id: number=0;
 
