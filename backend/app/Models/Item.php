@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'itemID';
+    // protected $primaryKey = 'itemID';
     protected $fillable = [
         'itemName',
         'itemDesc',
@@ -17,6 +17,7 @@ class Item extends Model
     ];
     public function invoiceItems()
     {
-        return $this->hasMany(InvoiceItem::class, 'itemID');
+        return $this->belongsToMany(InvoiceItem::class, 'invoice_item_item', 'item_id', 'invoice_item_id');
     }
+
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'invoiceID';
+    // protected $primaryKey = 'invoiceID';
     protected $fillable = [
         'invoiceDate',
         'invoiceTime',
@@ -23,13 +23,11 @@ class Invoice extends Model
         'invoiceDone',
     ];
     protected $casts = [
-        'invoiceStatus' => 'boolean',
-        'invoiceIsOffering' => 'boolean',
         'invoiceDone' => 'boolean',
     ];
 
     public function invoiceItems()
     {
-        return $this->hasMany(InvoiceItem::class, 'invoiceItemID');
+        return $this->hasMany(InvoiceItem::class, 'invoiceID');
     }
 }

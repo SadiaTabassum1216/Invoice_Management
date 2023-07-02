@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('item_attachments', function (Blueprint $table) {
-            $table->id('itemattachmentID');
+            $table->bigIncrements('itemattachmentID');
             $table->string('itemattachmentName');
             $table->string('itemattachmentFile');
             $table->unsignedBigInteger('invoiceItemID');
@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->timestamps();
 
             // Foreign key relationship
-            $table->foreign('invoiceItemID')->references('InvoiceItemID')->on('invoice_items');
+            $table->foreign('invoiceItemID')->references('id')->on('invoice_items');
         });
     }
 

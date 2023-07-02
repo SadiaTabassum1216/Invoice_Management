@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('shipping_statuses', function (Blueprint $table) {
-            $table->id('shippingstatusID');
+            $table->bigIncrements('shippingstatusID');
             $table->string('shippingName');
             $table->string('shippingStatusColor');
             $table->timestamps();
