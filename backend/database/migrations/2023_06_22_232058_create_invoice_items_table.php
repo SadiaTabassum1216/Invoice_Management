@@ -53,9 +53,9 @@ return new class extends Migration {
             
             $table->timestamps();
 
-            $table->foreign('invoiceID')->references('id')->on('invoices');
-            $table->foreign('userID')->references('id')->on('users');
-            $table->foreign('uomID')->references('id')->on('uom_ids');
+            $table->foreign('invoiceID')->references('id')->on('invoices')->onDelete('cascade');
+            $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('uomID')->references('id')->on('uom_ids')->onDelete('cascade');
         });
 
     }
