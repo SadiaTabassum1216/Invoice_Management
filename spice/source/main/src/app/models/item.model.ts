@@ -12,18 +12,18 @@ export class Item {
   deliveryAdditionalCost: number=0;
   totalPrice: number = 0;
   POD: string='';
-  closingDate: Date=new Date('Invalid Date');
+  closingDate: any=new Date(1970, 0, 1);
 
   purchasePrice: number=0;
   isFirstPaymentDone: boolean=false;
   firstPaymentPrice: number=0;
-  firstPaymentDate: Date=new Date('Invalid Date');
+  firstPaymentDate: any=new Date(1970, 0, 1);
   isLastPaymentDone: boolean=false;
   lastPaymentPrice: number=0;
-  lastPaymentDate: Date=new Date('Invalid Date');
+  lastPaymentDate: any=new Date(1970, 0, 1);
   logisticCompany: string='';
   logisticLocation: string='';
-  logisticEstimatedDate: Date=new Date('Invalid Date');
+  logisticEstimatedDate: any=new Date(1970, 0, 1);
   shippingStatus: string='';
   
   isDeliveredToIraq: boolean = false; // Set to false by default

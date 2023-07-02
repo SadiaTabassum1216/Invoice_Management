@@ -20,4 +20,9 @@ class UOMController extends Controller
             return UomResource::collection($uoms);
         }
     }
+
+    public function show(){
+        $uoms= UOM:: all();
+        return UomResource::collection($uoms);
+    }
 }

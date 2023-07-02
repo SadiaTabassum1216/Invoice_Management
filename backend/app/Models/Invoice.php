@@ -20,10 +20,10 @@ class Invoice extends Model
         'invoiceAdditional',
         'invoiceStatus',
         'invoiceIsOffering',
-        'invoiceDone',
+        'invoiceIsDone',
     ];
     protected $casts = [
-        'invoiceDone' => 'boolean',
+        'invoiceIsDone' => 'boolean',
     ];
 
     public function invoiceItems()

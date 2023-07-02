@@ -2,6 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 
 @Component({
   selector: 'app-modal',
@@ -10,12 +11,15 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class ModalComponent {
   uploadedFilePaths: string[] = [];
+  
+  uploadedFile: File[]=[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, 
   public dialogRef: MatDialogRef<ModalComponent>,
   private http: HttpClient) {
     this.uploadedFilePaths = data.filePaths;
-    console.log(this.uploadedFilePaths);
+    this.uploadedFile=data;
+    console.log(this.uploadedFile);
   }
 
   deleteFile(filePath: string): void {
@@ -26,9 +30,9 @@ export class ModalComponent {
   }
 
   redirectToPath(filePath: string): void {
-    this.http.get<any>('YOUR_API_ENDPOINT').subscribe(
+    this.http.get<any>(`${backendEnvironment.apiUrl}/api//file_download/filepath`).subscribe(
       (response) => {
-        const fetchedFilePath = response.filePath; // Adjust the property name as per your API response
+        const fetchedFilePath = response.filePath; 
         window.open(fetchedFilePath, '_blank');
       },
       (error) => {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\InvoiceItemController;
 use App\Http\Controllers\Api\InvoiceItemFileController;
 use App\Http\Controllers\Api\ItemController;
@@ -69,8 +70,9 @@ Route::delete('/items/{id}', [ItemController::class, 'destroy']);
 
 Route::post('/invoice', [InvoiceItemController::class, 'store']);
 Route::get('/invoice', [InvoiceItemController::class, 'show']);
+Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy']);
 
 Route::get('/file_download/{id}', [InvoiceItemFileController::class, 'downloadFile']);
 
 
-Route::get('/searchUOM', [UOMController::class, 'search']);
+Route::get('/searchUOM', [UOMController::class, 'show']);

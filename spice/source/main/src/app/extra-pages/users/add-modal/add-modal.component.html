@@ -22,13 +22,13 @@
           <label for="newUsername">Password</label>
           <input type="password" class="form-control" id="newPass" [(ngModel)]="newUser.password">
         </div>
-      <div class="form-group col-md-6">
+      <!-- <div class="form-group col-md-6">
         <label for="newStatus">Status</label>
         <select class="form-control" id="newStatus" [(ngModel)]="newUser.status">
           <option [ngValue]="'online'">Active</option>
           <option [ngValue]="'offline'">Inactive</option>
         </select>
-      </div>
+      </div> -->
     </div>
     <br>
     <button mat-raised-button class="btn btn-primary" (click)="addUser()">

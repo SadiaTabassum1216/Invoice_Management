@@ -146,6 +146,7 @@ class InvoiceItemController extends Controller
     public function show()
     {
         $invoices = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->get();
-        return response()->json($invoices);
+        // return response()->json($invoices);
+        return ['data' => $invoices->all()];
     }
 }

@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/users`).subscribe(data => {
 
       this.userList = data;
-      // console.log(this.userList);
+       console.log(this.userList);
     });
 
   }
