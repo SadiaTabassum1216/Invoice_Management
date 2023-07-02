@@ -9,14 +9,16 @@
       <div class="form-group  row">
         <label for="estimatedDate" class="col-sm-6 col-form-label">Estimated Date</label>
         <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
-          [(ngModel)]="invoice.invoiceEstimatedDate">
+          [(ngModel)]="invoice.invoiceEstimatedDate" [value]="formatDateToString(invoice.invoiceEstimatedDate)">
+          <!-- <input type="date" [value]="formatDateToString(invoice.invoiceEstimatedDate)" /> -->
+
       </div><br>
-      
+
 
       <div class="form-group   row">
         <label for="closingDate" class="col-sm-6 col-form-label">Closing Date</label>
         <input type="date" class="form-control" id="closingDate" name="closingDate"
-          [(ngModel)]="invoice.invoiceClosingDate">
+          [(ngModel)]="invoice.invoiceClosingDate" [value]="formatDateToString(invoice.invoiceClosingDate)">
       </div><br>
 
       <!-- <div class="form-group">
@@ -43,7 +45,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="text-center">Item Name</th>
+              <th class="text-center">Item ID</th>
               <th class="text-center">User ID</th>
               <th class="text-center">UOM ID</th>
               <th class="text-center">First Price</th>
@@ -56,7 +58,7 @@
               <th class="text-center">Delivery Additional Cost</th>
               <th class="text-center">POD</th>
               <th class="text-center">Closing Date</th>
-              <th class="text-center">Files</th>
+              <th class="text-center">Files (1)</th>
 
 
               <th class="text-center">Purchase Price</th>
@@ -73,8 +75,7 @@
               <th class="text-center">Logistic Location</th>
               <th class="text-center">Logistic Estimated Date</th>
               <th class="text-center">Shipping Status</th>
-              <th class="text-center">Files</th>
-
+              <th class="text-center">Files (2)</th>
 
               <th class="text-center">Is Delivered to Iraq</th>
               <th class="text-center">Is Delivered by Logistic</th>
@@ -82,7 +83,7 @@
               <th class="text-center">Logistic Cost</th>
               <th class="text-center">Is Fully Paid</th>
               <th class="text-center">Is Submitted</th>
-              <th class="text-center">Files</th>
+              <th class="text-center">Files (3)</th>
 
 
               <th class="text-center">Status</th>
@@ -91,13 +92,32 @@
           <tbody>
             <tr *ngFor="let item of itemList; let i = index">
               <td class="text-center">
-                <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
+                <!-- <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
                   <option *ngFor="let option of itemName" [value]="option">{{option}}</option>
-                </select>
+                </select> -->
+
+                <input matInput type="text" [matAutocomplete]="auto" name="{{item.itemId}}" [(ngModel)]="item.itemId"
+                  [formControl]="myControlitem">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let item of filteredOptionsItem | async" [value]="item.id">
+                    {{ item.name }} (ID: {{ item.id }})
+                  </mat-option>
+                </mat-autocomplete>
               </td>
+
+
               <td class="text-center">
-                <input type="text" name="{{item.userId}}" [(ngModel)]="item.userId">
+                <!-- <mat-form-field> -->
+                <input matInput type="text" [matAutocomplete]="autouser" name="{{item.userId}}"
+                  [(ngModel)]="item.userId" [formControl]="myControluser">
+                <mat-autocomplete #autouser="matAutocomplete">
+                  <mat-option *ngFor="let user of filteredOptionsUser | async" [value]="user.id">
+                    {{ user.name }} (ID: {{ user.id }})
+                  </mat-option>
+                </mat-autocomplete>
+                <!-- </mat-form-field> -->
               </td>
+
               <td class="text-center">
                 <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId">
               </td>
@@ -131,13 +151,15 @@
                 <input type="text" name="{{item.POD}}" [(ngModel)]="item.POD">
               </td>
               <td class="text-center">
-                <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate">
+                <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate"
+                [value]="formatDateToString(item.closingDate)">
               </td>
 
               <!-- file buttons -->
               <td class="text-center">
-                <p><input type="file" multiple (change)="onFileSelect($event)"></p>
-                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles1)">Upload Files</button>
+                <!-- <p><input type="file" multiple (change)="onFileSelect($event)"></p> -->
+                <p><input type="file" multiple (change)="onFileSelect($event, i)"></p>
+                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles1,i)">Upload Files</button>
                 <span class="button-gap"></span>
                 <button class="view-button" (click)="openModal(item.uploadedFiles1)">View</button>
               </td>
@@ -153,7 +175,8 @@
                 <input type="number" name="{{item.firstPaymentPrice}}" [(ngModel)]="item.firstPaymentPrice">
               </td>
               <td class="text-center">
-                <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate">
+                <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate"
+                [value]="formatDateToString(item.firstPaymentDate)">
               </td>
 
               <td class="text-center">
@@ -163,7 +186,8 @@
                 <input type="number" name="{{item.lastPaymentPrice}}" [(ngModel)]="item.lastPaymentPrice">
               </td>
               <td class="text-center">
-                <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate">
+                <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate"
+                [value]="formatDateToString(item.lastPaymentDate)">
               </td>
               <td class="text-center">
                 <input type="text" name="{{item.logisticCompany}}" [(ngModel)]="item.logisticCompany">
@@ -172,7 +196,8 @@
                 <input type="text" name="{{item.logisticLocation}}" [(ngModel)]="item.logisticLocation">
               </td>
               <td class="text-center">
-                <input type="date" name="{{item.logisticEstimatedDate}}" [(ngModel)]="item.logisticEstimatedDate">
+                <input type="date" name="{{item.logisticEstimatedDate}}" [(ngModel)]="item.logisticEstimatedDate"
+                [value]="formatDateToString(item.logisticEstimatedDate)">
               </td>
               <td class="text-center">
                 <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">
@@ -180,8 +205,8 @@
 
               <!-- file buttons -->
               <td class="text-center">
-                <p><input type="file" multiple (change)="onFileSelect($event)"></p>
-                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles2)">Upload Files</button>
+                <p><input type="file" multiple (change)="onFileSelect($event,i)"></p>
+                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles2,i)">Upload Files</button>
                 <span class="button-gap"></span>
                 <button class="view-button" (click)="openModal(item.uploadedFiles2)">View</button>
               </td>
@@ -209,8 +234,8 @@
 
               <!-- file buttons -->
               <td class="text-center">
-                <p><input type="file" multiple (change)="onFileSelect($event)"></p>
-                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles3)">Upload Files</button>
+                <p><input type="file" multiple (change)="onFileSelect($event,i)"></p>
+                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles3,i)">Upload Files</button>
                 <span class="button-gap"></span>
                 <button class="view-button" (click)="openModal(item.uploadedFiles3)">View</button>
               </td>
@@ -222,7 +247,7 @@
             </tr>
           </tbody>
         </table>
-        
+
       </div>
       <br>
       <div colspan="29" class="text-center">
@@ -255,9 +280,10 @@
       <div class="form-group row">
         <label for="isDone" class="col-sm-6 col-form-label text-right">Is done</label>
         <div class="col-sm-6  d-flex align-items-left">
-        
-          <input type="checkbox" class="form-check-input"  id="isDone" name="{{invoice.isDone}}" [(ngModel)]="invoice.isDone">
-          </div>     
+
+          <input type="checkbox" class="form-check-input" id="isDone" name="{{invoice.isDone}}"
+            [(ngModel)]="invoice.isDone">
+        </div>
       </div>
       <br>
 

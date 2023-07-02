@@ -9,9 +9,9 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { User } from '../models/user';
+import { AuthUser } from '../models/user';
 
-const users: User[] = [
+const users: AuthUser[] = [
   {
     id: 1,
     username: 'admin',

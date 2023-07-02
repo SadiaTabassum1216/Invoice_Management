@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.model';
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 
 @Component({
   selector: 'app-add-modal',
@@ -14,7 +15,7 @@ export class AddModalComponent {
 
 
   addUser() {
-    this.http.post<any>('http://localhost:8000/api/users', this.newUser).subscribe(data => {
+    this.http.post<any>(`${backendEnvironment.apiUrl}api/users`, this.newUser).subscribe(data => {
       console.log(this.newUser);
     });
     // window.location.reload();

@@ -137,7 +137,7 @@
 
   <p *ngFor="let filter of selectedFilters">{{filter}}<i class="fas fa-times" (click)="removeFilter(filter)"></i></p>
 </div>
-
+<br><br>
 
   <div class="card listCard">
     <div class="card-body">
@@ -164,10 +164,9 @@
                       <button class="btn btn-success" (click)="editInvoice(invoice)">
                         <i class="fas fa-edit"></i> Edit
                       </button>
-                      <button class="btn btn-danger" (click)="deleteInvoice(invoice)">
+                      <button class="btn btn-danger" (click)="confirmDelete(invoice)">
                         <i class="fas fa-trash"></i> Delete
-                      </button>
-                      
+                      </button>                  
                     </td>
                   </tr>
                 </tbody>
