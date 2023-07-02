@@ -8,27 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class InvoiceItem extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'invoiceItemID';
+    protected $table = 'invoice_items';
+
+    // protected $primaryKey = 'invoiceItemID';
+
     protected $fillable = [
-        'itemID',
-        'invoiceID',
+        // 'invoiceID',
         'userID',
         'invoiceItemQTY',
         'uomID',
-        'invoiceItemFirstprice',
-        'invoiceItemLastprice',
+        'invoiceItemFirstPrice',
+        'invoiceItemLastPrice',
         'invoiceItemVAT',
         'invoiceItemUnitprice',
-        'invoiceItemQouteAdditioncost',
-        'invoiceitemPurchaseAdditioncost',
-        'invoiceItemDeliveryAdditioncost',
-        'invoiceItemTotalprice',
+        'invoiceItemQouteAdditionalCost',
+        'invoiceitemPurchaseAdditionalCost',
+        'invoiceItemDeliveryAdditionalCost',
+        'invoiceItemTotalPrice',
         'invoiceItemPOD',
         'invoiceItemClosingDate',
-        'invoiceItemPurchaseprice',
-        'invoiceItemFirstPayment',
+        'invoiceItemPurchasePrice',
+        'invoiceItemFirstPaymentPrice',
         'invoiceItemFirstPaymentDate',
-        'invoiceItemLastPayment',
+        'invoiceItemLastPaymentPrice',
         'invoiceItemLastPaymentDate',
         'invoiceItemLogisticCompany',
         'invoiceItemLogisticLocation',
@@ -41,6 +43,8 @@ class InvoiceItem extends Model
         'invoiceItemFullPaid',
         'invoiceItemSubmitted',
         'invoiceItemStatus',
+        'invoiceItemIsFirstPaymentDone',
+        'invoiceItemIsLastPaymentDone'
     ];
     protected $casts = [
         'invoiceItemDeliveredToIraq' => 'boolean',
@@ -52,10 +56,7 @@ class InvoiceItem extends Model
         'invoiceItemIsLastPaymentDone' => 'boolean',
     ];
 
-    public function item()
-    {
-        return $this->belongsTo(Item::class, 'itemID');
-    }
+
 
     public function invoice()
     {
@@ -64,11 +65,21 @@ class InvoiceItem extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'userID');
     }
 
-    // public function uom()
-    // {
-    //     return $this->belongsTo(Uom::class, 'uomID');
-    // }
+    public function uom()
+    {
+        return $this->belongsTo(Uom::class, 'uomID');
+    }
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'invoice_item_item', 'invoice_item_id', 'item_id');
+    }
+
+    public function invoiceItemFiles()
+    {
+        return $this->hasMany(InvoiceItemFile::class, 'invoiceItemID');
+    }
 }

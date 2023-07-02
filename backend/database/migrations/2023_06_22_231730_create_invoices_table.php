@@ -11,18 +11,19 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id('invoiceID');
+            // $table->bigIncrements('invoiceID');
+            $table->id();
             $table->date('invoiceDate')->nullable();
             $table->time('invoiceTime')->nullable();
-            $table->date('invoiceEstimateDate')->nullable();
+            $table->date('invoiceEstimatedDate')->nullable();
             $table->date('invoiceClosingDate')->nullable();
             $table->double('invoiceTotalCost', 8, 2)->nullable();
-            $table->double('invoiceTotalsubtotal', 8, 2)->nullable();
+            $table->double('invoiceSubtotal', 8, 2)->nullable();
             $table->double('invoiceGrandtotal', 8, 2)->nullable();
-            $table->text('invoiceAdditional')->nullable(); //cost
+            $table->double('invoiceAdditionalCost', 8 ,2)->nullable(); //cost
             $table->string('invoiceStatus')->nullable();
-            $table->boolean('invoiceIsOffering')->nullable();
-            $table->boolean('invoiceDone')->nullable();
+            $table->string('invoiceOffering')->nullable();
+            $table->boolean('invoiceIsDone')->nullable();
             $table->timestamps();
         });
     }

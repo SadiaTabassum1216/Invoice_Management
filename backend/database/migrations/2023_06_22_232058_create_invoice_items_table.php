@@ -11,29 +11,29 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('invoice_items', function (Blueprint $table) {
-            $table->id('invoiceItemID');
-            $table->unsignedBigInteger('itemID');
+            // $table->bigIncrements('invoiceItemID');
+
+            $table->id();
+
             $table->unsignedBigInteger('invoiceID');
             $table->unsignedBigInteger('userID')->nullable();
             $table->integer('invoiceItemQTY')->nullable();
             $table->unsignedBigInteger('uomID')->nullable();
-            $table->double('invoiceItemFirstprice', 8, 2)->nullable();
-            $table->double('invoiceItemLastprice', 8, 2)->nullable();
+            $table->double('invoiceItemFirstPrice', 8, 2)->nullable();
+            $table->double('invoiceItemLastPrice', 8, 2)->nullable();
             $table->double('invoiceItemVAT', 8, 2)->nullable();
-            $table->double('invoiceItemUnitprice', 8, 2)->nullable();
-            $table->double('invoiceItemQouteAdditioncost', 8, 2)->nullable();
-            $table->double('invoiceitemPurchaseAdditioncost', 8, 2)->nullable();
-            $table->double('invoiceItemDeliveryAdditioncost', 8, 2)->nullable();
-            $table->double('invoiceItemTotalprice', 8, 2)->nullable();
-            $table->text('invoiceItemPOD')->nullable();
+            $table->double('invoiceItemUnitPrice', 8, 2)->nullable();
+            $table->double('invoiceItemQouteAdditionalCost', 8, 2)->nullable();
+            $table->double('invoiceitemPurchaseAdditionalCost', 8, 2)->nullable();
+            $table->double('invoiceItemDeliveryAdditionalCost', 8, 2)->nullable();
+            $table->double('invoiceItemTotalPrice', 8, 2)->nullable();
+            $table->string('invoiceItemPOD')->nullable();
             $table->date('invoiceItemClosingDate')->nullable();
-            $table->double('invoiceItemPurchaseprice', 8, 2)->nullable();
-            $table->double('invoiceItemFirstPayment', 8, 2)->nullable();
+            $table->double('invoiceItemPurchasePrice', 8, 2)->nullable();
+            $table->double('invoiceItemFirstPaymentPrice', 8, 2)->nullable();
             $table->date('invoiceItemFirstPaymentDate')->nullable();
-            //first payment price, 
-            //second payment price these already exist
 
-            $table->double('invoiceItemLastPayment', 8, 2)->nullable();
+            $table->double('invoiceItemLastPaymentPrice', 8, 2)->nullable();
             $table->date('invoiceItemLastPaymentDate')->nullable();
 
 
@@ -53,11 +53,9 @@ return new class extends Migration {
             
             $table->timestamps();
 
-            
-            // $table->foreign('itemID')->references('itemID')->on('items');
-            $table->foreign('invoiceID')->references('invoiceID')->on('invoices');
+            $table->foreign('invoiceID')->references('id')->on('invoices');
             $table->foreign('userID')->references('id')->on('users');
-            $table->foreign('uomID')->references('uomID')->on('uom_ids');
+            $table->foreign('uomID')->references('id')->on('uom_ids');
         });
 
     }

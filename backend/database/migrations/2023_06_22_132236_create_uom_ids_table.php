@@ -11,9 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('uom_ids', function (Blueprint $table) {
-            $table->id('uomID');
-            $table->string('uomName');
-            $table->string('uomStatus');
+            // $table->bigIncrements('uomID');
+
+            $table->id();
+            $table->string('uomName')->nullable();
+            $table->string('uomStatus')->nullable();
             $table->timestamps();
         });
     }

@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'disks' => [
+            'secure' => [
+                'driver' => 'local',
+                'root' => storage_path('app/secure'),
+            ],
+        ],
+
     ],
 
     /*

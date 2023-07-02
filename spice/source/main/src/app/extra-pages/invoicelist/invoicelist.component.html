@@ -155,8 +155,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let invoice of filteredInvoices">
-                    <td class="text-center">{{ invoice.invoiceID }}</td>
+                  <tr *ngFor="let invoice of filteredInvoices.data">
+                    <td class="text-center">{{ invoice.id }}</td>
                     <td class="text-center">
                       <button class="btn btn-primary" (click)="viewInvoice(invoice)">
                         <i class="fas fa-eye"></i> View

@@ -20,11 +20,11 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" [(ngModel)]="selectedUser.password">
+      <input type="password" class="form-control" id="password" placeholder="Enter password" [(ngModel)]="selectedUser.password" >
     </div>
   </div>
 
-  <div class="form-row">
+  <!-- <div class="form-row">
     <div class="form-group col-md-6">
       <label for="status">Status</label>
       <select class="form-control" id="status" [(ngModel)]="selectedUser.status">
@@ -32,7 +32,7 @@
         <option [ngValue]="'Offline'">Offline</option>
       </select>
     </div>
-  </div>
+  </div> -->
   
   <br>
   <button class="btn btn-primary edit-button" (click)="updateUser()">

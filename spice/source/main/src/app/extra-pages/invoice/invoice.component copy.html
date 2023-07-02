@@ -9,7 +9,7 @@
       <div class="form-group  row">
         <label for="estimatedDate" class="col-sm-6 col-form-label">Estimated Date</label>
         <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
-          [(ngModel)]="invoice.invoiceEstimatedDate">
+          [(ngModel)]="invoice.invoiceEstimatedDate" [value]="formatDateToString(invoice.invoiceEstimatedDate)">
           <!-- <input type="date" [value]="formatDateToString(invoice.invoiceEstimatedDate)" /> -->
 
       </div><br>
@@ -18,10 +18,27 @@
       <div class="form-group   row">
         <label for="closingDate" class="col-sm-6 col-form-label">Closing Date</label>
         <input type="date" class="form-control" id="closingDate" name="closingDate"
-          [(ngModel)]="invoice.invoiceClosingDate">
+          [(ngModel)]="invoice.invoiceClosingDate" [value]="formatDateToString(invoice.invoiceClosingDate)">
       </div><br>
 
-      
+      <!-- <div class="form-group">
+      <label for="billFrom">BILL FROM</label>
+      <input type="text" class="form-control"  name="billFrom1" [(ngModel)]="invaddress.billFrom1" placeholder="Company name">
+      <input type="text" class="form-control"  name="billFrom2" [(ngModel)]="invaddress.billFrom2" placeholder="Address">
+      <input type="text" class="form-control"  name="billFrom3" [(ngModel)]="invaddress.billFrom3" placeholder="City, State Zip">
+      <input type="text" class="form-control" name="billFrom4" [(ngModel)]="invaddress.billFrom4" placeholder="Country">
+    </div>
+
+  
+    <div class="form-group">
+      <label for="billToAddress">Bill To</label>
+      <input type="text" class="form-control"  name="billTo1" [(ngModel)]="invaddress.billTo1" placeholder="Client name">
+      <input type="text" class="form-control"  name="billTo2" [(ngModel)]="invaddress.billTo2"  placeholder="Company name">
+      <input type="text" class="form-control"  name="billTo3" [(ngModel)]="invaddress.billTo3"  placeholder="Address">
+      <input type="text" class="form-control"  name="billTo4" [(ngModel)]="invaddress.billTo4"  placeholder="City, State Zip">
+      <input type="text" class="form-control"  name="billTo5" [(ngModel)]="invaddress.billTo5"  placeholder="Country">
+    </div> -->
+
       <div style="width: 85%; margin: 0 auto; ; overflow-x: auto;">
         <h3 class="text-center">Item Table</h3>
 
@@ -102,14 +119,7 @@
               </td>
 
               <td class="text-center">
-                <input matInput type="text" [matAutocomplete]="autouom" name="{{item.UOMId}}"
-                [(ngModel)]="item.UOMId" [formControl]="myControlUom">
-              <mat-autocomplete #autouom="matAutocomplete">
-                <mat-option *ngFor="let uom of filteredOptionsUOM | async" [value]="uom.id">
-                  {{ uom.name }} (ID: {{ uom.id }})
-                </mat-option>
-              </mat-autocomplete>
-                <!-- <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"> -->
+                <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId">
               </td>
 
               <td class="text-center">
@@ -142,7 +152,7 @@
               </td>
               <td class="text-center">
                 <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate"
-              >
+                [value]="formatDateToString(item.closingDate)">
               </td>
 
               <!-- file buttons -->
@@ -166,7 +176,7 @@
               </td>
               <td class="text-center">
                 <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate"
-               >
+                [value]="formatDateToString(item.firstPaymentDate)">
               </td>
 
               <td class="text-center">
@@ -177,7 +187,7 @@
               </td>
               <td class="text-center">
                 <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate"
-              >
+                [value]="formatDateToString(item.lastPaymentDate)">
               </td>
               <td class="text-center">
                 <input type="text" name="{{item.logisticCompany}}" [(ngModel)]="item.logisticCompany">
@@ -187,7 +197,7 @@
               </td>
               <td class="text-center">
                 <input type="date" name="{{item.logisticEstimatedDate}}" [(ngModel)]="item.logisticEstimatedDate"
-                >
+                [value]="formatDateToString(item.logisticEstimatedDate)">
               </td>
               <td class="text-center">
                 <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">
@@ -360,7 +370,6 @@
                                 <th class="text-center level1">Delivery Additional Cost</th>
                                 <th class="text-center level1">POD</th>
                                 <th class="text-center level1">Closing Date</th>
-                                <th class="text-center level1">Files (l-1)</th>
 
 
                                 <!-- level 2 -->
@@ -378,7 +387,6 @@
                                 <th class="text-center level2">Logistic Location</th>
                                 <th class="text-center level2">Logistic Estimated Date</th>
                                 <th class="text-center level2">Shipping Status</th>
-                                <th class="text-center level1">Files (l-2)</th>
 
                                 <!-- level 3 -->
                                 <th class="text-center level3">Is Delivered to Iraq</th>
@@ -387,7 +395,6 @@
                                 <th class="text-center level3">Logistic Cost</th>
                                 <th class="text-center level3">Is Fully Paid</th>
                                 <th class="text-center level3">Is Submitted</th>
-                                <th class="text-center level1">Files (l-3)</th>
 
                                 <!-- level 4 -->
                                 <th class="text-center level4">total Cost</th>
@@ -411,11 +418,6 @@
                                 <td class="text-center">{{ item.deliveryAdditionalCost }}</td>
                                 <td class="text-center">{{ item.POD }}</td>
                                 <td class="text-center">{{ item.closingDate | date: 'dd/MM/yyyy'}}</td>
-                                <td class="text-center">
-                                  <p *ngFor="let file in item.uploadedFiles1">
-                                    {{file.name}}
-                                  </p>
-                                </td>
 
                                 <td class="text-center">{{ item.purchasePrice }}</td>
                                 <td class="text-center">{{ item.isFirstPaymentDone }}</td>
@@ -424,11 +426,7 @@
                                 <td class="text-center">{{ item.isLastPaymentDone }}</td>
                                 <td class="text-center">{{ item.lastPaymentPrice }}</td>
                                 <td class="text-center">{{ item.lastPaymentDate | date: 'dd/MM/yyyy'}}</td>
-                                <td class="text-center">
-                                  <p *ngFor="let file in item.uploadedFiles2">
-                                    {{file.name}}
-                                  </p>
-                                </td>
+
                                 <td class="text-center">{{ item.logisticCompany }}</td>
                                 <td class="text-center">{{ item.logisticLocation }}</td>
                                 <td class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
@@ -440,11 +438,7 @@
                                 <td class="text-center">{{ item.logisticCost }}</td>
                                 <td class="text-center">{{ item.isFullyPaid }}</td>
                                 <td class="text-center">{{ item.isSubmitted }}</td>
-                                <td class="text-center">
-                                  <p *ngFor="let file in item.uploadedFiles2">
-                                    {{file.name}}
-                                  </p>
-                                </td>
+
                                 <td class="text-center">{{ item.totalPrice }}</td>
                                 <td class="text-center">{{ item.status }}</td>
                               </tr>
