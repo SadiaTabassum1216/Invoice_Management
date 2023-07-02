@@ -13,16 +13,15 @@ import { DatePipe } from '@angular/common';
 
 declare var require: any;
 
-import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
 import { AuthUser } from 'src/app/core/models/user';
 import { Product } from 'src/app/models/product.model';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
-const htmlToPdfmake = require("html-to-pdfmake");
+const htmlToPdfmake = require('html-to-pdfmake');
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
-
 
 @Component({
   selector: 'app-invoice',
@@ -33,46 +32,40 @@ export class InvoiceComponent implements OnInit {
   @ViewChild('toPrint')
   toPrint!: ElementRef;
 
-
-  material=[
-    MatAutocompleteModule
-  ];
+  material = [MatAutocompleteModule];
 
   isFormSubmitted = false;
   isModalOpen: boolean = false;
 
   dialog?: MatDialogRef<ModalComponent>;
-  
-  
+  selectedFiles: FileList | null | undefined;
 
   public currentUser: Observable<AuthUser> | undefined;
   name: string = '';
   id: number = 0;
   itemList: Item[] = [];
-  invoice: Invoice = new Invoice;
+  invoice: Invoice = new Invoice();
   itemName: string[] = [];
   productlist: any;
   userList: any;
   userName: string[] = [];
 
-
   filteredOptionsItem: Observable<any[]> | undefined;
   filteredOptionsUser: Observable<any[]> | undefined;
 
-  myControlitem= new FormControl();
-  myControluser= new FormControl();
+  myControlitem = new FormControl();
+  myControluser = new FormControl();
 
-  constructor(private http: HttpClient, 
+  constructor(
+    private http: HttpClient,
     private dialogModel: MatDialog,
-    private router: Router, 
-    private authService: AuthService,
-    ) {
-   
-     }
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
-    this.currentUser.subscribe(info => {
+    this.currentUser.subscribe((info) => {
       this.name = info['user']['name'];
       this.id = info['user']['id'];
     });
@@ -84,15 +77,14 @@ export class InvoiceComponent implements OnInit {
     this.getProductList();
     this.getUserList();
 
-
-    this.filteredOptionsItem= this.myControlitem.valueChanges.pipe(
+    this.filteredOptionsItem = this.myControlitem.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value))
-    )
-    this.filteredOptionsUser= this.myControluser.valueChanges.pipe(
+      map((value) => this._filter(value))
+    );
+    this.filteredOptionsUser = this.myControluser.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter2(value))
-    )
+      map((value) => this._filter2(value))
+    );
   }
 
   // private _filter(value : string) :any[]{
@@ -104,20 +96,22 @@ export class InvoiceComponent implements OnInit {
     if (typeof value !== 'string') {
       return [];
     }
-  
-    const filterValue = value.toLowerCase();
-    return this.itemNameId.filter(option => option.name.toLowerCase().includes(filterValue));
-  }
-  
 
-  private _filter2(value : string) :any[]{
+    const filterValue = value.toLowerCase();
+    return this.itemNameId.filter((option) =>
+      option.name.toLowerCase().includes(filterValue)
+    );
+  }
+
+  private _filter2(value: string): any[] {
     if (typeof value !== 'string') {
       return [];
     }
-    const filtervalue=value.toLowerCase()
-    return this.userNameId.filter(option =>option.name.toLowerCase().includes(filtervalue));
+    const filtervalue = value.toLowerCase();
+    return this.userNameId.filter((option) =>
+      option.name.toLowerCase().includes(filtervalue)
+    );
   }
-
 
   formatDateToString(date: Date): string {
     return formatDate(date, 'yyyy-MM-dd', 'en-US');
@@ -126,39 +120,44 @@ export class InvoiceComponent implements OnInit {
   //   return this.datePipe.transform(date, 'yyyy-MM-dd');
   // }
 
-  itemNameId: { id: any, name: any }[] = [];
-  userNameId: { id: any, name: any }[] = [];
+  itemNameId: { id: any; name: any }[] = [];
+  userNameId: { id: any; name: any }[] = [];
 
   getUserList() {
-    this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/users`).subscribe(data => {
-      this.userList = data;
-      // console.log("users: ", this.userList);
-      this.userNameId = this.userList.data.map((user: { id: any, name: any }) => {
-        return {
-          id: user.id,
-          name: user.name
-        };
+    this.http
+      .get<any[]>(`${backendEnvironment.apiUrl}/api/users`)
+      .subscribe((data) => {
+        this.userList = data;
+        // console.log("users: ", this.userList);
+        this.userNameId = this.userList.data.map(
+          (user: { id: any; name: any }) => {
+            return {
+              id: user.id,
+              name: user.name,
+            };
+          }
+        );
+        // console.log("User Name: ", this.userNameId);
       });
-      // console.log("User Name: ", this.userNameId);
-
-    });
-
   }
 
   getProductList() {
-    this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/items`).subscribe(data => {
-      this.productlist = data;
-      // console.log("products: ", this.productlist);
-      this.itemNameId = this.productlist.data.map((product: { id: any, name: any }) => {
-        return {
-          id: product.id,
-          name: product.name
-        };
+    this.http
+      .get<any[]>(`${backendEnvironment.apiUrl}/api/items`)
+      .subscribe((data) => {
+        this.productlist = data;
+        // console.log("products: ", this.productlist);
+        this.itemNameId = this.productlist.data.map(
+          (product: { id: any; name: any }) => {
+            return {
+              id: product.id,
+              name: product.name,
+            };
+          }
+        );
+        // console.log("items: ", this.itemNameId);
       });
-      // console.log("items: ", this.itemNameId);
-    });
   }
-  
 
   addRow() {
     let newItem: Item = {
@@ -197,15 +196,13 @@ export class InvoiceComponent implements OnInit {
 
       uploadedFiles1: [],
       uploadedFiles2: [],
-      uploadedFiles3: []
-
+      uploadedFiles3: [],
     };
 
     this.itemList.push(newItem);
   }
 
-
-  files: File[]=[];
+  files: File[] = [];
 
   // onFileSelect(event: any): void {
   //   this.files = Array.from(event.target.files);
@@ -214,70 +211,89 @@ export class InvoiceComponent implements OnInit {
   //   const files = Array.from(event.target.files);
   //   this.itemList[index].uploadedFiles1=files;
   // }
+  /// ==================================================
+  // onFileSelect(event: any, index: number): void {
+  //   const files = Array.from(event.target.files) as File[];
+  //   this.itemList[index].uploadedFiles1 = files;
+  // }
+
+  // uploadFiles(targetArray: File[], index: number): void {
+  //   if (this.files.length === 0) {
+  //     console.log('No files to upload.');
+  //     return;
+  //   }
+
+  //   // const files = this.itemList[index].targetArray;
+  //   const formData: FormData = new FormData();
+
+  //   for (let i = 0; i < this.files.length; i++) {
+  //     const file = this.files[i];
+  //     targetArray.push(file);
+  //     // formData.append('files', file);
+
+  //     formData.append('files', file, file.name);
+  //   }
+
+  //   console.log('target array: ', targetArray);
+  //   console.log('Files in FormData:', formData.getAll('files'));
+  //   console.log('Files uploaded successfully');
+
+  //   this.files = [];
+  // }
   onFileSelect(event: any, index: number): void {
-    const files = Array.from(event.target.files) as File[];
-    this.itemList[index].uploadedFiles1 = files;
+    // const files = Array.from(event.target.files) as File[];
+    // this.itemList[index].uploadedFiles1 = files;
+    this.selectedFiles = event.target.files;
   }
-  
 
   uploadFiles(targetArray: File[], index: number): void {
-    if (this.files.length === 0) {
+    if (!this.selectedFiles || this.selectedFiles.length === 0) {
       console.log('No files to upload.');
       return;
     }
-    
-    // const files = this.itemList[index].targetArray;
+
     const formData: FormData = new FormData();
 
-    for (let i = 0; i < this.files.length; i++) {
-      const file = this.files[i];
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+      const file = this.selectedFiles[i];
       targetArray.push(file);
-      // formData.append('files', file);
-      
-      formData.append('files', file, file.name);
+      formData.append('files[]', file);
     }
 
-    console.log("target array: ",targetArray);
-    console.log('Files in FormData:', formData.getAll('files'));
     console.log('Files uploaded successfully');
 
-    this.files=[];
+    this.selectedFiles = null;
   }
-
-
 
   openModal(targetArray: File[]): void {
     this.dialog = this.dialogModel.open(ModalComponent, {
       width: '640px',
       disableClose: true,
       data: {
-        filePaths: targetArray
-      }
+        filePaths: targetArray,
+      },
     });
   }
-
 
   export(): void {
     const toPrintContent = this.toPrint.nativeElement.innerHTML;
     const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
-  
+
     const pageSize = {
-      width: 2200.00, // Page width in points (A4 size: 595.28 points)
-      height: 600.00, // Page height in points (A4 size: 841.89 points)
+      width: 2200.0, // Page width in points (A4 size: 595.28 points)
+      height: 600.0, // Page height in points (A4 size: 841.89 points)
     };
-  
+
     const documentDefinition = {
       pageSize: pageSize,
-      content: pdfContent
+      content: pdfContent,
     };
-  
+
     pdfMake.createPdf(documentDefinition).download('newinvoice.pdf');
   }
-  
-
 
   submit() {
-    this.isFormSubmitted = true;
+    // this.isFormSubmitted = true;
 
     this.invoice.invoiceDate = new Date();
 
@@ -286,7 +302,11 @@ export class InvoiceComponent implements OnInit {
     this.invoice.grandTotal = 0;
 
     for (const item of this.itemList) {
-      item.totalPrice = item.unitPrice * item.quantity + item.VAT + item.additionalCost + item.deliveryAdditionalCost;
+      item.totalPrice =
+        item.unitPrice * item.quantity +
+        item.VAT +
+        item.additionalCost +
+        item.deliveryAdditionalCost;
 
       this.invoice.subtotal += item.firstPrice;
       this.invoice.totalCost += item.totalPrice;
@@ -294,16 +314,106 @@ export class InvoiceComponent implements OnInit {
     }
 
     this.invoice.itemList = this.itemList;
-     console.log(this.invoice);
+    console.log(this.invoice);
 
+    const formData: FormData = new FormData();
+    formData.append('invoiceID', this.invoice.invoiceID);
+    formData.append('invoiceDate', this.invoice.invoiceDate.toISOString());
+    formData.append(
+      'invoiceEstimatedDate',
+      this.invoice.invoiceEstimatedDate.toString()
+    );
+    formData.append(
+      'invoiceClosingDate',
+      this.invoice.invoiceClosingDate.toString()
+    );
+    formData.append('offering', this.invoice.offering);
+    formData.append('subtotal', this.invoice.subtotal.toString());
+    formData.append('grandTotal', this.invoice.grandTotal.toString());
+    formData.append('additionalCost', this.invoice.additionalCost.toString());
+    formData.append('totalCost', this.invoice.totalCost.toString());
+    formData.append('status', this.invoice.status);
+    formData.append('isDone', this.invoice.isDone.toString());
 
-    this.http.post<any>(`${backendEnvironment.apiUrl}/api/invoice`, this.invoice).subscribe(data => {
-      // console.log(this.invoice);
-      this.invoice.invoiceID = data.id;
-    });
+    for (let i = 0; i < this.invoice.itemList.length; i++) {
+      const item = this.invoice.itemList[i];
+      const newItem: any = {
+        itemId: item.itemId,
+        userId: item.userId,
+        UOMId: item.UOMId,
+        firstPrice: item.firstPrice,
+        lastPrice: item.lastPrice,
+        quantity: item.quantity,
+        VAT: item.VAT,
+        unitPrice: item.unitPrice,
+        additionalCost: item.additionalCost,
+        purchaseAdditionalCost: item.purchaseAdditionalCost,
+        deliveryAdditionalCost: item.deliveryAdditionalCost,
+        totalPrice: item.totalPrice,
+        POD: item.POD,
+        closingDate: item.closingDate.toString(),
+        purchasePrice: item.purchasePrice,
+        isFirstPaymentDone: item.isFirstPaymentDone,
+        firstPaymentPrice: item.firstPaymentPrice,
+        firstPaymentDate: item.firstPaymentDate.toString(),
+        isLastPaymentDone: item.isLastPaymentDone,
+        lastPaymentPrice: item.lastPaymentPrice,
+        lastPaymentDate: item.lastPaymentDate.toString(),
+        logisticCompany: item.logisticCompany,
+        logisticLocation: item.logisticLocation,
+        logisticEstimatedDate: item.logisticEstimatedDate.toString(),
+        shippingStatus: item.shippingStatus,
+        isDeliveredToIraq: item.isDeliveredToIraq,
+        isDeliveredByLogistic: item.isDeliveredByLogistic,
+        isDeliverToClient: item.isDeliverToClient,
+        logisticCost: item.logisticCost,
+        isFullyPaid: item.isFullyPaid,
+        isSubmitted: item.isSubmitted,
+        status: item.status,
+      };
+
+      // Append the properties of the newItem object to the formData
+      for (const property in newItem) {
+        if (newItem.hasOwnProperty(property)) {
+          formData.append(`itemList.${property}[]`, newItem[property]);
+        }
+      }
+
+      // Append uploaded files (if any)
+      for (let j = 0; j < item.uploadedFiles1.length; j++) {
+        formData.append(
+          `itemList.uploadedFiles.1.${i}[]`,
+          item.uploadedFiles1[j]
+        );
+      }
+      for (let j = 0; j < item.uploadedFiles2.length; j++) {
+        formData.append(
+          `itemList.uploadedFiles.2.${i}[]`,
+          item.uploadedFiles2[j]
+        );
+      }
+      for (let j = 0; j < item.uploadedFiles3.length; j++) {
+        formData.append(
+          `itemList.uploadedFiles.3.${i}[]`,
+          item.uploadedFiles3[j]
+        );
+      }
+      // for (let j = 0; j < item.uploadedFiles2.length; j++) {
+      //   formData.append(`itemList[${i}].uploadedFiles2[]`, item.uploadedFiles2[j]);
+      // }
+      // for (let j = 0; j < item.uploadedFiles3.length; j++) {
+      //   formData.append(`itemList[${i}].uploadedFiles3[]`, item.uploadedFiles3[j]);
+      // }
+    }
+
+    this.http
+      .post<any>(`${backendEnvironment.apiUrl}/api/invoice`, formData)
+      .subscribe((data) => {
+        // console.log(this.invoice);
+        this.invoice.invoiceID = data.id;
+        console.log(data);
+      });
   }
-
-
 
   breadscrums = [
     {
@@ -312,7 +422,4 @@ export class InvoiceComponent implements OnInit {
       active: 'Invoice',
     },
   ];
-
-
-
 }

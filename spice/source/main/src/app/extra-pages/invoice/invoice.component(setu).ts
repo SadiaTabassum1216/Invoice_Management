@@ -12,7 +12,9 @@ declare var require: any;
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/core/models/user';
+// import { User } from 'src/app/core/models/user';
+import { User } from 'src/app/models/user.model';
+import { AuthUser } from 'src/app/core/models/user';
 const htmlToPdfmake = require('html-to-pdfmake');
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -41,7 +43,7 @@ export class InvoiceComponent implements OnInit {
   selectedFiles2: FileList | null | undefined;
   selectedFiles: FileList | null | undefined;
 
-  public currentUser: Observable<User> | undefined;
+  public currentUser: Observable<AuthUser> | undefined;
   name: string = '';
   id: number = 0;
   items: Item[] = [];
@@ -116,36 +118,59 @@ export class InvoiceComponent implements OnInit {
     this.itemList.push(newItem);
   }
 
-  onFileSelect(event: any): void {
-    this.files = event.target.files;
+  // onFileSelect(event: any): void {
+  //   this.files = event.target.files;
+  // }
+
+  // uploadFiles(targetArray: File[]): void {
+  //   // if (!this.selectedFiles || this.selectedFiles.length === 0) {
+  //   //   console.log('No files to upload.');
+  //   //   return;
+  //   // }
+
+  //   const formData: FormData = new FormData();
+
+  //   for (let i = 0; i < this.files.length; i++) {
+  //     const file = this.files[i];
+  //     targetArray.push(file);
+  //     formData.append('files[]', file);
+  //   }
+
+  //   console.log('Files uploaded successfully');
+  //   console.log(targetArray);
+
+  //   this.selectedFiles = null;
+    
+
+  //   // this.http.post('http://localhost:8000/api/invoice', formData).subscribe(
+  //   //   data => {
+  //   //     console.log(data);
+  //   //   }
+  //   // );
+  // }
+onFileSelect(event: any): void {
+    this.selectedFiles = event.target.files;
   }
+  
 
   uploadFiles(targetArray: File[]): void {
-    // if (!this.selectedFiles || this.selectedFiles.length === 0) {
-    //   console.log('No files to upload.');
-    //   return;
-    // }
-
+    if (!this.selectedFiles || this.selectedFiles.length === 0) {
+      console.log('No files to upload.');
+      return;
+    }
+  
     const formData: FormData = new FormData();
-
-    for (let i = 0; i < this.files.length; i++) {
-      const file = this.files[i];
+  
+    for (let i = 0; i < this.selectedFiles.length; i++) {
+      const file = this.selectedFiles[i];
       targetArray.push(file);
       formData.append('files[]', file);
     }
-
+  
     console.log('Files uploaded successfully');
-    console.log(targetArray);
-
+   
     this.selectedFiles = null;
-
-    // this.http.post('http://localhost:8000/api/invoice', formData).subscribe(
-    //   data => {
-    //     console.log(data);
-    //   }
-    // );
   }
-
   openModal(targetArray: File[]): void {
     this.dialog = this.dialogModel.open(ModalComponent, {
       width: '640px',
@@ -249,16 +274,33 @@ export class InvoiceComponent implements OnInit {
           formData.append(`itemList.${property}[]`, newItem[property]);
         }
       }
-
-      // Append uploaded files (if any)
       for (let j = 0; j < item.uploadedFiles1.length; j++) {
-        
-          formData.append(
-            `itemList.uploadedFiles.${i}[]`,
-            item.uploadedFiles1[j]
-          );
-        
+        formData.append(
+          `itemList.uploadedFiles.1.${i}[]`,
+          item.uploadedFiles1[j]
+        );
       }
+      for (let j = 0; j < item.uploadedFiles2.length; j++) {
+        formData.append(
+          `itemList.uploadedFiles.2.${i}[]`,
+          item.uploadedFiles2[j]
+        );
+      }
+      for (let j = 0; j < item.uploadedFiles3.length; j++) {
+        formData.append(
+          `itemList.uploadedFiles.3.${i}[]`,
+          item.uploadedFiles3[j]
+        );
+      }
+      // Append uploaded files (if any)
+      // for (let j = 0; j < item.uploadedFiles1.length; j++) {
+
+      //     formData.append(
+      //       `itemList.uploadedFiles.${i}[]`,
+      //       item.uploadedFiles1[j]
+      //     );
+
+      // }
       // for (let j = 0; j < item.uploadedFiles2.length; j++) {
       //   formData.append(`itemList[${i}].uploadedFiles2[]`, item.uploadedFiles2[j]);
       // }

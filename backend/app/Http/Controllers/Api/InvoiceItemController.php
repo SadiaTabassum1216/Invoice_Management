@@ -45,18 +45,18 @@ class InvoiceItemController extends Controller
         $IIDs = [];
         for ($i = 0; $i < $maxIdx; $i++) {
 
-            // $item = Item::findOrFail($request->input('itemList_itemId')[$i]);
-            $item = Item::findOrFail($a[$i]);
+            $item = Item::findOrFail($request->input('itemList_itemId')[$i]);
+            // $item = Item::findOrFail($a[$i]);
 
             $invoiceItem = new InvoiceItem();
             $invoiceItem->invoiceID = $invoice->id;
-            // $invoiceItem->userID = $request->input('itemList_userId')[$i];
-            $invoiceItem->userID = $b[$i];
+            $invoiceItem->userID = $request->input('itemList_userId')[$i];
+            // $invoiceItem->userID = $b[$i];
 
 
             $invoiceItem->invoiceItemQTY = $request->input('itemList_quantity')[$i];
-            // $invoiceItem->uomID = $request->input('itemList_UOMId')[$i];
-            $invoiceItem->uomID = $c[$i];
+            $invoiceItem->uomID = $request->input('itemList_UOMId')[$i];
+            // $invoiceItem->uomID = $c[$i];
 
 
 
