@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->timestamps();
 
             // Foreign key relationship
-            $table->foreign('invoiceItemID')->references('id')->on('invoice_items');
+            $table->foreign('invoiceItemID')->references('id')->on('invoice_items')->onDelete('cascade');
         });
     }
 
