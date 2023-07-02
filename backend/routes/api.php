@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\InvoiceItemController;
+use App\Http\Controllers\Api\InvoiceItemFileController;
 use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\UOMController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -66,3 +68,9 @@ Route::put('/items/{id}', [ItemController::class, 'update']);
 Route::delete('/items/{id}', [ItemController::class, 'destroy']);
 
 Route::post('/invoice', [InvoiceItemController::class, 'store']);
+Route::get('/invoice', [InvoiceItemController::class, 'show']);
+
+Route::get('/file_download/{id}', [InvoiceItemFileController::class, 'downloadFile']);
+
+
+Route::get('/searchUOM', [UOMController::class, 'search']);

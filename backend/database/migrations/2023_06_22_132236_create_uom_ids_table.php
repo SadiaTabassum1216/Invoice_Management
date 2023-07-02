@@ -14,8 +14,8 @@ return new class extends Migration {
             // $table->bigIncrements('uomID');
 
             $table->id();
-            $table->string('uomName');
-            $table->string('uomStatus');
+            $table->string('uomName')->nullable();
+            $table->string('uomStatus')->nullable();
             $table->timestamps();
         });
     }
