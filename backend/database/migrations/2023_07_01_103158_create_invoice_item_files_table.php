@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
-            // $table->bigIncrements('itemID');
+        Schema::create('invoice_item_files', function (Blueprint $table) {
             $table->id();
-            $table->string('itemName')->nullable();
-            $table->string('itemDesc')->nullable();
-            $table->string('itemSource')->nullable();
-            $table->string('itemStatus')->nullable();
+            $table->unsignedBigInteger('invoiceItemID');
+            $table->string('level');
+            $table->string('filename');
+            $table->string('path');
             $table->timestamps();
+
+            $table->foreign('invoiceItemID')->references('id')->on('invoice_items')->onDelete('cascade');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('invoice_item_files');
     }
 };

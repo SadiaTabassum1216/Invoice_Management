@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('item_assings', function (Blueprint $table) {
-            $table->id('itemassignID');
+            $table->bigIncrements('itemassignID');
             $table->date('itemassignDate');
             $table->string('itemassignAdmin');
             $table->unsignedBigInteger('userID');
@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->foreign('userID')->references('id')->on('users');
-            $table->foreign('invoiceItemID')->references('invoiceItemID')->on('invoice_items');
+            $table->foreign('invoiceItemID')->references('id')->on('invoice_items');
         });
     }
 

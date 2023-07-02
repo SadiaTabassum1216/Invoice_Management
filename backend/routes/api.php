@@ -22,6 +22,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Will not go into the final version 
+
+Route::get('/test', function (Request $request) {
+
+    //     Log::info($request->all());
+//     return response()->json(['message' => 'Request logged.',
+// 'request' => $request->all()]);
+
+    // ob_start(); // Start output buffering
+    // var_dump($request->all()); // Perform the var_dump on the desired variable
+    // $dumpOutput = ob_get_clean(); // Get the dumped output and clean the buffer
+
+    // return response()->json(['dumpOutput' => $dumpOutput]);
+
+    dd($request);
+});
 
 Route::get('/ping', function (Request $request) {
     return response()->json(['message' => 'Pong']);

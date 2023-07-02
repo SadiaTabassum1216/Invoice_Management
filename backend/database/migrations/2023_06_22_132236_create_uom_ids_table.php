@@ -11,7 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('uom_ids', function (Blueprint $table) {
-            $table->id('uomID');
+            // $table->bigIncrements('uomID');
+
+            $table->id();
             $table->string('uomName');
             $table->string('uomStatus');
             $table->timestamps();

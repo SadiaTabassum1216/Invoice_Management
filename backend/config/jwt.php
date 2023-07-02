@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', 60),
+    'ttl' => env('JWT_TTL', 60*24*30*3), //set the value to 3 months = 60 min * 24 hour * 30 days * 3 months
 
     /*
     |--------------------------------------------------------------------------
