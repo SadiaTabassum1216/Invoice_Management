@@ -89,33 +89,34 @@ class InvoiceItemController extends Controller
             $invoiceItem->invoiceItemIsFirstPaymentDone = $this->getBooleanVal($request->input('itemList_isFirstPaymentDone')[$i]);
             $invoiceItem->invoiceItemIsLastPaymentDone = $this->getBooleanVal($request->input('itemList_isLastPaymentDone')[$i]);
 
-           
+
             $invoiceItem->save();
 
             $IIDs[] = $invoiceItem->id;
 
             $item->invoiceItems()->attach($invoiceItem);
 
+            for ($j = 1; $j < 4; $j++) {
+                if ($request->exists('itemList_uploadedFiles_' . $j . '_' . $i)) {
+                    $files = $request->file('itemList_uploadedFiles_' . $j . '_' . $i);
+                    foreach ($files as $file) {
+                        $invoiceItemFile = new InvoiceItemFile();
+                        $invoiceItemFile->invoiceItemID = $invoiceItem->id;
+                        $invoiceItemFile->level = (string) $j;
 
-            if ($request->exists('itemList_uploadedFiles_' . $i)) {
-                $files = $request->file('itemList_uploadedFiles_' . $i);
-                foreach ($files as $file) {
-                    $invoiceItemFile = new InvoiceItemFile();
-                    $invoiceItemFile->invoiceItemID = $invoiceItem->id;
-                    $invoiceItemFile->level = (string) $i;
-
-                    $filename = $file->getClientOriginalName();
-                    $path = $file->store('secure');
-                    $invoiceItemFile->filename = $filename;
-                    $invoiceItemFile->path = $path;
-                    $invoiceItemFile->save();
+                        $filename = $file->getClientOriginalName();
+                        $path = $file->store('secure');
+                        $invoiceItemFile->filename = $filename;
+                        $invoiceItemFile->path = $path;
+                        $invoiceItemFile->save();
+                    }
                 }
             }
         }
-      
+
         $fileNames = [];
 
- 
+
 
         // $ret_invoice = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->findOrFail($invoice->invoiceID);
         $ret_invoice = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->find($invoice->id);
@@ -137,7 +138,14 @@ class InvoiceItemController extends Controller
         ]);
     }
 
-    private function getBooleanVal($val){
+    private function getBooleanVal($val)
+    {
         return $val == 'true' ? true : false;
+    }
+
+    public function show()
+    {
+        $invoices = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->get();
+        return response()->json($invoices);
     }
 }
