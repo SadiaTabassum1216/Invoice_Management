@@ -9,6 +9,7 @@ import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { startWith, map } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 declare var require: any;
 
@@ -18,6 +19,7 @@ import { Observable } from 'rxjs';
 import { AuthUser } from 'src/app/core/models/user';
 import { Product } from 'src/app/models/product.model';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 const htmlToPdfmake = require("html-to-pdfmake");
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -38,20 +40,15 @@ export class InvoiceComponent implements OnInit {
 
   isFormSubmitted = false;
   isModalOpen: boolean = false;
-  uploadedFilePaths1: string[] = [];
-  uploadedFilePaths2: string[] = [];
-  uploadedFilePaths3: string[] = [];
 
   dialog?: MatDialogRef<ModalComponent>;
-  selectedFiles1: FileList | null | undefined;
-  selectedFiles2: FileList | null | undefined;
-  selectedFiles: FileList | null | undefined;
+  
+  
 
   public currentUser: Observable<AuthUser> | undefined;
   name: string = '';
   id: number = 0;
-  // items: Item[] = [];
-   itemList: Item[] = [];
+  itemList: Item[] = [];
   invoice: Invoice = new Invoice;
   itemName: string[] = [];
   productlist: any;
@@ -69,7 +66,9 @@ export class InvoiceComponent implements OnInit {
     private dialogModel: MatDialog,
     private router: Router, 
     private authService: AuthService,
-    ) { }
+    ) {
+   
+     }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
@@ -96,16 +95,36 @@ export class InvoiceComponent implements OnInit {
     )
   }
 
-  private _filter(value : string) :any[]{
-    const filtervalue=value.toLowerCase()
-    return this.itemNameId.filter(option =>option.name.toLowerCase().includes(filtervalue));
+  // private _filter(value : string) :any[]{
+  //   const filtervalue=value.toLowerCase()
+  //   return this.itemNameId.filter(option =>option.name.toLowerCase().includes(filtervalue));
+  // }
+
+  private _filter(value: string): any[] {
+    if (typeof value !== 'string') {
+      return [];
+    }
+  
+    const filterValue = value.toLowerCase();
+    return this.itemNameId.filter(option => option.name.toLowerCase().includes(filterValue));
   }
+  
 
   private _filter2(value : string) :any[]{
+    if (typeof value !== 'string') {
+      return [];
+    }
     const filtervalue=value.toLowerCase()
     return this.userNameId.filter(option =>option.name.toLowerCase().includes(filtervalue));
   }
 
+
+  formatDateToString(date: Date): string {
+    return formatDate(date, 'yyyy-MM-dd', 'en-US');
+  }
+  // formatDate(date: Date): string {
+  //   return this.datePipe.transform(date, 'yyyy-MM-dd');
+  // }
 
   itemNameId: { id: any, name: any }[] = [];
   userNameId: { id: any, name: any }[] = [];
@@ -156,17 +175,17 @@ export class InvoiceComponent implements OnInit {
       deliveryAdditionalCost: 0,
       totalPrice: 0,
       POD: ' ',
-      closingDate: new Date('Invalid Date'),
+      closingDate: new Date(),
       purchasePrice: 0,
       isFirstPaymentDone: false,
       firstPaymentPrice: 0,
-      firstPaymentDate: new Date('Invalid Date'),
+      firstPaymentDate: new Date(),
       isLastPaymentDone: false,
       lastPaymentPrice: 0,
-      lastPaymentDate: new Date('Invalid Date'),
+      lastPaymentDate: new Date(),
       logisticCompany: ' ',
       logisticLocation: ' ',
-      logisticEstimatedDate: new Date('Invalid Date'),
+      logisticEstimatedDate: new Date(),
       shippingStatus: ' ',
       isDeliveredToIraq: false,
       isDeliveredByLogistic: false,
@@ -186,28 +205,43 @@ export class InvoiceComponent implements OnInit {
   }
 
 
-  onFileSelect(event: any): void {
-    this.selectedFiles = event.target.files;
+  files: File[]=[];
+
+  // onFileSelect(event: any): void {
+  //   this.files = Array.from(event.target.files);
+  // }
+  // onFileSelect(event: any, index: number): void {
+  //   const files = Array.from(event.target.files);
+  //   this.itemList[index].uploadedFiles1=files;
+  // }
+  onFileSelect(event: any, index: number): void {
+    const files = Array.from(event.target.files) as File[];
+    this.itemList[index].uploadedFiles1 = files;
   }
+  
 
-
-  uploadFiles(targetArray: File[]): void {
-    if (!this.selectedFiles || this.selectedFiles.length === 0) {
+  uploadFiles(targetArray: File[], index: number): void {
+    if (this.files.length === 0) {
       console.log('No files to upload.');
       return;
     }
-
+    
+    // const files = this.itemList[index].targetArray;
     const formData: FormData = new FormData();
 
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      const file = this.selectedFiles[i];
+    for (let i = 0; i < this.files.length; i++) {
+      const file = this.files[i];
       targetArray.push(file);
-      formData.append('files[]', file);
+      // formData.append('files', file);
+      
+      formData.append('files', file, file.name);
     }
 
+    console.log("target array: ",targetArray);
+    console.log('Files in FormData:', formData.getAll('files'));
     console.log('Files uploaded successfully');
 
-    this.selectedFiles = null;
+    this.files=[];
   }
 
 
@@ -226,9 +260,20 @@ export class InvoiceComponent implements OnInit {
   export(): void {
     const toPrintContent = this.toPrint.nativeElement.innerHTML;
     const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
-    const documentDefinition = { content: pdfContent };
+  
+    const pageSize = {
+      width: 2200.00, // Page width in points (A4 size: 595.28 points)
+      height: 600.00, // Page height in points (A4 size: 841.89 points)
+    };
+  
+    const documentDefinition = {
+      pageSize: pageSize,
+      content: pdfContent
+    };
+  
     pdfMake.createPdf(documentDefinition).download('newinvoice.pdf');
   }
+  
 
 
   submit() {
@@ -249,11 +294,11 @@ export class InvoiceComponent implements OnInit {
     }
 
     this.invoice.itemList = this.itemList;
-    console.log(this.invoice);
+     console.log(this.invoice);
 
 
     this.http.post<any>(`${backendEnvironment.apiUrl}/api/invoice`, this.invoice).subscribe(data => {
-      console.log(this.invoice);
+      // console.log(this.invoice);
       this.invoice.invoiceID = data.id;
     });
   }

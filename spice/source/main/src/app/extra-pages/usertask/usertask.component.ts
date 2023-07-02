@@ -6,7 +6,6 @@ import { EditItemsComponent } from './edit-items/edit-items.component';
 import * as XLSX from "xlsx";
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Observable } from 'rxjs';
-// import { User } from 'src/app/models/user.model';
 import { AuthUser } from 'src/app/core/models/user';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 

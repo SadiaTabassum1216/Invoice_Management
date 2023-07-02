@@ -17,29 +17,16 @@ export class InvoicelistComponent {
   invoices: Invoice[] = [];
   selectedInvoice: Invoice=new Invoice();
 
-  totalInvoice: number=20;
-  totalGrandTotal: number=900;
-  totalCost: number=1000;
-  totalDone: number=50;
+  totalInvoice: number=0;
+  totalGrandTotal: number=0;
+  totalCost: number=0;
+  totalDone: number=0;
 
   constructor(private http: HttpClient, private dialogModel: MatDialog) {
     
     this.getInvoices();
-    this.getStat();
   }
-  getStat() {
-    this.http.get<any>('http://localhost:8000/api/data').subscribe(data => {
-    this.totalInvoice = data.totalInvoice;
-    this.totalGrandTotal = data.totalGrandTotal;
-    this.totalCost = data.totalCost;
-    this.totalDone = data.totalDone;
-
-    console.log('Total Invoice:', this.totalInvoice);
-    console.log('Total Grand Total:', this.totalGrandTotal);
-    console.log('Total Cost:', this.totalCost);
-    console.log('Total Done:', this.totalDone);
-  }); 
-  }
+  
   getInvoices() {
     const item1: Item = {
       itemId: 'A001',
@@ -125,9 +112,9 @@ export class InvoicelistComponent {
       itemList: [item1, item2],
       offering: 'Offering1',
       subtotal: 100,
-      grandTotal: 120,
+      grandTotal: 70,
       additionalCost: 20,
-      totalCost: 140,
+      totalCost: 200,
       status: 'Pending',
       isDone: false
     };
@@ -142,15 +129,26 @@ export class InvoicelistComponent {
       subtotal: 50,
       grandTotal: 60,
       additionalCost: 10,
-      totalCost: 70,
+      totalCost: 100,
       status: 'Completed',
       isDone: true
     };
     this.invoices.push(invoice1, invoice2);
+    
+    //stat
+    this.totalInvoice=this.invoices.length;
+
+    for (let inv of this.invoices){
+      this.totalGrandTotal+=inv.grandTotal;
+      this.totalCost+=inv.totalCost;
+      if(inv.isDone){
+        this.totalDone++;
+      }
+    }
 
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoice`).subscribe(data => {
     this.invoices = data;
-    console.log(this.invoices);
+    // console.log(this.invoices);
   });
   }
 
@@ -201,7 +199,7 @@ deleteInvoice(invoice: Invoice) {
 
   this.http.delete<any>(`${backendEnvironment.apiUrl}/api/invoice/${invoice.invoiceID}`).subscribe(
     data => {
-      console.log("Item deleted successfully");
+      // console.log("Item deleted successfully");
       window.location.reload();
     },
     error => {

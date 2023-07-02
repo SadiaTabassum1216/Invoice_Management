@@ -32,7 +32,19 @@ export class ViewInvoiceComponent {
     // console.log(this.invoice);
     const toPrintContent = this.Print.nativeElement.innerHTML;
     const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
-    const documentDefinition = { content: pdfContent };
+  
+  
+  
+    const pageSize = {
+      width: 2200.00, // Page width in points (A4 size: 595.28 points)
+      height: 600.00, // Page height in points (A4 size: 841.89 points)
+    };
+  
+    const documentDefinition = {
+      pageSize: pageSize,
+      content: pdfContent
+    };
+  
     pdfMake.createPdf(documentDefinition).download('invoice.pdf');
   }
   
