@@ -59,14 +59,14 @@ export class UsersComponent implements OnInit {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/users`).subscribe(data => {
 
       this.userList = data;
-      console.log(this.userList);
+      // console.log(this.userList);
     });
 
   }
 
   editUser(user: User) {
     this.selectedUser = user;
-    console.log(this.selectedUser);
+    // console.log(this.selectedUser);
   
     this.dialogModel.open(EditModalComponent, {
       width: '640px',

@@ -17,7 +17,7 @@ export class EditInvoiceComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,  public dialog: MatDialog, private http: HttpClient) {
     // console.log(data.invoice); 
     this.invoice=data.invoice;
-    console.log(this.invoice);
+    // console.log(this.invoice);
   }
   
 
@@ -67,7 +67,7 @@ export class EditInvoiceComponent {
   
   update() {
     this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice/${this.invoice.invoiceID}`, this.invoice).subscribe(data => {
-  console.log(this.invoice);
+  // console.log(this.invoice);
 });
     this.dialog.closeAll();
   }
