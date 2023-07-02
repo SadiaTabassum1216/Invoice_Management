@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { backendEnvironment } from 'src/environments/backendEnvironment';
 
 @Component({
   selector: 'app-edit-modal',
@@ -18,7 +19,7 @@ export class EditModalComponent {
   }
 
   updateUser() {
-    this.http.put<any>(`http://localhost:8000/api/users/${this.selectedUser.id}`, this.selectedUser).subscribe(data => {
+    this.http.put<any>(`${backendEnvironment.apiUrl}/api/users/${this.selectedUser.id}`, this.selectedUser).subscribe(data => {
   console.log(this.selectedUser);
 });
     this.dialog.closeAll();

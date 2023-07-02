@@ -25,6 +25,7 @@ import { ViewInvoiceComponent } from './invoicelist/view-invoice/view-invoice.co
 import { EditInvoiceComponent } from './invoicelist/edit-invoice/edit-invoice.component';
 import { UsertaskComponent } from './usertask/usertask.component';
 import { EditItemsComponent } from './usertask/edit-items/edit-items.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -55,7 +56,9 @@ import { EditItemsComponent } from './usertask/edit-items/edit-items.component';
     MatCheckboxModule,
     MatTabsModule,
     ComponentsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule
+
   ],
 })
 export class ExtraPagesModule {}

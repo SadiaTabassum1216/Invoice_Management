@@ -1,4 +1,4 @@
-export class User {
+export class AuthUser {
   [x: string]: any;
   id!: number;
   username!: string;
