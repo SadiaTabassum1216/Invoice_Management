@@ -9,7 +9,7 @@
       <div class="form-group  row">
         <label for="estimatedDate" class="col-sm-6 col-form-label">Estimated Date</label>
         <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
-          [(ngModel)]="invoice.invoiceEstimatedDate" [value]="formatDateToString(invoice.invoiceEstimatedDate)">
+          [(ngModel)]="invoice.invoiceEstimatedDate" [value]="formatDate(invoice.invoiceEstimatedDate)">
           <!-- <input type="date" [value]="formatDateToString(invoice.invoiceEstimatedDate)" /> -->
 
       </div><br>
@@ -18,7 +18,7 @@
       <div class="form-group   row">
         <label for="closingDate" class="col-sm-6 col-form-label">Closing Date</label>
         <input type="date" class="form-control" id="closingDate" name="closingDate"
-          [(ngModel)]="invoice.invoiceClosingDate" [value]="formatDateToString(invoice.invoiceClosingDate)">
+          [(ngModel)]="invoice.invoiceClosingDate" [value]="formatDate(invoice.invoiceClosingDate)">
       </div><br>
 
       <!-- <div class="form-group">
@@ -119,7 +119,14 @@
               </td>
 
               <td class="text-center">
-                <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId">
+                <input matInput type="text" [matAutocomplete]="autouser" name="{{item.UOMId}}"
+                [(ngModel)]="item.UOMId" [formControl]="myControluser">
+              <mat-autocomplete #autouser="matAutocomplete">
+                <mat-option *ngFor="let user of filteredOptionsUser | async" [value]="user.id">
+                  {{ user.name }} (ID: {{ user.id }})
+                </mat-option>
+              </mat-autocomplete>
+                <!-- <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"> -->
               </td>
 
               <td class="text-center">

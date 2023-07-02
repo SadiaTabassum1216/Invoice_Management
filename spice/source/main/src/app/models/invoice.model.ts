@@ -2,9 +2,9 @@ import { Item } from "./item.model";
 
 export class Invoice {
     invoiceID: string='';  
-    invoiceDate: Date= new Date();
-    invoiceEstimatedDate: Date= new Date();
-    invoiceClosingDate: Date= new Date();
+    invoiceDate: Date = new Date(1970, 0, 1);
+    invoiceEstimatedDate: any= new Date(1970, 0, 1);
+    invoiceClosingDate: any= new Date(1970, 0, 1);
     itemList: Item[]=[];
     offering: string='';
     subtotal: number=0;

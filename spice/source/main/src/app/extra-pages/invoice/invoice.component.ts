@@ -10,6 +10,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { startWith, map } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import * as moment from 'moment';
+
 
 declare var require: any;
 
@@ -66,6 +68,7 @@ export class InvoiceComponent implements OnInit {
     private dialogModel: MatDialog,
     private router: Router, 
     private authService: AuthService,
+    // private datePipe: DatePipe
     ) {
    
      }
@@ -119,13 +122,11 @@ export class InvoiceComponent implements OnInit {
   }
 
 
-  formatDateToString(date: Date): string {
-    return formatDate(date, 'yyyy-MM-dd', 'en-US');
-  }
+ 
   // formatDate(date: Date): string {
-  //   return this.datePipe.transform(date, 'yyyy-MM-dd');
+  //   return this.datePipe.transform(date, 'yyyy-MM-dd') || '';
   // }
-
+  
   itemNameId: { id: any, name: any }[] = [];
   userNameId: { id: any, name: any }[] = [];
 
@@ -175,17 +176,17 @@ export class InvoiceComponent implements OnInit {
       deliveryAdditionalCost: 0,
       totalPrice: 0,
       POD: ' ',
-      closingDate: new Date(),
+      closingDate:new Date(1970, 0, 1),
       purchasePrice: 0,
       isFirstPaymentDone: false,
       firstPaymentPrice: 0,
-      firstPaymentDate: new Date(),
+      firstPaymentDate:new Date(1970, 0, 1),
       isLastPaymentDone: false,
       lastPaymentPrice: 0,
-      lastPaymentDate: new Date(),
+      lastPaymentDate: new Date(1970, 0, 1),
       logisticCompany: ' ',
       logisticLocation: ' ',
-      logisticEstimatedDate: new Date(),
+      logisticEstimatedDate:new Date(1970, 0, 1),
       shippingStatus: ' ',
       isDeliveredToIraq: false,
       isDeliveredByLogistic: false,
@@ -255,7 +256,28 @@ export class InvoiceComponent implements OnInit {
       }
     });
   }
+ // formatDateToString(date: Date): string {
+  //   return formatDate(date, 'yyyy-MM-dd', 'en-US');
+  // }
+  formatDate(date: Date): string {
+    if (date) {
+      return this.formatDateToString(date);
+    } else {
+      const currentDate = new Date();
+      return this.formatDateToString(currentDate);
+    }
+  }
 
+  formatDateToString(date: Date): string {
+    const year = date.getFullYear();
+    const month = this.padNumber(date.getMonth() + 1);
+    const day = this.padNumber(date.getDate());
+    return `${year}-${month}-${day}`;
+  }
+  
+  padNumber(number: number): string {
+    return number < 10 ? '0' + number : number.toString();
+  }
 
   export(): void {
     const toPrintContent = this.toPrint.nativeElement.innerHTML;
@@ -280,6 +302,10 @@ export class InvoiceComponent implements OnInit {
     this.isFormSubmitted = true;
 
     this.invoice.invoiceDate = new Date();
+    
+     this.invoice.invoiceEstimatedDate = moment(this.invoice.invoiceEstimatedDate).format('YYYY-MM-DD');
+     this.invoice.invoiceClosingDate = moment(this.invoice.invoiceClosingDate).format('YYYY-MM-DD');
+    //  this.invoice.invoiceEstimatedDate = formatDate(this.invoice.invoiceEstimatedDate);
 
     this.invoice.totalCost = 0;
     this.invoice.subtotal = 0;
