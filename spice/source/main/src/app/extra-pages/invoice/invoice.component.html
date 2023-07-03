@@ -10,7 +10,7 @@
         <label for="estimatedDate" class="col-sm-6 col-form-label">Estimated Date</label>
         <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
           [(ngModel)]="invoice.invoiceEstimatedDate">
-          <!-- <input type="date" [value]="formatDateToString(invoice.invoiceEstimatedDate)" /> -->
+        <!-- <input type="date" [value]="formatDateToString(invoice.invoiceEstimatedDate)" /> -->
 
       </div><br>
 
@@ -21,7 +21,7 @@
           [(ngModel)]="invoice.invoiceClosingDate">
       </div><br>
 
-      
+
       <div style="width: 85%; margin: 0 auto; ; overflow-x: auto;">
         <h3 class="text-center">Item Table</h3>
 
@@ -75,17 +75,17 @@
           <tbody>
             <tr *ngFor="let item of itemList; let i = index">
               <td class="text-center">
-                <!-- <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
-                  <option *ngFor="let option of itemName" [value]="option">{{option}}</option>
-                </select> -->
-
                 <input matInput type="text" [matAutocomplete]="auto" name="{{item.itemId}}" [(ngModel)]="item.itemId"
                   [formControl]="myControlitem">
                 <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let item of filteredOptionsItem | async" [value]="item.id">
+                  <mat-option *ngFor="let item of filteredOptionsItem  | async"  [value]="item.id">
                     {{ item.name }} (ID: {{ item.id }})
                   </mat-option>
                 </mat-autocomplete>
+              </td>
+
+              <td class="text-center">
+                <input type="text" name="{{item.name}}" [(ngModel)]="item.name" disabled>
               </td>
 
 
@@ -102,13 +102,13 @@
               </td>
 
               <td class="text-center">
-                <input matInput type="text" [matAutocomplete]="autouom" name="{{item.UOMId}}"
-                [(ngModel)]="item.UOMId" [formControl]="myControlUom">
-              <mat-autocomplete #autouom="matAutocomplete">
-                <mat-option *ngFor="let uom of filteredOptionsUOM | async" [value]="uom.id">
-                  {{ uom.name }} (ID: {{ uom.id }})
-                </mat-option>
-              </mat-autocomplete>
+                <input matInput type="text" [matAutocomplete]="autouom" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"
+                  [formControl]="myControlUom">
+                <mat-autocomplete #autouom="matAutocomplete">
+                  <mat-option *ngFor="let uom of filteredOptionsUOM | async" [value]="uom.id">
+                    {{ uom.name }} (ID: {{ uom.id }})
+                  </mat-option>
+                </mat-autocomplete>
                 <!-- <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"> -->
               </td>
 
@@ -141,8 +141,7 @@
                 <input type="text" name="{{item.POD}}" [(ngModel)]="item.POD">
               </td>
               <td class="text-center">
-                <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate"
-              >
+                <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate">
               </td>
 
               <!-- file buttons -->
@@ -165,8 +164,7 @@
                 <input type="number" name="{{item.firstPaymentPrice}}" [(ngModel)]="item.firstPaymentPrice">
               </td>
               <td class="text-center">
-                <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate"
-               >
+                <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate">
               </td>
 
               <td class="text-center">
@@ -176,8 +174,7 @@
                 <input type="number" name="{{item.lastPaymentPrice}}" [(ngModel)]="item.lastPaymentPrice">
               </td>
               <td class="text-center">
-                <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate"
-              >
+                <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate">
               </td>
               <td class="text-center">
                 <input type="text" name="{{item.logisticCompany}}" [(ngModel)]="item.logisticCompany">
@@ -186,8 +183,7 @@
                 <input type="text" name="{{item.logisticLocation}}" [(ngModel)]="item.logisticLocation">
               </td>
               <td class="text-center">
-                <input type="date" name="{{item.logisticEstimatedDate}}" [(ngModel)]="item.logisticEstimatedDate"
-                >
+                <input type="date" name="{{item.logisticEstimatedDate}}" [(ngModel)]="item.logisticEstimatedDate">
               </td>
               <td class="text-center">
                 <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">

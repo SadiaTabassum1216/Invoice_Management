@@ -1,5 +1,5 @@
 export class Item {
-  itemId: string='';
+  itemId: string=' ';
   userId: string='';
   UOMId: string='';
   firstPrice: number=0;

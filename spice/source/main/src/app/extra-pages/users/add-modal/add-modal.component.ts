@@ -10,17 +10,17 @@ import { backendEnvironment } from 'src/environments/backendEnvironment';
   styleUrls: ['./add-modal.component.scss']
 })
 export class AddModalComponent {
-  newUser: User = new User(0, '', '', '');
+  newUser: User = new User(0, '', '');
   constructor(private http: HttpClient,  public dialog: MatDialog) { }
 
 
   addUser() {
-    this.http.post<any>(`${backendEnvironment.apiUrl}api/users`, this.newUser).subscribe(data => {
+    this.http.post<any>(`${backendEnvironment.apiUrl}/api/users`, this.newUser).subscribe(data => {
       console.log(this.newUser);
     });
-    // window.location.reload();
-     this.dialog.closeAll();
     //  window.location.reload();
+     this.dialog.closeAll();
+      // window.location.reload();
     // this.userList.push(this.newUser);
     // this.addUserFormVisible = false;
   }

@@ -10,7 +10,7 @@ import { backendEnvironment } from 'src/environments/backendEnvironment';
   styleUrls: ['./edit-modal.component.scss']
 })
 export class EditModalComponent {
-  selectedUser: User = new User(0, '', '', '');
+  selectedUser: User = new User(0, '', '');
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient,  public dialog: MatDialog) {
     // console.log(data.user); 

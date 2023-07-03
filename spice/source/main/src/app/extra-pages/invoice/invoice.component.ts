@@ -99,9 +99,9 @@ export class InvoiceComponent implements OnInit {
 
 
   private _filter(value: string): any[] {
-    if (typeof value !== 'string') {
-      return [];
-    }
+    // if (typeof value !== 'string') {
+    //   return [];
+    // }
 
     const filterValue = value.toLowerCase();
     return this.itemNameId.filter((option) =>
@@ -110,9 +110,9 @@ export class InvoiceComponent implements OnInit {
   }
 
   private _filter2(value: string): any[] {
-    if (typeof value !== 'string') {
-      return [];
-    }
+    // if (typeof value !== 'string') {
+    //   return [];
+    // }
     const filtervalue = value.toLowerCase();
     return this.userNameId.filter((option) =>
       option.name.toLowerCase().includes(filtervalue)
@@ -120,9 +120,9 @@ export class InvoiceComponent implements OnInit {
   }
 
   private _filter3(value: string): any[] {
-    if (typeof value !== 'string') {
-      return [];
-    }
+    // if (typeof value !== 'string') {
+    //   return [];
+    // }
     const filtervalue = value.toLowerCase();
     return this.uomNameId.filter((option) =>
       option.name.toLowerCase().includes(filtervalue)
@@ -131,7 +131,7 @@ export class InvoiceComponent implements OnInit {
 
 
 
-  itemNameId: { id: any; name: any }[] = [];
+  itemNameId: { id: string; name: string }[] = [];
   userNameId: { id: any; name: any }[] = [];
   uomNameId: { id: any; name: any }[] = [];
 
@@ -178,7 +178,7 @@ export class InvoiceComponent implements OnInit {
         this.productlist = data;
         // console.log("products: ", this.productlist);
         this.itemNameId = this.productlist.data.map(
-          (product: { id: any; name: any }) => {
+          (product: { id: string; name: string }) => {
             return {
               id: product.id,
               name: product.name,
@@ -190,10 +190,10 @@ export class InvoiceComponent implements OnInit {
   }
 
   addRow() {
-    let newItem: Item = {
+    const newItem: Item = {
       itemId: ' ',
-      userId: ' ',
-      UOMId: ' ',
+      userId: '',
+      UOMId: '',
       firstPrice: 0,
       lastPrice: 0,
       quantity: 0,
@@ -289,7 +289,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   submit() {
-     this.isFormSubmitted = true;
+    //  this.isFormSubmitted = true;
 
     this.invoice.invoiceDate = new Date();
     
@@ -311,6 +311,11 @@ export class InvoiceComponent implements OnInit {
       this.invoice.subtotal += item.firstPrice * item.quantity;
       this.invoice.totalCost += item.totalPrice;
       this.invoice.grandTotal += item.totalPrice + item.logisticCost;
+
+      item.closingDate = moment( item.closingDate).format('YYYY-MM-DD');
+      item.firstPaymentDate = moment( item.firstPaymentDate).format('YYYY-MM-DD');
+      item.lastPaymentDate = moment( item.lastPaymentDate).format('YYYY-MM-DD');
+      item.logisticEstimatedDate = moment( item.logisticEstimatedDate).format('YYYY-MM-DD');
     }
 
     this.invoice.itemList = this.itemList;
@@ -409,7 +414,7 @@ export class InvoiceComponent implements OnInit {
     this.http
       .post<any>(`${backendEnvironment.apiUrl}/api/invoice`, formData)
       .subscribe((data) => {
-        // console.log(this.invoice);
+        console.log(this.invoice);
         this.invoice.invoiceID = data.id;
         console.log(data);
       });

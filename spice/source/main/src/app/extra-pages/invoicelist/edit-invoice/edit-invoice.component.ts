@@ -145,7 +145,7 @@ export class EditInvoiceComponent implements OnInit{
 
 
   addRow() {
-    let newItem: InvoiceItem = {
+    const newItem: InvoiceItem = {
       id: 0,
       userID: 0,
       uomID: 0,
