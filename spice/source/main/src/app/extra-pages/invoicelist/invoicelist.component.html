@@ -13,7 +13,7 @@
                 <h5 class="float-end">Invoice Count</h5>
               </div>
               <div class="card-body float-end">
-               {{totalInvoice}}
+                {{totalInvoice}}
               </div>
             </div>
           </div>
@@ -96,48 +96,48 @@
       </div>
     </div>
   </div>
-<br>
+  <br>
 
 
-<!-- filter -->
-<div class="filter-controls">
-  <div class="filter-dropdown">
-    <label>Filter by:</label>
-    <div class="filter-button-container">
-      <button class="filter-button" (click)="toggleFilterOptionsVisibility()">
-        <i class="fa fa-filter"></i> Filter
-      </button>
-    </div>
-    <div class="dropdown-container" *ngIf="filterOptionsVisible">
-      <select class="filter-select" [(ngModel)]="selectedFilters" multiple>
-        <option *ngFor="let option of filterOptions" [value]="option">{{ option }}</option>
-      </select>
-      
-      <div class="input-option" *ngIf="selectedFilters.includes('Date Range')">
-        <label>Start Date:</label>
-        <input type="date" [(ngModel)]="startDate">
-        <label> End Date:</label>
-        <input type="date" [(ngModel)]="endDate">
+  <!-- filter -->
+  <div class="filter-controls">
+    <div class="filter-dropdown">
+      <label>Filter by:</label>
+      <div class="filter-button-container">
+        <button class="filter-button" (click)="toggleFilterOptionsVisibility()">
+          <i class="fa fa-filter"></i> Filter
+        </button>
       </div>
-      <div class="input-option" *ngIf="selectedFilters.includes('Status')">
-        <label>Status:</label>
-        <input type="text" [(ngModel)]="status">
-      </div>
-      <div class="input-option" *ngIf="selectedFilters.includes('Is Done')">
-        <label>Is Done:</label>
-        <select [(ngModel)]="isDone">
-          <option value="">Select</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+      <div class="dropdown-container" *ngIf="filterOptionsVisible">
+        <select class="filter-select" [(ngModel)]="selectedFilters" multiple>
+          <option *ngFor="let option of filterOptions" [value]="option">{{ option }}</option>
         </select>
+
+        <div class="input-option" *ngIf="selectedFilters.includes('Date Range')">
+          <label>Start Date:</label>
+          <input type="date" [(ngModel)]="startDate">
+          <label> End Date:</label>
+          <input type="date" [(ngModel)]="endDate">
+        </div>
+        <div class="input-option" *ngIf="selectedFilters.includes('Status')">
+          <label>Status:</label>
+          <input type="text" [(ngModel)]="status">
+        </div>
+        <div class="input-option" *ngIf="selectedFilters.includes('Is Done')">
+          <label>Is Done:</label>
+          <select [(ngModel)]="isDone">
+            <option value="">Select</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="apply-button" (click)="applyFilters()">Apply Filters</button>
+    <button class="apply-button" (click)="applyFilters()">Apply Filters</button>
 
-  <p *ngFor="let filter of selectedFilters">{{filter}}<i class="fas fa-times" (click)="removeFilter(filter)"></i></p>
-</div>
-<br><br>
+    <p *ngFor="let filter of selectedFilters">{{filter}}<i class="fas fa-times" (click)="removeFilter(filter)"></i></p>
+  </div>
+  <br><br>
 
   <div class="card listCard">
     <div class="card-body">
@@ -166,13 +166,176 @@
                       </button>
                       <button class="btn btn-danger" (click)="confirmDelete(invoice)">
                         <i class="fas fa-trash"></i> Delete
-                      </button>                  
+                      </button>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+  <div class="card-content">
+    <br><br>
+    <div class="card-body" *ngFor="let invoice of filteredInvoices.data">
+      <h3>INVOICE
+        <span class=" float-end">{{invoice.id}}</span>
+      </h3>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="float-end text-end">
+            <address>
+              <p class="m-t-30">
+                <b>Invoice Date :</b>
+                <i class="fa fa-calendar"></i>{{ invoice.invoiceDate | date:
+                "dd-MM-yyyy"}}
+              </p>
+              <p class="m-t-30">
+                <b>Estimated Date :</b>
+                <i class="fa fa-calendar"></i>{{ invoice.invoiceEstimatedDate |
+                date: "dd-MM-yyyy"}}
+              </p>
+              <p class="m-t-30">
+                <b>Closing Date :</b>
+                <i class="fa fa-calendar"></i>{{ invoice.invoiceClosingDate |
+                date: "dd-MM-yyyy"}}
+              </p>
+              <p>
+                <b>Status :</b>
+                <span class="label label-success">{{invoice.invoiceStatus}}</span>
+              </p>
+
+              <p>
+                <b>Done </b>
+                <i class="fas"
+                  [ngClass]="{'fa-check-circle': invoice.invoiceIsDone, 'fa-times-circle': !invoice.invoiceIsDone}"
+                  [ngStyle]="{'color': invoice.invoiceIsDone ? 'green' : 'red'}"></i>
+              </p>
+
+            </address>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <h3 class="text-center">Selected Items</h3>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <!-- level 1 -->
+                <th class="text-center level1">Item Name</th>
+                <th class="text-center level1">User ID</th>
+                <th class="text-center level1">UOM ID</th>
+                <th class="text-center level1">First Price</th>
+                <th class="text-center level1">Last Price</th>
+                <th class="text-center level1">Quantity</th>
+                <th class="text-center level1">VAT</th>
+                <th class="text-center level1">Unit Price</th>
+                <th class="text-center level1">Additional Cost</th>
+                <th class="text-center level1">Purchase Additional Cost</th>
+                <th class="text-center level1">Delivery Additional Cost</th>
+                <th class="text-center level1">POD</th>
+                <th class="text-center level1">Closing Date</th>
+
+
+                <!-- level 2 -->
+                <th class="text-center level2">Purchase Price</th>
+
+                <th class="text-center level2">Is First Payment Done</th>
+                <th class="text-center level2">First Payment Price</th>
+                <th class="text-center level2">First Payment Date</th>
+
+                <th class="text-center level2">Is Last Payment Done</th>
+                <th class="text-center level2">Last Payment Price</th>
+                <th class="text-center level2">Last Payment Date</th>
+
+                <th class="text-center level2">Logistic Company</th>
+                <th class="text-center level2">Logistic Location</th>
+                <th class="text-center level2">Logistic Estimated Date</th>
+                <th class="text-center level2">Shipping Status</th>
+
+                <!-- level 3 -->
+                <th class="text-center level3">Is Delivered to Iraq</th>
+                <th class="text-center level3">Is Delivered by Logistic</th>
+                <th class="text-center level3">Is Deliver to Client</th>
+                <th class="text-center level3">Logistic Cost</th>
+                <th class="text-center level3">Is Fully Paid</th>
+                <th class="text-center level3">Is Submitted</th>
+
+                <!-- level 4 -->
+                <th class="text-center level4">total Cost</th>
+                <th class="text-center level4">Status</th>
+              </tr>
+
+            </thead>
+            <tbody>
+
+              <tr *ngFor="let item of invoice.invoice_items">
+                <td class="text-center">{{ item.id }}</td>
+                <td class="text-center">{{ item.userID }}</td>
+                <td class="text-center">{{ item.uomID }}</td>
+                <td class="text-center">{{ item.invoiceItemFirstPrice }}</td>
+                <td class="text-center">{{ item.invoiceItemLastPrice }}</td>
+                <td class="text-center">{{ item.invoiceItemQTY }}</td>
+                <td class="text-center">{{ item.invoiceItemVAT }}</td>
+                <td class="text-center">{{ item.invoiceItemUnitPrice }}</td>
+                <td class="text-center">{{ item.invoiceItemQouteAdditionalCost }}</td>
+                <td class="text-center">{{ item.invoiceitemPurchaseAdditionalCost }}</td>
+                <td class="text-center">{{ item.invoiceItemDeliveryAdditionalCost }}</td>
+                <td class="text-center">{{ item.invoiceItemPOD }}</td>
+                <td class="text-center">{{ item.invoiceItemClosingDate | date:
+                  'dd/MM/yyyy'}}</td>
+
+                <td class="text-center">{{ item.invoiceItemPurchasePrice }}</td>
+                <td class="text-center">{{ item.invoiceItemIsFirstPaymentDone }}</td>
+                <td class="text-center">{{ item.invoiceItemFirstPaymentPrice }}</td>
+                <td class="text-center">{{ item.invoiceItemFirstPaymentDate | date:
+                  'dd/MM/yyyy'}}</td>
+                <td class="text-center">{{ item.invoiceItemIsLastPaymentDone }}</td>
+                <td class="text-center">{{ item.invoiceItemLastPaymentPrice }}</td>
+                <td class="text-center">{{ item.invoiceItemLastPaymentDate | date:
+                  'dd/MM/yyyy'}}</td>
+
+                <td class="text-center">{{ item.invoiceItemLogisticCompany }}</td>
+                <td class="text-center">{{ item.invoiceItemLogisticLocation }}</td>
+                <td class="text-center">{{ item.invoiceItemLogisitEstimatedDate | date:
+                  'dd/MM/yyyy'}}</td>
+                <td class="text-center">{{ item.invoiceItemShippingStatus }}</td>
+
+                <td class="text-center">{{ item.invoiceItemDeliveredToIraq }}</td>
+                <td class="text-center">{{ item.invoiceItemDeliverByLogisic }}</td>
+                <td class="text-center">{{ item.invoiceItemDeliverToClient }}</td>
+                <td class="text-center">{{ item.invoiceItemLogisticCost }}</td>
+                <td class="text-center">{{ item.invoiceItemFullPaid }}</td>
+                <td class="text-center">{{ item.invoiceItemSubmitted }}</td>
+
+                <td class="text-center">{{ item.invoiceItemTotalPrice }}</td>
+                <td class="text-center">{{ item.invoiceItemStatus }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="col-md-12">
+          <div class="float-end m-t-30 text-end">
+            <p><strong>Offering : </strong> {{invoice.invoiceOffering }} </p>
+            <p><strong>Sub-Total amount : </strong> ${{invoice.invoiceSubtotal | number:'1.2-2'}}</p>
+            <p><b>Additional Cost : </b> ${{invoice.invoiceAdditionalCost | number:'1.2-2'}} </p>
+            <hr>
+            <h4>
+              <p>Total : ${{invoice.invoiceTotalCost | number:'1.2-2'}}</p>
+              <p><b>Grand Total : ${{invoice.invoiceGrandtotal | number:'1.2-2'}} </b></p>
+            </h4>
+          </div>
+          <div class="clearfix"></div>
+          <hr>
+          <br>
         </div>
       </div>
     </div>

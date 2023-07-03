@@ -26,6 +26,8 @@ return new class extends Migration {
             $table->boolean('invoiceIsDone')->nullable();
             $table->timestamps();
         });
+
+        
     }
 
     /**

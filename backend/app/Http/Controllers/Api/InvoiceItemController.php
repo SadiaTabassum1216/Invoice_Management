@@ -149,4 +149,9 @@ class InvoiceItemController extends Controller
         // return response()->json($invoices);
         return ['data' => $invoices->all()];
     }
+
+    public function update(Request $request, string $id){
+
+        return ['data' => $request->all(),'a'=> $id];
+    }
 }

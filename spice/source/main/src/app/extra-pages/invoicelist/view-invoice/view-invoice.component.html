@@ -2,7 +2,7 @@
     <div class="edit-user-container">
         <div id="toBePrinted" #toBePrinted>
             <h3>INVOICE
-                <span class="float-end">{{invoice.invoiceID}}</span>
+                <span class="float-end">{{invoice.id}}</span>
             </h3>
             <hr>
             <div class="row">
@@ -27,14 +27,14 @@
                             </p>
                             <p>
                                 <b>Status :</b>
-                                <span class="label label-success">{{invoice.status}}</span>
+                                <span class="label label-success">{{invoice.invoiceStatus}}</span>
                             </p>
 
                             <p>
                                 <b>Done </b>
                                 <i class="fas"
-                                    [ngClass]="{'fa-check-circle': invoice.isDone, 'fa-times-circle': !invoice.isDone}"
-                                    [ngStyle]="{'color': invoice.isDone ? 'green' : 'red'}"></i>
+                                    [ngClass]="{'fa-check-circle': invoice.invoiceIsDone, 'fa-times-circle': !invoice.invoiceIsDone}"
+                                    [ngStyle]="{'color': invoice.invoiceIsDone ? 'green' : 'red'}"></i>
                             </p>
 
                         </address>
@@ -95,47 +95,47 @@
                         </thead>
                         <tbody>
 
-                            <tr *ngFor="let item of invoice.itemList">
-                                <td class="text-center">{{ item.itemId }}</td>
-                                <td class="text-center">{{ item.userId }}</td>
-                                <td class="text-center">{{ item.UOMId }}</td>
-                                <td class="text-center">{{ item.firstPrice }}</td>
-                                <td class="text-center">{{ item.lastPrice }}</td>
-                                <td class="text-center">{{ item.quantity }}</td>
-                                <td class="text-center">{{ item.VAT }}</td>
-                                <td class="text-center">{{ item.unitPrice }}</td>
-                                <td class="text-center">{{ item.additionalCost }}</td>
-                                <td class="text-center">{{ item.purchaseAdditionalCost }}</td>
-                                <td class="text-center">{{ item.deliveryAdditionalCost }}</td>
-                                <td class="text-center">{{ item.POD }}</td>
-                                <td class="text-center">{{ item.closingDate | date:
+                            <tr *ngFor="let item of invoice.invoice_items">
+                                <td class="text-center">{{ item.id }}</td>
+                                <td class="text-center">{{ item.userID }}</td>
+                                <td class="text-center">{{ item.uomID }}</td>
+                                <td class="text-center">{{ item.invoiceItemFirstPrice }}</td>
+                                <td class="text-center">{{ item.invoiceItemLastPrice }}</td>
+                                <td class="text-center">{{ item.invoiceItemQTY }}</td>
+                                <td class="text-center">{{ item.invoiceItemVAT }}</td>
+                                <td class="text-center">{{ item.invoiceItemUnitPrice }}</td>
+                                <td class="text-center">{{ item.invoiceItemQouteAdditionalCost }}</td>
+                                <td class="text-center">{{ item.invoiceitemPurchaseAdditionalCost }}</td>
+                                <td class="text-center">{{ item.invoiceItemDeliveryAdditionalCost }}</td>
+                                <td class="text-center">{{ item.invoiceItemPOD }}</td>
+                                <td class="text-center">{{ item.invoiceItemClosingDate | date:
                                     'dd/MM/yyyy'}}</td>
 
-                                <td class="text-center">{{ item.purchasePrice }}</td>
-                                <td class="text-center">{{ item.isFirstPaymentDone }}</td>
-                                <td class="text-center">{{ item.firstPaymentPrice }}</td>
-                                <td class="text-center">{{ item.firstPaymentDate | date:
+                                <td class="text-center">{{ item.invoiceItemPurchasePrice }}</td>
+                                <td class="text-center">{{ item.invoiceItemIsFirstPaymentDone }}</td>
+                                <td class="text-center">{{ item.invoiceItemFirstPaymentPrice }}</td>
+                                <td class="text-center">{{ item.invoiceItemFirstPaymentDate | date:
                                     'dd/MM/yyyy'}}</td>
-                                <td class="text-center">{{ item.isLastPaymentDone }}</td>
-                                <td class="text-center">{{ item.lastPaymentPrice }}</td>
-                                <td class="text-center">{{ item.lastPaymentDate | date:
+                                <td class="text-center">{{ item.invoiceItemIsLastPaymentDone }}</td>
+                                <td class="text-center">{{ item.invoiceItemLastPaymentPrice }}</td>
+                                <td class="text-center">{{ item.invoiceItemLastPaymentDate | date:
                                     'dd/MM/yyyy'}}</td>
 
-                                <td class="text-center">{{ item.logisticCompany }}</td>
-                                <td class="text-center">{{ item.logisticLocation }}</td>
-                                <td class="text-center">{{ item.logisticEstimatedDate | date:
+                                <td class="text-center">{{ item.invoiceItemLogisticCompany }}</td>
+                                <td class="text-center">{{ item.invoiceItemLogisticLocation }}</td>
+                                <td class="text-center">{{ item.invoiceItemLogisitEstimatedDate | date:
                                     'dd/MM/yyyy'}}</td>
-                                <td class="text-center">{{ item.shippingStatus }}</td>
+                                <td class="text-center">{{ item.invoiceItemShippingStatus }}</td>
 
-                                <td class="text-center">{{ item.isDeliveredToIraq }}</td>
-                                <td class="text-center">{{ item.isDeliveredByLogistic }}</td>
-                                <td class="text-center">{{ item.isDeliverToClient }}</td>
-                                <td class="text-center">{{ item.logisticCost }}</td>
-                                <td class="text-center">{{ item.isFullyPaid }}</td>
-                                <td class="text-center">{{ item.isSubmitted }}</td>
+                                <td class="text-center">{{ item.invoiceItemDeliveredToIraq }}</td>
+                                <td class="text-center">{{ item.invoiceItemDeliverByLogisic }}</td>
+                                <td class="text-center">{{ item.invoiceItemDeliverToClient }}</td>
+                                <td class="text-center">{{ item.invoiceItemLogisticCost }}</td>
+                                <td class="text-center">{{ item.invoiceItemFullPaid }}</td>
+                                <td class="text-center">{{ item.invoiceItemSubmitted }}</td>
 
-                                <td class="text-center">{{ item.totalPrice }}</td>
-                                <td class="text-center">{{ item.status }}</td>
+                                <td class="text-center">{{ item.invoiceItemTotalPrice }}</td>
+                                <td class="text-center">{{ item.invoiceItemStatus }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -144,13 +144,13 @@
 
                 <div class="col-md-12">
                     <div class="float-end m-t-30 text-end">
-                        <p><strong>Offering : </strong> {{invoice.offering }} </p>
-                        <p><strong>Sub-Total amount : </strong> ${{invoice.subtotal | number:'1.2-2'}}</p>
-                        <p><b>Additional Cost : </b> ${{invoice.additionalCost | number:'1.2-2'}} </p>
+                        <p><strong>Offering : </strong> {{invoice.invoiceOffering }} </p>
+                        <p><strong>Sub-Total amount : </strong> ${{invoice.invoiceSubtotal | number:'1.2-2'}}</p>
+                        <p><b>Additional Cost : </b> ${{invoice.invoiceAdditionalCost | number:'1.2-2'}} </p>
                         <hr>
                         <h4>
-                            <p>Total : ${{invoice.totalCost | number:'1.2-2'}}</p>
-                            <p><b>Grand Total : ${{invoice.grandTotal | number:'1.2-2'}} </b></p>
+                            <p>Total : ${{invoice.invoiceTotalCost | number:'1.2-2'}}</p>
+                            <p><b>Grand Total : ${{invoice.invoiceGrandtotal | number:'1.2-2'}} </b></p>
                         </h4>
                     </div>
                     <div class="clearfix"></div>

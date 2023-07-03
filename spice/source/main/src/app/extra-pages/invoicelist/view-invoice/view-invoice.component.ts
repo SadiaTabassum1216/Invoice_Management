@@ -4,6 +4,7 @@ import { Invoice } from 'src/app/models/invoice.model';
 
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import { Invoice2 } from 'src/app/models/invoice2.model';
 const htmlToPdfmake = require("html-to-pdfmake");
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -14,7 +15,7 @@ declare var require: any;
   styleUrls: ['./view-invoice.component.scss']
 })
 export class ViewInvoiceComponent {
-  invoice: Invoice=new Invoice();
+  invoice: Invoice2=new Invoice2();
   dialogConfig?: MatDialogConfig;
 
 
