@@ -70,9 +70,11 @@ Route::delete('/items/{id}', [ItemController::class, 'destroy']);
 
 Route::post('/invoice', [InvoiceItemController::class, 'store']);
 Route::get('/invoice', [InvoiceItemController::class, 'show']);
+Route::put('/invoice/{id}', [InvoiceController::class, 'update']);
 Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy']);
 
 Route::get('/file_download/{id}', [InvoiceItemFileController::class, 'downloadFile']);
 
 
 Route::get('/searchUOM', [UOMController::class, 'show']);
+Route::put('/invoice_item/{id}', [InvoiceItemController::class, 'update']);

@@ -1,9 +1,9 @@
 export class Invoice2 {
     id: number = 0;
-    invoiceDate: string = '';
+    invoiceDate: Date = new Date();
     invoiceTime: string = '';
-    invoiceEstimatedDate: string = '';
-    invoiceClosingDate: string = '';
+    invoiceEstimatedDate: any= new Date(1970, 0, 1);
+    invoiceClosingDate: any= new Date(1970, 0, 1);
     invoiceTotalCost: number = 0;
     invoiceSubtotal: number = 0;
     invoiceGrandtotal: number = 0;
@@ -30,14 +30,17 @@ export class InvoiceItem {
     invoiceItemTotalPrice: number = 0;
     invoiceItemPOD: string = '';
     invoiceItemClosingDate: string = '';
+    
     invoiceItemPurchasePrice: number = 0;
     invoiceItemFirstPaymentPrice: number = 0;
     invoiceItemFirstPaymentDate: string = '';
     invoiceItemLastPaymentPrice: number = 0;
     invoiceItemLastPaymentDate: string = '';
+
     invoiceItemLogisticCompany: string = '';
     invoiceItemLogisticLocation: string = '';
     invoiceItemLogisitEstimatedDate: string = '';
+
     invoiceItemShippingStatus: string = '';
     invoiceItemDeliveredToIraq: boolean = false;
     invoiceItemDeliverByLogisic: boolean = false;
@@ -45,11 +48,11 @@ export class InvoiceItem {
     invoiceItemLogisticCost: number = 0;
     invoiceItemFullPaid: boolean = false;
     invoiceItemSubmitted: boolean = false;
+    
     invoiceItemStatus: string = '';
     invoiceItemIsFirstPaymentDone: boolean = false;
     invoiceItemIsLastPaymentDone: boolean = false;
-    created_at: string = '';
-    updated_at: string = '';
+   
     items: Item2[] = [];
     invoice_item_files: Files[] = [];
 }
