@@ -40,7 +40,7 @@ class InvoiceItemController extends Controller
 
         for ($i = 0; $i < $maxIdx; $i++) {
 
-            $item = Item::findOrFail($request->input('itemList_itemId')[$i]);
+            $item = $this->getItem($request->input('itemList_itemId')[$i]);
             $invoiceItem = new InvoiceItem();
             $invoiceItem->invoiceID = $invoice->id;
             $invoiceItem->userID = $request->input('itemList_userId')[$i];
@@ -114,7 +114,22 @@ class InvoiceItemController extends Controller
 
     private function shouldDateBeNull($date)
     {
-        return $date == '1970-01-01' ? $date : null;
+        return $date == '1970-01-01' ? null : $date;
+    }
+
+    private function getItem($itemName)
+    {
+        $item = Item::where('itemName', $itemName)->first();
+
+        if ($item){
+            return $item;
+        } else {
+            $newItem = new Item();
+            $newItem->itemName = $itemName;
+            $newItem->save();
+
+            return $newItem;
+        }
     }
     public function show()
     {
