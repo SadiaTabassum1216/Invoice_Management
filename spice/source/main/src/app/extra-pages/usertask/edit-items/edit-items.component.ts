@@ -14,19 +14,19 @@ import { InvoiceItem3 } from 'src/app/models/invoice3.model';
   styleUrls: ['./edit-items.component.scss']
 })
 export class EditItemsComponent {
-  selectedItem: Item = new Item();
+  selectedItem: InvoiceItem3 = new InvoiceItem3();
   dialogConfig?: MatDialogConfig;
-   item: InvoiceItem3= new InvoiceItem3();
+  // item: InvoiceItem3= new InvoiceItem3();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, public dialog: MatDialog) {
     this.selectedItem = data.item;
-     this.item= data.item;
+    //  this.item= data.item;
     // console.log("Selected Item is: ",this.selectedItem);
   }
 
 
   update() {
-    this.http.put<any>(`${backendEnvironment.apiUrl}/api/items/${this.selectedItem.itemId}`, this.selectedItem).subscribe(data => {
+    this.http.put<any>(`${backendEnvironment.apiUrl}/api/items/${this.selectedItem.id}`, this.selectedItem).subscribe(data => {
       console.log(this.selectedItem);
     },
       error => {      
