@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/core/service/auth.service';
 import { Observable } from 'rxjs';
 import { AuthUser } from 'src/app/core/models/user';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
+import { InvoiceItem } from 'src/app/models/invoice2.model';
+import { InvoiceItem3 } from 'src/app/models/invoice3.model';
 
 @Component({
   selector: 'app-usertask',
@@ -31,8 +33,8 @@ export class UsertaskComponent implements OnInit{
 
   constructor(private http: HttpClient,  private dialogModel: MatDialog, private authService: AuthService) {}
 
-  items: Item[] = [];
-  selectedItem: Item= new Item();
+  items: any;
+  selectedItem: InvoiceItem3= new InvoiceItem3();
   dialog?: MatDialogRef<EditItemsComponent>;
 
  
@@ -40,97 +42,20 @@ export class UsertaskComponent implements OnInit{
   filename='items.xlsx';
 
    getItemList() {
-    this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/items`).subscribe(data => {
+    this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoiceitems`).subscribe(data => {
       this.items = data;
       console.log(this.items);
     });
-    const item1: Item = {
-      itemId: '1',
-      userId: 'user1',
-      UOMId: 'uom1',
-      firstPrice: 10,
-      lastPrice: 20,
-      quantity: 5,
-      VAT: 5,
-      unitPrice: 15,
-      additionalCost: 2,
-      purchaseAdditionalCost: 3,
-      deliveryAdditionalCost: 1,
-      totalPrice: 100,
-      POD: 'pod1',
-      closingDate: new Date('2023-06-30'),
-      purchasePrice: 30,
-      isFirstPaymentDone: true,
-      firstPaymentPrice: 5,
-      firstPaymentDate: new Date('2023-06-25'),
-      isLastPaymentDone: false,
-      lastPaymentPrice: 0,
-      lastPaymentDate: new Date('Invalid Date'),
-      logisticCompany: 'company1',
-      logisticLocation: 'location1',
-      logisticEstimatedDate: new Date('2023-07-05'),
-      shippingStatus: 'status1',
-      isDeliveredToIraq: false,
-      isDeliveredByLogistic: true,
-      isDeliverToClient: false,
-      logisticCost: 50,
-      isFullyPaid: false,
-      isSubmitted: true,
-      status: 'pending',
-      uploadedFiles1: [],
-      uploadedFiles2: [],
-      uploadedFiles3: []
-    };
-  
-    const item2: Item = {
-      itemId: '2',
-      userId: 'user2',
-      UOMId: 'uom2',
-      firstPrice: 5,
-      lastPrice: 10,
-      quantity: 3,
-      VAT: 2,
-      unitPrice: 7,
-      additionalCost: 1,
-      purchaseAdditionalCost: 2,
-      deliveryAdditionalCost: 1,
-      totalPrice: 300,
-      POD: 'pod2',
-      closingDate: new Date('2023-07-02'),
-      purchasePrice: 20,
-      isFirstPaymentDone: true,
-      firstPaymentPrice: 3,
-      firstPaymentDate: new Date('2023-06-27'),
-      isLastPaymentDone: true,
-      lastPaymentPrice: 2,
-      lastPaymentDate: new Date('2023-06-29'),
-      logisticCompany: 'company2',
-      logisticLocation: 'location2',
-      logisticEstimatedDate: new Date('2023-07-07'),
-      shippingStatus: 'status2',
-      isDeliveredToIraq: true,
-      isDeliveredByLogistic: true,
-      isDeliverToClient: true,
-      logisticCost: 40,
-      isFullyPaid: true,
-      isSubmitted: true,
-      status: 'good',
-      uploadedFiles1: [],
-      uploadedFiles2: [],
-      uploadedFiles3: []
-    };
-  
-    this.items.push(item1, item2);
-  
+    
   }
 
   
-edit(item: Item): void {
+edit(item: InvoiceItem3): void {
   this.selectedItem = item;
     //  console.log(this.selectedItem);
   
     this.dialogModel.open(EditItemsComponent, {
-      width: '640px',
+      width: '740px',
       disableClose: true,
       data: {
         item: this.selectedItem
@@ -140,21 +65,19 @@ edit(item: Item): void {
 }
 
 
-confirmDelete(item: Item): void {
+confirmDelete(item: InvoiceItem): void {
   const confirmation = window.confirm('Are you sure you want to delete?');
   if (confirmation) 
     this.delete(item);
   }
 
-delete(item: Item): void {
+delete(item: InvoiceItem): void {
   const index = this.items.indexOf(item);
   if (index !== -1) {
     this.items.splice(index, 1);
   }
 
-
-
-  this.http.delete<any>(`${backendEnvironment.apiUrl}/api/items/${item.itemId}`).subscribe(
+  this.http.delete<any>(`${backendEnvironment.apiUrl}/api/invoiceItem/${item.id}`).subscribe(
     data => {
       console.log("Item deleted successfully");
       window.location.reload();

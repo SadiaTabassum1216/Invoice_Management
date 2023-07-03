@@ -142,4 +142,9 @@ class InvoiceItemController extends Controller
 
         return ['data' => $request->all(),'a'=> $id];
     }
+
+    public function itemShow(){
+        $invoiceItem = InvoiceItem:: with('items')->get();
+        return ['data' => $invoiceItem->all()];
+    }
 }

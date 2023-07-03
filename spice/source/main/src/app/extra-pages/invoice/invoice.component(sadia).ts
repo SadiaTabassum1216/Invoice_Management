@@ -318,7 +318,7 @@ export class InvoiceComponent implements OnInit {
     console.log(this.invoice);
 
     const formData: FormData = new FormData();
-    formData.append('invoiceID', this.invoice.id);
+    formData.append('invoiceID', this.invoice.id.toString());
     formData.append('invoiceDate', this.invoice.invoiceDate.toISOString());
     formData.append(
       'invoiceEstimatedDate',
@@ -411,7 +411,7 @@ export class InvoiceComponent implements OnInit {
       .post<any>(`${backendEnvironment.apiUrl}/api/invoice`, formData)
       .subscribe((data) => {
         // console.log(this.invoice);
-        this.invoice.invoiceID = data.id;
+        this.invoice.id = data.id;
         console.log(data);
       });
   }

@@ -78,3 +78,4 @@ Route::get('/file_download/{id}', [InvoiceItemFileController::class, 'downloadFi
 
 Route::get('/searchUOM', [UOMController::class, 'show']);
 Route::put('/invoice_item/{id}', [InvoiceItemController::class, 'update']);
+Route::get('/invoiceitems', [InvoiceItemController::class, 'itemShow']);

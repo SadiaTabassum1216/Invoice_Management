@@ -5,6 +5,7 @@ import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 import { FormsModule } from '@angular/forms';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
+import { InvoiceItem3 } from 'src/app/models/invoice3.model';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { backendEnvironment } from 'src/environments/backendEnvironment';
 export class EditItemsComponent {
   selectedItem: Item = new Item();
   dialogConfig?: MatDialogConfig;
-   item: Item= new Item();
+   item: InvoiceItem3= new InvoiceItem3();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, public dialog: MatDialog) {
     this.selectedItem = data.item;

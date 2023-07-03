@@ -1,4 +1,4 @@
-export class Invoice2 {
+export class Invoice3 {
     id: number = 0;
     invoiceDate: Date = new Date();
     invoiceTime: string = '';
@@ -11,11 +11,13 @@ export class Invoice2 {
     invoiceStatus: string = '';
     invoiceOffering: string = '';
     invoiceIsDone: boolean=false;
-    invoice_items: InvoiceItem[] = []
+    invoice_items: InvoiceItem3[] = []
 }
 
-export class InvoiceItem {
+
+export class InvoiceItem3{
     id: number = 0;
+    itemName: string ='';
     invoiceID: number = 0;
     userID: number = 0;
     invoiceItemQTY: number = 0;
@@ -52,36 +54,4 @@ export class InvoiceItem {
     invoiceItemStatus: string = '';
     invoiceItemIsFirstPaymentDone: boolean = false;
     invoiceItemIsLastPaymentDone: boolean = false;
-   
-    items: Item2[] = [];
-    invoice_item_files: Files[] = [];
 }
-
-export class Item2 {
-    id: number = 0;
-    itemName: string = '';
-    itemDesc: string = '';
-    itemSource: string = '';
-    itemStatus: string = '';
-    created_at: string = '';
-    updated_at: string = '';
-    pivot: {
-        invoice_item_id: number;
-        item_id: number;
-    } = {
-            invoice_item_id: 0,
-            item_id: 0,
-        };
-}
-
-export class Files {
-    id: number = 0;
-    invoiceItemID: number = 0;
-    level: string = '';
-    filename: string = '';
-    path: string = '';
-    created_at: string = '';
-    updated_at: string = '';
-}
-
-
