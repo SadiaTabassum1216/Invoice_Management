@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/d
 import { Observable, map, startWith } from 'rxjs';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Invoice2, InvoiceItem, Item2 } from 'src/app/models/invoice2.model';
+import { Invoice3, InvoiceItem3 } from 'src/app/models/invoice3.model';
 import { Item } from 'src/app/models/item.model';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 
@@ -15,7 +16,7 @@ import { backendEnvironment } from 'src/environments/backendEnvironment';
   styleUrls: ['./edit-invoice.component.scss']
 })
 export class EditInvoiceComponent implements OnInit{
-  invoice: Invoice2 = new Invoice2();
+  invoice: Invoice3 = new Invoice3();
   dialogConfig?: MatDialogConfig;
   material = [MatAutocompleteModule];
   
@@ -145,7 +146,7 @@ export class EditInvoiceComponent implements OnInit{
 
 
   addRow() {
-    const newItem: InvoiceItem = {
+    const newItem: InvoiceItem3 = {
       id: 0,
       userID: 0,
       uomID: 0,
@@ -178,16 +179,15 @@ export class EditInvoiceComponent implements OnInit{
       invoiceItemStatus: '',
       invoiceItemIsFirstPaymentDone: false,
       invoiceItemIsLastPaymentDone: false,
-      
+
       invoiceID: 0,
-      items: [],
-      invoice_item_files: []
+      itemName: ''
     };
 
     this.invoice.invoice_items.push(newItem);
   }
 
-  update(item: InvoiceItem) {
+  update(item: InvoiceItem3) {
     this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice_item/${item.id}`, item).subscribe(data => {
        console.log(data);
       //  console.log(a);

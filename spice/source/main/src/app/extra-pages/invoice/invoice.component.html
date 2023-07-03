@@ -28,7 +28,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="text-center">Item ID</th>
+              <th class="text-center">Item Name</th>
               <th class="text-center">User ID</th>
               <th class="text-center">UOM ID</th>
               <th class="text-center">First Price</th>
@@ -76,7 +76,7 @@
             <tr *ngFor="let item of itemList; let i = index">
               <td class="text-center">
                 <input matInput type="text" [matAutocomplete]="auto" name="{{item.itemId}}" 
-                [(ngModel)]="tempItem[i]" >
+                [(ngModel)]="tempItem[i]"  [formControl]="myControlitem">
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let item of filteredOptionsItem  | async" [value]="item.name">
                     {{ item.name }} (ID: {{ item.id }})
@@ -86,7 +86,7 @@
 
               <td class="text-center">
                 <input matInput type="text" [matAutocomplete]="autouser" name="{{item.userId}}"
-                  [(ngModel)]="tempUser[i]" 
+                  [(ngModel)]="tempUser[i]"  [formControl]="myControluser"
                  >
                 <mat-autocomplete #autouser="matAutocomplete">
                   <mat-option *ngFor="let user of filteredOptionsUser | async" [value]="user.id">
@@ -99,7 +99,7 @@
 
               <td class="text-center">
                 <input matInput type="text" [matAutocomplete]="autouom" name="{{item.UOMId}}"
-                 [(ngModel)]="tempUom[i]"
+                 [(ngModel)]="tempUom[i]"  [formControl]="myControlUom"
                  
                   >
                 <mat-autocomplete #autouom="matAutocomplete">
@@ -341,7 +341,7 @@
                             <thead>
                               <tr>
                                 <!-- level 1 -->
-                                <th class="text-center level1">Item Name</th>
+                                <th class="text-center level1">Item ID</th>
                                 <th class="text-center level1">User ID</th>
                                 <th class="text-center level1">UOM ID</th>
                                 <th class="text-center level1">First Price</th>

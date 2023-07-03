@@ -1,263 +1,277 @@
 <div class="edit-user-container">
     <div>
         <!-- <form> -->
-            <br>
-            <h3 class="text-center">Edit Invoice Table</h3>
-            <br>
+        <br>
+        <h3 class="text-center">Edit Invoice Table</h3>
+        <br>
 
-            <div class="form-group">
-                <label for="estimatedDate">Estimated Date</label>
-                <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
-                    [(ngModel)]="invoice.invoiceEstimatedDate">
-            </div>
+        <div class="form-group">
+            <label for="estimatedDate">Estimated Date</label>
+            <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
+                [(ngModel)]="invoice.invoiceEstimatedDate">
+        </div>
 
-            <div class="form-group">
-                <label for="closingDate">Closing Date</label>
-                <input type="date" class="form-control" id="closingDate" name="closingDate"
-                    [(ngModel)]="invoice.invoiceClosingDate">
-            </div>
-            <div class="form-group">
-                <label for="offering">Offering</label>
-                <input type="text" class="form-control" id="offering" name="offering" [(ngModel)]="invoice.invoiceOffering">
-            </div>
+        <div class="form-group">
+            <label for="closingDate">Closing Date</label>
+            <input type="date" class="form-control" id="closingDate" name="closingDate"
+                [(ngModel)]="invoice.invoiceClosingDate">
+        </div>
+        <div class="form-group">
+            <label for="offering">Offering</label>
+            <input type="text" class="form-control" id="offering" name="offering" [(ngModel)]="invoice.invoiceOffering">
+        </div>
 
-            <div class="form-group">
-                <label for="additionalCost">Additional Cost</label>
-                <input type="number" class="form-control" id="additionalCost" name="additionalCost"
-                    [(ngModel)]="invoice.invoiceAdditionalCost">
-            </div>
+        <div class="form-group">
+            <label for="additionalCost">Additional Cost</label>
+            <input type="number" class="form-control" id="additionalCost" name="additionalCost"
+                [(ngModel)]="invoice.invoiceAdditionalCost">
+        </div>
 
-            <div class="form-group">
-                <label for="status">Status</label>
-                <input type="text" class="form-control" id="status" name="status" [(ngModel)]="invoice.invoiceStatus">
-            </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" id="status" name="status" [(ngModel)]="invoice.invoiceStatus">
+        </div>
 
-            <div class="form-group">
-                Is done <input type="checkbox" name="{{invoice.invoiceIsDone}}" [(ngModel)]="invoice.invoiceIsDone">
-            </div>
+        <div class="form-group">
+            Is done <input type="checkbox" name="{{invoice.invoiceIsDone}}" [(ngModel)]="invoice.invoiceIsDone">
+        </div>
         <!-- </form> -->
         <button class="btn btn-primary edit-button" (click)="updateInvoice()">
             <i class="fas fa-pencil-alt"></i> Update Invoice
         </button>
 
-            <div style=" margin: 0 auto; ; overflow-x: auto;">
-                <h3 class="text-center">Item Table</h3>
+        <div style=" margin: 0 auto; ; overflow-x: auto;">
+            <h3 class="text-center">Item Table</h3>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="text-center">Item Name</th>
-                            <th class="text-center">User ID</th>
-                            <th class="text-center">UOM ID</th>
-                            <th class="text-center">First Price</th>
-                            <th class="text-center">Last Price</th>
-                            <th class="text-center">Quantity</th>
-                            <th class="text-center">VAT</th>
-                            <th class="text-center">Unit Price</th>
-                            <th class="text-center">Additional Cost</th>
-                            <th class="text-center">Purchase Additional Cost</th>
-                            <th class="text-center">Delivery Additional Cost</th>
-                            <th class="text-center">POD</th>
-                            <th class="text-center">Closing Date</th>
-                            <!-- <th class="text-center">Files</th> -->
-
-
-                            <th class="text-center">Purchase Price</th>
-
-                            <th class="text-center">Is First Payment Done</th>
-                            <th class="text-center">First Payment Price</th>
-                            <th class="text-center">First Payment Date</th>
-
-                            <th class="text-center">Is Last Payment Done</th>
-                            <th class="text-center">Last Payment Price</th>
-                            <th class="text-center">Last Payment Date</th>
-
-                            <th class="text-center">Logistic Company</th>
-                            <th class="text-center">Logistic Location</th>
-                            <th class="text-center">Logistic Estimated Date</th>
-                            <th class="text-center">Shipping Status</th>
-                            <!-- <th class="text-center">Files</th> -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">Item Name</th>
+                        <th class="text-center">User ID</th>
+                        <th class="text-center">UOM ID</th>
+                        <th class="text-center">First Price</th>
+                        <th class="text-center">Last Price</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">VAT</th>
+                        <th class="text-center">Unit Price</th>
+                        <th class="text-center">Additional Cost</th>
+                        <th class="text-center">Purchase Additional Cost</th>
+                        <th class="text-center">Delivery Additional Cost</th>
+                        <th class="text-center">POD</th>
+                        <th class="text-center">Closing Date</th>
+                        <!-- <th class="text-center">Files</th> -->
 
 
-                            <th class="text-center">Is Delivered to Iraq</th>
-                            <th class="text-center">Is Delivered by Logistic</th>
-                            <th class="text-center">Is Deliver to Client</th>
-                            <th class="text-center">Logistic Cost</th>
-                            <th class="text-center">Is Fully Paid</th>
-                            <th class="text-center">Is Submitted</th>
-                            <!-- <th class="text-center">Files</th> -->
+                        <th class="text-center">Purchase Price</th>
+
+                        <th class="text-center">Is First Payment Done</th>
+                        <th class="text-center">First Payment Price</th>
+                        <th class="text-center">First Payment Date</th>
+
+                        <th class="text-center">Is Last Payment Done</th>
+                        <th class="text-center">Last Payment Price</th>
+                        <th class="text-center">Last Payment Date</th>
+
+                        <th class="text-center">Logistic Company</th>
+                        <th class="text-center">Logistic Location</th>
+                        <th class="text-center">Logistic Estimated Date</th>
+                        <th class="text-center">Shipping Status</th>
+                        <!-- <th class="text-center">Files</th> -->
 
 
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of invoice.invoice_items; let i = index">
-                            <td class="text-center">
-                                <!-- <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
+                        <th class="text-center">Is Delivered to Iraq</th>
+                        <th class="text-center">Is Delivered by Logistic</th>
+                        <th class="text-center">Is Deliver to Client</th>
+                        <th class="text-center">Logistic Cost</th>
+                        <th class="text-center">Is Fully Paid</th>
+                        <th class="text-center">Is Submitted</th>
+                        <!-- <th class="text-center">Files</th> -->
+
+
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of invoice.invoice_items; let i = index">
+                        <td class="text-center">
+                            <!-- <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
                                   <option *ngFor="let option of itemName" [value]="option">{{option}}</option>
                                 </select> -->
-                
-                                <input matInput type="text" [matAutocomplete]="auto" name="{{item.id}}" [(ngModel)]="item.id"
-                                  [formControl]="myControlitem">
-                                <mat-autocomplete #auto="matAutocomplete">
-                                  <mat-option *ngFor="let item of filteredOptionsItem | async" [value]="item.id">
+
+                            <input matInput type="text" [matAutocomplete]="auto" name="{{item.itemName}}"
+                                [(ngModel)]="item.itemName" [formControl]="myControlitem">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let item of filteredOptionsItem | async" [value]="item.name">
                                     {{ item.name }} (ID: {{ item.id }})
-                                  </mat-option>
-                                </mat-autocomplete>
-                              </td>
-                
-                
-                              <td class="text-center">
-                                <!-- <mat-form-field> -->
-                                <input matInput type="text" [matAutocomplete]="autouser" name="{{item.userID}}"
-                                  [(ngModel)]="item.userID" [formControl]="myControluser">
-                                <mat-autocomplete #autouser="matAutocomplete">
-                                  <mat-option *ngFor="let user of filteredOptionsUser | async" [value]="user.id">
-                                    {{ user.name }} (ID: {{ user.id }})
-                                  </mat-option>
-                                </mat-autocomplete>
-                                <!-- </mat-form-field> -->
-                              </td>
-                
-                              <td class="text-center">
-                                <input matInput type="text" [matAutocomplete]="autouom" name="{{item.uomID}}"
-                                [(ngModel)]="item.uomID" [formControl]="myControlUom">
-                              <mat-autocomplete #autouom="matAutocomplete">
-                                <mat-option *ngFor="let uom of filteredOptionsUOM | async" [value]="uom.id">
-                                  {{ uom.name }} (ID: {{ uom.id }})
                                 </mat-option>
-                              </mat-autocomplete>
-                                <!-- <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"> -->
-                              </td>
-
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemFirstPrice}}" [(ngModel)]="item.invoiceItemFirstPrice">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemLastPrice}}" [(ngModel)]="item.invoiceItemLastPrice">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemQTY}}" [(ngModel)]="item.invoiceItemQTY">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemVAT}}" [(ngModel)]="item.invoiceItemVAT">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemUnitPrice}}" [(ngModel)]="item.invoiceItemUnitPrice">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemQouteAdditionalCost}}" [(ngModel)]="item.invoiceItemQouteAdditionalCost">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceitemPurchaseAdditionalCost}}"
-                                    [(ngModel)]="item.invoiceitemPurchaseAdditionalCost">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemDeliveryAdditionalCost}}"
-                                    [(ngModel)]="item.invoiceItemDeliveryAdditionalCost">
-                            </td>
-
-                            <td class="text-center">
-                                <input type="text" name="{{item.invoiceItemPOD}}" [(ngModel)]="item.invoiceItemPOD">
-                            </td>
-                            <td class="text-center">
-                                <input type="date" name="{{item.invoiceItemClosingDate}}" [(ngModel)]="item.invoiceItemClosingDate">
-                            </td>
+                            </mat-autocomplete>
+                        </td>
 
 
-                            <!-- level 2 -->
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemPurchasePrice}}" [(ngModel)]="item.invoiceItemPurchasePrice">
-                            </td>
-                            <td class="text-center">
-                                <input type="checkbox" name="{{item.invoiceItemIsFirstPaymentDone}}"
-                                    [(ngModel)]="item.invoiceItemIsFirstPaymentDone">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemFirstPaymentPrice}}"
-                                    [(ngModel)]="item.invoiceItemFirstPaymentPrice">
-                            </td>
-                            <td class="text-center">
-                                <input type="date" name="{{item.invoiceItemFirstPaymentDate}}" [(ngModel)]="item.invoiceItemFirstPaymentDate">
-                            </td>
+                        <td class="text-center">
+                            <!-- <mat-form-field> -->
+                            <input matInput type="text" [matAutocomplete]="autouser" name="{{item.userID}}"
+                                [(ngModel)]="item.userID" [formControl]="myControluser">
+                            <mat-autocomplete #autouser="matAutocomplete">
+                                <mat-option *ngFor="let user of filteredOptionsUser | async" [value]="user.id">
+                                    {{ user.name }} (ID: {{ user.id }})
+                                </mat-option>
+                            </mat-autocomplete>
+                            <!-- </mat-form-field> -->
+                        </td>
 
-                            <td class="text-center">
-                                <input type="checkbox" name="{{item.invoiceItemIsLastPaymentDone}}"
-                                    [(ngModel)]="item.invoiceItemIsLastPaymentDone">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemLastPaymentPrice}}"
-                                    [(ngModel)]="item.invoiceItemLastPaymentPrice">
-                            </td>
-                            <td class="text-center">
-                                <input type="date" name="{{item.invoiceItemLastPaymentDate}}" [(ngModel)]="item.invoiceItemLastPaymentDate">
-                            </td>
-                            <td class="text-center">
-                                <input type="text" name="{{item.invoiceItemLogisticCompany}}" [(ngModel)]="item.invoiceItemLogisticCompany">
-                            </td>
-                            <td class="text-center">
-                                <input type="text" name="{{item.invoiceItemLogisticLocation}}" [(ngModel)]="item.invoiceItemLogisticLocation">
-                            </td>
-                            <td class="text-center">
-                                <input type="date" name="{{item.invoiceItemLogisitEstimatedDate}}"
-                                    [(ngModel)]="item.invoiceItemLogisitEstimatedDate">
-                            </td>
-                            <td class="text-center">
-                                <input type="text" name="{{item.invoiceItemShippingStatus}}" [(ngModel)]="item.invoiceItemShippingStatus">
-                            </td>
+                        <td class="text-center">
+                            <input matInput type="text" [matAutocomplete]="autouom" name="{{item.uomID}}"
+                                [(ngModel)]="item.uomID" [formControl]="myControlUom">
+                            <mat-autocomplete #autouom="matAutocomplete">
+                                <mat-option *ngFor="let uom of filteredOptionsUOM | async" [value]="uom.id">
+                                    {{ uom.name }} (ID: {{ uom.id }})
+                                </mat-option>
+                            </mat-autocomplete>
+                            <!-- <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"> -->
+                        </td>
+
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemFirstPrice}}"
+                                [(ngModel)]="item.invoiceItemFirstPrice">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemLastPrice}}"
+                                [(ngModel)]="item.invoiceItemLastPrice">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemQTY}}" [(ngModel)]="item.invoiceItemQTY">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemVAT}}" [(ngModel)]="item.invoiceItemVAT">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemUnitPrice}}"
+                                [(ngModel)]="item.invoiceItemUnitPrice">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemQouteAdditionalCost}}"
+                                [(ngModel)]="item.invoiceItemQouteAdditionalCost">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceitemPurchaseAdditionalCost}}"
+                                [(ngModel)]="item.invoiceitemPurchaseAdditionalCost">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemDeliveryAdditionalCost}}"
+                                [(ngModel)]="item.invoiceItemDeliveryAdditionalCost">
+                        </td>
+
+                        <td class="text-center">
+                            <input type="text" name="{{item.invoiceItemPOD}}" [(ngModel)]="item.invoiceItemPOD">
+                        </td>
+                        <td class="text-center">
+                            <input type="date" name="{{item.invoiceItemClosingDate}}"
+                                [(ngModel)]="item.invoiceItemClosingDate">
+                        </td>
 
 
-                            <!-- level 3 -->
-                            <td class="text-center">
-                                <input type="checkbox" name="{{item.invoiceItemDeliveredToIraq}}"
-                                    [(ngModel)]="item.invoiceItemDeliveredToIraq">
-                            </td>
-                            <td class="text-center">
-                                <input type="checkbox" name="{{item.invoiceItemDeliverByLogisic}}"
-                                    [(ngModel)]="item.invoiceItemDeliverByLogisic">
-                            </td>
-                            <td class="text-center">
-                                <input type="checkbox" name="{{item.invoiceItemDeliverToClient}}"
-                                    [(ngModel)]="item.invoiceItemDeliverToClient">
-                            </td>
-                            <td class="text-center">
-                                <input type="number" name="{{item.invoiceItemLogisticCost}}" [(ngModel)]="item.invoiceItemLogisticCost">
-                            </td>
-                            <td class="text-center">
-                                <input type="checkbox" name="{{item.invoiceItemFullPaid}}" [(ngModel)]="item.invoiceItemFullPaid">
-                            </td>
-                            <td class="text-center">
-                                <input type="checkbox" name="{{item.invoiceItemSubmitted}}" [(ngModel)]="item.invoiceItemSubmitted">
-                            </td>
+                        <!-- level 2 -->
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemPurchasePrice}}"
+                                [(ngModel)]="item.invoiceItemPurchasePrice">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" name="{{item.invoiceItemIsFirstPaymentDone}}"
+                                [(ngModel)]="item.invoiceItemIsFirstPaymentDone">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemFirstPaymentPrice}}"
+                                [(ngModel)]="item.invoiceItemFirstPaymentPrice">
+                        </td>
+                        <td class="text-center">
+                            <input type="date" name="{{item.invoiceItemFirstPaymentDate}}"
+                                [(ngModel)]="item.invoiceItemFirstPaymentDate">
+                        </td>
 
-            
-                            <!-- level 4 -->
-                            <td class="text-center">
-                                <input type="text" name="{{item.invoiceItemStatus}}" [(ngModel)]="item.invoiceItemStatus">
-                            </td>
-                            <td class="text-center">
-                                <button class="btn btn-primary edit-button" (click)="update(item)">
-                                    <i class="fas fa-pencil-alt"></i> Update
-                                </button>
-                            </td>
+                        <td class="text-center">
+                            <input type="checkbox" name="{{item.invoiceItemIsLastPaymentDone}}"
+                                [(ngModel)]="item.invoiceItemIsLastPaymentDone">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemLastPaymentPrice}}"
+                                [(ngModel)]="item.invoiceItemLastPaymentPrice">
+                        </td>
+                        <td class="text-center">
+                            <input type="date" name="{{item.invoiceItemLastPaymentDate}}"
+                                [(ngModel)]="item.invoiceItemLastPaymentDate">
+                        </td>
+                        <td class="text-center">
+                            <input type="text" name="{{item.invoiceItemLogisticCompany}}"
+                                [(ngModel)]="item.invoiceItemLogisticCompany">
+                        </td>
+                        <td class="text-center">
+                            <input type="text" name="{{item.invoiceItemLogisticLocation}}"
+                                [(ngModel)]="item.invoiceItemLogisticLocation">
+                        </td>
+                        <td class="text-center">
+                            <input type="date" name="{{item.invoiceItemLogisitEstimatedDate}}"
+                                [(ngModel)]="item.invoiceItemLogisitEstimatedDate">
+                        </td>
+                        <td class="text-center">
+                            <input type="text" name="{{item.invoiceItemShippingStatus}}"
+                                [(ngModel)]="item.invoiceItemShippingStatus">
+                        </td>
 
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
-            <br>
-            <div colspan="29" class="text-center">
-              <button class="add-row-button" (click)="addRow()">
+
+                        <!-- level 3 -->
+                        <td class="text-center">
+                            <input type="checkbox" name="{{item.invoiceItemDeliveredToIraq}}"
+                                [(ngModel)]="item.invoiceItemDeliveredToIraq">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" name="{{item.invoiceItemDeliverByLogisic}}"
+                                [(ngModel)]="item.invoiceItemDeliverByLogisic">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" name="{{item.invoiceItemDeliverToClient}}"
+                                [(ngModel)]="item.invoiceItemDeliverToClient">
+                        </td>
+                        <td class="text-center">
+                            <input type="number" name="{{item.invoiceItemLogisticCost}}"
+                                [(ngModel)]="item.invoiceItemLogisticCost">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" name="{{item.invoiceItemFullPaid}}"
+                                [(ngModel)]="item.invoiceItemFullPaid">
+                        </td>
+                        <td class="text-center">
+                            <input type="checkbox" name="{{item.invoiceItemSubmitted}}"
+                                [(ngModel)]="item.invoiceItemSubmitted">
+                        </td>
+
+
+                        <!-- level 4 -->
+                        <td class="text-center">
+                            <input type="text" name="{{item.invoiceItemStatus}}" [(ngModel)]="item.invoiceItemStatus">
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-primary edit-button" (click)="update(item)">
+                                <i class="fas fa-pencil-alt"></i> Update
+                            </button>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div colspan="29" class="text-center">
+            <button class="add-row-button" (click)="addRow()">
                 <i class="fa fa-plus"></i> Add Row
-              </button>
-            </div>
-           <br>
+            </button>
+        </div>
+        <br>
 
-          
-            <span class="button-gap"></span>
-            <button mat-raised-button class="btn btn-primary" (click)="close()">Close</button>
+
+        <span class="button-gap"></span>
+        <button mat-raised-button class="btn btn-primary" (click)="close()">Close</button>
     </div>
 </div>
