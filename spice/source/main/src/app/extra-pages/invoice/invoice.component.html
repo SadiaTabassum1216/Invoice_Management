@@ -75,35 +75,33 @@
           <tbody>
             <tr *ngFor="let item of itemList; let i = index">
               <td class="text-center">
-                <input matInput type="text" [matAutocomplete]="auto" name="{{item.itemId}}" [(ngModel)]="item.itemId"
-                  [formControl]="myControlitem">
+                <input matInput type="text" [matAutocomplete]="auto" name="{{item.itemId}}" 
+                [(ngModel)]="tempItem[i]" >
                 <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let item of filteredOptionsItem  | async"  [value]="item.id">
+                  <mat-option *ngFor="let item of filteredOptionsItem  | async" [value]="item.name">
                     {{ item.name }} (ID: {{ item.id }})
                   </mat-option>
                 </mat-autocomplete>
               </td>
 
               <td class="text-center">
-                <input type="text" name="{{item.name}}" [(ngModel)]="item.name" disabled>
-              </td>
-
-
-              <td class="text-center">
-                <!-- <mat-form-field> -->
                 <input matInput type="text" [matAutocomplete]="autouser" name="{{item.userId}}"
-                  [(ngModel)]="item.userId" [formControl]="myControluser">
+                  [(ngModel)]="tempUser[i]" 
+                 >
                 <mat-autocomplete #autouser="matAutocomplete">
                   <mat-option *ngFor="let user of filteredOptionsUser | async" [value]="user.id">
                     {{ user.name }} (ID: {{ user.id }})
                   </mat-option>
                 </mat-autocomplete>
-                <!-- </mat-form-field> -->
               </td>
 
+              
+
               <td class="text-center">
-                <input matInput type="text" [matAutocomplete]="autouom" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"
-                  [formControl]="myControlUom">
+                <input matInput type="text" [matAutocomplete]="autouom" name="{{item.UOMId}}"
+                 [(ngModel)]="tempUom[i]"
+                 
+                  >
                 <mat-autocomplete #autouom="matAutocomplete">
                   <mat-option *ngFor="let uom of filteredOptionsUOM | async" [value]="uom.id">
                     {{ uom.name }} (ID: {{ uom.id }})
@@ -267,7 +265,7 @@
         <label for="isDone" class="col-sm-6 col-form-label text-right">Is done</label>
         <div class="col-sm-6  d-flex align-items-left">
 
-          <input type="checkbox" class="form-check-input" id="isDone" name="{{invoice.isDone}}"
+          <input type="checkbox" class="form-check-input" id="isDone" name="isDone"
             [(ngModel)]="invoice.isDone">
         </div>
       </div>

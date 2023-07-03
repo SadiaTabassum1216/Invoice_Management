@@ -51,7 +51,10 @@ export class InvoiceComponent implements OnInit {
   productlist: any;
   userList: any;
   uomList: any;
-  userName: string[] = [];
+  tempItem: string[]=[];
+  tempUser: string[]=[];
+  tempUom: string[]=[];
+  // userName: string[] = [];
 
   filteredOptionsItem: Observable<any[]> | undefined;
   filteredOptionsUser: Observable<any[]> | undefined;
@@ -140,7 +143,7 @@ export class InvoiceComponent implements OnInit {
     .get<any[]>(`${backendEnvironment.apiUrl}/api/searchUOM`)
     .subscribe((data) => {
       this.uomList = data;
-       console.log("uom: ", this.uomList);
+      //  console.log("uom: ", this.uomList);
       this.uomNameId = this.uomList.data.map(
         (uom: { id: any; name: any }) => {
           return {
@@ -149,16 +152,17 @@ export class InvoiceComponent implements OnInit {
           };
         }
       );
-       console.log("items: ", this.uomNameId);
+      //  console.log("items: ", this.uomNameId);
     });
   }
+  userName: string[] = [];
 
   getUserList() {
     this.http
       .get<any[]>(`${backendEnvironment.apiUrl}/api/users`)
       .subscribe((data) => {
         this.userList = data;
-        // console.log("users: ", this.userList);
+         console.log("users: ", this.userList);
         this.userNameId = this.userList.data.map(
           (user: { id: any; name: any }) => {
             return {
@@ -168,6 +172,10 @@ export class InvoiceComponent implements OnInit {
           }
         );
         // console.log("User Name: ", this.userNameId);
+        // this.userName = this.userList.data.map((user: any) => user.name);
+        // this.itemName = this.items.map(item => item.itemId);
+        // console.log("User Names: ", this.userName);
+        
       });
   }
 
@@ -228,8 +236,14 @@ export class InvoiceComponent implements OnInit {
       uploadedFiles2: [],
       uploadedFiles3: [],
     };
+    for(let i=0; i<this.itemList.length;i++){
+      this.itemList[i].itemId=this.tempItem[i];
+      this.itemList[i].userId=this.tempUser[i];
+      this.itemList[i].UOMId=this.tempUom[i];
+    }
 
     this.itemList.push(newItem);
+    
   }
 
   files: File[] = [];
@@ -316,8 +330,14 @@ export class InvoiceComponent implements OnInit {
       item.firstPaymentDate = moment( item.firstPaymentDate).format('YYYY-MM-DD');
       item.lastPaymentDate = moment( item.lastPaymentDate).format('YYYY-MM-DD');
       item.logisticEstimatedDate = moment( item.logisticEstimatedDate).format('YYYY-MM-DD');
+
     }
 
+    for(let i=0; i<this.itemList.length;i++){
+      this.itemList[i].itemId=this.tempItem[i];
+      this.itemList[i].userId=this.tempUser[i];
+      this.itemList[i].UOMId=this.tempUom[i];
+    }
     this.invoice.itemList = this.itemList;
     console.log(this.invoice);
 
