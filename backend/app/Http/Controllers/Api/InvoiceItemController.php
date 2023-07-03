@@ -28,7 +28,7 @@ class InvoiceItemController extends Controller
         $invoice->invoiceStatus = $request->input("status");
         $invoice->invoiceGrandtotal = $request->input('grandTotal');
         $invoice->invoiceClosingDate = $this->shouldDateBeNull($request->input('invoiceClosingDate'));
-        $invoice->invoiceEstimatedDate =$this->shouldDateBeNull($request->input('invoiceEstimatedDate'));
+        $invoice->invoiceEstimatedDate = $this->shouldDateBeNull($request->input('invoiceEstimatedDate'));
         $invoice->invoiceAdditionalCost = $request->input('additionalCost');
         $invoice->invoiceOffering = $request->input('offering');
         $invoice->invoiceSubtotal = $request->input('subtotal');
@@ -121,7 +121,7 @@ class InvoiceItemController extends Controller
     {
         $item = Item::where('itemName', $itemName)->first();
 
-        if ($item){
+        if ($item) {
             return $item;
         } else {
             $newItem = new Item();
@@ -138,13 +138,22 @@ class InvoiceItemController extends Controller
         return ['data' => $invoices->all()];
     }
 
-    public function update(Request $request, string $id){
+    public function update(Request $request, string $id)
+    {
+        $invoiceItem = InvoiceItem::find($id);
+        if (!$invoiceItem) {
+            return response()->json(['message' => 'Item not found'], 404);
 
-        return ['data' => $request->all(),'a'=> $id];
+        }
+
+        $invoiceItem->update($request->all());
+
+        return ['data' => $invoiceItem];
     }
 
-    public function itemShow(){
-        $invoiceItem = InvoiceItem:: with('items')->get();
+    public function itemShow()
+    {
+        $invoiceItem = InvoiceItem::with('items')->get();
         return ['data' => $invoiceItem->all()];
     }
 }
