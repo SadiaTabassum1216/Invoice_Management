@@ -27,38 +27,26 @@ class InvoiceItemController extends Controller
         $invoice->invoiceTotalCost = $request->input('totalCost');
         $invoice->invoiceStatus = $request->input("status");
         $invoice->invoiceGrandtotal = $request->input('grandTotal');
-        $invoice->invoiceClosingDate = $request->input('invoiceClosingDate');
-        $invoice->invoiceEstimatedDate = $request->input('invoiceEstimatedDate');
+        $invoice->invoiceClosingDate = $this->shouldDateBeNull($request->input('invoiceClosingDate'));
+        $invoice->invoiceEstimatedDate =$this->shouldDateBeNull($request->input('invoiceEstimatedDate'));
         $invoice->invoiceAdditionalCost = $request->input('additionalCost');
         $invoice->invoiceOffering = $request->input('offering');
         $invoice->invoiceSubtotal = $request->input('subtotal');
         $invoice->invoiceIsDone = $this->getBooleanVal($request->input('isDone'));
         $invoice->save();
 
-        $a = [2, 5, 2];
-        $b = [1, 2, 3];
-        $c = [1, 2, 3];
-
         $invoiceItems = [];
         $maxIdx = count($request->input("itemList_quantity"));
 
-        $IIDs = [];
         for ($i = 0; $i < $maxIdx; $i++) {
 
-            $item = Item::findOrFail($request->input('itemList_itemId')[$i]);
-            // $item = Item::findOrFail($a[$i]);
-
+            $item = $this->getItem($request->input('itemList_itemId')[$i]);
             $invoiceItem = new InvoiceItem();
             $invoiceItem->invoiceID = $invoice->id;
             $invoiceItem->userID = $request->input('itemList_userId')[$i];
-            // $invoiceItem->userID = $b[$i];
-
 
             $invoiceItem->invoiceItemQTY = $request->input('itemList_quantity')[$i];
             $invoiceItem->uomID = $request->input('itemList_UOMId')[$i];
-            // $invoiceItem->uomID = $c[$i];
-
-
 
             $invoiceItem->invoiceItemFirstprice = $request->input('itemList_firstPrice')[$i];
             $invoiceItem->invoiceItemLastprice = $request->input('itemList_lastPrice')[$i];
@@ -69,15 +57,15 @@ class InvoiceItemController extends Controller
             $invoiceItem->invoiceItemDeliveryAdditionalCost = $request->input('itemList_deliveryAdditionalCost')[$i];
             $invoiceItem->invoiceItemTotalprice = $request->input('itemList_totalPrice')[$i];
             $invoiceItem->invoiceItemPOD = $request->input('itemList_POD')[$i];
-            $invoiceItem->invoiceItemClosingDate = $request->input('itemList_closingDate')[$i];
+            $invoiceItem->invoiceItemClosingDate = $this->shouldDateBeNull($request->input('itemList_closingDate')[$i]);
             $invoiceItem->invoiceItemPurchasePrice = $request->input('itemList_purchasePrice')[$i];
             $invoiceItem->invoiceItemFirstPaymentPrice = $request->input('itemList_firstPaymentPrice')[$i];
-            $invoiceItem->invoiceItemFirstPaymentDate = $request->input('itemList_firstPaymentDate')[$i];
+            $invoiceItem->invoiceItemFirstPaymentDate = $this->shouldDateBeNull($request->input('itemList_firstPaymentDate')[$i]);
             $invoiceItem->invoiceItemLastPaymentPrice = $request->input('itemList_lastPaymentPrice')[$i];
-            $invoiceItem->invoiceItemLastPaymentDate = $request->input('itemList_lastPaymentDate')[$i];
+            $invoiceItem->invoiceItemLastPaymentDate = $this->shouldDateBeNull($request->input('itemList_lastPaymentDate')[$i]);
             $invoiceItem->invoiceItemLogisticCompany = $request->input('itemList_logisticCompany')[$i];
             $invoiceItem->invoiceItemLogisticLocation = $request->input('itemList_logisticLocation')[$i];
-            $invoiceItem->invoiceItemLogisitEstimatedDate = $request->input('itemList_logisticEstimatedDate')[$i];
+            $invoiceItem->invoiceItemLogisitEstimatedDate = $this->shouldDateBeNull($request->input('itemList_logisticEstimatedDate')[$i]);
             $invoiceItem->invoiceItemShippingStatus = $request->input('itemList_shippingStatus')[$i];
             $invoiceItem->invoiceItemDeliveredToIraq = $this->getBooleanVal($request->input('itemList_isDeliveredToIraq')[$i]);
             $invoiceItem->invoiceItemDeliverByLogisic = $this->getBooleanVal($request->input('itemList_isDeliveredByLogistic')[$i]);
@@ -91,9 +79,6 @@ class InvoiceItemController extends Controller
 
 
             $invoiceItem->save();
-
-            $IIDs[] = $invoiceItem->id;
-
             $item->invoiceItems()->attach($invoiceItem);
 
             for ($j = 1; $j < 4; $j++) {
@@ -114,27 +99,11 @@ class InvoiceItemController extends Controller
             }
         }
 
-        $fileNames = [];
-
-
-
-        // $ret_invoice = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->findOrFail($invoice->invoiceID);
         $ret_invoice = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->find($invoice->id);
 
-        // $ret_invoice = $invoice->invoiceItems()->get();
-        // $ret_invoice = Invoice::with('invoiceItems')->findOrFail($invoice->get();
-
         return response([
-            "response" => $request->all(),
-            // "str" => $invoiceItem,
-            // "test" => $request->input('itemList_quantity'),
-            // "asekina" => $request->exists("itemList_uploadedFiles_1"),
-            // "dekhi" => "itemList_uploadedFiles_" . $i,
+            "message" => "Invoice stored successfully",
             "theInvoice" => $ret_invoice,
-            // "invoiceID" => $invoice->id,
-            // "invoiceItemIDs" => $IIDs,
-
-            "status" => $request->input("status"),
         ]);
     }
 
@@ -143,6 +112,25 @@ class InvoiceItemController extends Controller
         return $val == 'true' ? true : false;
     }
 
+    private function shouldDateBeNull($date)
+    {
+        return $date == '1970-01-01' ? null : $date;
+    }
+
+    private function getItem($itemName)
+    {
+        $item = Item::where('itemName', $itemName)->first();
+
+        if ($item){
+            return $item;
+        } else {
+            $newItem = new Item();
+            $newItem->itemName = $itemName;
+            $newItem->save();
+
+            return $newItem;
+        }
+    }
     public function show()
     {
         $invoices = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->get();
