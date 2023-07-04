@@ -31,11 +31,12 @@
                             </p>
 
                             <p>
-                                <b>Done </b>
+                                <b>Done : </b>
                                 <i class="fas"
-                                    [ngClass]="{'fa-check-circle': invoice.invoiceIsDone, 'fa-times-circle': !invoice.invoiceIsDone}"
-                                    [ngStyle]="{'color': invoice.invoiceIsDone ? 'green' : 'red'}"></i>
-                            </p>
+                                  [ngClass]="{'fa-check-circle': invoice.invoiceIsDone, 'fa-times-circle': !invoice.invoiceIsDone}"
+                                  [ngStyle]="{'color': invoice.invoiceIsDone ? 'green' : 'red'}"></i>{{ invoice.invoiceIsDone ? 'Yes'
+                                : 'No' }}
+                              </p>
 
                         </address>
                     </div>

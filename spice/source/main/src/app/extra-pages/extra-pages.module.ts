@@ -26,6 +26,7 @@ import { EditInvoiceComponent } from './invoicelist/edit-invoice/edit-invoice.co
 import { UsertaskComponent } from './usertask/usertask.component';
 import { EditItemsComponent } from './usertask/edit-items/edit-items.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FilesComponent } from './usertask/files/files.component';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -42,6 +43,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     ViewInvoiceComponent,
     EditInvoiceComponent,
     EditItemsComponent,
+    FilesComponent,
   ],
   imports: [
     CommonModule,

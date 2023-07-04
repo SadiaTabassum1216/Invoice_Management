@@ -31,6 +31,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   headerHeight = 60;
   currentRoute?: string;
   routerObj;
+  
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -73,7 +74,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.authService.currentUserValue) {
       this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
-      console.log("user: ",this.authService.currentUserValue);
+      // console.log("user: ",this.authService.currentUserValue);
       this.currentUser=this.authService.currentUser;
     this.currentUser.subscribe(info => {
       this.id=info['user']['id'];

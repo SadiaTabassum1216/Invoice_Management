@@ -7,101 +7,105 @@
         <br><br>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="itemID">Item Id</label>
-                <input type="text" class="form-control" id="itemID" name="itemId" [(ngModel)]="selectedItem.itemId">
+                <label for="invoiceID">Invoice ID</label>
+                    <input type="text" class="form-control" id="invoiceID" name="invoiceID"
+                        [(ngModel)]="selectedItem.invoiceID" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="itemID">Item ID</label>
+                <input type="text" class="form-control" id="itemID" name="id" [(ngModel)]="selectedItem.id" disabled>
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="userId">userId</label>
-                <input type="text" class="form-control" id="userId" name="userId" [(ngModel)]="selectedItem.userId"
-                    disabled>
-            </div>
-        </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="UOMId">UOM ID</label>
-                <input type="text" class="form-control" id="UOMId" name="selectedItem.UOMId"
-                    [(ngModel)]="selectedItem.UOMId">
+                <input type="text" class="form-control" id="uomID" name="selectedItem.uomID"
+                    [(ngModel)]="selectedItem.uomID">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="firstPrice">First Price</label>
-                <input type="number" class="form-control" id="firstPrice" name="firstPrice"
-                    [(ngModel)]="selectedItem.firstPrice">
+                <input type="number" class="form-control" id="firstPrice" name="invoiceItemFirstPrice"
+                    [(ngModel)]="selectedItem.invoiceItemFirstPrice">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="lastPrice">Last Price</label>
-                <input type="number" class="form-control" id="lastPrice" name="lastPrice"
-                    [(ngModel)]="selectedItem.lastPrice">
+                <input type="number" class="form-control" id="lastPrice" name="invoiceItemLastPrice"
+                    [(ngModel)]="selectedItem.invoiceItemLastPrice">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="quantity">Quantity</label>
-                <input type="number" class="form-control" id="quantity" name="quantity"
-                    [(ngModel)]="selectedItem.quantity">
+                <input type="number" class="form-control" id="quantity" name="invoiceItemQTY"
+                    [(ngModel)]="selectedItem.invoiceItemQTY">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="VAT">VAT</label>
-                <input type="number" class="form-control" id="VAT" name="VAT" [(ngModel)]="selectedItem.VAT">
+                <input type="number" class="form-control" id="VAT" name="invoiceItemVAT"
+                    [(ngModel)]="selectedItem.invoiceItemVAT">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="unitPrice">Unit Price</label>
-                <input type="number" class="form-control" id="unitPrice" name="unitPrice"
-                    [(ngModel)]="selectedItem.unitPrice">
+                <input type="number" class="form-control" id="unitPrice" name="invoiceItemUnitPrice"
+                    [(ngModel)]="selectedItem.invoiceItemUnitPrice">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="additionalCost">Additional Cost</label>
-                <input type="number" class="form-control" id="additionalCost" name="additionalCost"
-                    [(ngModel)]="selectedItem.additionalCost">
+                <input type="number" class="form-control" id="additionalCost" name="invoiceItemQouteAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceItemQouteAdditionalCost">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="purchaseAdditionalCost">Purchase Additional Cost</label>
-                <input type="number" class="form-control" id="purchaseAdditionalCost" name="purchaseAdditionalCost"
-                    [(ngModel)]="selectedItem.purchaseAdditionalCost">
+                <input type="number" class="form-control" id="purchaseAdditionalCost"
+                    name="invoiceitemPurchaseAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceitemPurchaseAdditionalCost">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="deliveryAdditionalCost">Delivery Additional Cost</label>
-                <input type="number" class="form-control" id="deliveryAdditionalCost" name="deliveryAdditionalCost"
-                    [(ngModel)]="selectedItem.deliveryAdditionalCost">
+                <input type="number" class="form-control" id="deliveryAdditionalCost"
+                    name="invoiceItemDeliveryAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceItemDeliveryAdditionalCost">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="totalPrice">Total Price</label>
-                <input type="number" class="form-control" id="totalPrice" name="totalPrice"
-                    [(ngModel)]="selectedItem.totalPrice" disabled>
+                <input type="number" class="form-control" id="totalPrice" name="invoiceItemTotalPrice"
+                    [(ngModel)]="selectedItem.invoiceItemTotalPrice" disabled>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="POD">POD</label>
-                <input type="text" class="form-control" id="POD" name="POD" [(ngModel)]="selectedItem.POD">
+                <input type="text" class="form-control" id="POD" name="invoiceItemPOD"
+                    [(ngModel)]="selectedItem.invoiceItemPOD">
             </div>
         </div>
 
@@ -109,16 +113,16 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="closingDate">Closing Date</label>
-                <input type="date" class="form-control" id="closingDate" name="closingDate"
-                    [(ngModel)]="selectedItem.closingDate">
+                <input type="date" class="form-control" id="closingDate" name="invoiceItemClosingDate"
+                    [(ngModel)]="selectedItem.invoiceItemClosingDate">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="purchasePrice">Purchase Price</label>
-                <input type="number" class="form-control" id="purchasePrice" name="purchasePrice"
-                    [(ngModel)]="selectedItem.purchasePrice">
+                <input type="number" class="form-control" id="purchasePrice" name="invoiceItemPurchasePrice"
+                    [(ngModel)]="selectedItem.invoiceItemPurchasePrice">
             </div>
         </div>
 
@@ -126,16 +130,17 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 Is First Payment Done
-                <input type="checkbox" name="isFirstPaymentDone" [(ngModel)]="selectedItem.isFirstPaymentDone">
-              
+                <input type="checkbox" name="invoiceItemIsFirstPaymentDone"
+                    [(ngModel)]="selectedItem.invoiceItemIsFirstPaymentDone">
+
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="firstPaymentPrice">First Payment Price</label>
-                <input type="number" class="form-control" id="firstPaymentPrice" name="firstPaymentPrice"
-                    [(ngModel)]="selectedItem.firstPaymentPrice">
+                <input type="number" class="form-control" id="firstPaymentPrice" name="invoiceItemFirstPaymentPrice"
+                    [(ngModel)]="selectedItem.invoiceItemFirstPaymentPrice">
             </div>
         </div>
 
@@ -143,16 +148,16 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="firstPaymentDate">First Payment Date</label>
-                <input type="date" class="form-control" id="firstPaymentDate" name="firstPaymentDate"
-                    [(ngModel)]="selectedItem.firstPaymentDate">
+                <input type="date" class="form-control" id="firstPaymentDate" name="invoiceItemFirstPaymentDate"
+                    [(ngModel)]="selectedItem.invoiceItemFirstPaymentDate">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 Is Last Payment done
-                <input type="checkbox" name="isLastPaymentDone"
-                    [(ngModel)]="selectedItem.isLastPaymentDone">
+                <input type="checkbox" name="invoiceItemIsLastPaymentDone"
+                    [(ngModel)]="selectedItem.invoiceItemIsLastPaymentDone">
             </div>
         </div>
 
@@ -160,16 +165,16 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="lastPaymentPrice">Last Payment Price</label>
-                <input type="number" class="form-control" id="lastPaymentPrice" name="lastPaymentPrice"
-                    [(ngModel)]="selectedItem.lastPaymentPrice">
+                <input type="number" class="form-control" id="lastPaymentPrice" name="invoiceItemLastPaymentPrice"
+                    [(ngModel)]="selectedItem.invoiceItemLastPaymentPrice">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="lastPaymentDate">Last Payment Date</label>
-                <input type="date" class="form-control" id="lastPaymentDate" name="lastPaymentDate"
-                    [(ngModel)]="selectedItem.lastPaymentDate">
+                <input type="date" class="form-control" id="lastPaymentDate" name="invoiceItemLastPaymentDate"
+                    [(ngModel)]="selectedItem.invoiceItemLastPaymentDate">
             </div>
         </div>
 
@@ -177,16 +182,16 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="logisticCompany">Logistic Company</label>
-                <input type="text" class="form-control" id="logisticCompany" name="logisticCompany"
-                    [(ngModel)]="selectedItem.logisticCompany">
+                <input type="text" class="form-control" id="logisticCompany" name="invoiceItemLogisticCompany"
+                    [(ngModel)]="selectedItem.invoiceItemLogisticCompany">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="logisticLocation">Logistic Location</label>
-                <input type="text" class="form-control" id="logisticLocation" name="logisticLocation"
-                    [(ngModel)]="selectedItem.logisticLocation">
+                <input type="text" class="form-control" id="logisticLocation" name="invoiceItemLogisticLocation"
+                    [(ngModel)]="selectedItem.invoiceItemLogisticLocation">
             </div>
         </div>
 
@@ -194,71 +199,71 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="logisticEstimatedDate">Logistic Estimated Date</label>
-                <input type="date" class="form-control" id="logisticEstimatedDate" name="logisticEstimatedDate"
-                    [(ngModel)]="selectedItem.logisticEstimatedDate">
+                <input type="date" class="form-control" id="logisticEstimatedDate"
+                    name="invoiceItemLogisitEstimatedDate" [(ngModel)]="selectedItem.invoiceItemLogisitEstimatedDate">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="shippingStatus">Shipping Status</label>
-                <input type="text" class="form-control" id="shippingStatus" name="shippingStatus"
-                    [(ngModel)]="selectedItem.shippingStatus">
+                <input type="text" class="form-control" id="shippingStatus" name="invoiceItemShippingStatus"
+                    [(ngModel)]="selectedItem.invoiceItemShippingStatus">
             </div>
         </div>
 
         <!-- Repeat the pattern for other attributes -->
         <div class="form-row">
             <div class="form-group col-md-6">
-              Is Delivered to Iraq
-                <input type="checkbox"  name="isDeliveredToIraq"
-                    [(ngModel)]="selectedItem.isDeliveredToIraq">
+                Is Delivered to Iraq
+                <input type="checkbox" name="invoiceItemDeliveredToIraq"
+                    [(ngModel)]="selectedItem.invoiceItemDeliveredToIraq">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
-              Is Delivered by Logistic
-                <input type="checkbox"  name="isDeliveredByLogistic"
-                    [(ngModel)]="selectedItem.isDeliveredByLogistic">
+                Is Delivered by Logistic
+                <input type="checkbox" name="invoiceItemDeliverByLogisic"
+                    [(ngModel)]="selectedItem.invoiceItemDeliverByLogisic">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 Is Deliver to Client
-                <input type="checkbox"  name="isDeliverToClient"
-                    [(ngModel)]="selectedItem.isDeliverToClient">
+                <input type="checkbox" name="invoiceItemDeliverToClient"
+                    [(ngModel)]="selectedItem.invoiceItemDeliverToClient">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="logisticCost">Logistic Cost</label>
-                <input type="number" class="form-control" id="logisticCost" name="logisticCost"
-                    [(ngModel)]="selectedItem.logisticCost">
+                <input type="number" class="form-control" id="logisticCost" name="invoiceItemLogisticCost"
+                    [(ngModel)]="selectedItem.invoiceItemLogisticCost">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 Is Fully Paid
-                <input type="checkbox" name="isFullyPaid"
-                    [(ngModel)]="selectedItem.isFullyPaid">
+                <input type="checkbox" name="invoiceItemFullPaid" [(ngModel)]="selectedItem.invoiceItemFullPaid">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                Is Submitted<input type="checkbox"  name="isSubmitted"
-                    [(ngModel)]="selectedItem.isSubmitted">
+                Is Submitted<input type="checkbox" name="invoiceItemSubmitted"
+                    [(ngModel)]="selectedItem.invoiceItemSubmitted">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="status">Status</label>
-                <input type="text" class="form-control" id="status" name="status" [(ngModel)]="selectedItem.status">
+                <input type="text" class="form-control" id="status" name="invoiceItemStatus"
+                    [(ngModel)]="selectedItem.invoiceItemStatus">
             </div>
         </div>
 

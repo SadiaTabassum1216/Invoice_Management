@@ -8,6 +8,8 @@ import { ViewInvoiceComponent } from './view-invoice/view-invoice.component';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Invoice2 } from 'src/app/models/invoice2.model';
+import { AuthUser } from 'src/app/core/models/user';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 
 @Component({
@@ -27,13 +29,26 @@ export class InvoicelistComponent implements OnInit {
   totalGrandTotal: number = 0;
   totalCost: number = 0;
   totalDone: number = 0;
+  public currentUser: Observable<AuthUser> | undefined;
+  id: number=0;
 
-  constructor(private http: HttpClient, private dialogModel: MatDialog) {
+  
+  constructor(private http: HttpClient,
+    private authService: AuthService,
+     private dialogModel: MatDialog) {
 
 
   }
   ngOnInit(): void {
     this.getInvoices();
+    this.currentUser=this.authService.currentUser;
+    this.currentUser.subscribe(info => {
+     
+      this.id=info['user']['id'];
+      // console.log("Current user id ",  this.id);
+    });
+
+   
   }
 
   getInvoices() {
