@@ -5,6 +5,16 @@
     1. composer
     2. php 8.1 or higher
     3. Laravel 10.10 or higher
+    4. Node.js
+    5. Angular CLI (npm install -g @angular/cli)
+
+# Front End Tutorial
+
+1. Download and extract the project zip file to your desired location.
+2. Open a terminal or command prompt and navigate to the project folder: cd path/to/your-repo-main
+3. Install the dependencies: npm install
+4. **To start the backend server, use:**: ng serve
+5. Open your web browser and visit http://localhost:4200 to see the application.
     
 # Back End Tutorial 
 
