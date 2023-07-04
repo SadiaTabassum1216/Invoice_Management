@@ -46,7 +46,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="text-center">Item Name</th>
+                        <th class="text-center">Item Id</th>
                         <th class="text-center">User ID</th>
                         <th class="text-center">UOM ID</th>
                         <th class="text-center">First Price</th>
@@ -59,7 +59,7 @@
                         <th class="text-center">Delivery Additional Cost</th>
                         <th class="text-center">POD</th>
                         <th class="text-center">Closing Date</th>
-                        <!-- <th class="text-center">Files</th> -->
+                       
 
 
                         <th class="text-center">Purchase Price</th>
@@ -76,7 +76,7 @@
                         <th class="text-center">Logistic Location</th>
                         <th class="text-center">Logistic Estimated Date</th>
                         <th class="text-center">Shipping Status</th>
-                        <!-- <th class="text-center">Files</th> -->
+                       
 
 
                         <th class="text-center">Is Delivered to Iraq</th>
@@ -85,8 +85,7 @@
                         <th class="text-center">Logistic Cost</th>
                         <th class="text-center">Is Fully Paid</th>
                         <th class="text-center">Is Submitted</th>
-                        <!-- <th class="text-center">Files</th> -->
-
+                       
 
                         <th class="text-center">Status</th>
                         <th class="text-center">Action</th>
@@ -95,22 +94,12 @@
                 <tbody>
                     <tr *ngFor="let item of invoice.invoice_items; let i = index">
                         <td class="text-center">
-                            <!-- <select name="{{item.itemId}}" [(ngModel)]="item.itemId">
-                                  <option *ngFor="let option of itemName" [value]="option">{{option}}</option>
-                                </select> -->
-
-                            <input matInput type="text" [matAutocomplete]="auto" name="{{item.itemName}}"
-                                [(ngModel)]="item.itemName" [formControl]="myControlitem">
-                            <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let item of filteredOptionsItem | async" [value]="item.name">
-                                    {{ item.name }} (ID: {{ item.id }})
-                                </mat-option>
-                            </mat-autocomplete>
+                           {{item.id}}
                         </td>
 
 
                         <td class="text-center">
-                            <!-- <mat-form-field> -->
+                          
                             <input matInput type="text" [matAutocomplete]="autouser" name="{{item.userID}}"
                                 [(ngModel)]="item.userID" [formControl]="myControluser">
                             <mat-autocomplete #autouser="matAutocomplete">
@@ -118,7 +107,7 @@
                                     {{ user.name }} (ID: {{ user.id }})
                                 </mat-option>
                             </mat-autocomplete>
-                            <!-- </mat-form-field> -->
+                           
                         </td>
 
                         <td class="text-center">
@@ -129,7 +118,7 @@
                                     {{ uom.name }} (ID: {{ uom.id }})
                                 </mat-option>
                             </mat-autocomplete>
-                            <!-- <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"> -->
+                           
                         </td>
 
                         <td class="text-center">
@@ -172,7 +161,7 @@
                         </td>
 
 
-                        <!-- level 2 -->
+                       
                         <td class="text-center">
                             <input type="number" name="{{item.invoiceItemPurchasePrice}}"
                                 [(ngModel)]="item.invoiceItemPurchasePrice">
@@ -220,7 +209,7 @@
                         </td>
 
 
-                        <!-- level 3 -->
+                       
                         <td class="text-center">
                             <input type="checkbox" name="{{item.invoiceItemDeliveredToIraq}}"
                                 [(ngModel)]="item.invoiceItemDeliveredToIraq">
@@ -247,7 +236,7 @@
                         </td>
 
 
-                        <!-- level 4 -->
+                       
                         <td class="text-center">
                             <input type="text" name="{{item.invoiceItemStatus}}" [(ngModel)]="item.invoiceItemStatus">
                         </td>
@@ -263,11 +252,11 @@
             </table>
         </div>
         <br>
-        <div colspan="29" class="text-center">
+        <!-- <div colspan="29" class="text-center">
             <button class="add-row-button" (click)="addRow()">
                 <i class="fa fa-plus"></i> Add Row
             </button>
-        </div>
+        </div> -->
         <br>
 
 

@@ -5,7 +5,7 @@
     <div class="menu">
       <ng-scrollbar [style.height]="listMaxHeight + 'px'" visibility="hover">
         <ul class="list">
-      
+
           <!-- Top Most level menu -->
           <li *ngFor="let sidebarItem of sidebarItems"
             [routerLinkActive]="sidebarItem.submenu.length !== 0 ? 'active' : 'active-top'">
@@ -19,37 +19,39 @@
               <span *ngIf="sidebarItem.badge !== '' " [ngClass]="[sidebarItem.badgeClass]">{{sidebarItem.badge}}</span>
             </a>
             <!-- First level menu -->
-            <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
+            <!-- <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
               <li *ngFor="let sidebarSubItem1 of sidebarItem.submenu"
                 [routerLinkActive]="sidebarSubItem1.submenu.length > 0 ? '' : 'active'">
                 <a [routerLink]="sidebarSubItem1.submenu.length > 0 ? null : [sidebarSubItem1.path]"
                   (click)="callToggleMenu($event,sidebarSubItem1.submenu.length)" [ngClass]="[sidebarSubItem1.class]">
                   {{sidebarSubItem1.title}}
                 </a>
-                <!-- Second level menu -->
-                <ul class="ml-menu-2" *ngIf="sidebarSubItem1.submenu.length > 0">
-                  <li *ngFor="let sidebarSubItem2 of sidebarSubItem1.submenu"
-                    [routerLinkActive]="sidebarSubItem2.submenu.length > 0 ? '' : 'active'">
-                    <a [routerLink]="sidebarSubItem2.submenu.length > 0 ? null : [sidebarSubItem2.path]"
-                      (click)="callToggleMenu($event,sidebarSubItem2.submenu.length)"
-                      [ngClass]="[sidebarSubItem2.class]">
-                      {{sidebarSubItem2.title}}
-                    </a>
-                    <!-- Third level menu -->
-                    <ul class="ml-menu-3" *ngIf="sidebarSubItem2.submenu.length > 0">
-                      <li *ngFor="let sidebarSubItem3 of sidebarSubItem2.submenu"
-                        [routerLinkActive]="sidebarSubItem3.submenu.length > 0 ? '' : 'active'">
-                        <a [routerLink]="sidebarSubItem3.submenu.length > 0 ? null : [sidebarSubItem3.path]"
-                          (click)="callToggleMenu($event,sidebarSubItem3.submenu.length)"
-                          [ngClass]="[sidebarSubItem3.class]">
-                          {{sidebarSubItem3.title}}
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
+              </li>
+            </ul> -->
+
+            <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
+              <li *ngIf=" id === 1 && sidebarItem.submenu.length >= 1">
+                <a [routerLink]="sidebarItem.submenu[0].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[0].class]">
+                  {{ sidebarItem.submenu[0].title }}
+                </a>
+              </li>
+              <li *ngIf="id === 1 && sidebarItem.submenu.length >= 2">
+                <a [routerLink]="sidebarItem.submenu[1].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[1].class]">
+                  {{ sidebarItem.submenu[1].title }}
+                </a>
+              </li>
+              <li *ngIf="sidebarItem.submenu.length >= 3">
+                <a [routerLink]="sidebarItem.submenu[2].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[2].class]">
+                  {{ sidebarItem.submenu[2].title }}
+                </a>
+              </li>
+              <li *ngIf="sidebarItem.submenu.length >= 4">
+                <a [routerLink]="sidebarItem.submenu[3].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[3].class]">
+                  {{ sidebarItem.submenu[3].title }}
+                </a>
               </li>
             </ul>
+            
           </li>
         </ul>
       </ng-scrollbar>

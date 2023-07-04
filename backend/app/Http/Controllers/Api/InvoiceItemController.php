@@ -153,7 +153,7 @@ class InvoiceItemController extends Controller
 
     public function itemShow()
     {
-        $invoiceItem = InvoiceItem::with('items')->get();
+        $invoiceItem = InvoiceItem::with('items','invoiceItemFiles')->get();
         return ['data' => $invoiceItem->all()];
     }
 }

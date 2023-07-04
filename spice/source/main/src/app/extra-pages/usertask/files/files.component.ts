@@ -6,27 +6,28 @@ import { Item } from 'src/app/models/item.model';
 import { FormsModule } from '@angular/forms';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
-
+import { InvoiceItem } from 'src/app/models/invoice2.model';
 
 @Component({
-  selector: 'app-edit-items',
-  templateUrl: './edit-items.component.html',
-  styleUrls: ['./edit-items.component.scss']
+  selector: 'app-files',
+  templateUrl: './files.component.html',
+  styleUrls: ['./files.component.scss']
 })
-export class EditItemsComponent {
-  selectedItem: InvoiceItem3 = new InvoiceItem3();
+export class FilesComponent {
+  selectedItem: InvoiceItem = new InvoiceItem();
   dialogConfig?: MatDialogConfig;
+  // backendEnvironment: any;
+  link: string= backendEnvironment.apiUrl;
   // item: InvoiceItem3= new InvoiceItem3();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, public dialog: MatDialog) {
     this.selectedItem = data.item;
     //  this.item= data.item;
-    // console.log("Selected Item is: ",this.selectedItem);
+     console.log("Selected Item is: ",this.selectedItem);
   }
 
-
-  update() {
-    this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice_item/${this.selectedItem.id}`, this.selectedItem).subscribe(data => {
+  download() {
+    this.http.post<any>(`${backendEnvironment.apiUrl}/api/invoice_item/${this.selectedItem.id}`, this.selectedItem).subscribe(data => {
       console.log(this.selectedItem);
     },
       error => {      
@@ -39,4 +40,5 @@ export class EditItemsComponent {
   close(){
     this.dialog.closeAll();
   }
+
 }

@@ -303,7 +303,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   submit() {
-    //  this.isFormSubmitted = true;
+      this.isFormSubmitted = true;
 
     this.invoice.invoiceDate = new Date();
     
