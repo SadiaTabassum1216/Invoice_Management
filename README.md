@@ -13,7 +13,7 @@
 1. Download and extract the project zip file to your desired location.
 2. Open a terminal or command prompt and navigate to the project folder: `cd path/to/your-repo-main`
 3. Install the dependencies: `npm i`
-4. **To start the backend server, use:**: `ng serve`
+4. **To start the backend server:** Navigate to the project folder and use the command `ng serve`
 5. Open your web browser and visit http://localhost:4200 to see the application.
     
 # Back End Tutorial 
