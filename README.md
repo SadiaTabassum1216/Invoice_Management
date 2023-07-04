@@ -1,4 +1,4 @@
-# How To Setup Back End 
+# How To Setup 
 (This assumes that you have already extracted the zip file and have the 'frontend' and 'backend' folders ready to go.)
 
 # Requirements:
