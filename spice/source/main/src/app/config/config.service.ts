@@ -14,7 +14,7 @@ export class ConfigService {
   setConfigData() {
     this.configData = {
       layout: {
-        rtl: true, // options:  true & false
+        rtl: false, // options:  true & false
         variant: 'light', // options:  light & dark
         theme_color: 'white', // options:  white, black, purple, blue, cyan, green, orange
         logo_bg_color: 'white', // options:  white, black, purple, blue, cyan, green, orange

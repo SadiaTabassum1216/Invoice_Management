@@ -1,4 +1,4 @@
 export const backendEnvironment = {
-  production: true, 
-  apiUrl: 'http://localhost:8000',
+  production: false, 
+  apiUrl: 'https://tmb.kreatedev.com/api',
 }

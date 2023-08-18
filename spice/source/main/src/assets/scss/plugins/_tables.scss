@@ -228,6 +228,19 @@
     width: 20px !important;
   }
 }
+.home-feather-iconz {
+  color: #606060;
+  display: inline !important;
+  .feather {
+    height: 35px !important;
+    width: 35px !important;
+  }
+}
+
+.homebtn:hover {
+  opacity: 0.4;
+  @include transform(rotate(-5deg) scale(1.1));
+}
 .avatar {
   position: relative;
   width: 30px;
