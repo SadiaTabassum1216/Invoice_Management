@@ -20,6 +20,7 @@ import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     NgScrollbarModule,
     LoadingBarRouterModule,
     CoreModule,
+    FormsModule,
     SharedModule,
   ],
   providers: [

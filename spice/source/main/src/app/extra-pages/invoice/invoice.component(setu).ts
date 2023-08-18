@@ -142,7 +142,7 @@ export class InvoiceComponent implements OnInit {
   //   this.selectedFiles = null;
     
 
-  //   // this.http.post('http://localhost:8000/api/invoice', formData).subscribe(
+  //   // this.http.post('https://tmb.kreatedev.com/api/api/invoice', formData).subscribe(
   //   //   data => {
   //   //     console.log(data);
   //   //   }
@@ -312,7 +312,7 @@ onFileSelect(event: any): void {
     // Now you can use the formData object in your HTTP request
 
     this.http
-      .post<any>('http://localhost:8000/api/invoice', formData)
+      .post<any>('https://tmb.kreatedev.com/api/api/invoice', formData)
       .subscribe((data) => {
         // console.log(this.invoice);
         // console.log('FormData', formData.getAll('itemList'));
