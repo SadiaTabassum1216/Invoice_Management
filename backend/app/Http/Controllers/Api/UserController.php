@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -103,11 +104,12 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
+            'name' => 'nullable|string',
             // 'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'required|min:8',
-            'username' => 'required|unique:users,username,' . $id,
-            'status' => 'nullable|string'
+            'password' => 'nullable|min:8',
+            'username' => 'nullable|unique:users,username,' . $id,
+            'status' => 'nullable|string',
+            'roles.*' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -124,14 +126,10 @@ class UserController extends Controller
             ], 404);
         }
 
-        $user->update([
-            'name' => $request->input('name'),
-            // 'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-            'username' => $request->input('username'),
-            'status' => $request->input('status'),
-        ]);
-        $user->syncRoles($request->input('roles'));
+        if ($request->has('username')) $user->username = $request->input('username');
+        if ($request->has('password')) $user->username = Hash::make($request->input('username'));
+        if ($request->has('name')) $user->username = $request->input('name');
+        if ($request->has('roles')) $user->syncRoles($request->input('roles'));
 
         return response()->json(new UserResource($user));
     }
