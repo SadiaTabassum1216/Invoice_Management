@@ -13,15 +13,15 @@ class NotificationController extends Controller
     public function index()
     {
 
-        $user = Auth()->user();
+        // $user = Auth()->user();
 
-        return ['user' => $user];
+        // return ['user' => $user];
 
-    //     $notifications = Auth()->user()->notifications;
+        $notifications = Auth()->user()->notifications;
 
-    //     return [
-    //         'notifications' => $notifications,
-    //     ]
+        return [
+            'notifications' => $notifications,
+        ];
     }
 
     /**

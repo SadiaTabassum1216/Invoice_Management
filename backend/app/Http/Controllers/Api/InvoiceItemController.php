@@ -101,7 +101,7 @@ class InvoiceItemController extends Controller
             }
 
             $employee = User::findOrFail($invoiceItem->userID);
-            $employee->notifiy(new NewInvoiceNotification($invoiceItem));
+            $employee->notify(new NewInvoiceNotification($invoiceItem));
         }
 
         $ret_invoice = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->find($invoice->id);
