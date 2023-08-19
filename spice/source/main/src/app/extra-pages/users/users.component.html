@@ -27,12 +27,8 @@
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.username }}</td>
-        <td>
-          <ng-container *ngIf="user.roles && user.roles.length > 0; else noRoles">
-            {{ user.roles.join(', ') }}
-          </ng-container>
-          <ng-template #noRoles>No Roles</ng-template>
-        </td>
+        <td>{{ user.roles && user.roles.length ? user.roles.join(', ') : 'No Roles' }}</td>
+
         <td>{{ user.status}}</td>
         <td>
           <button mat-raised-button class="btn btn-primary edit-button" (click)="editUser(i)">

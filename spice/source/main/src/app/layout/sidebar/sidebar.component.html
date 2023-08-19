@@ -18,41 +18,20 @@
               </span>
               <span *ngIf="sidebarItem.badge !== '' " [ngClass]="[sidebarItem.badgeClass]">{{sidebarItem.badge}}</span>
             </a>
-            <!-- First level menu -->
-            <!-- <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
-              <li *ngFor="let sidebarSubItem1 of sidebarItem.submenu"
-                [routerLinkActive]="sidebarSubItem1.submenu.length > 0 ? '' : 'active'">
-                <a [routerLink]="sidebarSubItem1.submenu.length > 0 ? null : [sidebarSubItem1.path]"
-                  (click)="callToggleMenu($event,sidebarSubItem1.submenu.length)" [ngClass]="[sidebarSubItem1.class]">
-                  {{sidebarSubItem1.title}}
-                </a>
-              </li>
-            </ul> -->
 
             <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
-              <li *ngIf=" id === 1 && sidebarItem.submenu.length >= 1">
-                <a [routerLink]="sidebarItem.submenu[0].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[0].class]">
-                  {{ sidebarItem.submenu[0].title }}
-                </a>
-              </li>
-              
-              <li *ngIf="id === 1 && sidebarItem.submenu.length >= 2">
-                <a [routerLink]="sidebarItem.submenu[1].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[1].class]">
-                  {{ sidebarItem.submenu[1].title }}
-                </a>
-              </li>
-              <li *ngIf="sidebarItem.submenu.length >= 3">
-                <a [routerLink]="sidebarItem.submenu[2].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[2].class]">
-                  {{ sidebarItem.submenu[2].title }}
-                </a>
-              </li>
-              <li *ngIf="sidebarItem.submenu.length >= 4">
-                <a [routerLink]="sidebarItem.submenu[3].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[3].class]">
-                  {{ sidebarItem.submenu[3].title }}
-                </a>
-              </li>
+              <ng-container *ngFor="let subItem of sidebarItem.submenu; let i = index">
+                <li *ngIf="id === 1 || (i >= 3 && i <= 8)">
+                  <a [routerLink]="subItem.path" [routerLinkActive]="'active'" [ngClass]="[subItem.class]">
+
+                    <i [ngClass]="[subItem.iconType]">{{subItem.icon}}</i>
+                    <span class="hide-menu"> {{ subItem.title }}
+                    </span>
+                  </a>
+                </li>
+              </ng-container>
             </ul>
-            
+
           </li>
         </ul>
       </ng-scrollbar>
