@@ -18,6 +18,7 @@ const users: AuthUser[] = [
     password: 'admin',
     firstName: 'Sarah',
     lastName: 'Smith',
+    roles: ['admin'],
     token: 'admin-token',
   },
 ];
@@ -57,6 +58,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
+         roles: user.roles,
         token: user.token,
       });
     }
@@ -68,6 +70,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       username: string;
       firstName: string;
       lastName: string;
+      roles: string[];
       token: string;
     }) {
       return of(new HttpResponse({ status: 200, body }));
