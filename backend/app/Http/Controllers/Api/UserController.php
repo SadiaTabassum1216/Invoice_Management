@@ -52,7 +52,7 @@ class UserController extends Controller
             'password' => 'required|min:8',
             'username' => 'required|unique:users',
             'status' => 'nullable|string',
-            'roles' => 'required|string',
+            'roles.*' => 'required|string',
         ]);
 
         if ($validator->fails()) {
