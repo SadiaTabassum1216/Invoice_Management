@@ -3,6 +3,7 @@ export class User {
     name: string;
     username: string;
     status: string='offline';
+    role: string[]=[];
     password:string='';
   
     constructor(userID: number, fullName: string, username: string) {
