@@ -25,6 +25,54 @@ export const ROUTES: RouteInfo[] = [
       
   },
   {
+    path: '/extra-pages/invoice_view',
+    title: 'Invoice View',
+    iconType: 'material-icons-two-tone',
+    icon: 'fact_check',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+      
+  },
+  {
+    path: '/extra-pages/pricing_level',
+    title: 'Pricing Level',
+    iconType: 'material-icons-two-tone',
+    icon: 'fact_check',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+      
+  },
+  {
+    path: '/extra-pages/offering_level',
+    title: 'Offering Level',
+    iconType: 'material-icons-two-tone',
+    icon: 'fact_check',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+      
+  },
+  {
+    path: '/extra-pages/purchase_level',
+    title: 'Purchase Level',
+    iconType: 'material-icons-two-tone',
+    icon: 'fact_check',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+      
+  },
+  {
     path: '/extra-pages/invoicelist',
     title: 'Invoice Reports',
     iconType: 'material-icons-two-tone',

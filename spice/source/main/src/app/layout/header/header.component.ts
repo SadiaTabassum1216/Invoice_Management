@@ -60,6 +60,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.sendPing();
   }
 
+  navigateToNotifications() {
+    this.router.navigate(['extra-pages', 'notification']);
+  }
+
   sendPing(){
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
     this.http.get(`${backendEnvironment.apiUrl}/api/ping`, {headers}).subscribe(

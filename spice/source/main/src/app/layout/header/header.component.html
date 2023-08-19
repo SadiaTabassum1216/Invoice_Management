@@ -20,10 +20,19 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
+        <li class="nav-item notifications">
+          <button mat-button (click)="navigateToNotifications()">
+            <div class="chip">
+              <span>Notifications</span>
+              <i class="fas fa-bell notification-icon"></i>
+            </div>
+          </button>
+        </li>
+              
         <li class="nav-item user_profile">
           <button mat-button [matMenuTriggerFor]="profilemenu">
-            <div class="chip dropdown-toggle" ngbDropdownToggle class="">
-              <span>{{name}}  </span>
+            <div class="chip dropdown-toggle profile-toggle">
+              <span>{{name}}</span>
               <i class="fas fa-user user-icon"></i>
             </div>
           </button>
@@ -31,15 +40,6 @@
             <div class="noti-list">
               <div class="menu ">
                 <div class="user_dw_menu">
-                  <!-- <button mat-menu-item>
-                    <app-feather-icons [icon]="'user'" [class]="'user-menu-icons'"></app-feather-icons>Account
-                  </button>
-                  <button mat-menu-item>
-                    <app-feather-icons [icon]="'mail'" [class]="'user-menu-icons'"></app-feather-icons>Inbox
-                  </button>
-                  <button mat-menu-item>
-                    <app-feather-icons [icon]="'settings'" [class]="'user-menu-icons'"></app-feather-icons>Settings
-                  </button> -->
                   <button mat-menu-item (click)="logout()">
                     <app-feather-icons [icon]="'log-out'" [class]="'user-menu-icons'"></app-feather-icons>Logout
                   </button>
@@ -48,6 +48,7 @@
             </div>
           </mat-menu>
         </li>
+        
       </ul>
     </div>
   </div>
