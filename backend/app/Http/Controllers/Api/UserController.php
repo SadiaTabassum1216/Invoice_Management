@@ -51,7 +51,8 @@ class UserController extends Controller
             // 'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             'username' => 'required|unique:users',
-            'status' => 'nullable|string'
+            'status' => 'nullable|string',
+            'roles' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -66,7 +67,7 @@ class UserController extends Controller
             'password' => bcrypt($request->input('password')),
             'username' => $request->input('username'),
             'status' => $request->input('status'),
-        ]);
+        ])->assignRole($request->input('roles'));
 
         return response()->json(new UserResource($user), 201);
     }
@@ -130,6 +131,7 @@ class UserController extends Controller
             'username' => $request->input('username'),
             'status' => $request->input('status'),
         ]);
+        $user->syncRoles($request->input('roles'));
 
         return response()->json(new UserResource($user));
     }
