@@ -12,9 +12,9 @@ export class Invoice {
     additionalCost: number=0;
     totalCost: number=0;
 
-    origin: string = ''; 
-    partNumber: string = ''; 
-    manufacturer: string = ''; 
+    // origin: string = ''; 
+    // partNumber: string = ''; 
+    // manufacturer: string = ''; 
 
     status: string='';
     isDone: boolean= false;

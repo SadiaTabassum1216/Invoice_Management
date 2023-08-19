@@ -364,9 +364,9 @@ export class InvoiceComponent implements OnInit {
     formData.append('grandTotal', this.invoice.grandTotal.toString());
     formData.append('additionalCost', this.invoice.additionalCost.toString());
     formData.append('totalCost', this.invoice.totalCost.toString());
-    formData.append('origin', this.invoice.origin);
-    formData.append('partNumber', this.invoice.partNumber); 
-    formData.append('manufacturer', this.invoice.manufacturer); 
+    // formData.append('origin', this.invoice.origin);
+    // formData.append('partNumber', this.invoice.partNumber); 
+    // formData.append('manufacturer', this.invoice.manufacturer); 
 
     formData.append('status', this.invoice.status);
     formData.append('isDone', this.invoice.isDone.toString());

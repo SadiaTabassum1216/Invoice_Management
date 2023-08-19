@@ -59,54 +59,56 @@
 
         <tr *ngFor="let item of items.data; let i in index">
           <!-- <div *ngIf="id===item.userID"> -->
-            <td *ngIf="id===item.userID" class="text-center">{{ item.items[0].itemName }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceID }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.uomID }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemFirstPrice }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemLastPrice }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemQTY }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemVAT }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemUnitPrice }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemQouteAdditionalCost }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceitemPurchaseAdditionalCost }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemDeliveryAdditionalCost }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemPOD }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemClosingDate | date: 'dd/MM/yyyy'}}</td>
-  
-  
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemPurchasePrice }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemIsFirstPaymentDone }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemFirstPaymentPrice }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemFirstPaymentDate | date: 'dd/MM/yyyy'}}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemIsLastPaymentDone }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemLastPaymentPrice }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemLastPaymentDate | date: 'dd/MM/yyyy'}}</td>
-  
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemLogisticCompany }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemLogisticLocation }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemShippingStatus }}</td>
-  
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemDeliveredToIraq }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemDeliverByLogisic }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemDeliverToClient }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemLogisticCost }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemFullPaid }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemSubmitted }}</td>
-  
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemTotalPrice }}</td>
-            <td *ngIf="id===item.userID" class="text-center">{{ item.invoiceItemStatus }}</td>
-            <td *ngIf="id===item.userID" >
+          <ng-container *ngIf="id===item.userID">
+            <td class="text-center">{{ item.items[0].itemName }}</td>
+            <td class="text-center">{{ item.invoiceID }}</td>
+            <td class="text-center">{{ item.uomID }}</td>
+            <td class="text-center">{{ item.invoiceItemFirstPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemLastPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemQTY }}</td>
+            <td class="text-center">{{ item.invoiceItemVAT }}</td>
+            <td class="text-center">{{ item.invoiceItemUnitPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemQouteAdditionalCost }}</td>
+            <td class="text-center">{{ item.invoiceitemPurchaseAdditionalCost }}</td>
+            <td class="text-center">{{ item.invoiceItemDeliveryAdditionalCost }}</td>
+            <td class="text-center">{{ item.invoiceItemPOD }}</td>
+            <td class="text-center">{{ item.invoiceItemClosingDate | date: 'dd/MM/yyyy'}}</td>
+
+
+            <td class="text-center">{{ item.invoiceItemPurchasePrice }}</td>
+            <td class="text-center">{{ item.invoiceItemIsFirstPaymentDone }}</td>
+            <td class="text-center">{{ item.invoiceItemFirstPaymentPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemFirstPaymentDate | date: 'dd/MM/yyyy'}}</td>
+            <td class="text-center">{{ item.invoiceItemIsLastPaymentDone }}</td>
+            <td class="text-center">{{ item.invoiceItemLastPaymentPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemLastPaymentDate | date: 'dd/MM/yyyy'}}</td>
+
+            <td class="text-center">{{ item.invoiceItemLogisticCompany }}</td>
+            <td class="text-center">{{ item.invoiceItemLogisticLocation }}</td>
+            <td class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
+            <td class="text-center">{{ item.invoiceItemShippingStatus }}</td>
+
+            <td class="text-center">{{ item.invoiceItemDeliveredToIraq }}</td>
+            <td class="text-center">{{ item.invoiceItemDeliverByLogisic }}</td>
+            <td class="text-center">{{ item.invoiceItemDeliverToClient }}</td>
+            <td class="text-center">{{ item.invoiceItemLogisticCost }}</td>
+            <td class="text-center">{{ item.invoiceItemFullPaid }}</td>
+            <td class="text-center">{{ item.invoiceItemSubmitted }}</td>
+
+            <td class="text-center">{{ item.invoiceItemTotalPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemStatus }}</td>
+            <td>
               <button mat-raised-button class="btn btn-primary edit-button" (click)="edit(i) ">
                 <i class="fas fa-edit"></i> Edit
               </button>
               <span class="button-gap"></span>
               <button class="btn btn-danger delete-button" (click)="view(i)">
-                 View Files
+                View Files
               </button>
             </td>
+          </ng-container>
           <!-- </div> -->
-          
+
         </tr>
       </tbody>
     </table>
