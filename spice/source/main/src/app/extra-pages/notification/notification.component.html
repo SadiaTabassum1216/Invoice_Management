@@ -1,0 +1,15 @@
+<br><br><br><br>
+<div class="notification-container">
+  
+    <h2>Notifications</h2>
+    <div class="notification-list">   
+      <ng-container *ngFor="let notification of notificationList">
+        <div class="notification-item" 
+               [ngClass]="{ 'bold-text': !notification.seen }">
+          <span class="notification-text">{{notification.message}}    </span>
+          <span class="notification-time">{{notification.time | date: 'medium'}}</span>
+        </div>
+      </ng-container>
+      
+    </div>
+  </div>

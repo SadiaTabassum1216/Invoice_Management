@@ -27,6 +27,11 @@ import { UsertaskComponent } from './usertask/usertask.component';
 import { EditItemsComponent } from './usertask/edit-items/edit-items.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FilesComponent } from './usertask/files/files.component';
+import { NotificationComponent } from './notification/notification.component';
+import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
+import { PricingLevelComponent } from './pricing-level/pricing-level.component';
+import { OfferingLevelComponent } from './offering-level/offering-level.component';
+import { PurchaseLevelComponent } from './purchase-level/purchase-level.component';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -44,6 +49,11 @@ import { FilesComponent } from './usertask/files/files.component';
     EditInvoiceComponent,
     EditItemsComponent,
     FilesComponent,
+    NotificationComponent,
+    InvoiceViewComponent,
+    PricingLevelComponent,
+    OfferingLevelComponent,
+    PurchaseLevelComponent,
   ],
   imports: [
     CommonModule,
