@@ -126,4 +126,5 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.renderer.addClass(this.document.body, 'submenu-closed');
     }
   }
+
 }
