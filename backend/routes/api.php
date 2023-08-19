@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\InvoiceItemController;
 use App\Http\Controllers\Api\InvoiceItemFileController;
 use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\UOMController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -79,3 +80,6 @@ Route::get('/file_download/{id}', [InvoiceItemFileController::class, 'downloadFi
 Route::get('/searchUOM', [UOMController::class, 'show']);
 Route::put('/invoice_item/{id}', [InvoiceItemController::class, 'update']);
 Route::get('/invoiceitems', [InvoiceItemController::class, 'itemShow']);
+
+
+Route::get('/notifications', [NotificationController::class, 'index'])->middleware('jwt.auth');
