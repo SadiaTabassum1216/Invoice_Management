@@ -3,13 +3,14 @@ export class User {
     name: string;
     username: string;
     status: string='offline';
-    role: string[]=[];
+    roles: string[]=[];
     password:string='';
   
-    constructor(userID: number, fullName: string, username: string) {
+    constructor(userID: number, fullName: string, username: string, roles: string[]) {
       this.id = userID;
       this.name = fullName;
       this.username = username;
+      this.roles = roles;
     }
   }
   

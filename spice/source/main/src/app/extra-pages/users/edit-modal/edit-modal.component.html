@@ -24,15 +24,15 @@
     </div>
   </div>
 
-  <!-- <div class="form-row">
+  <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="status">Status</label>
-      <select class="form-control" id="status" [(ngModel)]="selectedUser.status">
-        <option [ngValue]="'Online'">Online</option>
-        <option [ngValue]="'Offline'">Offline</option>
+      <label for="userRoles">Roles</label>
+      <select class="form-control" id="roles"  [(ngModel)]="selectedUser.roles" name="userRoles" multiple>
+        <option value="admin">Admin</option>
+        <option value="employee">Employee</option>
       </select>
     </div>
-  </div> -->
+  </div>
   
   <br>
   <button class="btn btn-primary edit-button" (click)="updateUser()">
