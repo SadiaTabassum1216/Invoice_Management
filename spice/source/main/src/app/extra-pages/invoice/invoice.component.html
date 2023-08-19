@@ -255,10 +255,17 @@
       </div>
       <br>
 
-      <div class="form-group   row">
+      <div class="form-group row">
         <label for="status" class="col-sm-6 col-form-label">Status</label>
-        <input type="text" class="form-control" id="status" name="status" [(ngModel)]="invoice.status">
+        <div class="col-sm-6">
+          <select class="form-control" id="status" name="status" [(ngModel)]="invoice.status">
+            <option value="pricing-level">Pricing Level</option>
+            <option value="offering-level">Offering Level</option>
+            <option value="purchase-level">Purchase Level</option>
+          </select>
+        </div>
       </div>
+      
       <br>
 
       <div class="form-group row">

@@ -4,6 +4,7 @@ import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout
 import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
+import { NotificationComponent } from './extra-pages/notification/notification.component';
 
 const routes: Routes = [
   
@@ -135,6 +136,7 @@ const routes: Routes = [
         (m) => m.AuthenticationModule
       ),
   },
+ 
   { path: '**', component: Page404Component },
 ];
 @NgModule({
