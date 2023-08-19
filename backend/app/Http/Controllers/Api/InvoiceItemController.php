@@ -7,6 +7,8 @@ use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use App\Models\InvoiceItemFile;
 use App\Models\Item;
+use App\Models\User;
+use App\Notifications\NewInvoiceNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -97,6 +99,9 @@ class InvoiceItemController extends Controller
                     }
                 }
             }
+
+            $employee = User::findOrFail($invoiceItem->userID);
+            $employee->notifiy(new NewInvoiceNotification($invoiceItem));
         }
 
         $ret_invoice = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->find($invoice->id);
