@@ -35,6 +35,7 @@
                   {{ sidebarItem.submenu[0].title }}
                 </a>
               </li>
+              
               <li *ngIf="id === 1 && sidebarItem.submenu.length >= 2">
                 <a [routerLink]="sidebarItem.submenu[1].path" [routerLinkActive]="'active'" [ngClass]="[sidebarItem.submenu[1].class]">
                   {{ sidebarItem.submenu[1].title }}

@@ -27,6 +27,9 @@
   .notification-item {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 70px;
   }
   
   .notification-text {

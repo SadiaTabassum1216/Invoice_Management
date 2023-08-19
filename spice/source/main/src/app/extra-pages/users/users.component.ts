@@ -24,8 +24,8 @@ export class UsersComponent implements OnInit {
   id: number=0;
 
   
-  selectedUser: User = new User(0, '', '');
-  newUser: User = new User(0, '', '');
+  selectedUser: User = new User(0, '', '',[]);
+  newUser: User = new User(0, '', '',[]);
 
   dialogConfig?: MatDialogConfig;
   constructor(private http: HttpClient,  

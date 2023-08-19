@@ -19,9 +19,9 @@ export class NotificationComponent implements OnInit {
 
   getNotifications() {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/notifications`, httpOptions)
-    .subscribe((data) => {
-      console.log(data);
+    .subscribe((data) => {   
       this.notificationList = data;
+      console.log("Notification: ",this.notificationList);
     });
   }
 

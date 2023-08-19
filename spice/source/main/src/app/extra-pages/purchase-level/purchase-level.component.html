@@ -1,1 +1,123 @@
-<br><br><br><br><p>purchase-level works!</p>
+<section class="content">
+  <br><br><br><br>
+
+  <div class="table-container" style="width: 85%; margin: 0 auto; overflow-x: auto;">
+    <h2 class="text-center">Purchase Level Items</h2>
+    <br>
+
+    <table class="table" style="width: 100%;" id="excel">
+      <thead>
+        <tr>
+          <!-- level 1 -->
+          <th class="text-center level1">Item Name</th>
+          <th class="text-center level1">Invoice ID</th>
+          <th class="text-center level1">UOM ID</th>
+          <th class="text-center level1">First Price</th>
+          <th class="text-center level1">Last Price</th>
+          <th class="text-center level1">Quantity</th>
+          <th class="text-center level1">VAT</th>
+          <th class="text-center level1">Unit Price</th>
+          <th class="text-center level1">Additional Cost</th>
+          <th class="text-center level1">Purchase Additional Cost</th>
+          <th class="text-center level1">Delivery Additional Cost</th>
+          <th class="text-center level1">POD</th>
+          <th class="text-center level1">Closing Date</th>
+
+
+
+          <!-- level 2 -->
+          <th class="text-center level2">Purchase Price</th>
+          <th class="text-center level2">Is First Payment Done</th>
+          <th class="text-center level2">First Payment Price</th>
+          <th class="text-center level2">First Payment Date</th>
+
+          <th class="text-center level2">Is Last Payment Done</th>
+          <th class="text-center level2">Last Payment Price</th>
+          <th class="text-center level2">Last Payment Date</th>
+
+          <th class="text-center level2">Logistic Company</th>
+          <th class="text-center level2">Logistic Location</th>
+          <th class="text-center level2">Logistic Estimated Date</th>
+          <th class="text-center level2">Shipping Status</th>
+
+          <!-- level 3 -->
+          <th class="text-center level3">Is Delivered to Iraq</th>
+          <th class="text-center level3">Is Delivered by Logistic</th>
+          <th class="text-center level3">Is Deliver to Client</th>
+          <th class="text-center level3">Logistic Cost</th>
+          <th class="text-center level3">Is Fully Paid</th>
+          <th class="text-center level3">Is Submitted</th>
+
+          <!-- level 4 -->
+          <th class="text-center level4">Total Cost</th>
+          <th class="text-center level4">Status</th>
+          <th class="text-center level4">Actions</th>
+        </tr>
+
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of items.data; let i in index">
+          <ng-container *ngIf="item.invoiceItemStatus === 'purchase_level' && id===item.userID">
+            <td class="text-center">{{ item.items[0].itemName }}</td>
+            <td class="text-center">{{ item.invoiceID }}</td>
+            <td class="text-center">{{ item.uomID }}</td>
+            <td class="text-center">{{ item.invoiceItemFirstPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemLastPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemQTY }}</td>
+            <td class="text-center">{{ item.invoiceItemVAT }}</td>
+            <td class="text-center">{{ item.invoiceItemUnitPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemQouteAdditionalCost }}</td>
+            <td class="text-center">{{ item.invoiceitemPurchaseAdditionalCost }}</td>
+            <td class="text-center">{{ item.invoiceItemDeliveryAdditionalCost }}</td>
+            <td class="text-center">{{ item.invoiceItemPOD }}</td>
+            <td class="text-center">{{ item.invoiceItemClosingDate | date: 'dd/MM/yyyy'}}</td>
+
+
+            <td class="text-center">{{ item.invoiceItemPurchasePrice }}</td>
+            <td class="text-center">{{ item.invoiceItemIsFirstPaymentDone }}</td>
+            <td class="text-center">{{ item.invoiceItemFirstPaymentPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemFirstPaymentDate | date: 'dd/MM/yyyy'}}</td>
+            <td class="text-center">{{ item.invoiceItemIsLastPaymentDone }}</td>
+            <td class="text-center">{{ item.invoiceItemLastPaymentPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemLastPaymentDate | date: 'dd/MM/yyyy'}}</td>
+
+            <td class="text-center">{{ item.invoiceItemLogisticCompany }}</td>
+            <td class="text-center">{{ item.invoiceItemLogisticLocation }}</td>
+            <td class="text-center">{{ item.logisticEstimatedDate | date: 'dd/MM/yyyy'}}</td>
+            <td class="text-center">{{ item.invoiceItemShippingStatus }}</td>
+
+            <td class="text-center">{{ item.invoiceItemDeliveredToIraq }}</td>
+            <td class="text-center">{{ item.invoiceItemDeliverByLogisic }}</td>
+            <td class="text-center">{{ item.invoiceItemDeliverToClient }}</td>
+            <td class="text-center">{{ item.invoiceItemLogisticCost }}</td>
+            <td class="text-center">{{ item.invoiceItemFullPaid }}</td>
+            <td class="text-center">{{ item.invoiceItemSubmitted }}</td>
+
+            <td class="text-center">{{ item.invoiceItemTotalPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemStatus }}</td>
+            <td *ngIf="id===item.userID">
+              <button mat-raised-button class="btn btn-primary edit-button" (click)="edit(i) ">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <span class="button-gap"></span>
+              <button class="btn btn-danger delete-button" (click)="view(i)">
+                View Files
+              </button>
+            </td>
+          </ng-container>
+          <!-- </div> -->
+
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <button mat-raised-button class="btn btn-primary" (click)="exportList()">Export</button>
+  </div>
+
+
+</section>

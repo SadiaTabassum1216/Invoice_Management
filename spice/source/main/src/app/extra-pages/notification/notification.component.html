@@ -2,12 +2,14 @@
 <div class="notification-container">
   
     <h2>Notifications</h2>
-    <div class="notification-list">   
-      <ng-container *ngFor="let notification of notificationList">
+    <div class="notification-list">
+         
+      <ng-container *ngFor="let notification of notificationList.notifications">
+      
         <div class="notification-item" 
-               [ngClass]="{ 'bold-text': !notification.seen }">
-          <span class="notification-text">{{notification.message}}    </span>
-          <span class="notification-time">{{notification.time | date: 'medium'}}</span>
+               [ngClass]="{ 'bold-text': !notification.read_at }">
+          <span class="notification-text">{{notification.data.message}}    </span>
+          <span class="notification-time">{{notification.created_at | date: "short"}}</span>
         </div>
       </ng-container>
       
