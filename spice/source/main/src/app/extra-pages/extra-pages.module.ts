@@ -33,6 +33,8 @@ import { PricingLevelComponent } from './pricing-level/pricing-level.component';
 import { OfferingLevelComponent } from './offering-level/offering-level.component';
 import { PurchaseLevelComponent } from './purchase-level/purchase-level.component';
 import { EditComponent } from './pricing-level/edit/edit.component';
+import { EditOComponent } from './offering-level/edit-o/edit-o.component';
+import { EditPComponent } from './purchase-level/edit-p/edit-p.component';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -56,6 +58,8 @@ import { EditComponent } from './pricing-level/edit/edit.component';
     OfferingLevelComponent,
     PurchaseLevelComponent,
     EditComponent,
+    EditOComponent,
+    EditPComponent,
   ],
   imports: [
     CommonModule,

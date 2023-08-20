@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { EditItemsComponent } from '../usertask/edit-items/edit-items.component';
 import * as XLSX from "xlsx";
 import { AuthService } from 'src/app/core/service/auth.service';
 import { Observable } from 'rxjs';
@@ -9,8 +8,8 @@ import { AuthUser } from 'src/app/core/models/user';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem } from 'src/app/models/invoice2.model';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
-import { FilesComponent } from '../usertask/files/files.component';
-import { EditComponent } from './edit/edit.component';
+import { FilesComponent } from './files/files.component';
+import { EditOComponent } from './edit-o/edit-o.component';
 @Component({
   selector: 'app-offering-level',
   templateUrl: './offering-level.component.html',
@@ -36,7 +35,7 @@ export class OfferingLevelComponent implements OnInit{
   items: any;
   selectedItem: InvoiceItem3 = new InvoiceItem3();
   selectedItem2: InvoiceItem = new InvoiceItem();
-  dialog?: MatDialogRef<EditItemsComponent>;
+  dialog?: MatDialogRef<EditOComponent>;
 
 
 
@@ -55,7 +54,7 @@ export class OfferingLevelComponent implements OnInit{
     this.selectedItem = item;
     //  console.log(this.selectedItem);
 
-    this.dialogModel.open(EditComponent, {
+    this.dialogModel.open(EditOComponent, {
       width: '740px',
       disableClose: true,
       data: {
@@ -71,6 +70,8 @@ export class OfferingLevelComponent implements OnInit{
     if (confirmation)
       this.delete(item);
   }
+
+  
 
   view(item: InvoiceItem) {
     this.selectedItem2 = item;
@@ -102,7 +103,7 @@ export class OfferingLevelComponent implements OnInit{
     );
 
   }
-
+  
   exportList() {
     let element = document.getElementById('excel')
 
@@ -112,5 +113,5 @@ export class OfferingLevelComponent implements OnInit{
     XLSX.writeFile(wb, this.filename)
 
   }
-
+ 
 }

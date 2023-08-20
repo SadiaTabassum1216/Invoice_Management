@@ -10,7 +10,6 @@ import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem } from 'src/app/models/invoice2.model';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
 import { FilesComponent } from './files/files.component';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-pricing-level',

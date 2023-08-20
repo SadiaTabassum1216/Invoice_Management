@@ -6,11 +6,11 @@ import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  selector: 'app-edit-p',
+  templateUrl: './edit-p.component.html',
+  styleUrls: ['./edit-p.component.scss']
 })
-export class EditComponent {
+export class EditPComponent {
   selectedItem: InvoiceItem3 = new InvoiceItem3();
   dialogConfig?: MatDialogConfig;
   // item: InvoiceItem3= new InvoiceItem3();

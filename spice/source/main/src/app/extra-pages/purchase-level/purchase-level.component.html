@@ -1,4 +1,4 @@
-<!-- <section class="content">
+<section class="content">
   <br><br><br><br>
 
   <div class="table-container" style="width: 85%; margin: 0 auto; overflow-x: auto;">
@@ -11,20 +11,8 @@
 
           <th class="text-center level1">Item Name</th>
           <th class="text-center level1">Invoice ID</th>
-          <th class="text-center level1">UOM ID</th>
-          <th class="text-center level1">First Price</th>
-          <th class="text-center level1">Last Price</th>
-          <th class="text-center level1">Quantity</th>
-          <th class="text-center level1">VAT</th>
-          <th class="text-center level1">Unit Price</th>
-          <th class="text-center level1">Additional Cost</th>
-          <th class="text-center level1">Purchase Additional Cost</th>
-          <th class="text-center level1">Delivery Additional Cost</th>
-          <th class="text-center level1">POD</th>
-          <th class="text-center level1">Closing Date</th>
+         
 
-
-          <th class="text-center level2">Purchase Price</th>
           <th class="text-center level2">Is First Payment Done</th>
           <th class="text-center level2">First Payment Price</th>
           <th class="text-center level2">First Payment Date</th>
@@ -59,20 +47,7 @@
           <ng-container *ngIf="item.invoiceItemStatus === 'purchase_level' && id===item.userID">
             <td class="text-center">{{ item.items[0].itemName }}</td>
             <td class="text-center">{{ item.invoiceID }}</td>
-            <td class="text-center">{{ item.uomID }}</td>
-            <td class="text-center">{{ item.invoiceItemFirstPrice }}</td>
-            <td class="text-center">{{ item.invoiceItemLastPrice }}</td>
-            <td class="text-center">{{ item.invoiceItemQTY }}</td>
-            <td class="text-center">{{ item.invoiceItemVAT }}</td>
-            <td class="text-center">{{ item.invoiceItemUnitPrice }}</td>
-            <td class="text-center">{{ item.invoiceItemQouteAdditionalCost }}</td>
-            <td class="text-center">{{ item.invoiceitemPurchaseAdditionalCost }}</td>
-            <td class="text-center">{{ item.invoiceItemDeliveryAdditionalCost }}</td>
-            <td class="text-center">{{ item.invoiceItemPOD }}</td>
-            <td class="text-center">{{ item.invoiceItemClosingDate | date: 'dd/MM/yyyy'}}</td>
-
-
-            <td class="text-center">{{ item.invoiceItemPurchasePrice }}</td>
+           
             <td class="text-center">{{ item.invoiceItemIsFirstPaymentDone }}</td>
             <td class="text-center">{{ item.invoiceItemFirstPaymentPrice }}</td>
             <td class="text-center">{{ item.invoiceItemFirstPaymentDate | date: 'dd/MM/yyyy'}}</td>
@@ -118,4 +93,4 @@
   </div>
 
 
-</section> -->
+</section>

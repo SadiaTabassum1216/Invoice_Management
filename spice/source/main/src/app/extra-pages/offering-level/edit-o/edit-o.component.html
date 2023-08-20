@@ -21,41 +21,66 @@
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="firstPrice">First Price</label>
-                <input type="number" class="form-control" id="firstPrice" name="invoiceItemFirstPrice"
-                    [(ngModel)]="selectedItem.invoiceItemFirstPrice">
+                <label for="unitPrice">Unit Price</label>
+                <input type="number" class="form-control" id="unitPrice" name="invoiceItemUnitPrice"
+                    [(ngModel)]="selectedItem.invoiceItemUnitPrice">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="lastPrice">Last Price</label>
-                <input type="number" class="form-control" id="lastPrice" name="invoiceItemLastPrice"
-                    [(ngModel)]="selectedItem.invoiceItemLastPrice">
+                <label for="additionalCost">Additional Cost</label>
+                <input type="number" class="form-control" id="additionalCost" name="invoiceItemQouteAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceItemQouteAdditionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="purchaseAdditionalCost">Purchase Additional Cost</label>
+                <input type="number" class="form-control" id="purchaseAdditionalCost"
+                    name="invoiceitemPurchaseAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceitemPurchaseAdditionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="deliveryAdditionalCost">Delivery Additional Cost</label>
+                <input type="number" class="form-control" id="deliveryAdditionalCost"
+                    name="invoiceItemDeliveryAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceItemDeliveryAdditionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="totalPrice">Total Price</label>
+                <input type="number" class="form-control" id="totalPrice" name="invoiceItemTotalPrice"
+                    [(ngModel)]="selectedItem.invoiceItemTotalPrice" disabled>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="POD">POD</label>
+                <input type="text" class="form-control" id="POD" name="invoiceItemPOD"
+                    [(ngModel)]="selectedItem.invoiceItemPOD">
             </div>
         </div>
 
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="VAT">VAT</label>
-                <input type="number" class="form-control" id="VAT" name="invoiceItemVAT"
-                    [(ngModel)]="selectedItem.invoiceItemVAT">
-            </div>
-        </div>
-
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="purchasePrice">Purchase Price</label>
-                <input type="number" class="form-control" id="purchasePrice" name="invoiceItemPurchasePrice"
-                    [(ngModel)]="selectedItem.invoiceItemPurchasePrice">
+                <label for="closingDate">Closing Date</label>
+                <input type="date" class="form-control" id="closingDate" name="invoiceItemClosingDate"
+                    [(ngModel)]="selectedItem.invoiceItemClosingDate">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="uploadedFiles1">Uploaded Files 1</label>
+                <label for="uploadedFiles1">Uploaded Files 2</label>
                 <input type="file" class="form-control" id="uploadedFiles1" name="uploadedFiles1"
                      (change)="onFileSelect($event)">
                      <!-- <button class="upload-button" (click)="uploadFiles(selectedItem.uploadedFiles1)">Upload Files</button> -->
@@ -72,6 +97,7 @@
                   </select>
             </div>
         </div>
+
 
 
         <br>

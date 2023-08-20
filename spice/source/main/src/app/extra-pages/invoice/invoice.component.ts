@@ -450,6 +450,8 @@ export class InvoiceComponent implements OnInit {
         this.invoice.invoiceID = data.id;
         console.log(data);
       });
+
+      // this.router.navigate['/invoicelist'];
   }
 
   breadscrums = [
