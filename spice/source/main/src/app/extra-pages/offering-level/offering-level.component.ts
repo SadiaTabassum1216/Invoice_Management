@@ -10,6 +10,7 @@ import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem } from 'src/app/models/invoice2.model';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
 import { FilesComponent } from '../usertask/files/files.component';
+import { EditComponent } from './edit/edit.component';
 @Component({
   selector: 'app-offering-level',
   templateUrl: './offering-level.component.html',
@@ -54,7 +55,7 @@ export class OfferingLevelComponent implements OnInit{
     this.selectedItem = item;
     //  console.log(this.selectedItem);
 
-    this.dialogModel.open(EditItemsComponent, {
+    this.dialogModel.open(EditComponent, {
       width: '740px',
       disableClose: true,
       data: {

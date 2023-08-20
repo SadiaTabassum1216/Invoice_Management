@@ -32,6 +32,7 @@ import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { PricingLevelComponent } from './pricing-level/pricing-level.component';
 import { OfferingLevelComponent } from './offering-level/offering-level.component';
 import { PurchaseLevelComponent } from './purchase-level/purchase-level.component';
+import { EditComponent } from './pricing-level/edit/edit.component';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -54,6 +55,7 @@ import { PurchaseLevelComponent } from './purchase-level/purchase-level.componen
     PricingLevelComponent,
     OfferingLevelComponent,
     PurchaseLevelComponent,
+    EditComponent,
   ],
   imports: [
     CommonModule,

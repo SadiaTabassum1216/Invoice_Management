@@ -12,11 +12,9 @@ export class Invoice {
     additionalCost: number=0;
     totalCost: number=0;
 
-    // origin: string = ''; 
-    // partNumber: string = ''; 
-    // manufacturer: string = ''; 
+    
 
-    status: string='';
+    status: string='pricing_level';
     isDone: boolean= false;
    
   }

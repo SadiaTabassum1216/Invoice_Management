@@ -1,0 +1,30 @@
+<br><br>
+<div class="card">
+    <div class="card-body">
+        <h3 class="text-center">Files</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>Level</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let file of selectedItem.invoice_item_files">
+                    <td>{{file.filename}}</td>
+                    <td>{{file.level}}</td>
+                    <td>
+                        <a class="btn" href="{{link}}/api/file_download/{{ file.id }}">
+                          <i class="fas fa-download"></i>
+                        </a>
+                      </td>
+                      
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+    </div>
+    <button class="btn btn-primary" (click)="close()">Close</button>
+</div>

@@ -43,8 +43,8 @@ roles: string[]=[];
        console.log("Current user: ",  this.currentUser);
     });
 
-    if (this.id !== 1) {
-      this.router.navigate(['/**']);
+    if (!this.roles.includes('admin')) {
+      this.router.navigate(['/**']); 
     }
   }
 

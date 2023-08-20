@@ -78,16 +78,16 @@ export class InvoiceComponent implements OnInit {
     this.currentUser.subscribe((info) => {
       this.name = info['user']['name'];
       this.id = info['user']['id'];
-      this.roles = info['user']['roles'];
+      this.roles=info['user']['roles'];
     });
 
-    if (this.id !== 1) {
-      this.router.navigate(['/**']);
-    }
-
-    // if (!this.roles.includes('admin')) {
-    //   this.router.navigate(['/**']); 
+    // if (this.id !== 1) {
+    //   this.router.navigate(['/**']);
     // }
+
+    if (!this.roles.includes('admin')) {
+      this.router.navigate(['/**']); 
+    }
 
     this.getProductList();
     this.getUserList();
@@ -212,6 +212,10 @@ export class InvoiceComponent implements OnInit {
       firstPrice: 0,
       lastPrice: 0,
       quantity: 0,
+      origin: '',
+      partNumber: '',
+      manufacturer: '',
+      
       VAT: 0,
       unitPrice: 0,
       additionalCost: 0,
@@ -242,6 +246,7 @@ export class InvoiceComponent implements OnInit {
       uploadedFiles1: [],
       uploadedFiles2: [],
       uploadedFiles3: [],
+     
     };
     for (let i = 0; i < this.itemList.length; i++) {
       this.itemList[i].itemId = this.tempItem[i];
@@ -364,10 +369,7 @@ export class InvoiceComponent implements OnInit {
     formData.append('grandTotal', this.invoice.grandTotal.toString());
     formData.append('additionalCost', this.invoice.additionalCost.toString());
     formData.append('totalCost', this.invoice.totalCost.toString());
-    // formData.append('origin', this.invoice.origin);
-    // formData.append('partNumber', this.invoice.partNumber); 
-    // formData.append('manufacturer', this.invoice.manufacturer); 
-
+    
     formData.append('status', this.invoice.status);
     formData.append('isDone', this.invoice.isDone.toString());
 
@@ -377,6 +379,10 @@ export class InvoiceComponent implements OnInit {
         itemId: item.itemId,
         userId: item.userId,
         UOMId: item.UOMId,
+        origin:item.origin,
+        partNumber: item.partNumber,
+        manufacturer:item.manufacturer,
+
         firstPrice: item.firstPrice,
         lastPrice: item.lastPrice,
         quantity: item.quantity,
@@ -434,12 +440,7 @@ export class InvoiceComponent implements OnInit {
           item.uploadedFiles3[j]
         );
       }
-      // for (let j = 0; j < item.uploadedFiles2.length; j++) {
-      //   formData.append(`itemList[${i}].uploadedFiles2[]`, item.uploadedFiles2[j]);
-      // }
-      // for (let j = 0; j < item.uploadedFiles3.length; j++) {
-      //   formData.append(`itemList[${i}].uploadedFiles3[]`, item.uploadedFiles3[j]);
-      // }
+      
     }
 
     this.http

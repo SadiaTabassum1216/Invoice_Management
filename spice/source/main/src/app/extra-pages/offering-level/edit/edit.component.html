@@ -1,0 +1,92 @@
+<br><br>
+
+<div class="modal-body" style="max-height: 800px; overflow-y: auto;">
+
+    <div class="edit-user-container">
+        <h4>Edit Item</h4>
+        <br><br>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="invoiceID">Invoice ID</label>
+                <input type="text" class="form-control" id="invoiceID" name="invoiceID"
+                    [(ngModel)]="selectedItem.invoiceID" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="itemID">Item ID</label>
+                <input type="text" class="form-control" id="itemID" name="id" [(ngModel)]="selectedItem.id" disabled>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstPrice">First Price</label>
+                <input type="number" class="form-control" id="firstPrice" name="invoiceItemFirstPrice"
+                    [(ngModel)]="selectedItem.invoiceItemFirstPrice">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="lastPrice">Last Price</label>
+                <input type="number" class="form-control" id="lastPrice" name="invoiceItemLastPrice"
+                    [(ngModel)]="selectedItem.invoiceItemLastPrice">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="VAT">VAT</label>
+                <input type="number" class="form-control" id="VAT" name="invoiceItemVAT"
+                    [(ngModel)]="selectedItem.invoiceItemVAT">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="purchasePrice">Purchase Price</label>
+                <input type="number" class="form-control" id="purchasePrice" name="invoiceItemPurchasePrice"
+                    [(ngModel)]="selectedItem.invoiceItemPurchasePrice">
+            </div>
+        </div>
+
+        <!-- <div class="form-row">
+            <div class="form-group col-md-6">
+                <p><input type="file" multiple (change)="onFileSelect($event, selectedItem)"></p>
+                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles1,selectedItem)">Upload Files</button>
+            </div>
+        </div> -->
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="uploadedFiles1">Uploaded Files 1</label>
+                <input type="file" class="form-control" id="uploadedFiles1" name="uploadedFiles1"
+                     (change)="onFileSelect($event)">
+                     <!-- <button class="upload-button" (click)="uploadFiles(selectedItem.uploadedFiles1)">Upload Files</button> -->
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" name="invoiceItemStatus"
+                    [(ngModel)]="selectedItem.invoiceItemStatus">
+            </div>
+        </div>
+
+
+
+
+        <br>
+        <button class="btn btn-primary edit-button" (click)="update()">
+            <i class="fas fa-pencil-alt"></i> Update
+        </button>
+
+        <span class="button-gap"></span>
+        <button mat-raised-button class="btn btn-primary" (click)="close()">Close</button>
+    </div>
+
+</div>
