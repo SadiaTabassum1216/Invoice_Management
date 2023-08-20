@@ -5,5 +5,6 @@ export class AuthUser {
   password!: string;
   firstName!: string;
   lastName!: string;
+  roles: string[]=[];
   token!: string;
 }

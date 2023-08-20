@@ -1,4 +1,4 @@
-<section class="content" *ngIf="id === 1">
+<section class="content">
   <div *ngIf="!isFormSubmitted">
     <form>
       <br><br><br><br>
@@ -10,7 +10,6 @@
         <label for="estimatedDate" class="col-sm-6 col-form-label">Estimated Date</label>
         <input type="date" class="form-control" id="estimatedDate" name="estimatedDate"
           [(ngModel)]="invoice.invoiceEstimatedDate">
-        <!-- <input type="date" [value]="formatDateToString(invoice.invoiceEstimatedDate)" /> -->
 
       </div><br>
 
@@ -31,43 +30,11 @@
               <th class="text-center">Item Name</th>
               <th class="text-center">User ID</th>
               <th class="text-center">UOM ID</th>
-              <th class="text-center">First Price</th>
-              <th class="text-center">Last Price</th>
+              
               <th class="text-center">Quantity</th>
-              <th class="text-center">VAT</th>
-              <th class="text-center">Unit Price</th>
-              <th class="text-center">Additional Cost</th>
-              <th class="text-center">Purchase Additional Cost</th>
-              <th class="text-center">Delivery Additional Cost</th>
-              <th class="text-center">POD</th>
-              <th class="text-center">Closing Date</th>
-              <th class="text-center">Files (1)</th>
-
-
-              <th class="text-center">Purchase Price</th>
-
-              <th class="text-center">Is First Payment Done</th>
-              <th class="text-center">First Payment Price</th>
-              <th class="text-center">First Payment Date</th>
-
-              <th class="text-center">Is Last Payment Done</th>
-              <th class="text-center">Last Payment Price</th>
-              <th class="text-center">Last Payment Date</th>
-
-              <th class="text-center">Logistic Company</th>
-              <th class="text-center">Logistic Location</th>
-              <th class="text-center">Logistic Estimated Date</th>
-              <th class="text-center">Shipping Status</th>
-              <th class="text-center">Files (2)</th>
-
-              <th class="text-center">Is Delivered to Iraq</th>
-              <th class="text-center">Is Delivered by Logistic</th>
-              <th class="text-center">Is Deliver to Client</th>
-              <th class="text-center">Logistic Cost</th>
-              <th class="text-center">Is Fully Paid</th>
-              <th class="text-center">Is Submitted</th>
-              <th class="text-center">Files (3)</th>
-
+              <th class="text-center">Origin</th>
+              <th class="text-center">Part Number</th>
+              <th class="text-center">Manufacturer</th>
 
               <th class="text-center">Status</th>
             </tr>
@@ -104,129 +71,26 @@
                     {{ uom.name }} (ID: {{ uom.id }})
                   </mat-option>
                 </mat-autocomplete>
-                <!-- <input type="text" name="{{item.UOMId}}" [(ngModel)]="item.UOMId"> -->
               </td>
 
-              <td class="text-center">
-                <input type="number" name="{{item.firstPrice}}" [(ngModel)]="item.firstPrice">
-              </td>
-              <td class="text-center">
-                <input type="number" name="{{item.lastPrice}}" [(ngModel)]="item.lastPrice">
-              </td>
               <td class="text-center">
                 <input type="number" name="{{item.quantity}}" [(ngModel)]="item.quantity">
               </td>
               <td class="text-center">
-                <input type="number" name="{{item.VAT}}" [(ngModel)]="item.VAT">
+                <input type="text" name="{{ item.origin }}" [(ngModel)]="item.origin">
               </td>
               <td class="text-center">
-                <input type="number" name="{{item.unitPrice}}" [(ngModel)]="item.unitPrice">
+                <input type="text" name="{{ item.partNumber }}" [(ngModel)]="item.partNumber">
               </td>
               <td class="text-center">
-                <input type="number" name="{{item.additionalCost}}" [(ngModel)]="item.additionalCost">
+                <input type="text" name="{{ item.manufacturer }}" [(ngModel)]="item.manufacturer">
               </td>
-              <td class="text-center">
-                <input type="number" name="{{item.purchaseAdditionalCost}}" [(ngModel)]="item.purchaseAdditionalCost">
-              </td>
-              <td class="text-center">
-                <input type="number" name="{{item.deliveryAdditionalCost}}" [(ngModel)]="item.deliveryAdditionalCost">
-              </td>
-
-              <td class="text-center">
-                <input type="text" name="{{item.POD}}" [(ngModel)]="item.POD">
-              </td>
-              <td class="text-center">
-                <input type="date" name="{{item.closingDate}}" [(ngModel)]="item.closingDate">
-              </td>
-
-              <!-- file buttons -->
-              <td class="text-center">
-                <!-- <p><input type="file" multiple (change)="onFileSelect($event)"></p> -->
-                <p><input type="file" multiple (change)="onFileSelect($event, i)"></p>
-                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles1,i)">Upload Files</button>
-                <span class="button-gap"></span>
-                <button class="view-button" (click)="openModal(item.uploadedFiles1)">View</button>
-              </td>
-
-              <!-- level 2 -->
-              <td class="text-center">
-                <input type="number" name="{{item.purchasePrice}}" [(ngModel)]="item.purchasePrice">
-              </td>
-              <td class="text-center">
-                <input type="checkbox" name="{{item.isFirstPaymentDone}}" [(ngModel)]="item.isFirstPaymentDone">
-              </td>
-              <td class="text-center">
-                <input type="number" name="{{item.firstPaymentPrice}}" [(ngModel)]="item.firstPaymentPrice">
-              </td>
-              <td class="text-center">
-                <input type="date" name="{{item.firstPaymentDate}}" [(ngModel)]="item.firstPaymentDate">
-              </td>
-
-              <td class="text-center">
-                <input type="checkbox" name="{{item.isLastPaymentDone}}" [(ngModel)]="item.isLastPaymentDone">
-              </td>
-              <td class="text-center">
-                <input type="number" name="{{item.lastPaymentPrice}}" [(ngModel)]="item.lastPaymentPrice">
-              </td>
-              <td class="text-center">
-                <input type="date" name="{{item.lastPaymentDate}}" [(ngModel)]="item.lastPaymentDate">
-              </td>
-              <td class="text-center">
-                <input type="text" name="{{item.logisticCompany}}" [(ngModel)]="item.logisticCompany">
-              </td>
-              <td class="text-center">
-                <input type="text" name="{{item.logisticLocation}}" [(ngModel)]="item.logisticLocation">
-              </td>
-              <td class="text-center">
-                <input type="date" name="{{item.logisticEstimatedDate}}" [(ngModel)]="item.logisticEstimatedDate">
-              </td>
-              <td class="text-center">
-                <input type="text" name="{{item.shippingStatus}}" [(ngModel)]="item.shippingStatus">
-              </td>
-
-              <!-- file buttons -->
-              <td class="text-center">
-                <p><input type="file" multiple (change)="onFileSelect($event,i)"></p>
-                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles2,i)">Upload Files</button>
-                <span class="button-gap"></span>
-                <button class="view-button" (click)="openModal(item.uploadedFiles2)">View</button>
-              </td>
-
-
-              <!-- level 3 -->
-              <td class="text-center">
-                <input type="checkbox" name="{{item.isDeliveredToIraq}}" [(ngModel)]="item.isDeliveredToIraq">
-              </td>
-              <td class="text-center">
-                <input type="checkbox" name="{{item.isDeliveredByLogistic}}" [(ngModel)]="item.isDeliveredByLogistic">
-              </td>
-              <td class="text-center">
-                <input type="checkbox" name="{{item.isDeliverToClient}}" [(ngModel)]="item.isDeliverToClient">
-              </td>
-              <td class="text-center">
-                <input type="number" name="{{item.logisticCost}}" [(ngModel)]="item.logisticCost">
-              </td>
-              <td class="text-center">
-                <input type="checkbox" name="{{item.isFullyPaid}}" [(ngModel)]="item.isFullyPaid">
-              </td>
-              <td class="text-center">
-                <input type="checkbox" name="{{item.isSubmitted}}" [(ngModel)]="item.isSubmitted">
-              </td>
-
-              <!-- file buttons -->
-              <td class="text-center">
-                <p><input type="file" multiple (change)="onFileSelect($event,i)"></p>
-                <button class="upload-button" (click)="uploadFiles(item.uploadedFiles3,i)">Upload Files</button>
-                <span class="button-gap"></span>
-                <button class="view-button" (click)="openModal(item.uploadedFiles3)">View</button>
-              </td>
-
               <!-- level 4 -->
               <td class="text-center">
                 <select name="{{item.status}}" [(ngModel)]="item.status">
-                  <option value="pricing-level">Pricing Level</option>
-                  <option value="offering-level">Offering Level</option>
-                  <option value="purchase-level">Purchase Level</option>
+                  <option value="pricing_level">Pricing Level</option>
+                  <option value="offering_level">Offering Level</option>
+                  <option value="purchase_level">Purchase Level</option>
                 </select>
               </td>
               
@@ -250,29 +114,6 @@
           <input type="text" class="form-control" id="offering" name="offering" [(ngModel)]="invoice.offering">
         </div>
       </div> <br>
-
-      <!-- <div class="form-group row">
-        <label for="origin" class="col-sm-6 col-form-label">Origin</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" id="origin" name="origin" [(ngModel)]="invoice.origin">
-        </div>
-      </div> <br>
-
-      <div class="form-group row">
-        <label for="partNumber" class="col-sm-6 col-form-label">Part Number</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" id="partNumber" name="partNumber" [(ngModel)]="invoice.partNumber">
-        </div>
-      </div> <br>
-
-      <div class="form-group row">
-        <label for="manufacturer" class="col-sm-6 col-form-label">Manufacturer</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" id="manufacturer" name="manufacturer"
-            [(ngModel)]="invoice.manufacturer">
-        </div>
-      </div> <br> -->
-
 
 
       <div class="form-group   row">

@@ -8,25 +8,11 @@
     <table class="table" style="width: 100%;" id="excel">
       <thead>
         <tr>
-          <!-- level 1 -->
+
           <th class="text-center level1">Item Name</th>
           <th class="text-center level1">Invoice ID</th>
-          <th class="text-center level1">UOM ID</th>
-          <th class="text-center level1">First Price</th>
-          <th class="text-center level1">Last Price</th>
-          <th class="text-center level1">Quantity</th>
-          <th class="text-center level1">VAT</th>
-          <th class="text-center level1">Unit Price</th>
-          <th class="text-center level1">Additional Cost</th>
-          <th class="text-center level1">Purchase Additional Cost</th>
-          <th class="text-center level1">Delivery Additional Cost</th>
-          <th class="text-center level1">POD</th>
-          <th class="text-center level1">Closing Date</th>
+         
 
-
-
-          <!-- level 2 -->
-          <th class="text-center level2">Purchase Price</th>
           <th class="text-center level2">Is First Payment Done</th>
           <th class="text-center level2">First Payment Price</th>
           <th class="text-center level2">First Payment Date</th>
@@ -40,7 +26,7 @@
           <th class="text-center level2">Logistic Estimated Date</th>
           <th class="text-center level2">Shipping Status</th>
 
-          <!-- level 3 -->
+          
           <th class="text-center level3">Is Delivered to Iraq</th>
           <th class="text-center level3">Is Delivered by Logistic</th>
           <th class="text-center level3">Is Deliver to Client</th>
@@ -48,7 +34,7 @@
           <th class="text-center level3">Is Fully Paid</th>
           <th class="text-center level3">Is Submitted</th>
 
-          <!-- level 4 -->
+         
           <th class="text-center level4">Total Cost</th>
           <th class="text-center level4">Status</th>
           <th class="text-center level4">Actions</th>
@@ -61,20 +47,7 @@
           <ng-container *ngIf="item.invoiceItemStatus === 'purchase_level' && id===item.userID">
             <td class="text-center">{{ item.items[0].itemName }}</td>
             <td class="text-center">{{ item.invoiceID }}</td>
-            <td class="text-center">{{ item.uomID }}</td>
-            <td class="text-center">{{ item.invoiceItemFirstPrice }}</td>
-            <td class="text-center">{{ item.invoiceItemLastPrice }}</td>
-            <td class="text-center">{{ item.invoiceItemQTY }}</td>
-            <td class="text-center">{{ item.invoiceItemVAT }}</td>
-            <td class="text-center">{{ item.invoiceItemUnitPrice }}</td>
-            <td class="text-center">{{ item.invoiceItemQouteAdditionalCost }}</td>
-            <td class="text-center">{{ item.invoiceitemPurchaseAdditionalCost }}</td>
-            <td class="text-center">{{ item.invoiceItemDeliveryAdditionalCost }}</td>
-            <td class="text-center">{{ item.invoiceItemPOD }}</td>
-            <td class="text-center">{{ item.invoiceItemClosingDate | date: 'dd/MM/yyyy'}}</td>
-
-
-            <td class="text-center">{{ item.invoiceItemPurchasePrice }}</td>
+           
             <td class="text-center">{{ item.invoiceItemIsFirstPaymentDone }}</td>
             <td class="text-center">{{ item.invoiceItemFirstPaymentPrice }}</td>
             <td class="text-center">{{ item.invoiceItemFirstPaymentDate | date: 'dd/MM/yyyy'}}</td>
@@ -106,7 +79,7 @@
               </button>
             </td>
           </ng-container>
-          <!-- </div> -->
+      
 
         </tr>
       </tbody>
