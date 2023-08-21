@@ -12,15 +12,13 @@
             <th class="text-center level1">Item Name</th>
             <th class="text-center level1">Invoice ID</th>
             
-            <th class="text-center level1">Unit Price</th>
-            <th class="text-center level1">Additional Cost</th>
-            <th class="text-center level1">Purchase Additional Cost</th>
-            <th class="text-center level1">Delivery Additional Cost</th>
-            <th class="text-center level1">POD</th>
-            <th class="text-center level1">Closing Date</th>  
+            <th class="text-center level2">Unit Price</th>
+            <th class="text-center level2">Additional Cost</th>
+            <th class="text-center level2">Purchase Additional Cost</th>
+            <th class="text-center level2">Delivery Additional Cost</th>
+            <th class="text-center level2">POD</th>
+            <th class="text-center level2">Closing Date</th>  
             
-           
-            <th class="text-center level4">Total Cost</th>
             <th class="text-center level4">Status</th>
             <th class="text-center level4">Actions</th>
           </tr>
@@ -39,8 +37,6 @@
               <td class="text-center">{{ item.invoiceItemPOD }}</td>
               <td class="text-center">{{ item.invoiceItemClosingDate | date: 'dd/MM/yyyy'}}</td>
   
-  
-              <td class="text-center">{{ item.invoiceItemTotalPrice }}</td>
               <td class="text-center">{{ item.invoiceItemStatus }}</td>
               <td *ngIf="id===item.userID">
                 <button mat-raised-button class="btn btn-primary edit-button" (click)="edit(i) ">

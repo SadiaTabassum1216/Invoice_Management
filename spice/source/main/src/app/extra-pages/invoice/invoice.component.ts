@@ -261,13 +261,11 @@ export class InvoiceComponent implements OnInit {
   files: File[] = [];
 
 
-  onFileSelect(event: any, index: number): void {
-    // const files = Array.from(event.target.files) as File[];
-    // this.itemList[index].uploadedFiles1 = files;
+  onFileSelect(event: any): void {
     this.selectedFiles = event.target.files;
   }
 
-  uploadFiles(targetArray: File[], index: number): void {
+  uploadFiles(targetArray: File[]): void {
     if (!this.selectedFiles || this.selectedFiles.length === 0) {
       console.log('No files to upload.');
       return;
