@@ -1,0 +1,12 @@
+<div class="modal_">
+    <div class="modal-content">
+      <h2>Add Payment</h2>
+      <label for="paymentDone">Payment Done:</label>
+      <input type="checkbox" id="paymentDone" [(ngModel)]="paymentDone">
+      <div class="modal-buttons">
+        <button (click)="closeModal()">Cancel</button>
+        <button (click)="submitPayment()">Add Payment</button>
+      </div>
+    </div>
+  </div>
+
