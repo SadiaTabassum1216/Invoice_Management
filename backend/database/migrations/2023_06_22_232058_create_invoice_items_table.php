@@ -17,26 +17,38 @@ return new class extends Migration {
 
             $table->unsignedBigInteger('invoiceID');
             $table->unsignedBigInteger('userID')->nullable();
-            $table->integer('invoiceItemQTY')->nullable();
             $table->unsignedBigInteger('uomID')->nullable();
+            $table->string('invoiceItemOrigin')->nullable();
+            $table->string('invoiceItemManufacturer')->nullable();
+            $table->string('invoiceItemPartNumber')->nullable();
+            $table->integer('invoiceItemQTY')->nullable();
+            $table->string('invoiceItemStatus')->nullable();
+
+            ///////////////////////////////////////////////
+
             $table->double('invoiceItemFirstPrice', 8, 2)->nullable();
             $table->double('invoiceItemLastPrice', 8, 2)->nullable();
             $table->double('invoiceItemVAT', 8, 2)->nullable();
+            $table->double('invoiceItemPurchasePrice', 8, 2)->nullable();
+
+            //////////////////////////////////////////////
+
             $table->double('invoiceItemUnitPrice', 8, 2)->nullable();
             $table->double('invoiceItemQouteAdditionalCost', 8, 2)->nullable();
             $table->double('invoiceitemPurchaseAdditionalCost', 8, 2)->nullable();
             $table->double('invoiceItemDeliveryAdditionalCost', 8, 2)->nullable();
-            $table->double('invoiceItemTotalPrice', 8, 2)->nullable();
             $table->string('invoiceItemPOD')->nullable();
             $table->date('invoiceItemClosingDate')->nullable();
-            $table->double('invoiceItemPurchasePrice', 8, 2)->nullable();
-            $table->double('invoiceItemFirstPaymentPrice', 8, 2)->nullable();
+
+            ////////////////////////////////////////////////////
+            
+            
+            $table->boolean('invoiceItemIsFirstPaymentDone')->nullable();
             $table->date('invoiceItemFirstPaymentDate')->nullable();
-
-            $table->double('invoiceItemLastPaymentPrice', 8, 2)->nullable();
+            $table->double('invoiceItemFirstPaymentPrice', 8, 2)->nullable();
+            $table->boolean('invoiceItemIsLastPaymentDone')->nullable();
             $table->date('invoiceItemLastPaymentDate')->nullable();
-
-
+            $table->double('invoiceItemLastPaymentPrice', 8, 2)->nullable();
             $table->string('invoiceItemLogisticCompany')->nullable();
             $table->string('invoiceItemLogisticLocation')->nullable();
             $table->date('invoiceItemLogisitEstimatedDate')->nullable();
@@ -47,10 +59,11 @@ return new class extends Migration {
             $table->double('invoiceItemLogisticCost', 8, 2)->nullable();
             $table->boolean('invoiceItemFullPaid')->nullable();
             $table->boolean('invoiceItemSubmitted')->nullable();
-            $table->string('invoiceItemStatus')->nullable();
-            $table->boolean('invoiceItemIsFirstPaymentDone')->nullable();
-            $table->boolean('invoiceItemIsLastPaymentDone')->nullable();
             
+            
+            $table->double('invoiceItemTotalPrice', 8, 2)->nullable();
+
+
             $table->timestamps();
 
             $table->foreign('invoiceID')->references('id')->on('invoices')->onDelete('cascade');
