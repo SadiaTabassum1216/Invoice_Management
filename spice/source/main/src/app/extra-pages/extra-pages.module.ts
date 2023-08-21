@@ -35,6 +35,7 @@ import { PurchaseLevelComponent } from './purchase-level/purchase-level.componen
 import { EditComponent } from './pricing-level/edit/edit.component';
 import { EditOComponent } from './offering-level/edit-o/edit-o.component';
 import { EditPComponent } from './purchase-level/edit-p/edit-p.component';
+import { PaymentModalComponent } from './invoice-view/payment-modal/payment-modal.component';
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -60,6 +61,7 @@ import { EditPComponent } from './purchase-level/edit-p/edit-p.component';
     EditComponent,
     EditOComponent,
     EditPComponent,
+    PaymentModalComponent,
   ],
   imports: [
     CommonModule,
