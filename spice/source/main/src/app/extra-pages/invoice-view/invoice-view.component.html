@@ -1,2 +1,39 @@
-<br><br><br><br>
-<p>invoice-view works!</p>
+<br><br>
+<section class="content">
+    <div class="card listCard">
+        <div class="card-body">
+            <h2 class="text-center">Invoice View</h2>
+            <br><br>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date & Time</th>
+                                    <th>Subtotal</th>
+                                    <th>Grand Total</th>
+                                    <th>Discount</th>
+                                    <th>Final Price</th>
+                                    <th>Payment Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let invoice of invoices">
+                                    <td>{{ invoice.id }}</td>
+                                    <td>{{ invoice.datetime | date }}</td>
+                                    <td>{{ invoice.subtotal }}</td>
+                                    <td>{{ invoice.grandtotal }}</td>
+                                    <td>{{ invoice.discount }}</td>
+                                    <td>{{ invoice.finalprice }}</td>
+                                    <td>{{ invoice.isFullyPaid ? 'Fully Paid' : 'Not Paid' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

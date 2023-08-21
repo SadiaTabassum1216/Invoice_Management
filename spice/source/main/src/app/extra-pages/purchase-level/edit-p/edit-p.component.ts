@@ -4,6 +4,9 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/d
 import { FormsModule } from '@angular/forms';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
+import { Observable } from 'rxjs';
+import { AuthUser } from 'src/app/core/models/user';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-edit-p',
@@ -13,14 +16,23 @@ import { InvoiceItem3 } from 'src/app/models/invoice3.model';
 export class EditPComponent {
   selectedItem: InvoiceItem3 = new InvoiceItem3();
   dialogConfig?: MatDialogConfig;
+  public currentUser: Observable<AuthUser> | undefined;
+ roles: string[]=[];
   // item: InvoiceItem3= new InvoiceItem3();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, public dialog: MatDialog) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, public dialog: MatDialog, private authService: AuthService) {
     this.selectedItem = data.item;
-    //  this.item= data.item;
      console.log("Selected Item is: ",this.selectedItem);
+    
   }
-
+  ngOnInit(): void {
+    this.currentUser = this.authService.currentUser;
+    this.currentUser.subscribe(info => {
+      this.roles = info['user']['roles'];
+   
+    });
+    
+  }
   selectedFiles: FileList | null | undefined;
 
 

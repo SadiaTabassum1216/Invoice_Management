@@ -178,7 +178,7 @@
        
         <div class="form-row">
             <div class="form-group col-md-6">
-                <select class="form-control" id="status" name="invoiceItemStatus" [(ngModel)]="selectedItem.invoiceItemStatus">
+                <select class="form-control" id="status" name="invoiceItemStatus" [(ngModel)]="selectedItem.invoiceItemStatus" *ngIf="roles.includes('admin')">
                     <option value="pricing_level">Pricing Level</option>
                     <option value="offering_level">Offering Level</option>
                     <option value="purchase_level">Purchase Level</option>
