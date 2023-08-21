@@ -1,1 +1,64 @@
-<br><br><br><br><p>offering-level works!</p>
+<section class="content">
+    <br><br><br><br>
+  
+    <div class="table-container" style="width: 85%; margin: 0 auto; overflow-x: auto;">
+      <h2 class="text-center">Offering Level Items</h2>
+      <br>
+  
+      <table class="table" style="width: 100%;" id="excel">
+        <thead>
+          <tr>
+            
+            <th class="text-center level1">Item Name</th>
+            <th class="text-center level1">Invoice ID</th>
+            
+            <th class="text-center level2">Unit Price</th>
+            <th class="text-center level2">Additional Cost</th>
+            <th class="text-center level2">Purchase Additional Cost</th>
+            <th class="text-center level2">Delivery Additional Cost</th>
+            <th class="text-center level2">POD</th>
+            <th class="text-center level2">Closing Date</th>  
+            
+            <th class="text-center level4">Status</th>
+            <th class="text-center level4">Actions</th>
+          </tr>
+  
+        </thead>
+        <tbody>
+  
+          <tr *ngFor="let item of items.data; let i in index">
+            <ng-container *ngIf="item.invoiceItemStatus === 'offering_level' && id===item.userID">
+              <td class="text-center">{{ item.items[0].itemName }}</td>
+              <td class="text-center">{{ item.invoiceID }}</td>
+             <td class="text-center">{{ item.invoiceItemUnitPrice }}</td>
+              <td class="text-center">{{ item.invoiceItemQouteAdditionalCost }}</td>
+              <td class="text-center">{{ item.invoiceitemPurchaseAdditionalCost }}</td>
+              <td class="text-center">{{ item.invoiceItemDeliveryAdditionalCost }}</td>
+              <td class="text-center">{{ item.invoiceItemPOD }}</td>
+              <td class="text-center">{{ item.invoiceItemClosingDate | date: 'dd/MM/yyyy'}}</td>
+  
+              <td class="text-center">{{ item.invoiceItemStatus }}</td>
+              <td *ngIf="id===item.userID">
+                <button mat-raised-button class="btn btn-primary edit-button" (click)="edit(i) ">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <span class="button-gap"></span>
+                <button class="btn btn-danger delete-button" (click)="view(i)">
+                  View Files
+                </button>
+              </td>
+            </ng-container>
+            
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+  
+    <div class="container">
+      <br><br>
+      <button mat-raised-button class="btn btn-primary" (click)="exportList()">Export</button>
+    </div>
+  
+  
+  </section>

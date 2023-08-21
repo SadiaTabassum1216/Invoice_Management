@@ -1,0 +1,112 @@
+<br><br>
+
+<div class="modal-body" style="max-height: 800px; overflow-y: auto;">
+
+    <div class="edit-user-container">
+        <h4>Edit Item</h4>
+        <br><br>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="invoiceID">Invoice ID</label>
+                <input type="text" class="form-control" id="invoiceID" name="invoiceID"
+                    [(ngModel)]="selectedItem.invoiceID" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="itemID">Item ID</label>
+                <input type="text" class="form-control" id="itemID" name="id" [(ngModel)]="selectedItem.id" disabled>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="unitPrice">Unit Price</label>
+                <input type="number" class="form-control" id="unitPrice" name="invoiceItemUnitPrice"
+                    [(ngModel)]="selectedItem.invoiceItemUnitPrice">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="additionalCost">Additional Cost</label>
+                <input type="number" class="form-control" id="additionalCost" name="invoiceItemQouteAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceItemQouteAdditionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="purchaseAdditionalCost">Purchase Additional Cost</label>
+                <input type="number" class="form-control" id="purchaseAdditionalCost"
+                    name="invoiceitemPurchaseAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceitemPurchaseAdditionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="deliveryAdditionalCost">Delivery Additional Cost</label>
+                <input type="number" class="form-control" id="deliveryAdditionalCost"
+                    name="invoiceItemDeliveryAdditionalCost"
+                    [(ngModel)]="selectedItem.invoiceItemDeliveryAdditionalCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="totalPrice">Total Price</label>
+                <input type="number" class="form-control" id="totalPrice" name="invoiceItemTotalPrice"
+                    [(ngModel)]="selectedItem.invoiceItemTotalPrice" disabled>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="POD">POD</label>
+                <input type="text" class="form-control" id="POD" name="invoiceItemPOD"
+                    [(ngModel)]="selectedItem.invoiceItemPOD">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="closingDate">Closing Date</label>
+                <input type="date" class="form-control" id="closingDate" name="invoiceItemClosingDate"
+                    [(ngModel)]="selectedItem.invoiceItemClosingDate">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="uploadedFiles1">Uploaded Files 2</label>
+                <input type="file" class="form-control" id="uploadedFiles1" name="uploadedFiles1"
+                     (change)="onFileSelect($event)">
+                     <!-- <button class="upload-button" (click)="uploadFiles(selectedItem.uploadedFiles1)">Upload Files</button> -->
+            </div>
+        </div>
+
+       
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <select class="form-control" id="status" name="invoiceItemStatus" [(ngModel)]="selectedItem.invoiceItemStatus"  *ngIf="roles.includes('admin')">
+                    <option value="pricing_level">Pricing Level</option>
+                    <option value="offering_level">Offering Level</option>
+                    <option value="purchase_level">Purchase Level</option>
+                  </select>
+            </div>
+        </div>
+
+
+
+        <br>
+        <button class="btn btn-primary edit-button" (click)="update()">
+            <i class="fas fa-pencil-alt"></i> Update
+        </button>
+
+        <span class="button-gap"></span>
+        <button mat-raised-button class="btn btn-primary" (click)="close()">Close</button>
+    </div>
+
+</div>

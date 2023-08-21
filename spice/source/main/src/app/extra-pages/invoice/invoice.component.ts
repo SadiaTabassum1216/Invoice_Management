@@ -45,15 +45,16 @@ export class InvoiceComponent implements OnInit {
   public currentUser: Observable<AuthUser> | undefined;
   name: string = '';
   id: number = 0;
+  roles:  string[] = [];
   itemList: Item[] = [];
   invoice: Invoice = new Invoice();
   itemName: string[] = [];
   productlist: any;
   userList: any;
   uomList: any;
-  tempItem: string[]=[];
-  tempUser: string[]=[];
-  tempUom: string[]=[];
+  tempItem: string[] = [];
+  tempUser: string[] = [];
+  tempUom: string[] = [];
   // userName: string[] = [];
 
   filteredOptionsItem: Observable<any[]> | undefined;
@@ -63,23 +64,29 @@ export class InvoiceComponent implements OnInit {
   myControlitem = new FormControl();
   myControluser = new FormControl();
   myControlUom = new FormControl();
+  
 
   constructor(
     private http: HttpClient,
     private dialogModel: MatDialog,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
     this.currentUser.subscribe((info) => {
       this.name = info['user']['name'];
       this.id = info['user']['id'];
+      this.roles=info['user']['roles'];
     });
 
-    if (this.id !== 1) {
-      this.router.navigate(['/**']);
+    // if (this.id !== 1) {
+    //   this.router.navigate(['/**']);
+    // }
+
+    if (!this.roles.includes('admin')) {
+      this.router.navigate(['/**']); 
     }
 
     this.getProductList();
@@ -138,22 +145,22 @@ export class InvoiceComponent implements OnInit {
   userNameId: { id: any; name: any }[] = [];
   uomNameId: { id: any; name: any }[] = [];
 
-  getUOMList(){
+  getUOMList() {
     this.http
-    .get<any[]>(`${backendEnvironment.apiUrl}/api/searchUOM`)
-    .subscribe((data) => {
-      this.uomList = data;
-      //  console.log("uom: ", this.uomList);
-      this.uomNameId = this.uomList.data.map(
-        (uom: { id: any; name: any }) => {
-          return {
-            id: uom.id,
-            name: uom.name,
-          };
-        }
-      );
-      //  console.log("items: ", this.uomNameId);
-    });
+      .get<any[]>(`${backendEnvironment.apiUrl}/api/searchUOM`)
+      .subscribe((data) => {
+        this.uomList = data;
+        //  console.log("uom: ", this.uomList);
+        this.uomNameId = this.uomList.data.map(
+          (uom: { id: any; name: any }) => {
+            return {
+              id: uom.id,
+              name: uom.name,
+            };
+          }
+        );
+        //  console.log("items: ", this.uomNameId);
+      });
   }
   userName: string[] = [];
 
@@ -162,7 +169,7 @@ export class InvoiceComponent implements OnInit {
       .get<any[]>(`${backendEnvironment.apiUrl}/api/users`)
       .subscribe((data) => {
         this.userList = data;
-         console.log("users: ", this.userList);
+        console.log("users: ", this.userList);
         this.userNameId = this.userList.data.map(
           (user: { id: any; name: any }) => {
             return {
@@ -175,7 +182,7 @@ export class InvoiceComponent implements OnInit {
         // this.userName = this.userList.data.map((user: any) => user.name);
         // this.itemName = this.items.map(item => item.itemId);
         // console.log("User Names: ", this.userName);
-        
+
       });
   }
 
@@ -205,6 +212,10 @@ export class InvoiceComponent implements OnInit {
       firstPrice: 0,
       lastPrice: 0,
       quantity: 0,
+      origin: '',
+      partNumber: '',
+      manufacturer: '',
+      
       VAT: 0,
       unitPrice: 0,
       additionalCost: 0,
@@ -212,17 +223,17 @@ export class InvoiceComponent implements OnInit {
       deliveryAdditionalCost: 0,
       totalPrice: 0,
       POD: ' ',
-      closingDate:new Date(1970, 0, 1),
+      closingDate: new Date(1970, 0, 1),
       purchasePrice: 0,
       isFirstPaymentDone: false,
       firstPaymentPrice: 0,
-      firstPaymentDate:new Date(1970, 0, 1),
+      firstPaymentDate: new Date(1970, 0, 1),
       isLastPaymentDone: false,
       lastPaymentPrice: 0,
       lastPaymentDate: new Date(1970, 0, 1),
       logisticCompany: ' ',
       logisticLocation: ' ',
-      logisticEstimatedDate:new Date(1970, 0, 1),
+      logisticEstimatedDate: new Date(1970, 0, 1),
       shippingStatus: ' ',
       isDeliveredToIraq: false,
       isDeliveredByLogistic: false,
@@ -235,27 +246,26 @@ export class InvoiceComponent implements OnInit {
       uploadedFiles1: [],
       uploadedFiles2: [],
       uploadedFiles3: [],
+     
     };
-    for(let i=0; i<this.itemList.length;i++){
-      this.itemList[i].itemId=this.tempItem[i];
-      this.itemList[i].userId=this.tempUser[i];
-      this.itemList[i].UOMId=this.tempUom[i];
+    for (let i = 0; i < this.itemList.length; i++) {
+      this.itemList[i].itemId = this.tempItem[i];
+      this.itemList[i].userId = this.tempUser[i];
+      this.itemList[i].UOMId = this.tempUom[i];
     }
 
     this.itemList.push(newItem);
-    
+
   }
 
   files: File[] = [];
 
- 
-  onFileSelect(event: any, index: number): void {
-    // const files = Array.from(event.target.files) as File[];
-    // this.itemList[index].uploadedFiles1 = files;
+
+  onFileSelect(event: any): void {
     this.selectedFiles = event.target.files;
   }
 
-  uploadFiles(targetArray: File[], index: number): void {
+  uploadFiles(targetArray: File[]): void {
     if (!this.selectedFiles || this.selectedFiles.length === 0) {
       console.log('No files to upload.');
       return;
@@ -303,12 +313,12 @@ export class InvoiceComponent implements OnInit {
   }
 
   submit() {
-      this.isFormSubmitted = true;
+    this.isFormSubmitted = true;
 
     this.invoice.invoiceDate = new Date();
-    
-     this.invoice.invoiceEstimatedDate = moment(this.invoice.invoiceEstimatedDate).format('YYYY-MM-DD');
-     this.invoice.invoiceClosingDate = moment(this.invoice.invoiceClosingDate).format('YYYY-MM-DD');
+
+    this.invoice.invoiceEstimatedDate = moment(this.invoice.invoiceEstimatedDate).format('YYYY-MM-DD');
+    this.invoice.invoiceClosingDate = moment(this.invoice.invoiceClosingDate).format('YYYY-MM-DD');
     //  this.invoice.invoiceEstimatedDate = formatDate(this.invoice.invoiceEstimatedDate);
 
     this.invoice.totalCost = 0;
@@ -326,17 +336,17 @@ export class InvoiceComponent implements OnInit {
       this.invoice.totalCost += item.totalPrice;
       this.invoice.grandTotal += item.totalPrice + item.logisticCost;
 
-      item.closingDate = moment( item.closingDate).format('YYYY-MM-DD');
-      item.firstPaymentDate = moment( item.firstPaymentDate).format('YYYY-MM-DD');
-      item.lastPaymentDate = moment( item.lastPaymentDate).format('YYYY-MM-DD');
-      item.logisticEstimatedDate = moment( item.logisticEstimatedDate).format('YYYY-MM-DD');
+      item.closingDate = moment(item.closingDate).format('YYYY-MM-DD');
+      item.firstPaymentDate = moment(item.firstPaymentDate).format('YYYY-MM-DD');
+      item.lastPaymentDate = moment(item.lastPaymentDate).format('YYYY-MM-DD');
+      item.logisticEstimatedDate = moment(item.logisticEstimatedDate).format('YYYY-MM-DD');
 
     }
 
-    for(let i=0; i<this.itemList.length;i++){
-      this.itemList[i].itemId=this.tempItem[i];
-      this.itemList[i].userId=this.tempUser[i];
-      this.itemList[i].UOMId=this.tempUom[i];
+    for (let i = 0; i < this.itemList.length; i++) {
+      this.itemList[i].itemId = this.tempItem[i];
+      this.itemList[i].userId = this.tempUser[i];
+      this.itemList[i].UOMId = this.tempUom[i];
     }
     this.invoice.itemList = this.itemList;
     console.log(this.invoice);
@@ -357,6 +367,7 @@ export class InvoiceComponent implements OnInit {
     formData.append('grandTotal', this.invoice.grandTotal.toString());
     formData.append('additionalCost', this.invoice.additionalCost.toString());
     formData.append('totalCost', this.invoice.totalCost.toString());
+    
     formData.append('status', this.invoice.status);
     formData.append('isDone', this.invoice.isDone.toString());
 
@@ -366,6 +377,10 @@ export class InvoiceComponent implements OnInit {
         itemId: item.itemId,
         userId: item.userId,
         UOMId: item.UOMId,
+        origin:item.origin,
+        partNumber: item.partNumber,
+        manufacturer:item.manufacturer,
+
         firstPrice: item.firstPrice,
         lastPrice: item.lastPrice,
         quantity: item.quantity,
@@ -423,12 +438,7 @@ export class InvoiceComponent implements OnInit {
           item.uploadedFiles3[j]
         );
       }
-      // for (let j = 0; j < item.uploadedFiles2.length; j++) {
-      //   formData.append(`itemList[${i}].uploadedFiles2[]`, item.uploadedFiles2[j]);
-      // }
-      // for (let j = 0; j < item.uploadedFiles3.length; j++) {
-      //   formData.append(`itemList[${i}].uploadedFiles3[]`, item.uploadedFiles3[j]);
-      // }
+      
     }
 
     this.http
@@ -438,6 +448,8 @@ export class InvoiceComponent implements OnInit {
         this.invoice.invoiceID = data.id;
         console.log(data);
       });
+
+      // this.router.navigate['/invoicelist'];
   }
 
   breadscrums = [

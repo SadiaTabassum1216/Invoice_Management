@@ -22,10 +22,10 @@ export class UsersComponent implements OnInit {
  
   public currentUser: Observable<AuthUser> | undefined;
   id: number=0;
-
+roles: string[]=[];
   
-  selectedUser: User = new User(0, '', '');
-  newUser: User = new User(0, '', '');
+  selectedUser: User = new User(0, '', '',[]);
+  newUser: User = new User(0, '', '',[]);
 
   dialogConfig?: MatDialogConfig;
   constructor(private http: HttpClient,  
@@ -39,11 +39,12 @@ export class UsersComponent implements OnInit {
     this.currentUser.subscribe(info => {
      
       this.id=info['user']['id'];
-      // console.log("Current user id ",  this.id);
+      this.roles=info['user']['roles'];
+       console.log("Current user: ",  this.currentUser);
     });
 
-    if (this.id !== 1) {
-      this.router.navigate(['/**']);
+    if (!this.roles.includes('admin')) {
+      this.router.navigate(['/**']); 
     }
   }
 

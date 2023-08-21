@@ -21,6 +21,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { FormsModule } from '@angular/forms';
+// import { NgSelectModule } from '@ng-select/ng-select';   
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     CoreModule,
     FormsModule,
     SharedModule,
+    // NgSelectModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

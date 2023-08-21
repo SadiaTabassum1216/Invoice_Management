@@ -261,18 +261,15 @@
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="status">Status</label>
-                <input type="text" class="form-control" id="status" name="invoiceItemStatus"
-                    [(ngModel)]="selectedItem.invoiceItemStatus">
+                <select class="form-control" id="status" name="invoiceItemStatus" [(ngModel)]="selectedItem.invoiceItemStatus">
+                    <option value="pricing_level">Pricing Level</option>
+                    <option value="offering_level">Offering Level</option>
+                    <option value="purchase_level">Purchase Level</option>
+                  </select>
             </div>
         </div>
 
-        <!-- <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="uploadedFiles1">Uploaded Files 1</label>
-      <input type="file" class="form-control" id="uploadedFiles1" name="uploadedFiles1" (change)="onFileChange($event, 'uploadedFiles1')">
-    </div>
-  </div> -->
+      
 
 
         <br>

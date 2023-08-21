@@ -1,0 +1,201 @@
+<br><br>
+
+<div class="modal-body" style="max-height: 800px; overflow-y: auto;">
+
+    <div class="edit-user-container">
+        <h4>Edit Item</h4>
+        <br><br>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="invoiceID">Invoice ID</label>
+                <input type="text" class="form-control" id="invoiceID" name="invoiceID"
+                    [(ngModel)]="selectedItem.invoiceID" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="itemID">Item ID</label>
+                <input type="text" class="form-control" id="itemID" name="id" [(ngModel)]="selectedItem.id" disabled>
+            </div>
+        </div>
+
+       
+       
+     
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is First Payment Done
+                <input type="checkbox" name="invoiceItemIsFirstPaymentDone"
+                    [(ngModel)]="selectedItem.invoiceItemIsFirstPaymentDone">
+
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstPaymentPrice">First Payment Price</label>
+                <input type="number" class="form-control" id="firstPaymentPrice" name="invoiceItemFirstPaymentPrice"
+                    [(ngModel)]="selectedItem.invoiceItemFirstPaymentPrice">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstPaymentDate">First Payment Date</label>
+                <input type="date" class="form-control" id="firstPaymentDate" name="invoiceItemFirstPaymentDate"
+                    [(ngModel)]="selectedItem.invoiceItemFirstPaymentDate">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Last Payment done
+                <input type="checkbox" name="invoiceItemIsLastPaymentDone"
+                    [(ngModel)]="selectedItem.invoiceItemIsLastPaymentDone">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="lastPaymentPrice">Last Payment Price</label>
+                <input type="number" class="form-control" id="lastPaymentPrice" name="invoiceItemLastPaymentPrice"
+                    [(ngModel)]="selectedItem.invoiceItemLastPaymentPrice">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="lastPaymentDate">Last Payment Date</label>
+                <input type="date" class="form-control" id="lastPaymentDate" name="invoiceItemLastPaymentDate"
+                    [(ngModel)]="selectedItem.invoiceItemLastPaymentDate">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="logisticCompany">Logistic Company</label>
+                <input type="text" class="form-control" id="logisticCompany" name="invoiceItemLogisticCompany"
+                    [(ngModel)]="selectedItem.invoiceItemLogisticCompany">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="logisticLocation">Logistic Location</label>
+                <input type="text" class="form-control" id="logisticLocation" name="invoiceItemLogisticLocation"
+                    [(ngModel)]="selectedItem.invoiceItemLogisticLocation">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="logisticEstimatedDate">Logistic Estimated Date</label>
+                <input type="date" class="form-control" id="logisticEstimatedDate"
+                    name="invoiceItemLogisitEstimatedDate" [(ngModel)]="selectedItem.invoiceItemLogisitEstimatedDate">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="shippingStatus">Shipping Status</label>
+                <input type="text" class="form-control" id="shippingStatus" name="invoiceItemShippingStatus"
+                    [(ngModel)]="selectedItem.invoiceItemShippingStatus">
+            </div>
+        </div>
+
+    
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Delivered to Iraq
+                <input type="checkbox" name="invoiceItemDeliveredToIraq"
+                    [(ngModel)]="selectedItem.invoiceItemDeliveredToIraq">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Delivered by Logistic
+                <input type="checkbox" name="invoiceItemDeliverByLogisic"
+                    [(ngModel)]="selectedItem.invoiceItemDeliverByLogisic">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Deliver to Client
+                <input type="checkbox" name="invoiceItemDeliverToClient"
+                    [(ngModel)]="selectedItem.invoiceItemDeliverToClient">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="logisticCost">Logistic Cost</label>
+                <input type="number" class="form-control" id="logisticCost" name="invoiceItemLogisticCost"
+                    [(ngModel)]="selectedItem.invoiceItemLogisticCost">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Fully Paid
+                <input type="checkbox" name="invoiceItemFullPaid" [(ngModel)]="selectedItem.invoiceItemFullPaid">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                Is Submitted<input type="checkbox" name="invoiceItemSubmitted"
+                    [(ngModel)]="selectedItem.invoiceItemSubmitted">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" name="invoiceItemStatus"
+                    [(ngModel)]="selectedItem.invoiceItemStatus">
+            </div>
+        </div>
+
+       
+
+        
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="uploadedFiles1">Uploaded Files 1</label>
+                <input type="file" class="form-control" id="uploadedFiles1" name="uploadedFiles1"
+                     (change)="onFileSelect($event)">
+                     <!-- <button class="upload-button" (click)="uploadFiles(selectedItem.uploadedFiles1)">Upload Files</button> -->
+            </div>
+        </div>
+
+       
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <select class="form-control" id="status" name="invoiceItemStatus" [(ngModel)]="selectedItem.invoiceItemStatus">
+                    <option value="pricing_level">Pricing Level</option>
+                    <option value="offering_level">Offering Level</option>
+                    <option value="purchase_level">Purchase Level</option>
+                  </select>
+            </div>
+        </div>
+
+
+
+
+        <br>
+        <button class="btn btn-primary edit-button" (click)="update()">
+            <i class="fas fa-pencil-alt"></i> Update
+        </button>
+
+        <span class="button-gap"></span>
+        <button mat-raised-button class="btn btn-primary" (click)="close()">Close</button>
+    </div>
+
+</div>

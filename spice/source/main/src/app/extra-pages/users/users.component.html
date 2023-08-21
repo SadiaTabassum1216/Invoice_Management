@@ -1,4 +1,4 @@
-<section class="content" *ngIf="id === 1">
+<section class="content">
   <h2>Users</h2>
   <br /><br />
 
@@ -17,8 +17,9 @@
         <th>User ID</th>
         <th>Full Name</th>
         <th>Username</th>
-        <th>User Status</th>
-        <th>Actions</th>
+        <th> Role</th>
+        <th>User Status</th>       
+        <th  *ngIf="roles.includes('admin')">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -26,13 +27,14 @@
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.username }}</td>
+        <td>{{ user.roles && user.roles.length ? user.roles.join(', ') : 'No Roles' }}</td>
         <td>{{ user.status}}</td>
         <td>
-          <button mat-raised-button class="btn btn-primary edit-button" (click)="editUser(i)">
+          <button mat-raised-button class="btn btn-primary edit-button" (click)="editUser(i)"  >
             <i class="fas fa-edit"></i> Edit
           </button>
           <span class="button-gap"></span>
-          <button class="btn btn-danger delete-button" (click)="confirmDelete(user.id)" *ngIf="user.id !== 1">
+          <button class="btn btn-danger delete-button" (click)="confirmDelete(user.id)" *ngIf="!user.roles.includes('admin')">
             <i class="fas fa-trash"></i> Delete
           </button>
         </td>

@@ -71,6 +71,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   public currentUser: Observable<AuthUser> | undefined;
   id:number=0;
+  roles: string[]=[];
+  
   ngOnInit() {
     if (this.authService.currentUserValue) {
       this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
@@ -78,6 +80,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.currentUser=this.authService.currentUser;
     this.currentUser.subscribe(info => {
       this.id=info['user']['id'];
+      this.roles=info['user']['roles'];
       // console.log("Current user id ",  this.id);
     });
     }
@@ -126,4 +129,5 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.renderer.addClass(this.document.body, 'submenu-closed');
     }
   }
+
 }

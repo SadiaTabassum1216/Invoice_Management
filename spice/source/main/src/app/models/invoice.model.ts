@@ -11,7 +11,10 @@ export class Invoice {
     grandTotal: number=0;
     additionalCost: number=0;
     totalCost: number=0;
-    status: string='';
+
+    
+
+    status: string='pricing_level';
     isDone: boolean= false;
    
   }

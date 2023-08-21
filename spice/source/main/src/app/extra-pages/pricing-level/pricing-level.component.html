@@ -1,1 +1,77 @@
-<br><br><br><br><p>pricing-level works!</p>
+<section class="content">
+  <br><br><br><br>
+
+  <div class="table-container" style="width: 85%; margin: 0 auto; overflow-x: auto;">
+    <h2 class="text-center">Pricing Level Items</h2>
+    <br>
+
+    <table class="table" style="width: 100%;" id="excel">
+      <thead>
+        <tr>
+          <!-- level 1 -->
+          <th class="text-center level1">Item Name</th>
+          <th class="text-center level1">Invoice ID</th>
+          <th class="text-center level1">UOM ID</th>
+
+          <th class="text-center level1">Quantity</th>
+          <th class="text-center level1">Origin</th>
+          <th class="text-center level1">Part Number</th>
+          <th class="text-center level1">Manufacturer</th>
+
+
+          <th class="text-center level2">First Price</th>
+          <th class="text-center level2">Last Price</th>
+          <th class="text-center level2">VAT</th>
+          <th class="text-center level2">Purchase Price</th>
+          
+
+          <th class="text-center level3">Status</th>
+          <th class="text-center level3">Actions</th>
+
+        </tr>
+
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let item of items.data; let i in index">
+          <ng-container *ngIf="item.invoiceItemStatus === 'pricing_level' && id===item.userID">
+            <td class="text-center">{{ item.items[0].itemName }}</td>
+            <td class="text-center">{{ item.invoiceID }}</td>
+            <td class="text-center">{{ item.uomID }}</td>
+
+            <td class="text-center">{{ item.invoiceItemQTY }}</td>
+            <td class="text-center">{{ item.origin }}</td>
+            <td class="text-center">{{ item.partNumber }}</td>
+            <td class="text-center">{{ item.manufacturer }}</td>
+
+            <td class="text-center">{{ item.invoiceItemFirstPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemLastPrice }}</td>
+            <td class="text-center">{{ item.invoiceItemVAT }}</td>
+            <td class="text-center">{{ item.invoiceItemPurchasePrice }}</td>
+
+            <td class="text-center">{{ item.invoiceItemStatus }}</td>
+
+            <td *ngIf="id===item.userID">
+              <button mat-raised-button class="btn btn-primary edit-button" (click)="edit(i) ">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <span class="button-gap"></span>
+              <button class="btn btn-danger delete-button" (click)="view(i)">
+                View Files
+              </button>
+            </td>
+          </ng-container>
+
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </div>
+
+  <div class="container">
+    <br><br>
+    <button mat-raised-button class="btn btn-primary" (click)="exportList()">Export</button>
+  </div>
+
+
+</section>
