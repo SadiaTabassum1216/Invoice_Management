@@ -20,8 +20,6 @@ export class EditItemsComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, public dialog: MatDialog) {
     this.selectedItem = data.item;
-    //  this.item= data.item;
-    // console.log("Selected Item is: ",this.selectedItem);
   }
 
 
