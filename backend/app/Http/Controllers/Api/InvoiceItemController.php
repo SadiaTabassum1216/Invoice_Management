@@ -162,7 +162,7 @@ class InvoiceItemController extends Controller
         return ['data' => $invoiceItem->all()];
     }
 
-    public function invoiceCreate(Request $request)
+    public function createInvoice(Request $request)
     {
 
         $dateString = $request->input('invoiceDate');
@@ -252,5 +252,26 @@ class InvoiceItemController extends Controller
         //     }
 
         // }
+    }
+
+
+    public function updatePricingLevel($id, Request $request) 
+    {
+
+        // dd($request);
+
+        // $files = $request->file('file');
+
+        $names = [];
+
+        // foreach($request->file('file') as $file){
+        //     $names[] = $file->getClientOriginalName();
+        // }
+        return [
+            'request' => $request->all(),
+            'id' => $id, 
+            'files' => $request->files,
+            'files2' => $request->file('files'),
+        ];
     }
 }

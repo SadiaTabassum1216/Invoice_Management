@@ -71,8 +71,13 @@ Route::delete('/items/{id}', [ItemController::class, 'destroy']);
 
 Route::post('/invoice', [InvoiceItemController::class, 'store']);
 Route::get('/invoice', [InvoiceItemController::class, 'show']);
+Route::post('/createInvoice', [InvoiceItemController::class, 'createInvoice']);
+Route::post('/updatePricingLevel/{id}', [InvoiceItemController::class, 'updatePricingLevel']);
+
+
 Route::put('/invoice/{id}', [InvoiceController::class, 'update']);
 Route::delete('/invoice/{id}', [InvoiceController::class, 'destroy']);
+
 
 Route::get('/file_download/{id}', [InvoiceItemFileController::class, 'downloadFile']);
 

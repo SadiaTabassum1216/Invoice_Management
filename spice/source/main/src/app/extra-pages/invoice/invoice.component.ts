@@ -212,9 +212,9 @@ export class InvoiceComponent implements OnInit {
       firstPrice: 0,
       lastPrice: 0,
       quantity: 0,
-      origin: '',
-      partNumber: '',
-      manufacturer: '',
+      origin: ' ',
+      partNumber: ' ',
+      manufacturer: ' ',
       
       VAT: 0,
       unitPrice: 0,
@@ -440,9 +440,10 @@ export class InvoiceComponent implements OnInit {
       }
       
     }
+    console.log(formData);
 
     this.http
-      .post<any>(`${backendEnvironment.apiUrl}/api/invoice`, formData)
+      .post<any>(`${backendEnvironment.apiUrl}/api/createInvoice`, formData)
       .subscribe((data) => {
         console.log(this.invoice);
         this.invoice.invoiceID = data.id;
