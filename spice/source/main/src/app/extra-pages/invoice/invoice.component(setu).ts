@@ -3,7 +3,6 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ModalComponent } from './modal/modal.component';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 
@@ -38,7 +37,6 @@ export class InvoiceComponent implements OnInit {
   uploadedFilePaths3: string[] = [];
   files: File[] = [];
 
-  dialog?: MatDialogRef<ModalComponent>;
   selectedFiles1: FileList | null | undefined;
   selectedFiles2: FileList | null | undefined;
   selectedFiles: FileList | null | undefined;
@@ -113,6 +111,9 @@ export class InvoiceComponent implements OnInit {
       uploadedFiles1: [],
       uploadedFiles2: [],
       uploadedFiles3: [],
+      origin: '',
+      partNumber: '',
+      manufacturer: ''
     };
 
     this.itemList.push(newItem);
@@ -171,16 +172,7 @@ onFileSelect(event: any): void {
    
     this.selectedFiles = null;
   }
-  openModal(targetArray: File[]): void {
-    this.dialog = this.dialogModel.open(ModalComponent, {
-      width: '640px',
-      disableClose: true,
-      data: {
-        filePaths: targetArray,
-      },
-    });
-  }
-
+ 
   export(): void {
     const toPrintContent = this.toPrint.nativeElement.innerHTML;
     const pdfContent = htmlToPdfmake(toPrintContent, { tableAutoSize: true });
@@ -292,24 +284,9 @@ onFileSelect(event: any): void {
           item.uploadedFiles3[j]
         );
       }
-      // Append uploaded files (if any)
-      // for (let j = 0; j < item.uploadedFiles1.length; j++) {
-
-      //     formData.append(
-      //       `itemList.uploadedFiles.${i}[]`,
-      //       item.uploadedFiles1[j]
-      //     );
-
-      // }
-      // for (let j = 0; j < item.uploadedFiles2.length; j++) {
-      //   formData.append(`itemList[${i}].uploadedFiles2[]`, item.uploadedFiles2[j]);
-      // }
-      // for (let j = 0; j < item.uploadedFiles3.length; j++) {
-      //   formData.append(`itemList[${i}].uploadedFiles3[]`, item.uploadedFiles3[j]);
-      // }
+    
     }
 
-    // Now you can use the formData object in your HTTP request
 
     this.http
       .post<any>('https://tmb.kreatedev.com/api/api/invoice', formData)

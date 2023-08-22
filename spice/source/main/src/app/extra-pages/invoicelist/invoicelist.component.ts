@@ -1,6 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Invoice } from 'src/app/models/invoice.model';
-import { Item } from 'src/app/models/item.model';
+import { Component, OnInit } from '@angular/core';
 import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +8,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Invoice2 } from 'src/app/models/invoice2.model';
 import { AuthUser } from 'src/app/core/models/user';
 import { AuthService } from 'src/app/core/service/auth.service';
-
 
 @Component({
   selector: 'app-invoicelist',
@@ -30,25 +27,24 @@ export class InvoicelistComponent implements OnInit {
   totalCost: number = 0;
   totalDone: number = 0;
   public currentUser: Observable<AuthUser> | undefined;
-  id: number=0;
+  id: number = 0;
 
-  
+
   constructor(private http: HttpClient,
     private authService: AuthService,
-     private dialogModel: MatDialog) {
+    private dialogModel: MatDialog) {
 
 
   }
   ngOnInit(): void {
     this.getInvoices();
-    this.currentUser=this.authService.currentUser;
+    this.currentUser = this.authService.currentUser;
     this.currentUser.subscribe(info => {
-     
-      this.id=info['user']['id'];
-      // console.log("Current user id ",  this.id);
+
+      this.id = info['user']['id'];
     });
 
-   
+
   }
 
   getInvoices() {
@@ -59,7 +55,6 @@ export class InvoicelistComponent implements OnInit {
         console.log(data);
         this.filteredInvoices = this.invoices;
 
-        //stat
         this.totalInvoice = this.invoices.data.length;
 
         for (let inv of this.invoices.data) {
@@ -119,20 +114,14 @@ export class InvoicelistComponent implements OnInit {
       this.invoices.data.splice(index, 1);
     }
 
-
     this.http.delete<any>(`${backendEnvironment.apiUrl}/api/invoice/${invoice.id}`).subscribe(
       data => {
-         console.log("Invoice deleted successfully");
-         console.log(data);
+        console.log("Invoice deleted successfully");
+        console.log(data);
         // window.location.reload();
       },
-      error => {
-        console.log(error);
-      }
     );
   }
-
-
 
   filterOptions: string[] = ['Date Range', 'Status', 'Is Done'];
   selectedFilters: string[] = [];
@@ -150,10 +139,8 @@ export class InvoicelistComponent implements OnInit {
     this.filterOptionsVisible = !this.filterOptionsVisible;
   }
 
-
   // Filtered data
   filteredInvoices: any;
-
 
   applyFilters() {
     let filteredInvoices = this.invoices.data;
@@ -192,13 +179,13 @@ export class InvoicelistComponent implements OnInit {
     if (index !== -1) {
       this.selectedFilters.splice(index, 1);
     }
-    // console.log("before remove",this.filteredInvoices);
-    this.getOnlylist();   
-     console.log("after remove",this.filteredInvoices);
+
+    this.getOnlylist();
+    console.log("after remove", this.filteredInvoices);
     this.applyFilters();
   }
 
-  getOnlylist(){
+  getOnlylist() {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoice`).subscribe(
       data => {
         this.invoices = data;

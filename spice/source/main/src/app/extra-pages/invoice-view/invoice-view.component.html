@@ -30,8 +30,9 @@
                                     <td>{{ invoice.finalprice }}</td>
                                     <td>{{ invoice.isFullyPaid ? 'Fully Paid' : 'Not Paid' }}</td>
                                     <td>
-                                        <button class="btn btn-primary" (click)="openPaymentModal(invoice)">Add Payment</button>
-                                      </td>
+                                        <button *ngIf="!invoice.isFullyPaid" class="btn btn-primary" (click)="openPaymentModal(invoice)">Add Payment</button>
+                                    </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>

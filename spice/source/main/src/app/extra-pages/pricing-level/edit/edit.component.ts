@@ -5,7 +5,6 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
 import { Observable } from 'rxjs';
@@ -20,7 +19,6 @@ import { AuthService } from 'src/app/core/service/auth.service';
 export class EditComponent implements OnInit {
   selectedItem: InvoiceItem3 = new InvoiceItem3();
   dialogConfig?: MatDialogConfig;
-  // item: InvoiceItem3= new InvoiceItem3();
   public currentUser: Observable<AuthUser> | undefined;
   roles: string[] = [];
 
@@ -31,7 +29,6 @@ export class EditComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.selectedItem = data.item;
-    //  this.item= data.item;
     console.log('Selected Item is: ', this.selectedItem);
   }
 
@@ -61,20 +58,47 @@ export class EditComponent implements OnInit {
       targetArray.push(file);
       this.formData.append('files[]', file);
     }
-    this.formData.append('random', 'text');
+
+    // this.http.post<any>(
+    //   `${backendEnvironment.apiUrl}/api/updatePricingLevel/${this.selectedItem.id}`,
+    //   this.formData
+    // )
+    // .subscribe((data) => {
+    //   console.log(data);
+    // });
+
     console.log('Files uploaded successfully');
 
     this.selectedFiles = null;
   }
 
   update() {
-    this.formData.append('random2', 'TEXT2');
-    this.formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    // this.formData.forEach((value, key) => {
+    //   console.log(key, value);
+    // });
+    // this.formData.append('item', this.selectedItem);
+//     this.selectedItem.array.forEach((element: { key: any; }) => {
+//       console.log(element.key);
+//     });
+   
+//     for (const property in this.selectedItem) {
+//       if (this.selectedItem.hasOwnProperty(property)) {
+//           // this.formData.append(`itemList.${property}`, this.selectedItem[property]);
+// console.log(this.selectedItem[property]);
+//       }
+//   }
+
+
+this.formData.append('id', this.selectedItem.id.toString());
+this.formData.append('invoiceID', this.selectedItem.invoiceID.toString());
+this.formData.append('invoiceItemFirstPrice', this.selectedItem.invoiceItemFirstPrice.toString());
+this.formData.append('invoiceItemLastPrice', this.selectedItem.invoiceItemLastPrice.toString());
+this.formData.append('invoiceItemVAT', this.selectedItem.invoiceItemVAT.toString());
+this.formData.append('invoiceItemPurchasePrice', this.selectedItem.invoiceItemPurchasePrice.toString());
+this.formData.append('invoiceItemStatus', this.selectedItem.invoiceItemStatus.toString());
     this.http
       .post<any>(
-        `${backendEnvironment.apiUrl}/api/updatePricingLevel/${this.selectedItem.id}`,
+        `${backendEnvironment.apiUrl}/api/update/${this.selectedItem.id}`,
         this.formData
       )
       .subscribe((data) => {

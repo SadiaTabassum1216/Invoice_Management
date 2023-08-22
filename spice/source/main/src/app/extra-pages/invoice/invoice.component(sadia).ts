@@ -3,7 +3,6 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Invoice } from 'src/app/models/invoice.model';
 import { Item } from 'src/app/models/item.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ModalComponent } from './modal/modal.component';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -39,8 +38,6 @@ export class InvoiceComponent implements OnInit {
 
   isFormSubmitted = false;
   isModalOpen: boolean = false;
-
-  dialog?: MatDialogRef<ModalComponent>;
   selectedFiles: FileList | null | undefined;
 
   public currentUser: Observable<AuthUser> | undefined;
@@ -261,16 +258,7 @@ export class InvoiceComponent implements OnInit {
     this.selectedFiles = null;
   }
 
-  openModal(targetArray: File[]): void {
-    this.dialog = this.dialogModel.open(ModalComponent, {
-      width: '640px',
-      disableClose: true,
-      data: {
-        filePaths: targetArray,
-      },
-    });
-  }
-
+  
 
   export(): void {
     const toPrintContent = this.toPrint.nativeElement.innerHTML;
@@ -380,31 +368,7 @@ export class InvoiceComponent implements OnInit {
         }
       }
 
-      // Append uploaded files (if any)
-      for (let j = 0; j < item.uploadedFiles1.length; j++) {
-        formData.append(
-          `itemList.uploadedFiles.1.${i}[]`,
-          item.uploadedFiles1[j]
-        );
-      }
-      for (let j = 0; j < item.uploadedFiles2.length; j++) {
-        formData.append(
-          `itemList.uploadedFiles.2.${i}[]`,
-          item.uploadedFiles2[j]
-        );
-      }
-      for (let j = 0; j < item.uploadedFiles3.length; j++) {
-        formData.append(
-          `itemList.uploadedFiles.3.${i}[]`,
-          item.uploadedFiles3[j]
-        );
-      }
-      // for (let j = 0; j < item.uploadedFiles2.length; j++) {
-      //   formData.append(`itemList[${i}].uploadedFiles2[]`, item.uploadedFiles2[j]);
-      // }
-      // for (let j = 0; j < item.uploadedFiles3.length; j++) {
-      //   formData.append(`itemList[${i}].uploadedFiles3[]`, item.uploadedFiles3[j]);
-      // }
+      
     }
 
     this.http

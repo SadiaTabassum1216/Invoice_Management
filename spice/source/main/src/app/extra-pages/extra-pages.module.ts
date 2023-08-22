@@ -19,7 +19,6 @@ import { UsersComponent } from './users/users.component';
 import { EditModalComponent } from './users/edit-modal/edit-modal.component';
 import { AddModalComponent } from './users/add-modal/add-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ModalComponent } from './invoice/modal/modal.component';
 import { InvoicelistComponent } from './invoicelist/invoicelist.component';
 import { ViewInvoiceComponent } from './invoicelist/view-invoice/view-invoice.component';
 import { EditInvoiceComponent } from './invoicelist/edit-invoice/edit-invoice.component';
@@ -46,7 +45,6 @@ import { PaymentModalComponent } from './invoice-view/payment-modal/payment-moda
     UsersComponent,
     EditModalComponent,
     AddModalComponent,
-    ModalComponent,
     UsertaskComponent,
     InvoicelistComponent,
     ViewInvoiceComponent,
