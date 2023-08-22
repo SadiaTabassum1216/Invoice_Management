@@ -17,10 +17,7 @@
                 <label for="itemID">Item ID</label>
                 <input type="text" class="form-control" id="itemID" name="id" [(ngModel)]="selectedItem.id" disabled>
             </div>
-        </div>
-
-       
-       
+        </div>      
      
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -154,24 +151,13 @@
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="status">Status</label>
-                <input type="text" class="form-control" id="status" name="invoiceItemStatus"
-                    [(ngModel)]="selectedItem.invoiceItemStatus">
-            </div>
-        </div>
-
-       
-
-        
-
+      
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="uploadedFiles1">Uploaded Files 1</label>
-                <input type="file" class="form-control" id="uploadedFiles1" name="uploadedFiles1"
-                     (change)="onFileSelect($event)">
-                     <!-- <button class="upload-button" (click)="uploadFiles(selectedItem.uploadedFiles1)">Upload Files</button> -->
+                <input type="file" class="form-control" id="uploadedFiles3" name="uploadedFiles1"
+                     (change)="onFileSelect($event)" multiple>
+                     <button class="upload-button" (click)="uploadFiles(fileArray)">Upload Files</button>
             </div>
         </div>
 
