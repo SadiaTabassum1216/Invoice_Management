@@ -73,6 +73,8 @@ Route::post('/invoice', [InvoiceItemController::class, 'store']);
 Route::get('/invoice', [InvoiceItemController::class, 'show']);
 Route::post('/createInvoice', [InvoiceItemController::class, 'createInvoice']);
 Route::post('/updatePricingLevel/{id}', [InvoiceItemController::class, 'updatePricingLevel']);
+Route::post('/updateOfferingLevel/{id}', [InvoiceItemController::class, 'updateOfferingLevel']);
+Route::post('/updatePurchaseLevel/{id}', [InvoiceItemController::class, 'updatePurchaseLevel']);
 
 
 Route::put('/invoice/{id}', [InvoiceController::class, 'update']);

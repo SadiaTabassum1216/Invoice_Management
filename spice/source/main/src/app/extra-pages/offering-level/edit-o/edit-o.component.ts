@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogConfig,
+} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
@@ -11,9 +15,9 @@ import { AuthService } from 'src/app/core/service/auth.service';
 @Component({
   selector: 'app-edit-o',
   templateUrl: './edit-o.component.html',
-  styleUrls: ['./edit-o.component.scss']
+  styleUrls: ['./edit-o.component.scss'],
 })
-export class EditOComponent implements OnInit{
+export class EditOComponent implements OnInit {
   selectedItem: InvoiceItem3 = new InvoiceItem3();
   dialogConfig?: MatDialogConfig;
   public currentUser: Observable<AuthUser> | undefined;
@@ -59,18 +63,48 @@ export class EditOComponent implements OnInit{
 
     this.selectedFiles = null;
   }
-
+  returnStringOrNull(val: any | null) {
+    if (val == null) return val;
+    else return val.toString();
+  }
   update() {
-    
-this.formData.append('id', this.selectedItem.id.toString());
-this.formData.append('invoiceID', this.selectedItem.invoiceID.toString());
-this.formData.append('invoiceItemUnitPrice', this.selectedItem.invoiceItemUnitPrice.toString());
-this.formData.append('invoiceItemQouteAdditionalCost', this.selectedItem.invoiceItemQouteAdditionalCost.toString());
-this.formData.append('invoiceitemPurchaseAdditionalCost', this.selectedItem.invoiceitemPurchaseAdditionalCost.toString());
-this.formData.append('invoiceItemDeliveryAdditionalCost', this.selectedItem.invoiceItemDeliveryAdditionalCost.toString());
-this.formData.append('invoiceItemPOD', this.selectedItem.invoiceItemPOD.toString());
-this.formData.append('invoiceItemClosingDate', this.selectedItem.invoiceItemClosingDate.toString());
-this.formData.append('invoiceItemStatus', this.selectedItem.invoiceItemStatus.toString());
+    this.formData.append('id', this.returnStringOrNull(this.selectedItem.id));
+    this.formData.append(
+      'invoiceID',
+      this.returnStringOrNull(this.selectedItem.invoiceID)
+    );
+    this.formData.append(
+      'invoiceItemUnitPrice',
+      this.returnStringOrNull(this.selectedItem.invoiceItemUnitPrice)
+    );
+    this.formData.append(
+      'invoiceItemQouteAdditionalCost',
+      this.returnStringOrNull(this.selectedItem.invoiceItemQouteAdditionalCost)
+    );
+    this.formData.append(
+      'invoiceitemPurchaseAdditionalCost',
+      this.returnStringOrNull(
+        this.selectedItem.invoiceitemPurchaseAdditionalCost
+      )
+    );
+    this.formData.append(
+      'invoiceItemDeliveryAdditionalCost',
+      this.returnStringOrNull(
+        this.selectedItem.invoiceItemDeliveryAdditionalCost
+      )
+    );
+    this.formData.append(
+      'invoiceItemPOD',
+      this.returnStringOrNull(this.selectedItem.invoiceItemPOD)
+    );
+    this.formData.append(
+      'invoiceItemClosingDate',
+      this.returnStringOrNull(this.selectedItem.invoiceItemClosingDate)
+    );
+    this.formData.append(
+      'invoiceItemStatus',
+      this.returnStringOrNull(this.selectedItem.invoiceItemStatus)
+    );
 
     this.http
       .post<any>(
@@ -87,4 +121,3 @@ this.formData.append('invoiceItemStatus', this.selectedItem.invoiceItemStatus.to
     this.dialog.closeAll();
   }
 }
-

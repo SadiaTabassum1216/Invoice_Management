@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Log;
 
 class InvoiceItemController extends Controller
 {
+    private $LEVEL_1 = "1", $LEVEL_2 = "2", $LEVEL_3 = "3";
+
     public function store(Request $request)
     {
 
@@ -117,6 +119,11 @@ class InvoiceItemController extends Controller
         return $val == 'true' ? true : false;
     }
 
+    private function getNullVal($val)
+    {
+        return $val == 'null' ? null : $val;
+    }
+
     private function shouldDateBeNull($date)
     {
         return $date == '1970-01-01' ? null : $date;
@@ -192,15 +199,15 @@ class InvoiceItemController extends Controller
             $invoiceItem->invoiceItemPartNumber = $request->input('itemList_partNumber')[$i];
             $invoiceItem->invoiceItemQTY = $request->input('itemList_quantity')[$i];
             $invoiceItem->invoiceItemStatus = $request->input('itemList_status')[$i];
-            
+
             $invoiceItem->save();
             $item->invoiceItems()->attach($invoiceItem);
-            
+
             $employee = User::findOrFail($invoiceItem->userID);
             $employee->notify(new NewInvoiceNotification($invoiceItem));
 
         }
-        
+
         return [
             'response' => "Invoice Created Successfully",
         ];
@@ -255,23 +262,93 @@ class InvoiceItemController extends Controller
     }
 
 
-    public function updatePricingLevel($id, Request $request) 
+    public function updatePricingLevel($id, Request $request)
     {
+        $invoiceItem = InvoiceItem::findOrFail($id);
 
-        // dd($request);
+        $invoiceItem->invoiceItemFirstprice = $this->getNullVal($request->input('invoiceItemFirstPrice'));
+        $invoiceItem->invoiceItemLastPrice = $this->getNullVal($request->input('invoiceItemLastPrice'));
+        $invoiceItem->invoiceItemVAT = $this->getNullVal($request->input('invoiceItemVAT'));
+        $invoiceItem->invoiceItemPurchasePrice = $this->getNullVal($request->input('invoiceItemPurchasePrice'));
+        $invoiceItem->invoiceItemStatus = $this->getNullVal($request->input('invoiceItemStatus'));
+        $invoiceItem->save();
 
-        // $files = $request->file('file');
+        if ($request->exists('files')) {
+            $this->attachFiles($request->file('files'), $this->LEVEL_1, $invoiceItem->id);
+        }
 
-        $names = [];
-
-        // foreach($request->file('file') as $file){
-        //     $names[] = $file->getClientOriginalName();
-        // }
         return [
-            'request' => $request->all(),
-            'id' => $id, 
-            'files' => $request->files,
-            'files2' => $request->file('files'),
+            'message' => 'Item Updated Successfully',
         ];
+    }
+
+    public function updateOfferingLevel($id, Request $request)
+    {
+        $invoiceItem = InvoiceItem::findOrFail($id);
+
+        $invoiceItem->invoiceItemUnitPrice = $this->getNullVal($request->input('invoiceItemUnitPrice'));
+        $invoiceItem->invoiceItemQouteAdditionalCost = $this->getNullVal($request->input('invoiceItemQouteAdditionalCost'));
+        $invoiceItem->invoiceitemPurchaseAdditionalCost = $this->getNullVal($request->input('invoiceitemPurchaseAdditionalCost'));
+        $invoiceItem->invoiceItemDeliveryAdditionalCost = $this->getNullVal($request->input('invoiceItemDeliveryAdditionalCost'));
+        $invoiceItem->invoiceItemPOD = $this->getNullVal($request->input('invoiceItemPOD'));
+        $invoiceItem->invoiceItemClosingDate = $this->getNullVal($request->input('invoiceItemClosingDate'));
+        $invoiceItem->invoiceItemStatus = $this->getNullVal($request->input('invoiceItemStatus'));
+
+        $invoiceItem->save();
+
+        if ($request->exists('files')) {
+            $this->attachFiles($request->file('files'), $this->LEVEL_3, $invoiceItem->id);
+        }
+
+        return [
+            'message' => 'Item Updated Successfully',
+        ];
+    }
+
+    public function updatePurchaseLevel($id, Request $request)
+    {
+        $invoiceItem = InvoiceItem::findOrFail($id);
+
+        $invoiceItem->invoiceItemIsFirstPaymentDone = $this->getBooleanVal($request->input('invoiceItemIsFirstPaymentDone'));
+        $invoiceItem->invoiceItemFirstPaymentPrice = $this->getNullVal($request->input('invoiceItemFirstPaymentPrice'));
+        $invoiceItem->invoiceItemFirstPaymentDate = $this->getNullVal($request->input('invoiceItemFirstPaymentDate'));
+        $invoiceItem->invoiceItemIsLastPaymentDone = $this->getBooleanVal($request->input('invoiceItemIsLastPaymentDone'));
+        $invoiceItem->invoiceItemLastPaymentPrice = $this->getNullVal($request->input('invoiceItemLastPaymentPrice'));
+        $invoiceItem->invoiceItemLastPaymentDate = $this->getNullVal($request->input('invoiceItemLastPaymentDate'));
+        $invoiceItem->invoiceItemLogisticCompany = $this->getNullVal($request->input('invoiceItemLogisticCompany'));
+        $invoiceItem->invoiceItemLogisticLocation = $this->getNullVal($request->input('invoiceItemLogisticLocation'));
+        $invoiceItem->invoiceItemLogisitEstimatedDate = $this->getNullVal($request->input('invoiceItemLogisitEstimatedDate'));
+        $invoiceItem->invoiceItemShippingStatus = $this->getNullVal($request->input('invoiceItemShippingStatus'));
+        $invoiceItem->invoiceItemDeliveredToIraq = $this->getBooleanVal($request->input('invoiceItemDeliveredToIraq'));
+        $invoiceItem->invoiceItemDeliverByLogisic = $this->getBooleanVal($request->input('invoiceItemDeliverByLogisic'));
+        $invoiceItem->invoiceItemDeliverToClient = $this->getBooleanVal($request->input('invoiceItemDeliverToClient'));
+        $invoiceItem->invoiceItemLogisticCost = $this->getNullVal($request->input('invoiceItemLogisticCost'));
+        // $invoiceItem->invoiceItemFullPaid = $this->getBooleanVal($request->input('invoiceItemFullPaid'));
+        $invoiceItem->invoiceItemSubmitted = $this->getBooleanVal($request->input('invoiceItemSubmitted'));
+        $invoiceItem->invoiceItemStatus = $this->getNullVal($request->input('invoiceItemStatus'));
+
+        $invoiceItem->save();
+
+        if ($request->exists('files')) {
+            $this->attachFiles($request->file('files'), $this->LEVEL_3, $invoiceItem->id);
+        }
+
+        return [
+            'message' => 'Item Updated Successfully',
+        ];
+    }
+    private function attachFiles($files, $level, $invoiceItemID)
+    {
+        foreach ($files as $file) {
+            $invoiceItemFile = new InvoiceItemFile();
+            $invoiceItemFile->invoiceItemID = $invoiceItemID;
+            $invoiceItemFile->level = $level;
+
+            $filename = $file->getClientOriginalName();
+            $path = $file->store('secure');
+            $invoiceItemFile->filename = $filename;
+            $invoiceItemFile->path = $path;
+            $invoiceItemFile->save();
+        }
     }
 }
