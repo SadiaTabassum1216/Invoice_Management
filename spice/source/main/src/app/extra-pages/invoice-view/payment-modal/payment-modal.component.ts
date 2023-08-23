@@ -12,6 +12,8 @@ export class PaymentModalComponent {
   paymentDone: boolean = false;
   dialogConfig?: MatDialogConfig;
   paymentAmount: number = 0;
+  paymentNote: string=''; 
+   selectedFile: File | null | undefined;
   payment: any;
 
 
@@ -21,13 +23,29 @@ export class PaymentModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
+  
+  handleFileChange(event: any) {
+    this.selectedFile =  event.target.files[0];
+  }
+
+  formData: FormData = new FormData();
   submitPayment() {
     this.payment = {
       time: new Date(),
-      amount: this.paymentAmount
+      amount: this.paymentAmount,
+      note: this.paymentNote,
+      file: this.selectedFile,
     }
+
+    this.formData.append('time', this.payment.time.toISOString());
+    this.formData.append('amount', this.payment.amount);
+    this.formData.append('note', this.payment.note);
+    if(this.selectedFile!=null){
+      this.formData.append('attachment', this.selectedFile, this.selectedFile.name);
+    }
+    
     this.http
-      .post<any>(`${backendEnvironment.apiUrl}/api/payment`, this.payment)
+      .post<any>(`${backendEnvironment.apiUrl}/api/payment`, this.formData)
       .subscribe((data) => {
         console.log(data);
       });
@@ -37,4 +55,5 @@ export class PaymentModalComponent {
   closeModal() {
     this.dialog.closeAll();
   }
+
 }
