@@ -14,7 +14,7 @@ export class Invoice {
 
     
 
-    status: string='pricing_level';
+    status: string='';
     isDone: boolean= false;
    
   }

@@ -3,10 +3,16 @@
     <h2>Add Payment</h2>
     <label for="paymentAmount">Payment Amount:</label>
     <input type="number" id="paymentAmount" [(ngModel)]="paymentAmount">
+    
+    <label for="paymentNote">Payment Note:</label>
+    <textarea id="paymentNote" [(ngModel)]="paymentNote"></textarea>
+    
+    <label for="paymentFile">Attach File:</label>
+    <input type="file" id="paymentFile" (change)="handleFileChange($event)">
+    
     <div class="modal-buttons">
       <button (click)="closeModal()">Cancel</button>
       <button (click)="submitPayment()">Add Payment</button>
     </div>
   </div>
 </div>
-
