@@ -72,33 +72,43 @@ export class EditComponent implements OnInit {
     this.selectedFiles = null;
   }
 
+  returnStringOrNull(val: any | null) {
+    if (val == null) return val;
+    else return val.toString();
+  }
   update() {
-    // this.formData.forEach((value, key) => {
-    //   console.log(key, value);
-    // });
-    // this.formData.append('item', this.selectedItem);
-//     this.selectedItem.array.forEach((element: { key: any; }) => {
-//       console.log(element.key);
-//     });
-   
-//     for (const property in this.selectedItem) {
-//       if (this.selectedItem.hasOwnProperty(property)) {
-//           // this.formData.append(`itemList.${property}`, this.selectedItem[property]);
-// console.log(this.selectedItem[property]);
-//       }
-//   }
 
 
-this.formData.append('id', this.selectedItem.id.toString());
-this.formData.append('invoiceID', this.selectedItem.invoiceID.toString());
-this.formData.append('invoiceItemFirstPrice', this.selectedItem.invoiceItemFirstPrice.toString());
-this.formData.append('invoiceItemLastPrice', this.selectedItem.invoiceItemLastPrice.toString());
-this.formData.append('invoiceItemVAT', this.selectedItem.invoiceItemVAT.toString());
-this.formData.append('invoiceItemPurchasePrice', this.selectedItem.invoiceItemPurchasePrice.toString());
-this.formData.append('invoiceItemStatus', this.selectedItem.invoiceItemStatus.toString());
+    this.formData.append(
+      'id', 
+      this.returnStringOrNull(this.selectedItem.id));
+    this.formData.append(
+      'invoiceID',
+      this.returnStringOrNull(this.selectedItem.invoiceID)
+    );
+    this.formData.append(
+      'invoiceItemFirstPrice',
+      this.returnStringOrNull(this.selectedItem.invoiceItemFirstPrice)
+    );
+    this.formData.append(
+      'invoiceItemLastPrice',
+      this.returnStringOrNull(this.selectedItem.invoiceItemLastPrice)
+    );
+    this.formData.append(
+      'invoiceItemVAT',
+      this.returnStringOrNull(this.selectedItem.invoiceItemVAT)
+    );
+    this.formData.append(
+      'invoiceItemPurchasePrice',
+      this.returnStringOrNull(this.selectedItem.invoiceItemPurchasePrice)
+    );
+    this.formData.append(
+      'invoiceItemStatus',
+      this.returnStringOrNull(this.selectedItem.invoiceItemStatus)
+    );
     this.http
       .post<any>(
-        `${backendEnvironment.apiUrl}/api/update/${this.selectedItem.id}`,
+        `${backendEnvironment.apiUrl}/api/updatePricingLevel/${this.selectedItem.id}`,
         this.formData
       )
       .subscribe((data) => {
