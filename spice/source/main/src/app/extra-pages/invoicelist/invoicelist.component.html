@@ -159,7 +159,7 @@
                     <th class="text-center">Additional Cost</th>
                     <th class="text-center">Total Cost </th>
                     <th class="text-center">Grand Total</th>
-                    <th class="text-center">Offering</th>
+                    <!-- <th class="text-center">Offering</th> -->
                     <th class="text-center">Status</th>
                     <th class="text-center">Is done</th>
                     <th class="text-center">Actions</th>
@@ -176,9 +176,10 @@
                     <td class="text-center">{{ invoice.invoiceAdditionalCost }}</td>
                     <td class="text-center">{{ invoice.invoiceTotalCost }}</td>
                     <td class="text-center">{{ invoice.invoiceGrandtotal }}</td>
-                    <td class="text-center">{{ invoice.invoiceOffering }}</td>
+                    <!-- <td class="text-center">{{ invoice.invoiceOffering }}</td> -->
                     <td class="text-center">{{ invoice.invoiceStatus }}</td>
-                    <td class="text-center">{{ invoice.invoiceIsDone }}</td>
+                    <td class="text-center">{{ invoice.invoiceIsDone === true ? 'Yes' : 'No' }}</td>
+
                     <td class="text-center">
                       <button class="btn btn-primary" (click)="viewInvoice(invoice)">
                         <i class="fas fa-eye"></i> View

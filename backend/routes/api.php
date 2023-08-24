@@ -90,4 +90,4 @@ Route::get('/invoiceitems', [InvoiceItemController::class, 'itemShow']);
 
 
 Route::get('/notifications', [NotificationController::class, 'index'])->middleware('jwt.auth');
-Route::post('/markAsRead/{id}'. [NotificationController::class, 'edit'])->middleware('jwt.auth');
+Route::get('/markAsRead/{id}', [NotificationController::class, 'edit'])->middleware('jwt.auth');
