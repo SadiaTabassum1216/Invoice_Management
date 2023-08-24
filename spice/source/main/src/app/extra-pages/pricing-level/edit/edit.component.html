@@ -55,7 +55,7 @@
 
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="uploadedFiles1">Uploaded Files 1</label>
+                <label for="uploadedFiles1">Uploaded Files (Level-1)</label>
                 <input type="file" class="form-control" id="uploadedFiles1" name="uploadedFiles1"
                      (change)="onFileSelect($event)" multiple>
                      <button class="upload-button" (click)="uploadFiles(fileArray)">Upload Files</button>
@@ -68,7 +68,7 @@
                 <select class="form-control" id="status" name="invoiceItemStatus" [(ngModel)]="selectedItem.invoiceItemStatus" *ngIf="roles.includes('admin')">
                     <option value="pricing_level">Pricing Level</option>
                     <option value="offering_level">Offering Level</option>
-                    <option value="purchase_level">Purchase Level</option>
+                    <option value="purchase_level" disabled>Purchase Level</option>
                   </select>
             </div>
         </div>

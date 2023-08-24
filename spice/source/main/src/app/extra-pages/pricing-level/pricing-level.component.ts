@@ -9,7 +9,7 @@ import { AuthUser } from 'src/app/core/models/user';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem } from 'src/app/models/invoice2.model';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
-import { FilesComponent } from './files/files.component';
+import { FilePrComponent } from './file-pr/file-pr.component';
 
 @Component({
   selector: 'app-pricing-level',
@@ -78,7 +78,7 @@ export class PricingLevelComponent implements OnInit{
     this.selectedItem2 = item;
     console.log(this.selectedItem2);
 
-    this.dialogModel.open(FilesComponent, {
+    this.dialogModel.open(FilePrComponent, {
       width: '740px',
       disableClose: true,
       data: {
