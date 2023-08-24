@@ -8,8 +8,8 @@ import { AuthUser } from 'src/app/core/models/user';
 import { backendEnvironment } from 'src/environments/backendEnvironment';
 import { InvoiceItem } from 'src/app/models/invoice2.model';
 import { InvoiceItem3 } from 'src/app/models/invoice3.model';
-import { FilesComponent } from './files/files.component';
 import { EditOComponent } from './edit-o/edit-o.component';
+import { FileOComponent } from './file-o/file-o.component';
 @Component({
   selector: 'app-offering-level',
   templateUrl: './offering-level.component.html',
@@ -44,7 +44,7 @@ export class OfferingLevelComponent implements OnInit{
   getItemList() {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoiceitems`).subscribe(data => {
       this.items = data;
-      console.log(this.items);
+       console.log(this.items);
     });
 
   }
@@ -52,7 +52,7 @@ export class OfferingLevelComponent implements OnInit{
 
   edit(item: InvoiceItem3): void {
     this.selectedItem = item;
-    //  console.log(this.selectedItem);
+   
 
     this.dialogModel.open(EditOComponent, {
       width: '740px',
@@ -77,7 +77,7 @@ export class OfferingLevelComponent implements OnInit{
     this.selectedItem2 = item;
     console.log(this.selectedItem2);
 
-    this.dialogModel.open(FilesComponent, {
+    this.dialogModel.open(FileOComponent, {
       width: '740px',
       disableClose: true,
       data: {
