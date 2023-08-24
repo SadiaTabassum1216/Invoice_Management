@@ -192,10 +192,11 @@ class InvoiceItemController extends Controller
         $invoice->invoiceAdditionalCost = $request->input('additionalCost');
         $invoice->save();
 
-        // $invoicePayment = new InvoicePayment();
-        // $invoicePayment->id = $invoice->id;
-        // $invoicePayment->amountPaid = 0.0;
-        // $invoicePayment->save();
+        $invoicePayment = new InvoicePayment();
+        $invoicePayment->id = $invoice->id;
+        $invoicePayment->amountPaid = 0.0;
+        $invoicePayment->status = "unpaid";
+        $invoicePayment->save();
 
         $maxIdx = count($request->input("itemList_quantity"));
 
@@ -316,7 +317,7 @@ class InvoiceItemController extends Controller
         $invoice->invoiceTotalCost += $invoiceItem->invoiceItemTotalPrice;
         $invoice->invoiceGrandtotal += $invoiceItem->invoiceItemTotalPrice + $invoiceItem->invoiceItemLogisticCost;
 
-
+        $invoice->save();
         if ($request->exists('files')) {
             $this->attachFiles($request->file('files'), $this->LEVEL_3, $invoiceItem->id);
         }

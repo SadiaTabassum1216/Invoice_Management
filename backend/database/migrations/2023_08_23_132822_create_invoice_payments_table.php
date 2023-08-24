@@ -20,6 +20,8 @@ return new class extends Migration
             $table->double('amountPaid', 8, 2)->nullable();
             $table->double('amountRemaining', 8, 2)->nullable();
             $table->string('attachment')->nullable();
+            $table->string('status')->nullable();
+            $table->boolean('isDone')->nullable()->default(false);
             $table->timestamps();
 
             $table->foreign('invoiceID')->references('id')->on('invoices')->onDelete('cascade');
