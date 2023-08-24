@@ -263,7 +263,7 @@ class InvoiceItemController extends Controller
         $invoiceItem->save();
 
         if ($request->exists('files')) {
-            $this->attachFiles($request->file('files'), $this->LEVEL_3, $invoiceItem->id);
+            $this->attachFiles($request->file('files'), $this->LEVEL_2, $invoiceItem->id);
         }
 
         return [

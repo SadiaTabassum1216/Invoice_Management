@@ -15,13 +15,17 @@ export class PaymentModalComponent {
   paymentNote: string=''; 
    selectedFile: File | null | undefined;
   payment: any;
+  invoice: any
 
 
   constructor(
     public dialog: MatDialog,
     private http: HttpClient,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
+  ) { 
+    this.invoice = data.invoice;
+    console.log('Selected Invoice is: ', this.invoice);
+  }
 
   
   handleFileChange(event: any) {
@@ -37,9 +41,11 @@ export class PaymentModalComponent {
       file: this.selectedFile,
     }
 
-    this.formData.append('time', this.payment.time.toISOString());
+    this.formData.append('date', this.payment.time.toISOString());
     this.formData.append('amount', this.payment.amount);
     this.formData.append('note', this.payment.note);
+    this.formData.append('invoice_id', this.invoice.id);
+    
     if(this.selectedFile!=null){
       this.formData.append('attachment', this.selectedFile, this.selectedFile.name);
     }
