@@ -4,14 +4,14 @@
     <h2>Notifications</h2>
     <div class="notification-list">
          
-      <ng-container *ngFor="let notification of notificationList.notifications">
-      
-        <div class="notification-item" 
-               [ngClass]="{ 'bold-text': !notification.read_at }">
-          <span class="notification-text">{{notification.data.message}}    </span>
+      <ng-container *ngFor="let notification of notificationList.notifications.slice().reverse()">
+        <div class="notification-item alert alert-secondary bold-text"
+             (click)="onNotificationClick(notification)">
+          <span class="notification-text">{{notification.data.message}}</span>
           <span class="notification-time">{{notification.created_at | date: "short"}}</span>
         </div>
       </ng-container>
+      
       
     </div>
   </div>
