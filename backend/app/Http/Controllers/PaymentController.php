@@ -35,13 +35,13 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $id = $request->input('invoice_id');
-        $invoice = Invoice::findOrFail($id);
+        $invoice = Invoice::with('invoicePayments.payments')->findOrFail($id);
 
         $invoicePayment = $invoice->invoicePayments()->first();
 
         $payment = new Payment();
-        $payment->invoicePaymentID = $invoicePayment->id;
-        $payment->dateTime = $request->input('date');
+        $payment->invoice_payment_id = $invoicePayment->id;
+        // $payment->date = $request->input('date');
         $payment->amount = $request->input('amount');
         $payment->note = $request->input('note');
 
@@ -55,7 +55,7 @@ class PaymentController extends Controller
 
         $payment->save();
 
-
+        // $invoicePayment = InvoicePayment::with('payments')->find($payment->invoicePaymentID);
         $payments = $invoicePayment->payments;
         $tot = 0.0;
         foreach ($payments as $p) {
@@ -63,17 +63,17 @@ class PaymentController extends Controller
         }
 
         $invoicePayment->amountPaid = $tot;
-        $invoicePayment->amountRemaining = $invoicePayment->invoiceGrandtotal - $invoicePayment->amountPaid;
+        $invoicePayment->amountRemaining = $invoicePayment->invoiceFinalPrice - $invoicePayment->amountPaid;
 
-        $invoicePayment->save();
-
-        if ($invoicePayment->amountPaid >= $invoicePayment->invoiceGrandtotal) {
+        
+        if ($invoicePayment->amountPaid >= $invoicePayment->invoiceFinalPrice) {
             $invoice->invoiceIsDone = true;
             $invoicePayment->status = "fully-paid";
         } else {
             $invoice->invoiceIsDone = false;
             $invoicePayment->status = "partially-paid";
         }
+        $invoicePayment->save();
         $invoice->save();
 
         return [

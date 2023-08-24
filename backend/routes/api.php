@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\UOMController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\PaymentController;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -79,3 +80,11 @@ Route::get('/markAsRead/{id}', [NotificationController::class, 'edit'])->middlew
 Route::get('/invoicePayments', [PaymentController::class, 'index']);
 Route::post('/payment', [PaymentController::class, 'store']);
 Route::get('/payment_attachment/{paymentId}', [PaymentController::class, 'downloadFile']);
+
+
+Route::get('test', function(){
+    $i = Invoice::with('invoicePayments.payments')->first();
+    return [
+        'i' => $i,
+    ];
+});

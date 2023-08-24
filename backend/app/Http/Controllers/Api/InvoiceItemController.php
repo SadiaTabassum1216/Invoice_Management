@@ -193,7 +193,7 @@ class InvoiceItemController extends Controller
         $invoice->save();
 
         $invoicePayment = new InvoicePayment();
-        $invoicePayment->id = $invoice->id;
+        $invoicePayment->invoiceID = $invoice->id;
         $invoicePayment->amountPaid = 0.0;
         $invoicePayment->status = "unpaid";
         $invoicePayment->save();
@@ -300,7 +300,7 @@ class InvoiceItemController extends Controller
 
         $invoiceItem->save();
 
-        $invoice = Invoice::findOrFail($invoiceItem->invoiceID);
+        $invoice = Invoice::find($invoiceItem->invoiceID);
 
         if ($invoice->invoiceSubtotal == null){
             $invoice->invoiceSubtotal = 0.0;
@@ -318,6 +318,15 @@ class InvoiceItemController extends Controller
         $invoice->invoiceGrandtotal += $invoiceItem->invoiceItemTotalPrice + $invoiceItem->invoiceItemLogisticCost;
 
         $invoice->save();
+
+        $invoice = Invoice::with('invoicePayments')->find($invoiceItem->invoiceID);
+        
+        $invoicePayment = $invoice->invoicePayments()->first();
+        $invoicePayment->invoiceFinalPrice = $invoice->invoiceGrandtotal;
+        $invoicePayment->amountRemaining = $invoicePayment->invoiceFinalPrice - $invoicePayment->amountPaid;
+
+        $invoicePayment->save();
+
         if ($request->exists('files')) {
             $this->attachFiles($request->file('files'), $this->LEVEL_3, $invoiceItem->id);
         }
