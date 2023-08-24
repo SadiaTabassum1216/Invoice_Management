@@ -52,10 +52,13 @@ class NotificationController extends Controller
         
         if ($notification){
             $notification->markAsRead();
+            return [
+                'message' => 'notification mark as read',
+            ];
         }
 
         return [
-            'message' => 'notification mark as read',
+            'error' => 'No notification found',
         ];
     }
 

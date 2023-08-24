@@ -4,7 +4,7 @@
     <h2>Notifications</h2>
     <div class="notification-list">
          
-      <ng-container *ngFor="let notification of notificationList.notifications.slice().reverse()">
+      <ng-container *ngFor="let notification of notificationList.notifications.slice().sort(compareByTime)">
         <div class="notification-item alert alert-secondary bold-text"
              (click)="onNotificationClick(notification)">
           <span class="notification-text">{{notification.data.message}}</span>

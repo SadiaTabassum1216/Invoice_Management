@@ -16,10 +16,10 @@
             <input type="date" class="form-control" id="closingDate" name="closingDate"
                 [(ngModel)]="invoice.invoiceClosingDate">
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="offering">Offering</label>
             <input type="text" class="form-control" id="offering" name="offering" [(ngModel)]="invoice.invoiceOffering">
-        </div>
+        </div> -->
 
         <div class="form-group">
             <label for="additionalCost">Additional Cost</label>
@@ -32,15 +32,16 @@
             <input type="text" class="form-control" id="status" name="status" [(ngModel)]="invoice.invoiceStatus">
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             Is done <input type="checkbox" name="{{invoice.invoiceIsDone}}" [(ngModel)]="invoice.invoiceIsDone">
-        </div>
+        </div> -->
         <!-- </form> -->
         <button class="btn btn-primary edit-button" (click)="updateInvoice()">
             <i class="fas fa-pencil-alt"></i> Update Invoice
         </button>
-
+<br>
         <div style=" margin: 0 auto; ; overflow-x: auto;">
+            <br>
             <h3 class="text-center">Item Table</h3>
 
             <table class="table">
@@ -262,5 +263,6 @@
 
         <span class="button-gap"></span>
         <button mat-raised-button class="btn btn-primary" (click)="close()">Close</button>
+        <br>
     </div>
 </div>
