@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExtraPagesRoutingModule } from './extra-pages-routing.module';
-import { ProfileComponent } from './profile/profile.component';
-import { PricingComponent } from './pricing/pricing.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { FaqsComponent } from './faqs/faqs.component';
 import { BlankComponent } from './blank/blank.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,12 +35,10 @@ import { PaymentModalComponent } from './invoice-view/payment-modal/payment-moda
 import { FileOComponent } from './offering-level/file-o/file-o.component';
 import { FilePrComponent } from './pricing-level/file-pr/file-pr.component';
 import { FilePuComponent } from './purchase-level/file-pu/file-pu.component';
+import { PaymentComponent } from './payment/payment.component';
 @NgModule({
   declarations: [
-    ProfileComponent,
-    PricingComponent,
     InvoiceComponent,
-    FaqsComponent,
     BlankComponent,
     UsersComponent,
     EditModalComponent,
@@ -66,6 +61,7 @@ import { FilePuComponent } from './purchase-level/file-pu/file-pu.component';
     FileOComponent,
     FilePrComponent,
     FilePuComponent,
+    PaymentComponent,
   ],
   imports: [
     CommonModule,
