@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Item } from 'src/app/models/item.model';
 import { EditItemsComponent } from './edit-items/edit-items.component';
 import * as XLSX from "xlsx";
 import { AuthService } from 'src/app/core/service/auth.service';
@@ -28,7 +27,6 @@ export class UsertaskComponent implements OnInit {
     this.currentUser.subscribe(info => {
       this.name = info['user']['name'];
       this.id = info['user']['id'];
-      // console.log("Current user id ",  this.id);
     });
   }
 
@@ -75,7 +73,7 @@ export class UsertaskComponent implements OnInit {
 
   view(item: InvoiceItem) {
     this.selectedItem2 = item;
-    console.log(this.selectedItem2);
+    // console.log(this.selectedItem2);
 
     this.dialogModel.open(FilesComponent, {
       width: '740px',
