@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfileComponent } from './profile/profile.component';
-import { PricingComponent } from './pricing/pricing.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { FaqsComponent } from './faqs/faqs.component';
 import { BlankComponent } from './blank/blank.component';
 import { UsersComponent } from './users/users.component';
 import { UsertaskComponent } from './usertask/usertask.component';
@@ -13,24 +10,15 @@ import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { PricingLevelComponent } from './pricing-level/pricing-level.component';
 import { OfferingLevelComponent } from './offering-level/offering-level.component';
 import { PurchaseLevelComponent } from './purchase-level/purchase-level.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
-  {
-    path: 'profile',
-    component: ProfileComponent
-  },
-  {
-    path: 'pricing',
-    component: PricingComponent
-  },
+ 
   {
     path: 'invoice',
     component: InvoiceComponent
   },
-  {
-    path: 'faqs',
-    component: FaqsComponent
-  },
+ 
  
   {
     path: 'blank',
@@ -67,6 +55,10 @@ const routes: Routes = [
   {
     path: 'notification',
     component: NotificationComponent
+  },
+  {
+    path: 'payment',
+    component: PaymentComponent
   },
 ];
 @NgModule({

@@ -1,0 +1,41 @@
+<br><br>
+<section class="content">
+    <div class="card listCard">
+        <div class="card-body">
+            <h2 class="text-center">Payments</h2>
+            <br><br>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date & Time</th>
+                                    <th>Note</th>
+                                    <th>Invoice Final Price</th>
+                                    <th>Invoice Paid</th>
+                                    <th>Invoice Remained</th>
+                                    <th>Attachment File</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let invoice of invoices.data">
+                                    <td>{{ invoice.id }}</td>
+                                    <td>{{ invoice.created_at | date:'medium' }}</td>
+                                    <td>{{ invoice.note }}</td>
+                                    <td>{{ invoice.invoiceFinalPrice }}</td>
+                                    <td>{{ invoice.invoicePaid }}</td>
+                                    <td>{{ invoice.invoiceRemained }}</td>
+                                    <td><a *ngIf="invoice.attachment_file" class="btn" href="{{link}}/api/file_download/{{ invoice.id }}"><i class="fas fa-download"></i></a>
+                                        <span *ngIf="!invoice.attachment_file">No Attachment</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

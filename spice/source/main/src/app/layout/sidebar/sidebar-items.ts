@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/extra-pages/invoice',
         title: 'Create Invoice',
         iconType: 'material-icons-two-tone',
-        icon: 'fact_check',
+        icon: 'content_paste',
         class: '',
         groupTitle: false,
         badge: '',
@@ -26,7 +26,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/extra-pages/invoice_view',
         title: 'Invoice View',
         iconType: 'material-icons-two-tone',
-        icon: 'fact_check',
+        icon: 'format_list_bulleted',
         class: '',
         groupTitle: false,
         badge: '',
@@ -95,6 +95,18 @@ export const ROUTES: RouteInfo[] = [
           
       },
       {
+        path: '/extra-pages/payment',
+        title: 'Your Payments',
+        iconType: 'material-icons-two-tone',
+        icon: 'attach_money',
+        class: '',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        submenu: [],
+          
+      },
+      {
         path: '/extra-pages/user',
         title: 'All Users',
         iconType: 'material-icons-two-tone',
@@ -106,6 +118,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [],
           
       },
+      
     ],
       
   },

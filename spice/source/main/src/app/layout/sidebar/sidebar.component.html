@@ -21,7 +21,7 @@
 
             <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
               <ng-container *ngFor="let subItem of sidebarItem.submenu; let i = index">
-                  <li *ngIf="roles.includes('admin') || (i >= 3 && i < 8)">
+                  <li *ngIf="roles.includes('admin') || (i >= 3 && i <= 8)">
                   <a [routerLink]="subItem.path" [routerLinkActive]="'active'" [ngClass]="[subItem.class]">
 
                     <i [ngClass]="[subItem.iconType]">{{subItem.icon}}</i>
