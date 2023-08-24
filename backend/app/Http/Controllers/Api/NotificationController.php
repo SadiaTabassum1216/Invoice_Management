@@ -12,12 +12,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-
-        // $user = Auth()->user();
-
-        // return ['user' => $user];
-
-        $notifications = Auth()->user()->notifications;
+        $notifications = Auth()->user()->unreadNotifications;
 
         return [
             'notifications' => $notifications,
@@ -53,7 +48,15 @@ class NotificationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $notification = Auth()->user()->notifications()->find($id);
+        
+        if ($notification){
+            $notification->markAsRead();
+        }
+
+        return [
+            'message' => 'notification mark as read',
+        ];
     }
 
     /**
