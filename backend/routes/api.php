@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\UOMController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,23 +25,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
-
-// Will not go into the final version 
-
-Route::get('/test', function (Request $request) {
-
-    //     Log::info($request->all());
-//     return response()->json(['message' => 'Request logged.',
-// 'request' => $request->all()]);
-
-    // ob_start(); // Start output buffering
-    // var_dump($request->all()); // Perform the var_dump on the desired variable
-    // $dumpOutput = ob_get_clean(); // Get the dumped output and clean the buffer
-
-    // return response()->json(['dumpOutput' => $dumpOutput]);
-
-    dd($request);
 });
 
 Route::get('/ping', function (Request $request) {
@@ -91,3 +75,7 @@ Route::get('/invoiceitems', [InvoiceItemController::class, 'itemShow']);
 
 Route::get('/notifications', [NotificationController::class, 'index'])->middleware('jwt.auth');
 Route::get('/markAsRead/{id}', [NotificationController::class, 'edit'])->middleware('jwt.auth');
+
+Route::get('/invoicePayments', [PaymentController::class, 'index']);
+Route::post('/payment', [PaymentController::class, 'store']);
+Route::get('/payment_attachment/{paymentId}', [PaymentController::class, 'downloadFile']);

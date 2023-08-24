@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\InvoicePayment;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
 {
@@ -13,7 +15,10 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $invoicePayments = InvoicePayment::with('payments')->get();
+        return [
+            'invoicePayments' => $invoicePayments,
+        ];
     }
 
     /**
@@ -40,7 +45,7 @@ class PaymentController extends Controller
         $payment->amount = $request->input('amount');
         $payment->note = $request->input('note');
 
-        if ($request->exists('attachment')){
+        if ($request->exists('attachment')) {
             $file = $request->file('attachment');
             $filename = $file->getClientOriginalName();
             $path = $file->store('secure');
@@ -53,19 +58,27 @@ class PaymentController extends Controller
 
         $payments = $invoicePayment->payments;
         $tot = 0.0;
-        foreach($payments as $p){
+        foreach ($payments as $p) {
             $tot += $p->amount;
         }
 
         $invoicePayment->amountPaid = $tot;
-        $invoicePayment->amountRemaining = $invoicePayment->invoiceFinalPrice - $invoicePayment->amountPaid;
+        $invoicePayment->amountRemaining = $invoicePayment->invoiceGrandtotal - $invoicePayment->amountPaid;
 
         $invoicePayment->save();
 
-        if ($invoicePayment->amountPaid >= $invoicePayment->invoiceFinalPrice){
+        if ($invoicePayment->amountPaid >= $invoicePayment->invoiceGrandtotal) {
             $invoice->invoiceIsDone = true;
-            $invoice->save();
+            $invoicePayment->status = "fully-paid";
+        } else {
+            $invoice->invoiceIsDone = false;
+            $invoicePayment->status = "partially-paid";
         }
+        $invoice->save();
+
+        return [
+            'message' => 'payment updated successfully',
+        ];
     }
 
     /**
@@ -98,5 +111,17 @@ class PaymentController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function downloadFile($paymentId)
+    {
+        $payment = Payment::findOrFail($paymentId);
+        $path = $payment->attachment;
+
+        if (!Storage::exists($path)) {
+            abort(404);
+        }
+
+        return response()->download(Storage::path($path));
     }
 }
