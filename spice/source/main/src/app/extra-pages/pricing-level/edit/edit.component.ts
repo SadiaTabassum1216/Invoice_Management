@@ -47,6 +47,7 @@ export class EditComponent implements OnInit {
   }
 
   formData: FormData = new FormData();
+  uploadSuccess = false;
   uploadFiles(targetArray: File[]): void {
     if (!this.selectedFiles || this.selectedFiles.length === 0) {
       console.log('No files to upload.');
@@ -59,16 +60,8 @@ export class EditComponent implements OnInit {
       this.formData.append('files[]', file);
     }
 
-    // this.http.post<any>(
-    //   `${backendEnvironment.apiUrl}/api/updatePricingLevel/${this.selectedItem.id}`,
-    //   this.formData
-    // )
-    // .subscribe((data) => {
-    //   console.log(data);
-    // });
-
     console.log('Files uploaded successfully');
-
+    this.uploadSuccess=true;
     this.selectedFiles = null;
   }
 

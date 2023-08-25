@@ -45,7 +45,7 @@ export class PricingLevelComponent implements OnInit{
   getItemList() {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoiceitems`).subscribe(data => {
       this.items = data;
-      console.log(this.items);
+      console.log(data);
     });
 
   }

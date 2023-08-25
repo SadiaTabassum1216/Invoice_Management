@@ -48,6 +48,7 @@ export class EditOComponent implements OnInit {
   }
 
   formData: FormData = new FormData();
+  uploadSuccess = false;
   uploadFiles(targetArray: File[]): void {
     if (!this.selectedFiles || this.selectedFiles.length === 0) {
       console.log('No files to upload.');
@@ -62,6 +63,7 @@ export class EditOComponent implements OnInit {
     console.log('Files uploaded successfully');
 
     this.selectedFiles = null;
+    this.uploadSuccess=true;
   }
   returnStringOrNull(val: any | null) {
     if (val == null) return val;
