@@ -36,6 +36,7 @@ import { FileOComponent } from './offering-level/file-o/file-o.component';
 import { FilePrComponent } from './pricing-level/file-pr/file-pr.component';
 import { FilePuComponent } from './purchase-level/file-pu/file-pu.component';
 import { PaymentComponent } from './payment/payment.component';
+import { PaymentViewModalComponent } from './payment/payment-view-modal/payment-view-modal.component';
 @NgModule({
   declarations: [
     InvoiceComponent,
@@ -62,6 +63,7 @@ import { PaymentComponent } from './payment/payment.component';
     FilePrComponent,
     FilePuComponent,
     PaymentComponent,
+    PaymentViewModalComponent,
   ],
   imports: [
     CommonModule,
