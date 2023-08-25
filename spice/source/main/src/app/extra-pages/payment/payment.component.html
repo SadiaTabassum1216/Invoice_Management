@@ -16,20 +16,24 @@
                                     <th>Invoice Final Price</th>
                                     <th>Invoice Paid</th>
                                     <th>Invoice Remained</th>
-                                    <th>Attachment File</th>
+                        
+                                    <th>View all payments</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let invoice of invoices.data">
+                                <tr *ngFor="let invoice of invoices.invoicePayments">
                                     <td>{{ invoice.id }}</td>
                                     <td>{{ invoice.created_at | date:'medium' }}</td>
                                     <td>{{ invoice.note }}</td>
                                     <td>{{ invoice.invoiceFinalPrice }}</td>
-                                    <td>{{ invoice.invoicePaid }}</td>
-                                    <td>{{ invoice.invoiceRemained }}</td>
-                                    <td><a *ngIf="invoice.attachment_file" class="btn" href="{{link}}/api/file_download/{{ invoice.id }}"><i class="fas fa-download"></i></a>
-                                        <span *ngIf="!invoice.attachment_file">No Attachment</span>
+                                    <td>{{ invoice.amountPaid }}</td>
+                                    <td>{{ invoice.amountRemaining }}</td>
+                                    <td>
+                                        <button class="btn btn-success" (click)="openModal(invoice)">View all payments</button>
                                     </td>
+                                    <!-- <td><a *ngIf="invoice.attachment" class="btn" href="{{link}}/api/file_download/{{ invoice.id }}"><i class="fas fa-download"></i></a>
+                                        <span *ngIf="!invoice.attachment">No Attachment</span>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
