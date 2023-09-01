@@ -52,7 +52,7 @@ export class InvoicelistComponent implements OnInit {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoice`).subscribe(
       data => {
         this.invoices = data;
-        console.log(data);
+        // console.log(data);
         this.filteredInvoices = this.invoices;
 
         this.totalInvoice = this.invoices.data.length;
@@ -72,10 +72,10 @@ export class InvoicelistComponent implements OnInit {
 
 
   viewInvoice(invoice: Invoice2) {
-    console.log('View Invoice:', invoice.id);
+    // console.log('View Invoice:', invoice.id);
 
     this.selectedInvoice = invoice;
-    console.log(this.selectedInvoice);
+    // console.log(this.selectedInvoice);
 
     this.dialogModel.open(ViewInvoiceComponent, {
       disableClose: true,
@@ -86,7 +86,7 @@ export class InvoicelistComponent implements OnInit {
   }
 
   editInvoice(invoice: Invoice2) {
-    console.log('Edit Invoice:', invoice.id);
+    // console.log('Edit Invoice:', invoice.id);
     this.selectedInvoice = invoice;
 
     this.dialogModel.open(EditInvoiceComponent, {
@@ -97,7 +97,7 @@ export class InvoicelistComponent implements OnInit {
     });
 
     this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice/${invoice.id}`, invoice).subscribe(data => {
-      console.log(invoice);
+      // console.log(invoice);
     });
   }
 
@@ -116,8 +116,8 @@ export class InvoicelistComponent implements OnInit {
 
     this.http.delete<any>(`${backendEnvironment.apiUrl}/api/invoice/${invoice.id}`).subscribe(
       data => {
-        console.log("Invoice deleted successfully");
-        console.log(data);
+        // console.log("Invoice deleted successfully");
+        // console.log(data);
         // window.location.reload();
       },
     );
@@ -181,7 +181,7 @@ export class InvoicelistComponent implements OnInit {
     }
 
     this.getOnlylist();
-    console.log("after remove", this.filteredInvoices);
+    // console.log("after remove", this.filteredInvoices);
     this.applyFilters();
   }
 

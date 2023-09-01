@@ -30,7 +30,7 @@ export class EditOComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.selectedItem = data.item;
-    console.log('Selected Item is: ', this.selectedItem);
+    // console.log('Selected Item is: ', this.selectedItem);
   }
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class EditOComponent implements OnInit {
   uploadSuccess = false;
   uploadFiles(targetArray: File[]): void {
     if (!this.selectedFiles || this.selectedFiles.length === 0) {
-      console.log('No files to upload.');
+      // console.log('No files to upload.');
       return;
     }
 
@@ -60,7 +60,7 @@ export class EditOComponent implements OnInit {
       targetArray.push(file);
       this.formData.append('files[]', file);
     }
-    console.log('Files uploaded successfully');
+    // console.log('Files uploaded successfully');
 
     this.selectedFiles = null;
     this.uploadSuccess=true;
@@ -114,7 +114,7 @@ export class EditOComponent implements OnInit {
         this.formData
       )
       .subscribe((data) => {
-        console.log(data);
+        // console.log(data);
       });
     this.dialog.closeAll();
   }

@@ -19,9 +19,9 @@ export class AddModalComponent {
 
   
   addUser() {
-    console.log(this.newUser);
+    // console.log(this.newUser);
     this.http.post<any>(`${backendEnvironment.apiUrl}/api/users`, this.newUser).subscribe(data => {
-      console.log(this.newUser);
+      // console.log(this.newUser);
     });
     
      this.dialog.closeAll();

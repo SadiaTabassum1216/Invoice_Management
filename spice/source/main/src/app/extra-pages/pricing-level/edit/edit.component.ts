@@ -29,7 +29,7 @@ export class EditComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.selectedItem = data.item;
-    console.log('Selected Item is: ', this.selectedItem);
+    // console.log('Selected Item is: ', this.selectedItem);
   }
 
   ngOnInit(): void {
@@ -50,7 +50,7 @@ export class EditComponent implements OnInit {
   uploadSuccess = false;
   uploadFiles(targetArray: File[]): void {
     if (!this.selectedFiles || this.selectedFiles.length === 0) {
-      console.log('No files to upload.');
+      // console.log('No files to upload.');
       return;
     }
 
@@ -60,7 +60,7 @@ export class EditComponent implements OnInit {
       this.formData.append('files[]', file);
     }
 
-    console.log('Files uploaded successfully');
+    // console.log('Files uploaded successfully');
     this.uploadSuccess=true;
     this.selectedFiles = null;
   }
@@ -105,7 +105,7 @@ export class EditComponent implements OnInit {
         this.formData
       )
       .subscribe((data) => {
-        console.log(data);
+        // console.log(data);
       });
     this.dialog.closeAll();
   }

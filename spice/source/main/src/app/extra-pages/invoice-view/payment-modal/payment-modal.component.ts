@@ -24,7 +24,7 @@ export class PaymentModalComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { 
     this.invoice = data.invoice;
-    console.log('Selected Invoice is: ', this.invoice);
+    // console.log('Selected Invoice is: ', this.invoice);
   }
 
   
@@ -53,7 +53,7 @@ export class PaymentModalComponent {
     this.http
       .post<any>(`${backendEnvironment.apiUrl}/api/payment`, this.formData)
       .subscribe((data) => {
-        console.log(data);
+        // console.log(data);
       });
 
     this.dialog.closeAll();

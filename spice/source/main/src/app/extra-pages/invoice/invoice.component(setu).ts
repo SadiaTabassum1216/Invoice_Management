@@ -67,9 +67,9 @@ export class InvoiceComponent implements OnInit {
       .get<any[]>(`${backendEnvironment.apiUrl}/api/items`)
       .subscribe((data) => {
         this.items = data;
-        console.log(this.items);
+        // console.log(this.items);
         // this.itemName = this.items.map(item => item.itemId);
-        console.log('items: ', this.itemName);
+        // console.log('items: ', this.itemName);
       });
   }
 
@@ -156,7 +156,7 @@ onFileSelect(event: any): void {
 
   uploadFiles(targetArray: File[]): void {
     if (!this.selectedFiles || this.selectedFiles.length === 0) {
-      console.log('No files to upload.');
+      // console.log('No files to upload.');
       return;
     }
   
@@ -168,7 +168,7 @@ onFileSelect(event: any): void {
       formData.append('files[]', file);
     }
   
-    console.log('Files uploaded successfully');
+    // console.log('Files uploaded successfully');
    
     this.selectedFiles = null;
   }
@@ -202,7 +202,7 @@ onFileSelect(event: any): void {
     }
 
     this.invoice.itemList = this.itemList;
-    console.log(this.invoice);
+    // console.log(this.invoice);
 
     const formData: FormData = new FormData();
     formData.append('invoiceID', this.invoice.invoiceID);
@@ -294,7 +294,7 @@ onFileSelect(event: any): void {
         // console.log(this.invoice);
         // console.log('FormData', formData.getAll('itemList'));
         this.invoice.invoiceID = data.id;
-        console.log('response', data);
+        // console.log('response', data);
       });
   }
 

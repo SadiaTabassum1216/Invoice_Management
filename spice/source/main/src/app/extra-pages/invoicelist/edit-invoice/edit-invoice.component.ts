@@ -95,7 +95,7 @@ export class EditInvoiceComponent implements OnInit{
     .get<any[]>(`${backendEnvironment.apiUrl}/api/searchUOM`)
     .subscribe((data) => {
       this.uomList = data;
-       console.log("uom: ", this.uomList);
+      //  console.log("uom: ", this.uomList);
       this.uomNameId = this.uomList.data.map(
         (uom: { id: any; name: any }) => {
           return {
@@ -104,7 +104,7 @@ export class EditInvoiceComponent implements OnInit{
           };
         }
       );
-       console.log("items: ", this.uomNameId);
+      //  console.log("items: ", this.uomNameId);
     });
   }
 
@@ -189,7 +189,7 @@ export class EditInvoiceComponent implements OnInit{
 
   update(item: InvoiceItem3) {
     this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice_item/${item.id}`, item).subscribe(data => {
-       console.log(data);
+      //  console.log(data);
       //  console.log(a);
     });
     // this.dialog.closeAll();
@@ -197,7 +197,7 @@ export class EditInvoiceComponent implements OnInit{
 
   updateInvoice(){
     this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice/${this.invoice.id}`, this.invoice).subscribe(data => {
-       console.log(data);
+      //  console.log(data);
     });
     this.dialog.closeAll();
 

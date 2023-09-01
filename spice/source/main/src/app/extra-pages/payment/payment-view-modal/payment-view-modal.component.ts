@@ -17,7 +17,7 @@ link: string= backendEnvironment.apiUrl;
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { 
     this.invoices = data.invoice.payments;
-    console.log('Selected Invoice is: ', this.invoices);
+    // console.log('Selected Invoice is: ', this.invoices);
   }
 
   closeModal() {

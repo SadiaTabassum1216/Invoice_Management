@@ -37,7 +37,7 @@ export class PaymentComponent implements OnInit{
   fetchInvoices() {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoicePayments`).subscribe(data => {
       this.invoices = data;
-      console.log(this.invoices);
+      // console.log(this.invoices);
     });
   }
 

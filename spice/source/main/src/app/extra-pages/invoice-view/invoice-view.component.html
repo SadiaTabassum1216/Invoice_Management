@@ -13,8 +13,9 @@
                                     <th>ID</th>
                                     <th>Date & Time</th>
                                     <th>Subtotal</th>
-                                    <th>Grand Total</th>      
                                     <th>Final Price</th>
+                                    <th>Grand Total</th>      
+                                    <th>Amount Paid</th>
                                     <th>Payment Status</th>
                                     <th>Action</th> 
                                 </tr>
@@ -24,10 +25,15 @@
                                     <td>{{ invoice.id }}</td>
                                     <td>{{ invoice.created_at | date:'medium' }}</td>
                                     <td>{{ invoice.invoiceSubtotal }}</td>
+                                    <td>{{ invoice.invoiceTotalCost }}</td>
                                     <td>{{ invoice.invoiceGrandtotal }}</td>
                                   
-                                    <td>{{ invoice.invoiceTotalCost }}</td>
-                                    <td></td>
+                                    <td>
+                                        {{ invoice.invoice_payments[0].amountPaid }}
+                                    </td>
+                                    <td>
+                                        {{ invoice.invoice_payments[0].status }}
+                                    </td>
                                     <!-- <td [ngClass]="{'green-text': (invoice.invoiceGrandtotal) <= 0, 'red-text': (invoice.invoiceGrandtotal) > 0 }">
                                         {{ (invoice.invoiceGrandtotal) <= 0 ? 'Fully Paid' : 'Not Paid' }}
                                     </td> -->

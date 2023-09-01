@@ -40,7 +40,7 @@ roles: string[]=[];
      
       this.id=info['user']['id'];
       this.roles=info['user']['roles'];
-       console.log("Current user: ",  this.currentUser);
+      //  console.log("Current user: ",  this.currentUser);
     });
 
     if (!this.roles.includes('admin')) {
@@ -60,7 +60,7 @@ roles: string[]=[];
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/users`).subscribe(data => {
 
       this.userList = data;
-       console.log(this.userList);
+      //  console.log(this.userList);
     });
 
   }
@@ -93,11 +93,11 @@ roles: string[]=[];
   
     this.http.delete<any>(`${backendEnvironment.apiUrl}/api/users/${userID}`).subscribe(
       data => {
-        console.log("User deleted successfully");
+        // console.log("User deleted successfully");
         window.location.reload();
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
   }

@@ -152,7 +152,7 @@ class InvoiceItemController extends Controller
     }
     public function show()
     {
-        $invoices = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles')->get();
+        $invoices = Invoice::with('invoiceItems.items', 'invoiceItems.invoiceItemFiles', 'invoicePayments')->get();
         // return response()->json($invoices);
         return ['data' => $invoices->all()];
     }

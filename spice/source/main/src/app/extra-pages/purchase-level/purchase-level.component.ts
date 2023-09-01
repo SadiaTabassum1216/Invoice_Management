@@ -45,7 +45,7 @@ export class PurchaseLevelComponent implements OnInit{
   getItemList() {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoiceitems`).subscribe(data => {
       this.items = data;
-      console.log(this.items);
+      // console.log(this.items);
     });
 
   }
@@ -73,7 +73,7 @@ export class PurchaseLevelComponent implements OnInit{
 
   view(item: InvoiceItem) {
     this.selectedItem2 = item;
-    console.log(this.selectedItem2);
+    // console.log(this.selectedItem2);
 
     this.dialogModel.open(FilePuComponent, {
       width: '740px',
@@ -92,11 +92,11 @@ export class PurchaseLevelComponent implements OnInit{
 
     this.http.delete<any>(`${backendEnvironment.apiUrl}/api/invoiceItem/${item.id}`).subscribe(
       data => {
-        console.log("Item deleted successfully");
+        // console.log("Item deleted successfully");
         window.location.reload();
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
 
