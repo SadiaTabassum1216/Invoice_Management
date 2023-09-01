@@ -36,7 +36,7 @@ export class InvoiceViewComponent implements OnInit {
   fetchInvoices() {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/invoice`).subscribe(data => {
       this.invoices = data;
-      console.log(this.invoices);
+      // console.log(this.invoices);
     });
   }
 

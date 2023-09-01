@@ -141,7 +141,7 @@ export class InvoiceComponent implements OnInit {
       .get<any[]>(`${backendEnvironment.apiUrl}/api/users`)
       .subscribe((data) => {
         this.userList = data;
-        console.log("users: ", this.userList);
+        // console.log("users: ", this.userList);
         this.userNameId = this.userList.data.map(
           (user: { id: any; name: any }) => {
             return {
@@ -260,7 +260,7 @@ export class InvoiceComponent implements OnInit {
       this.itemList[i].UOMId = this.tempUom[i];
     }
     this.invoice.itemList = this.itemList;
-    console.log(this.invoice);
+    // console.log(this.invoice);
 
     const formData: FormData = new FormData();
     formData.append('invoiceID', this.invoice.invoiceID);
@@ -296,14 +296,14 @@ export class InvoiceComponent implements OnInit {
         }
       }
     }
-    console.log(formData);
+    // console.log(formData);
 
     this.http
       .post<any>(`${backendEnvironment.apiUrl}/api/createInvoice`, formData)
       .subscribe((data) => {
-        console.log(this.invoice);
+        // console.log(this.invoice);
         this.invoice.invoiceID = data.id;
-        console.log(data);
+        // console.log(data);
       });
 
       this.router.navigate(['extra-pages','invoicelist']);

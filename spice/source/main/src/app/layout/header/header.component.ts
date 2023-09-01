@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.currentUser=this.authService.currentUser;
     this.currentUser.subscribe(info => {
       this.name=info['user']['username'];
-      console.log("Current user is ", this.name);
+      // console.log("Current user is ", this.name);
     });
     this.sendPing();
   }

@@ -22,7 +22,7 @@ export class NotificationComponent implements OnInit {
     this.http.get<any[]>(`${backendEnvironment.apiUrl}/api/notifications`, httpOptions)
     .subscribe((data) => {   
       this.notificationList = data;
-      console.log("Notification: ",this.notificationList);
+      // console.log("Notification: ",this.notificationList);
     });
   }
   compareByTime(notificationA: any, notificationB: any): number {
@@ -36,7 +36,7 @@ export class NotificationComponent implements OnInit {
     this.http.get<any>(`${backendEnvironment.apiUrl}/api/markAsRead/${notification.id}`, httpOptions)
     .subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
       }
     );
   

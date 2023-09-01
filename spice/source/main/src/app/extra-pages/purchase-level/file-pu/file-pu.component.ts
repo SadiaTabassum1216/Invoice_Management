@@ -19,12 +19,12 @@ export class FilePuComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient, public dialog: MatDialog) {
     this.selectedItem = data.item;
     //  this.item= data.item;
-     console.log("Selected Item is: ",this.selectedItem);
+    //  console.log("Selected Item is: ",this.selectedItem);
   }
 
   download() {
     this.http.post<any>(`${backendEnvironment.apiUrl}/api/invoice_item/${this.selectedItem.id}`, this.selectedItem).subscribe(data => {
-      console.log(this.selectedItem);
+      // console.log(this.selectedItem);
     },
       error => {      
         console.error('An error occurred:', error);

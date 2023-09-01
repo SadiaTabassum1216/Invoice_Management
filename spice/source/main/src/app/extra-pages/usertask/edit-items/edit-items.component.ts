@@ -22,7 +22,7 @@ export class EditItemsComponent {
 
   update() {
     this.http.put<any>(`${backendEnvironment.apiUrl}/api/invoice_item/${this.selectedItem.id}`, this.selectedItem).subscribe(data => {
-      console.log(this.selectedItem);
+      // console.log(this.selectedItem);
     },
       error => {      
         console.error('An error occurred:', error);

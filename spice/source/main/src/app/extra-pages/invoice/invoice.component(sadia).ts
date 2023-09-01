@@ -138,7 +138,7 @@ export class InvoiceComponent implements OnInit {
     .get<any[]>(`${backendEnvironment.apiUrl}/api/searchUOM`)
     .subscribe((data) => {
       this.uomList = data;
-       console.log("uom: ", this.uomList);
+      //  console.log("uom: ", this.uomList);
       this.uomNameId = this.uomList.data.map(
         (uom: { id: any; name: any }) => {
           return {
@@ -147,7 +147,7 @@ export class InvoiceComponent implements OnInit {
           };
         }
       );
-       console.log("items: ", this.uomNameId);
+      //  console.log("items: ", this.uomNameId);
     });
   }
 
@@ -241,7 +241,7 @@ export class InvoiceComponent implements OnInit {
 
   uploadFiles(targetArray: File[], index: number): void {
     if (!this.selectedFiles || this.selectedFiles.length === 0) {
-      console.log('No files to upload.');
+      // console.log('No files to upload.');
       return;
     }
 
@@ -253,7 +253,7 @@ export class InvoiceComponent implements OnInit {
       formData.append('files[]', file);
     }
 
-    console.log('Files uploaded successfully');
+    // console.log('Files uploaded successfully');
 
     this.selectedFiles = null;
   }
@@ -303,7 +303,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     this.invoice.invoice_items = this.itemList;
-    console.log(this.invoice);
+    // console.log(this.invoice);
 
     const formData: FormData = new FormData();
     formData.append('invoiceID', this.invoice.id.toString());
@@ -376,7 +376,7 @@ export class InvoiceComponent implements OnInit {
       .subscribe((data) => {
         // console.log(this.invoice);
         this.invoice.id = data.id;
-        console.log(data);
+        // console.log(data);
       });
   }
 
